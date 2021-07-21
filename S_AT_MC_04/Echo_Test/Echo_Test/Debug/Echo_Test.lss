@@ -1,0 +1,620 @@
+
+Echo_Test.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000036e  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  0000036e  00000402  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000003b  00800062  00800062  00000404  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000404  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000434  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000118  00000000  00000000  00000470  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000ebd  00000000  00000000  00000588  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000897  00000000  00000000  00001445  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000804  00000000  00000000  00001cdc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000314  00000000  00000000  000024e0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000007d3  00000000  00000000  000027f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000947  00000000  00000000  00002fc7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000d8  00000000  00000000  0000390e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 4f 01 	jmp	0x29e	; 0x29e <__vector_13>
+  38:	0c 94 76 01 	jmp	0x2ec	; 0x2ec <__vector_14>
+  3c:	0c 94 28 01 	jmp	0x250	; 0x250 <__vector_15>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ee e6       	ldi	r30, 0x6E	; 110
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a2 36       	cpi	r26, 0x62	; 98
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a2 e6       	ldi	r26, 0x62	; 98
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	ad 39       	cpi	r26, 0x9D	; 157
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 c6 00 	call	0x18c	; 0x18c <main>
+  8a:	0c 94 b5 01 	jmp	0x36a	; 0x36a <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <Uart_RXC_ISR>:
+uint8_t gu8_flag=0;
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*--*-*-*- FUNCTIONS IMPLEMENTATION -*-*-*-*-*-*/
+
+void Uart_RXC_ISR(void)
+{
+  92:	cf 93       	push	r28
+  94:	df 93       	push	r29
+	gau8_data[gu8_counter] = Uart_DataRegister();
+  96:	c0 91 63 00 	lds	r28, 0x0063	; 0x800063 <gu8_counter>
+  9a:	d0 e0       	ldi	r29, 0x00	; 0
+  9c:	0e 94 26 01 	call	0x24c	; 0x24c <Uart_DataRegister>
+  a0:	cc 59       	subi	r28, 0x9C	; 156
+  a2:	df 4f       	sbci	r29, 0xFF	; 255
+  a4:	88 83       	st	Y, r24
+	Uart_sendByte(gau8_data[gu8_counter]);
+  a6:	e0 91 63 00 	lds	r30, 0x0063	; 0x800063 <gu8_counter>
+  aa:	f0 e0       	ldi	r31, 0x00	; 0
+  ac:	ec 59       	subi	r30, 0x9C	; 156
+  ae:	ff 4f       	sbci	r31, 0xFF	; 255
+  b0:	80 81       	ld	r24, Z
+  b2:	0e 94 df 00 	call	0x1be	; 0x1be <Uart_sendByte>
+	if (gau8_data[gu8_counter] == '\r')
+  b6:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <gu8_counter>
+  ba:	28 2f       	mov	r18, r24
+  bc:	30 e0       	ldi	r19, 0x00	; 0
+  be:	f9 01       	movw	r30, r18
+  c0:	ec 59       	subi	r30, 0x9C	; 156
+  c2:	ff 4f       	sbci	r31, 0xFF	; 255
+  c4:	90 81       	ld	r25, Z
+  c6:	9d 30       	cpi	r25, 0x0D	; 13
+  c8:	51 f4       	brne	.+20     	; 0xde <Uart_RXC_ISR+0x4c>
+	{
+		gau8_data[gu8_counter] = '\0';
+  ca:	f9 01       	movw	r30, r18
+  cc:	ec 59       	subi	r30, 0x9C	; 156
+  ce:	ff 4f       	sbci	r31, 0xFF	; 255
+  d0:	10 82       	st	Z, r1
+		gu8_counter = 0;
+  d2:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <gu8_counter>
+		gu8_flag = 1;
+  d6:	81 e0       	ldi	r24, 0x01	; 1
+  d8:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+  dc:	09 c0       	rjmp	.+18     	; 0xf0 <Uart_RXC_ISR+0x5e>
+	}else if (gau8_data[gu8_counter] == '\b')
+  de:	98 30       	cpi	r25, 0x08	; 8
+  e0:	21 f4       	brne	.+8      	; 0xea <Uart_RXC_ISR+0x58>
+	{
+		gu8_counter--;
+  e2:	81 50       	subi	r24, 0x01	; 1
+  e4:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <gu8_counter>
+  e8:	03 c0       	rjmp	.+6      	; 0xf0 <Uart_RXC_ISR+0x5e>
+	}
+	else
+	{
+		gu8_counter++;
+  ea:	8f 5f       	subi	r24, 0xFF	; 255
+  ec:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <gu8_counter>
+	}
+}
+  f0:	df 91       	pop	r29
+  f2:	cf 91       	pop	r28
+  f4:	08 95       	ret
+
+000000f6 <EchoApp_init>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the Application was already initialized */
+	if (enuCurrentAppStatus == APP_STATUS_INITIALIZED)
+  f6:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  fa:	84 30       	cpi	r24, 0x04	; 4
+  fc:	b9 f0       	breq	.+46     	; 0x12c <EchoApp_init+0x36>
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+
+	/* Initialize the Uart Module */
+	enuUart_Status_t Uart_State = Uart_init();
+  fe:	0e 94 c9 00 	call	0x192	; 0x192 <Uart_init>
+	if((UART_STATUS_ERROR_OK != Uart_State) && (UART_STATUS_ALREADY_INIT != Uart_State))
+ 102:	81 30       	cpi	r24, 0x01	; 1
+ 104:	11 f0       	breq	.+4      	; 0x10a <EchoApp_init+0x14>
+ 106:	87 30       	cpi	r24, 0x07	; 7
+ 108:	71 f4       	brne	.+28     	; 0x126 <EchoApp_init+0x30>
+		return APP_STATUS_ERROR_NOK;
+	
+	if(Uart_EnableNotification_RXC(Uart_RXC_ISR) != UART_STATUS_ERROR_OK)
+ 10a:	89 e4       	ldi	r24, 0x49	; 73
+ 10c:	90 e0       	ldi	r25, 0x00	; 0
+ 10e:	0e 94 11 01 	call	0x222	; 0x222 <Uart_EnableNotification_RXC>
+ 112:	81 30       	cpi	r24, 0x01	; 1
+ 114:	51 f4       	brne	.+20     	; 0x12a <EchoApp_init+0x34>
+		return APP_STATUS_ERROR_NOK;
+	EnableGlbl_Interrupt();
+ 116:	8f b7       	in	r24, 0x3f	; 63
+ 118:	80 68       	ori	r24, 0x80	; 128
+ 11a:	8f bf       	out	0x3f, r24	; 63
+
+	/* Update enuCurrentAppStatus to initialized */
+	enuCurrentAppStatus = APP_STATUS_INITIALIZED;
+ 11c:	84 e0       	ldi	r24, 0x04	; 4
+ 11e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+	return APP_STATUS_ERROR_OK;
+ 122:	81 e0       	ldi	r24, 0x01	; 1
+ 124:	08 95       	ret
+/**************************************************************************************/
+
+	/* Initialize the Uart Module */
+	enuUart_Status_t Uart_State = Uart_init();
+	if((UART_STATUS_ERROR_OK != Uart_State) && (UART_STATUS_ALREADY_INIT != Uart_State))
+		return APP_STATUS_ERROR_NOK;
+ 126:	80 e0       	ldi	r24, 0x00	; 0
+ 128:	08 95       	ret
+	
+	if(Uart_EnableNotification_RXC(Uart_RXC_ISR) != UART_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
+ 12a:	80 e0       	ldi	r24, 0x00	; 0
+	EnableGlbl_Interrupt();
+
+	/* Update enuCurrentAppStatus to initialized */
+	enuCurrentAppStatus = APP_STATUS_INITIALIZED;
+	return APP_STATUS_ERROR_OK;
+}
+ 12c:	08 95       	ret
+
+0000012e <EchoApp_update>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the Application was already initialized */
+	if (enuCurrentAppStatus != APP_STATUS_INITIALIZED)
+ 12e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 132:	84 30       	cpi	r24, 0x04	; 4
+ 134:	d9 f4       	brne	.+54     	; 0x16c <EchoApp_update+0x3e>
+/**************************************************************************************/
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	if(gu8_flag == 1)
+ 136:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__data_end>
+ 13a:	81 30       	cpi	r24, 0x01	; 1
+ 13c:	c9 f4       	brne	.+50     	; 0x170 <EchoApp_update+0x42>
+	{
+		gu8_flag = 0;
+ 13e:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <__data_end>
+		if(Uart_sendPacket(gau8_data, stringLength(gau8_data)) != UART_STATUS_ERROR_OK)
+ 142:	84 e6       	ldi	r24, 0x64	; 100
+ 144:	90 e0       	ldi	r25, 0x00	; 0
+ 146:	0e 94 9d 01 	call	0x33a	; 0x33a <stringLength>
+ 14a:	68 2f       	mov	r22, r24
+ 14c:	70 e0       	ldi	r23, 0x00	; 0
+ 14e:	84 e6       	ldi	r24, 0x64	; 100
+ 150:	90 e0       	ldi	r25, 0x00	; 0
+ 152:	0e 94 ea 00 	call	0x1d4	; 0x1d4 <Uart_sendPacket>
+ 156:	81 30       	cpi	r24, 0x01	; 1
+ 158:	69 f4       	brne	.+26     	; 0x174 <EchoApp_update+0x46>
+			return APP_STATUS_ERROR_NOK;
+		Uart_sendByte( '\r');
+ 15a:	8d e0       	ldi	r24, 0x0D	; 13
+ 15c:	0e 94 df 00 	call	0x1be	; 0x1be <Uart_sendByte>
+		EmptyString(gau8_data);
+ 160:	84 e6       	ldi	r24, 0x64	; 100
+ 162:	90 e0       	ldi	r25, 0x00	; 0
+ 164:	0e 94 a9 01 	call	0x352	; 0x352 <EmptyString>
+	}
+	return APP_STATUS_ERROR_OK;
+ 168:	81 e0       	ldi	r24, 0x01	; 1
+ 16a:	08 95       	ret
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the Application was already initialized */
+	if (enuCurrentAppStatus != APP_STATUS_INITIALIZED)
+	{
+		return APP_STATUS_UNINITIALIZED;
+ 16c:	85 e0       	ldi	r24, 0x05	; 5
+ 16e:	08 95       	ret
+		if(Uart_sendPacket(gau8_data, stringLength(gau8_data)) != UART_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+		Uart_sendByte( '\r');
+		EmptyString(gau8_data);
+	}
+	return APP_STATUS_ERROR_OK;
+ 170:	81 e0       	ldi	r24, 0x01	; 1
+ 172:	08 95       	ret
+/**************************************************************************************/
+	if(gu8_flag == 1)
+	{
+		gu8_flag = 0;
+		if(Uart_sendPacket(gau8_data, stringLength(gau8_data)) != UART_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+ 174:	80 e0       	ldi	r24, 0x00	; 0
+		Uart_sendByte( '\r');
+		EmptyString(gau8_data);
+	}
+	return APP_STATUS_ERROR_OK;
+ 176:	08 95       	ret
+
+00000178 <EchoApp_start>:
+{
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Initialize the Car application */
+	if(EchoApp_init() != APP_STATUS_ERROR_OK)
+ 178:	0e 94 7b 00 	call	0xf6	; 0xf6 <EchoApp_init>
+ 17c:	81 30       	cpi	r24, 0x01	; 1
+ 17e:	21 f4       	brne	.+8      	; 0x188 <EchoApp_start+0x10>
+		return APP_STATUS_ERROR_NOK;	
+	/* Application Super Loop */
+	while (1)
+	{
+		/* Update the car status */
+		if(EchoApp_update() != APP_STATUS_ERROR_OK)
+ 180:	0e 94 97 00 	call	0x12e	; 0x12e <EchoApp_update>
+ 184:	81 30       	cpi	r24, 0x01	; 1
+ 186:	e1 f3       	breq	.-8      	; 0x180 <EchoApp_start+0x8>
+		return APP_STATUS_ERROR_NOK;
+		
+	}
+}
+ 188:	80 e0       	ldi	r24, 0x00	; 0
+ 18a:	08 95       	ret
+
+0000018c <main>:
+
+
+int main(void)
+{
+    /* Replace with your application code */
+	EchoApp_start();
+ 18c:	0e 94 bc 00 	call	0x178	; 0x178 <EchoApp_start>
+ 190:	ff cf       	rjmp	.-2      	; 0x190 <main+0x4>
+
+00000192 <Uart_init>:
+/**************************************************************************************/
+	/*- Enable the Uart UDRE Interrupt -*/
+	UART_UCSRB_REG &= ~(u8_InterruptFlags);
+			
+	return UART_STATUS_ERROR_OK;
+}
+ 192:	80 91 96 00 	lds	r24, 0x0096	; 0x800096 <u8_Uart_Status>
+ 196:	81 30       	cpi	r24, 0x01	; 1
+ 198:	81 f0       	breq	.+32     	; 0x1ba <Uart_init+0x28>
+ 19a:	10 bc       	out	0x20, r1	; 32
+ 19c:	8c e0       	ldi	r24, 0x0C	; 12
+ 19e:	89 b9       	out	0x09, r24	; 9
+ 1a0:	82 e0       	ldi	r24, 0x02	; 2
+ 1a2:	8b b9       	out	0x0b, r24	; 11
+ 1a4:	88 e1       	ldi	r24, 0x18	; 24
+ 1a6:	8a b9       	out	0x0a, r24	; 10
+ 1a8:	80 e8       	ldi	r24, 0x80	; 128
+ 1aa:	80 bd       	out	0x20, r24	; 32
+ 1ac:	80 b5       	in	r24, 0x20	; 32
+ 1ae:	86 68       	ori	r24, 0x86	; 134
+ 1b0:	80 bd       	out	0x20, r24	; 32
+ 1b2:	81 e0       	ldi	r24, 0x01	; 1
+ 1b4:	80 93 96 00 	sts	0x0096, r24	; 0x800096 <u8_Uart_Status>
+ 1b8:	08 95       	ret
+ 1ba:	87 e0       	ldi	r24, 0x07	; 7
+ 1bc:	08 95       	ret
+
+000001be <Uart_sendByte>:
+ 1be:	90 91 96 00 	lds	r25, 0x0096	; 0x800096 <u8_Uart_Status>
+ 1c2:	99 23       	and	r25, r25
+ 1c4:	29 f0       	breq	.+10     	; 0x1d0 <Uart_sendByte+0x12>
+ 1c6:	5d 9b       	sbis	0x0b, 5	; 11
+ 1c8:	fe cf       	rjmp	.-4      	; 0x1c6 <Uart_sendByte+0x8>
+ 1ca:	8c b9       	out	0x0c, r24	; 12
+ 1cc:	81 e0       	ldi	r24, 0x01	; 1
+ 1ce:	08 95       	ret
+ 1d0:	86 e0       	ldi	r24, 0x06	; 6
+ 1d2:	08 95       	ret
+
+000001d4 <Uart_sendPacket>:
+ 1d4:	ef 92       	push	r14
+ 1d6:	ff 92       	push	r15
+ 1d8:	0f 93       	push	r16
+ 1da:	1f 93       	push	r17
+ 1dc:	cf 93       	push	r28
+ 1de:	df 93       	push	r29
+ 1e0:	20 91 96 00 	lds	r18, 0x0096	; 0x800096 <u8_Uart_Status>
+ 1e4:	22 23       	and	r18, r18
+ 1e6:	99 f0       	breq	.+38     	; 0x20e <Uart_sendPacket+0x3a>
+ 1e8:	8b 01       	movw	r16, r22
+ 1ea:	7c 01       	movw	r14, r24
+ 1ec:	c0 e0       	ldi	r28, 0x00	; 0
+ 1ee:	d0 e0       	ldi	r29, 0x00	; 0
+ 1f0:	09 c0       	rjmp	.+18     	; 0x204 <Uart_sendPacket+0x30>
+ 1f2:	f7 01       	movw	r30, r14
+ 1f4:	ec 0f       	add	r30, r28
+ 1f6:	fd 1f       	adc	r31, r29
+ 1f8:	80 81       	ld	r24, Z
+ 1fa:	0e 94 df 00 	call	0x1be	; 0x1be <Uart_sendByte>
+ 1fe:	81 30       	cpi	r24, 0x01	; 1
+ 200:	41 f4       	brne	.+16     	; 0x212 <Uart_sendPacket+0x3e>
+ 202:	21 96       	adiw	r28, 0x01	; 1
+ 204:	c0 17       	cp	r28, r16
+ 206:	d1 07       	cpc	r29, r17
+ 208:	a0 f3       	brcs	.-24     	; 0x1f2 <Uart_sendPacket+0x1e>
+ 20a:	81 e0       	ldi	r24, 0x01	; 1
+ 20c:	03 c0       	rjmp	.+6      	; 0x214 <Uart_sendPacket+0x40>
+ 20e:	86 e0       	ldi	r24, 0x06	; 6
+ 210:	01 c0       	rjmp	.+2      	; 0x214 <Uart_sendPacket+0x40>
+ 212:	80 e0       	ldi	r24, 0x00	; 0
+ 214:	df 91       	pop	r29
+ 216:	cf 91       	pop	r28
+ 218:	1f 91       	pop	r17
+ 21a:	0f 91       	pop	r16
+ 21c:	ff 90       	pop	r15
+ 21e:	ef 90       	pop	r14
+ 220:	08 95       	ret
+
+00000222 <Uart_EnableNotification_RXC>:
+ 222:	9c 01       	movw	r18, r24
+ 224:	90 91 96 00 	lds	r25, 0x0096	; 0x800096 <u8_Uart_Status>
+ 228:	99 23       	and	r25, r25
+ 22a:	61 f0       	breq	.+24     	; 0x244 <Uart_EnableNotification_RXC+0x22>
+ 22c:	21 15       	cp	r18, r1
+ 22e:	31 05       	cpc	r19, r1
+ 230:	59 f0       	breq	.+22     	; 0x248 <Uart_EnableNotification_RXC+0x26>
+ 232:	8a b1       	in	r24, 0x0a	; 10
+ 234:	80 68       	ori	r24, 0x80	; 128
+ 236:	8a b9       	out	0x0a, r24	; 10
+ 238:	30 93 9a 00 	sts	0x009A, r19	; 0x80009a <Uart_RXC_CallBackPtr+0x1>
+ 23c:	20 93 99 00 	sts	0x0099, r18	; 0x800099 <Uart_RXC_CallBackPtr>
+ 240:	81 e0       	ldi	r24, 0x01	; 1
+ 242:	08 95       	ret
+ 244:	86 e0       	ldi	r24, 0x06	; 6
+ 246:	08 95       	ret
+ 248:	85 e0       	ldi	r24, 0x05	; 5
+ 24a:	08 95       	ret
+
+0000024c <Uart_DataRegister>:
+*				the content of the data registers
+* Mainly used by the ISR Callback funtions
+*********************************************************/
+uint8_t Uart_DataRegister(void)
+{
+	return UART_UDR_REG;
+ 24c:	8c b1       	in	r24, 0x0c	; 12
+}
+ 24e:	08 95       	ret
+
+00000250 <__vector_15>:
+
+
+ISR(USART_TXC_IRQ){(*Uart_TXC_CallBackPtr)();}
+ 250:	1f 92       	push	r1
+ 252:	0f 92       	push	r0
+ 254:	0f b6       	in	r0, 0x3f	; 63
+ 256:	0f 92       	push	r0
+ 258:	11 24       	eor	r1, r1
+ 25a:	2f 93       	push	r18
+ 25c:	3f 93       	push	r19
+ 25e:	4f 93       	push	r20
+ 260:	5f 93       	push	r21
+ 262:	6f 93       	push	r22
+ 264:	7f 93       	push	r23
+ 266:	8f 93       	push	r24
+ 268:	9f 93       	push	r25
+ 26a:	af 93       	push	r26
+ 26c:	bf 93       	push	r27
+ 26e:	ef 93       	push	r30
+ 270:	ff 93       	push	r31
+ 272:	e0 91 9b 00 	lds	r30, 0x009B	; 0x80009b <Uart_TXC_CallBackPtr>
+ 276:	f0 91 9c 00 	lds	r31, 0x009C	; 0x80009c <Uart_TXC_CallBackPtr+0x1>
+ 27a:	09 95       	icall
+ 27c:	ff 91       	pop	r31
+ 27e:	ef 91       	pop	r30
+ 280:	bf 91       	pop	r27
+ 282:	af 91       	pop	r26
+ 284:	9f 91       	pop	r25
+ 286:	8f 91       	pop	r24
+ 288:	7f 91       	pop	r23
+ 28a:	6f 91       	pop	r22
+ 28c:	5f 91       	pop	r21
+ 28e:	4f 91       	pop	r20
+ 290:	3f 91       	pop	r19
+ 292:	2f 91       	pop	r18
+ 294:	0f 90       	pop	r0
+ 296:	0f be       	out	0x3f, r0	; 63
+ 298:	0f 90       	pop	r0
+ 29a:	1f 90       	pop	r1
+ 29c:	18 95       	reti
+
+0000029e <__vector_13>:
+ISR(USART_RXC_IRQ){(*Uart_RXC_CallBackPtr)();}
+ 29e:	1f 92       	push	r1
+ 2a0:	0f 92       	push	r0
+ 2a2:	0f b6       	in	r0, 0x3f	; 63
+ 2a4:	0f 92       	push	r0
+ 2a6:	11 24       	eor	r1, r1
+ 2a8:	2f 93       	push	r18
+ 2aa:	3f 93       	push	r19
+ 2ac:	4f 93       	push	r20
+ 2ae:	5f 93       	push	r21
+ 2b0:	6f 93       	push	r22
+ 2b2:	7f 93       	push	r23
+ 2b4:	8f 93       	push	r24
+ 2b6:	9f 93       	push	r25
+ 2b8:	af 93       	push	r26
+ 2ba:	bf 93       	push	r27
+ 2bc:	ef 93       	push	r30
+ 2be:	ff 93       	push	r31
+ 2c0:	e0 91 99 00 	lds	r30, 0x0099	; 0x800099 <Uart_RXC_CallBackPtr>
+ 2c4:	f0 91 9a 00 	lds	r31, 0x009A	; 0x80009a <Uart_RXC_CallBackPtr+0x1>
+ 2c8:	09 95       	icall
+ 2ca:	ff 91       	pop	r31
+ 2cc:	ef 91       	pop	r30
+ 2ce:	bf 91       	pop	r27
+ 2d0:	af 91       	pop	r26
+ 2d2:	9f 91       	pop	r25
+ 2d4:	8f 91       	pop	r24
+ 2d6:	7f 91       	pop	r23
+ 2d8:	6f 91       	pop	r22
+ 2da:	5f 91       	pop	r21
+ 2dc:	4f 91       	pop	r20
+ 2de:	3f 91       	pop	r19
+ 2e0:	2f 91       	pop	r18
+ 2e2:	0f 90       	pop	r0
+ 2e4:	0f be       	out	0x3f, r0	; 63
+ 2e6:	0f 90       	pop	r0
+ 2e8:	1f 90       	pop	r1
+ 2ea:	18 95       	reti
+
+000002ec <__vector_14>:
+ISR(USART_UDRE_IRQ){(*Uart_UDRE_CallBackPtr)();}
+ 2ec:	1f 92       	push	r1
+ 2ee:	0f 92       	push	r0
+ 2f0:	0f b6       	in	r0, 0x3f	; 63
+ 2f2:	0f 92       	push	r0
+ 2f4:	11 24       	eor	r1, r1
+ 2f6:	2f 93       	push	r18
+ 2f8:	3f 93       	push	r19
+ 2fa:	4f 93       	push	r20
+ 2fc:	5f 93       	push	r21
+ 2fe:	6f 93       	push	r22
+ 300:	7f 93       	push	r23
+ 302:	8f 93       	push	r24
+ 304:	9f 93       	push	r25
+ 306:	af 93       	push	r26
+ 308:	bf 93       	push	r27
+ 30a:	ef 93       	push	r30
+ 30c:	ff 93       	push	r31
+ 30e:	e0 91 97 00 	lds	r30, 0x0097	; 0x800097 <Uart_UDRE_CallBackPtr>
+ 312:	f0 91 98 00 	lds	r31, 0x0098	; 0x800098 <Uart_UDRE_CallBackPtr+0x1>
+ 316:	09 95       	icall
+ 318:	ff 91       	pop	r31
+ 31a:	ef 91       	pop	r30
+ 31c:	bf 91       	pop	r27
+ 31e:	af 91       	pop	r26
+ 320:	9f 91       	pop	r25
+ 322:	8f 91       	pop	r24
+ 324:	7f 91       	pop	r23
+ 326:	6f 91       	pop	r22
+ 328:	5f 91       	pop	r21
+ 32a:	4f 91       	pop	r20
+ 32c:	3f 91       	pop	r19
+ 32e:	2f 91       	pop	r18
+ 330:	0f 90       	pop	r0
+ 332:	0f be       	out	0x3f, r0	; 63
+ 334:	0f 90       	pop	r0
+ 336:	1f 90       	pop	r1
+ 338:	18 95       	reti
+
+0000033a <stringLength>:
+        else if(string1[u8_loopIndex] < string2[u8_loopIndex])
+            return 2;
+        u8_loopIndex++;
+    }
+    return 3;
+}
+ 33a:	ac 01       	movw	r20, r24
+ 33c:	80 e0       	ldi	r24, 0x00	; 0
+ 33e:	01 c0       	rjmp	.+2      	; 0x342 <stringLength+0x8>
+ 340:	8f 5f       	subi	r24, 0xFF	; 255
+ 342:	fa 01       	movw	r30, r20
+ 344:	e8 0f       	add	r30, r24
+ 346:	f1 1d       	adc	r31, r1
+ 348:	20 81       	ld	r18, Z
+ 34a:	21 11       	cpse	r18, r1
+ 34c:	f9 cf       	rjmp	.-14     	; 0x340 <stringLength+0x6>
+ 34e:	8f 5f       	subi	r24, 0xFF	; 255
+ 350:	08 95       	ret
+
+00000352 <EmptyString>:
+
+void EmptyString(uint8_t *string)
+{
+ 352:	ac 01       	movw	r20, r24
+	uint8_t u8_loopIndex=0;
+ 354:	90 e0       	ldi	r25, 0x00	; 0
+	while(string[u8_loopIndex] != '\0')
+ 356:	02 c0       	rjmp	.+4      	; 0x35c <EmptyString+0xa>
+		string[u8_loopIndex++] = '\0';
+ 358:	9f 5f       	subi	r25, 0xFF	; 255
+ 35a:	10 82       	st	Z, r1
+}
+
+void EmptyString(uint8_t *string)
+{
+	uint8_t u8_loopIndex=0;
+	while(string[u8_loopIndex] != '\0')
+ 35c:	fa 01       	movw	r30, r20
+ 35e:	e9 0f       	add	r30, r25
+ 360:	f1 1d       	adc	r31, r1
+ 362:	20 81       	ld	r18, Z
+ 364:	21 11       	cpse	r18, r1
+ 366:	f8 cf       	rjmp	.-16     	; 0x358 <EmptyString+0x6>
+		string[u8_loopIndex++] = '\0';
+}
+ 368:	08 95       	ret
+
+0000036a <_exit>:
+ 36a:	f8 94       	cli
+
+0000036c <__stop_program>:
+ 36c:	ff cf       	rjmp	.-2      	; 0x36c <__stop_program>

@@ -16,11 +16,10 @@
 #include "..\Platform_Types.h"
 #include "Uart_Symbols.h"
 #include "..\ATMega32_Interrupts.h"
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- CONSTANTS -*-*-*-*-*-*/
 
-
-/*-* DIO Module Status *-*/
 #define UART_NOT_INITIALIZED			0U
 #define UART_INITIALIZED				1U
 

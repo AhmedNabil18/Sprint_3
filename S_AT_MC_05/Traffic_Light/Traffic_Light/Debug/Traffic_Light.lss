@@ -1,0 +1,2146 @@
+
+Traffic_Light.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000a0c  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000062  00800060  00000a0c  00000aa0  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000014  008000c2  008000c2  00000b02  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000b02  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000b34  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000220  00000000  00000000  00000b70  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00001d9a  00000000  00000000  00000d90  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000da0  00000000  00000000  00002b2a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000012e2  00000000  00000000  000038ca  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000004b0  00000000  00000000  00004bac  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000e67  00000000  00000000  0000505c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000feb  00000000  00000000  00005ec3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000188  00000000  00000000  00006eae  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 cd 03 	jmp	0x79a	; 0x79a <__vector_13>
+  38:	0c 94 f4 03 	jmp	0x7e8	; 0x7e8 <__vector_14>
+  3c:	0c 94 a6 03 	jmp	0x74c	; 0x74c <__vector_15>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ec e0       	ldi	r30, 0x0C	; 12
+  68:	fa e0       	ldi	r31, 0x0A	; 10
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a2 3c       	cpi	r26, 0xC2	; 194
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a2 ec       	ldi	r26, 0xC2	; 194
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a6 3d       	cpi	r26, 0xD6	; 214
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 bd 01 	call	0x37a	; 0x37a <main>
+  8a:	0c 94 04 05 	jmp	0xa08	; 0xa08 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <TrafficApp_init>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the Application was already initialized */
+	if (enuCurrentAppStatus == APP_STATUS_INITIALIZED)
+  92:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  96:	84 30       	cpi	r24, 0x04	; 4
+  98:	51 f0       	breq	.+20     	; 0xae <TrafficApp_init+0x1c>
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+
+	/* Call the initializer in service layer */
+	if(SRVC_STATUS_ERROR_OK != Service_init())
+  9a:	0e 94 1b 04 	call	0x836	; 0x836 <Service_init>
+  9e:	81 30       	cpi	r24, 0x01	; 1
+  a0:	29 f4       	brne	.+10     	; 0xac <TrafficApp_init+0x1a>
+	{
+		return APP_STATUS_ERROR_NOK;
+	}
+	/* Update enuCurrentAppStatus to initialized */
+	enuCurrentAppStatus = APP_STATUS_INITIALIZED;
+  a2:	84 e0       	ldi	r24, 0x04	; 4
+  a4:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+	return APP_STATUS_ERROR_OK;
+  a8:	81 e0       	ldi	r24, 0x01	; 1
+  aa:	08 95       	ret
+/**************************************************************************************/
+
+	/* Call the initializer in service layer */
+	if(SRVC_STATUS_ERROR_OK != Service_init())
+	{
+		return APP_STATUS_ERROR_NOK;
+  ac:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	/* Update enuCurrentAppStatus to initialized */
+	enuCurrentAppStatus = APP_STATUS_INITIALIZED;
+	return APP_STATUS_ERROR_OK;
+}
+  ae:	08 95       	ret
+
+000000b0 <TrafficApp_update>:
+* Parameters (out): None
+* Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Update the state of the application.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuApp_Status_t TrafficApp_update(void)
+{
+  b0:	1f 93       	push	r17
+  b2:	cf 93       	push	r28
+  b4:	df 93       	push	r29
+  b6:	1f 92       	push	r1
+  b8:	cd b7       	in	r28, 0x3d	; 61
+  ba:	de b7       	in	r29, 0x3e	; 62
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the Application was already initialized */
+	if (enuCurrentAppStatus != APP_STATUS_INITIALIZED)
+  bc:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  c0:	84 30       	cpi	r24, 0x04	; 4
+  c2:	91 f5       	brne	.+100    	; 0x128 <TrafficApp_update+0x78>
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Get the input from the service layer */
+	enuTrafficState_t enu_trafficState = TRAFFIC_OFF;
+  c4:	19 82       	std	Y+1, r1	; 0x01
+	if(Service_ReportTerminal( (uint8_t*) &enu_trafficState) != SRVC_STATUS_ERROR_OK)
+  c6:	ce 01       	movw	r24, r28
+  c8:	01 96       	adiw	r24, 0x01	; 1
+  ca:	0e 94 30 04 	call	0x860	; 0x860 <Service_ReportTerminal>
+  ce:	81 30       	cpi	r24, 0x01	; 1
+  d0:	69 f5       	brne	.+90     	; 0x12c <TrafficApp_update+0x7c>
+		return APP_STATUS_ERROR_NOK;
+	if( (genu_AppState != enu_trafficState) || (TRAFFIC_AT == enu_trafficState))
+  d2:	90 91 c2 00 	lds	r25, 0x00C2	; 0x8000c2 <__data_end>
+  d6:	89 81       	ldd	r24, Y+1	; 0x01
+  d8:	98 13       	cpse	r25, r24
+  da:	02 c0       	rjmp	.+4      	; 0xe0 <TrafficApp_update+0x30>
+  dc:	81 30       	cpi	r24, 0x01	; 1
+  de:	41 f5       	brne	.+80     	; 0x130 <TrafficApp_update+0x80>
+	{
+		genu_AppState = enu_trafficState;
+  e0:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__data_end>
+		/* Check the input of the Terminal */
+		uint8_t u8_Action = TRAFFIC_ACTION_IDLE;
+		switch (enu_trafficState)
+  e4:	82 30       	cpi	r24, 0x02	; 2
+  e6:	69 f0       	breq	.+26     	; 0x102 <TrafficApp_update+0x52>
+  e8:	28 f4       	brcc	.+10     	; 0xf4 <TrafficApp_update+0x44>
+  ea:	88 23       	and	r24, r24
+  ec:	41 f0       	breq	.+16     	; 0xfe <TrafficApp_update+0x4e>
+  ee:	81 30       	cpi	r24, 0x01	; 1
+  f0:	71 f0       	breq	.+28     	; 0x10e <TrafficApp_update+0x5e>
+  f2:	20 c0       	rjmp	.+64     	; 0x134 <TrafficApp_update+0x84>
+  f4:	83 30       	cpi	r24, 0x03	; 3
+  f6:	39 f0       	breq	.+14     	; 0x106 <TrafficApp_update+0x56>
+  f8:	84 30       	cpi	r24, 0x04	; 4
+  fa:	39 f0       	breq	.+14     	; 0x10a <TrafficApp_update+0x5a>
+  fc:	1b c0       	rjmp	.+54     	; 0x134 <TrafficApp_update+0x84>
+		{	/* Decide the Action of the application */
+			case TRAFFIC_OFF:
+				u8_Action = TRAFFIC_ACTION_IDLE;
+  fe:	10 e0       	ldi	r17, 0x00	; 0
+ 100:	07 c0       	rjmp	.+14     	; 0x110 <TrafficApp_update+0x60>
+				break;
+			case TRAFFIC_AT:
+				u8_Action = TRAFFIC_ACTION_OK;
+				break;
+			case TRAFFIC_GO:
+				u8_Action = TRAFFIC_ACTION_GREEN;
+ 102:	12 e0       	ldi	r17, 0x02	; 2
+				break;
+ 104:	05 c0       	rjmp	.+10     	; 0x110 <TrafficApp_update+0x60>
+			case TRAFFIC_WAIT:
+				u8_Action = TRAFFIC_ACTION_YELLOW;
+ 106:	13 e0       	ldi	r17, 0x03	; 3
+				break;
+ 108:	03 c0       	rjmp	.+6      	; 0x110 <TrafficApp_update+0x60>
+			case TRAFFIC_STOP:
+				u8_Action = TRAFFIC_ACTION_RED;
+ 10a:	14 e0       	ldi	r17, 0x04	; 4
+				break;
+ 10c:	01 c0       	rjmp	.+2      	; 0x110 <TrafficApp_update+0x60>
+		{	/* Decide the Action of the application */
+			case TRAFFIC_OFF:
+				u8_Action = TRAFFIC_ACTION_IDLE;
+				break;
+			case TRAFFIC_AT:
+				u8_Action = TRAFFIC_ACTION_OK;
+ 10e:	11 e0       	ldi	r17, 0x01	; 1
+			default:
+				return APP_STATUS_ERROR_NOK;
+		}
+		
+		/* Send Action to the Service Layer */
+		if(Service_UpdateLeds(u8_Action) != SRVC_STATUS_ERROR_OK)
+ 110:	81 2f       	mov	r24, r17
+ 112:	0e 94 96 04 	call	0x92c	; 0x92c <Service_UpdateLeds>
+ 116:	81 30       	cpi	r24, 0x01	; 1
+ 118:	79 f4       	brne	.+30     	; 0x138 <TrafficApp_update+0x88>
+			return APP_STATUS_ERROR_NOK;
+		if(Service_UpdateTerminal(u8_Action) != SRVC_STATUS_ERROR_OK)
+ 11a:	81 2f       	mov	r24, r17
+ 11c:	0e 94 dc 04 	call	0x9b8	; 0x9b8 <Service_UpdateTerminal>
+ 120:	81 30       	cpi	r24, 0x01	; 1
+ 122:	61 f0       	breq	.+24     	; 0x13c <TrafficApp_update+0x8c>
+			return APP_STATUS_ERROR_NOK;	
+ 124:	80 e0       	ldi	r24, 0x00	; 0
+ 126:	0b c0       	rjmp	.+22     	; 0x13e <TrafficApp_update+0x8e>
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the Application was already initialized */
+	if (enuCurrentAppStatus != APP_STATUS_INITIALIZED)
+	{
+		return APP_STATUS_UNINITIALIZED;
+ 128:	85 e0       	ldi	r24, 0x05	; 5
+ 12a:	09 c0       	rjmp	.+18     	; 0x13e <TrafficApp_update+0x8e>
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Get the input from the service layer */
+	enuTrafficState_t enu_trafficState = TRAFFIC_OFF;
+	if(Service_ReportTerminal( (uint8_t*) &enu_trafficState) != SRVC_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
+ 12c:	80 e0       	ldi	r24, 0x00	; 0
+ 12e:	07 c0       	rjmp	.+14     	; 0x13e <TrafficApp_update+0x8e>
+		if(Service_UpdateLeds(u8_Action) != SRVC_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+		if(Service_UpdateTerminal(u8_Action) != SRVC_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;	
+	}
+	return APP_STATUS_ERROR_OK;
+ 130:	81 e0       	ldi	r24, 0x01	; 1
+ 132:	05 c0       	rjmp	.+10     	; 0x13e <TrafficApp_update+0x8e>
+				break;
+			case TRAFFIC_STOP:
+				u8_Action = TRAFFIC_ACTION_RED;
+				break;
+			default:
+				return APP_STATUS_ERROR_NOK;
+ 134:	80 e0       	ldi	r24, 0x00	; 0
+ 136:	03 c0       	rjmp	.+6      	; 0x13e <TrafficApp_update+0x8e>
+		}
+		
+		/* Send Action to the Service Layer */
+		if(Service_UpdateLeds(u8_Action) != SRVC_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+ 138:	80 e0       	ldi	r24, 0x00	; 0
+ 13a:	01 c0       	rjmp	.+2      	; 0x13e <TrafficApp_update+0x8e>
+		if(Service_UpdateTerminal(u8_Action) != SRVC_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;	
+	}
+	return APP_STATUS_ERROR_OK;
+ 13c:	81 e0       	ldi	r24, 0x01	; 1
+ 13e:	0f 90       	pop	r0
+ 140:	df 91       	pop	r29
+ 142:	cf 91       	pop	r28
+ 144:	1f 91       	pop	r17
+ 146:	08 95       	ret
+
+00000148 <TrafficApp_start>:
+{
+	/**************************************************************************************/
+	/*								Function Implementation								  */
+	/**************************************************************************************/
+	/* Initialize the Car application */
+	if(TrafficApp_init() != APP_STATUS_ERROR_OK)
+ 148:	0e 94 49 00 	call	0x92	; 0x92 <TrafficApp_init>
+ 14c:	81 30       	cpi	r24, 0x01	; 1
+ 14e:	39 f4       	brne	.+14     	; 0x15e <TrafficApp_start+0x16>
+		return APP_STATUS_ERROR_NOK;
+	EnableGlbl_Interrupt();
+ 150:	8f b7       	in	r24, 0x3f	; 63
+ 152:	80 68       	ori	r24, 0x80	; 128
+ 154:	8f bf       	out	0x3f, r24	; 63
+	/* Application Super Loop */
+	while (1)
+	{
+		/* Update the car status */
+		if(TrafficApp_update() != APP_STATUS_ERROR_OK)
+ 156:	0e 94 58 00 	call	0xb0	; 0xb0 <TrafficApp_update>
+ 15a:	81 30       	cpi	r24, 0x01	; 1
+ 15c:	e1 f3       	breq	.-8      	; 0x156 <TrafficApp_start+0xe>
+			return APP_STATUS_ERROR_NOK;
+			
+	}
+}
+ 15e:	80 e0       	ldi	r24, 0x00	; 0
+ 160:	08 95       	ret
+
+00000162 <Led_init>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the led module is already initialized */
+	if (genu_LedModuleState == LED_STATUS_INIT)
+ 162:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <genu_LedModuleState>
+ 166:	85 30       	cpi	r24, 0x05	; 5
+ 168:	71 f0       	breq	.+28     	; 0x186 <Led_init+0x24>
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Initialize the DIO Module and check if any error returned */
+	enuDio_Status_t Dio_State = Dio_init(strDio_pins);
+ 16a:	86 e6       	ldi	r24, 0x66	; 102
+ 16c:	90 e0       	ldi	r25, 0x00	; 0
+ 16e:	0e 94 c0 01 	call	0x380	; 0x380 <Dio_init>
+	if((DIO_STATUS_ERROR_OK != Dio_State) && (DIO_STATUS_ALREADY_INIT != Dio_State))
+ 172:	81 30       	cpi	r24, 0x01	; 1
+ 174:	11 f0       	breq	.+4      	; 0x17a <Led_init+0x18>
+ 176:	87 30       	cpi	r24, 0x07	; 7
+ 178:	29 f4       	brne	.+10     	; 0x184 <Led_init+0x22>
+		return LED_STATUS_ERROR_NOK;
+	/* Change the state of the Led module to Initialized */
+	genu_LedModuleState = LED_STATUS_INIT;
+ 17a:	85 e0       	ldi	r24, 0x05	; 5
+ 17c:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <genu_LedModuleState>
+	return LED_STATUS_ERROR_OK;
+ 180:	81 e0       	ldi	r24, 0x01	; 1
+ 182:	08 95       	ret
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Initialize the DIO Module and check if any error returned */
+	enuDio_Status_t Dio_State = Dio_init(strDio_pins);
+	if((DIO_STATUS_ERROR_OK != Dio_State) && (DIO_STATUS_ALREADY_INIT != Dio_State))
+		return LED_STATUS_ERROR_NOK;
+ 184:	80 e0       	ldi	r24, 0x00	; 0
+	/* Change the state of the Led module to Initialized */
+	genu_LedModuleState = LED_STATUS_INIT;
+	return LED_STATUS_ERROR_OK;
+}
+ 186:	08 95       	ret
+
+00000188 <Led_On>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the leds index is invalid */
+	if (LEDS_USED_NUM < u8_LedID)
+ 188:	84 30       	cpi	r24, 0x04	; 4
+ 18a:	60 f4       	brcc	.+24     	; 0x1a4 <Led_On+0x1c>
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Write Logic 1 on the Led's Pin and check if any error returned */
+	enuDio_Status_t Dio_State = Dio_writePin(gau8_ledsUsed[u8_LedID], PIN_HIGH);
+ 18c:	e8 2f       	mov	r30, r24
+ 18e:	f0 e0       	ldi	r31, 0x00	; 0
+ 190:	ee 59       	subi	r30, 0x9E	; 158
+ 192:	ff 4f       	sbci	r31, 0xFF	; 255
+ 194:	61 e0       	ldi	r22, 0x01	; 1
+ 196:	80 81       	ld	r24, Z
+ 198:	0e 94 ae 02 	call	0x55c	; 0x55c <Dio_writePin>
+	if(DIO_STATUS_ERROR_OK != Dio_State)
+ 19c:	81 30       	cpi	r24, 0x01	; 1
+ 19e:	21 f0       	breq	.+8      	; 0x1a8 <Led_On+0x20>
+		return LED_STATUS_ERROR_NOK;
+ 1a0:	80 e0       	ldi	r24, 0x00	; 0
+ 1a2:	08 95       	ret
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the leds index is invalid */
+	if (LEDS_USED_NUM < u8_LedID)
+	{
+		return LED_STATUS_ERROR_ID_INVALID;
+ 1a4:	82 e0       	ldi	r24, 0x02	; 2
+ 1a6:	08 95       	ret
+/**************************************************************************************/
+	/* Write Logic 1 on the Led's Pin and check if any error returned */
+	enuDio_Status_t Dio_State = Dio_writePin(gau8_ledsUsed[u8_LedID], PIN_HIGH);
+	if(DIO_STATUS_ERROR_OK != Dio_State)
+		return LED_STATUS_ERROR_NOK;
+	return LED_STATUS_ERROR_OK;
+ 1a8:	81 e0       	ldi	r24, 0x01	; 1
+}
+ 1aa:	08 95       	ret
+
+000001ac <Led_Off>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the leds index is invalid */
+	if (LEDS_USED_NUM < u8_LedID)
+ 1ac:	84 30       	cpi	r24, 0x04	; 4
+ 1ae:	60 f4       	brcc	.+24     	; 0x1c8 <Led_Off+0x1c>
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Write Logic 0 on the Led's Pin and check if any error returned */
+	enuDio_Status_t Dio_State = Dio_writePin(gau8_ledsUsed[u8_LedID], PIN_LOW);
+ 1b0:	e8 2f       	mov	r30, r24
+ 1b2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b4:	ee 59       	subi	r30, 0x9E	; 158
+ 1b6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1b8:	60 e0       	ldi	r22, 0x00	; 0
+ 1ba:	80 81       	ld	r24, Z
+ 1bc:	0e 94 ae 02 	call	0x55c	; 0x55c <Dio_writePin>
+	if(DIO_STATUS_ERROR_OK != Dio_State)
+ 1c0:	81 30       	cpi	r24, 0x01	; 1
+ 1c2:	21 f0       	breq	.+8      	; 0x1cc <Led_Off+0x20>
+		return LED_STATUS_ERROR_NOK;
+ 1c4:	80 e0       	ldi	r24, 0x00	; 0
+ 1c6:	08 95       	ret
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the leds index is invalid */
+	if (LEDS_USED_NUM < u8_LedID)
+	{
+		return LED_STATUS_ERROR_ID_INVALID;
+ 1c8:	82 e0       	ldi	r24, 0x02	; 2
+ 1ca:	08 95       	ret
+/**************************************************************************************/
+	/* Write Logic 0 on the Led's Pin and check if any error returned */
+	enuDio_Status_t Dio_State = Dio_writePin(gau8_ledsUsed[u8_LedID], PIN_LOW);
+	if(DIO_STATUS_ERROR_OK != Dio_State)
+		return LED_STATUS_ERROR_NOK;
+	return LED_STATUS_ERROR_OK;
+ 1cc:	81 e0       	ldi	r24, 0x01	; 1
+}
+ 1ce:	08 95       	ret
+
+000001d0 <stringLength>:
+        else if(string1[u8_loopIndex] < string2[u8_loopIndex])
+            return 2;
+        u8_loopIndex++;
+    }
+    return 3;
+}
+ 1d0:	ac 01       	movw	r20, r24
+ 1d2:	80 e0       	ldi	r24, 0x00	; 0
+ 1d4:	01 c0       	rjmp	.+2      	; 0x1d8 <stringLength+0x8>
+ 1d6:	8f 5f       	subi	r24, 0xFF	; 255
+ 1d8:	fa 01       	movw	r30, r20
+ 1da:	e8 0f       	add	r30, r24
+ 1dc:	f1 1d       	adc	r31, r1
+ 1de:	20 81       	ld	r18, Z
+ 1e0:	21 11       	cpse	r18, r1
+ 1e2:	f9 cf       	rjmp	.-14     	; 0x1d6 <stringLength+0x6>
+ 1e4:	8f 5f       	subi	r24, 0xFF	; 255
+ 1e6:	08 95       	ret
+
+000001e8 <stringCompare>:
+ 1e8:	ff 92       	push	r15
+ 1ea:	0f 93       	push	r16
+ 1ec:	1f 93       	push	r17
+ 1ee:	cf 93       	push	r28
+ 1f0:	df 93       	push	r29
+ 1f2:	ec 01       	movw	r28, r24
+ 1f4:	8b 01       	movw	r16, r22
+ 1f6:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <stringLength>
+ 1fa:	f8 2e       	mov	r15, r24
+ 1fc:	c8 01       	movw	r24, r16
+ 1fe:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <stringLength>
+ 202:	8f 15       	cp	r24, r15
+ 204:	a8 f0       	brcs	.+42     	; 0x230 <stringCompare+0x48>
+ 206:	f8 16       	cp	r15, r24
+ 208:	a8 f0       	brcs	.+42     	; 0x234 <stringCompare+0x4c>
+ 20a:	30 e0       	ldi	r19, 0x00	; 0
+ 20c:	07 c0       	rjmp	.+14     	; 0x21c <stringCompare+0x34>
+ 20e:	f8 01       	movw	r30, r16
+ 210:	e8 0f       	add	r30, r24
+ 212:	f9 1f       	adc	r31, r25
+ 214:	80 81       	ld	r24, Z
+ 216:	28 13       	cpse	r18, r24
+ 218:	0f c0       	rjmp	.+30     	; 0x238 <stringCompare+0x50>
+ 21a:	3f 5f       	subi	r19, 0xFF	; 255
+ 21c:	83 2f       	mov	r24, r19
+ 21e:	90 e0       	ldi	r25, 0x00	; 0
+ 220:	fe 01       	movw	r30, r28
+ 222:	e8 0f       	add	r30, r24
+ 224:	f9 1f       	adc	r31, r25
+ 226:	20 81       	ld	r18, Z
+ 228:	21 11       	cpse	r18, r1
+ 22a:	f1 cf       	rjmp	.-30     	; 0x20e <stringCompare+0x26>
+ 22c:	81 e0       	ldi	r24, 0x01	; 1
+ 22e:	05 c0       	rjmp	.+10     	; 0x23a <stringCompare+0x52>
+ 230:	82 e0       	ldi	r24, 0x02	; 2
+ 232:	03 c0       	rjmp	.+6      	; 0x23a <stringCompare+0x52>
+ 234:	83 e0       	ldi	r24, 0x03	; 3
+ 236:	01 c0       	rjmp	.+2      	; 0x23a <stringCompare+0x52>
+ 238:	80 e0       	ldi	r24, 0x00	; 0
+ 23a:	df 91       	pop	r29
+ 23c:	cf 91       	pop	r28
+ 23e:	1f 91       	pop	r17
+ 240:	0f 91       	pop	r16
+ 242:	ff 90       	pop	r15
+ 244:	08 95       	ret
+
+00000246 <EmptyString>:
+
+void EmptyString(uint8_t *string)
+{
+ 246:	ac 01       	movw	r20, r24
+	uint8_t u8_loopIndex=0;
+ 248:	90 e0       	ldi	r25, 0x00	; 0
+	while(string[u8_loopIndex] != '\0')
+ 24a:	02 c0       	rjmp	.+4      	; 0x250 <EmptyString+0xa>
+		string[u8_loopIndex++] = '\0';
+ 24c:	9f 5f       	subi	r25, 0xFF	; 255
+ 24e:	10 82       	st	Z, r1
+}
+
+void EmptyString(uint8_t *string)
+{
+	uint8_t u8_loopIndex=0;
+	while(string[u8_loopIndex] != '\0')
+ 250:	fa 01       	movw	r30, r20
+ 252:	e9 0f       	add	r30, r25
+ 254:	f1 1d       	adc	r31, r1
+ 256:	20 81       	ld	r18, Z
+ 258:	21 11       	cpse	r18, r1
+ 25a:	f8 cf       	rjmp	.-16     	; 0x24c <EmptyString+0x6>
+		string[u8_loopIndex++] = '\0';
+}
+ 25c:	08 95       	ret
+
+0000025e <stringCopy>:
+
+void stringCopy(uint8_t* source, uint8_t* destination)
+{
+ 25e:	dc 01       	movw	r26, r24
+    uint8_t u8_loopIndex=0;
+ 260:	90 e0       	ldi	r25, 0x00	; 0
+    while(source[u8_loopIndex] != '\0')
+ 262:	05 c0       	rjmp	.+10     	; 0x26e <stringCopy+0x10>
+    {
+	    destination[u8_loopIndex] = source[u8_loopIndex];
+ 264:	fb 01       	movw	r30, r22
+ 266:	e2 0f       	add	r30, r18
+ 268:	f3 1f       	adc	r31, r19
+ 26a:	40 83       	st	Z, r20
+	    u8_loopIndex++;
+ 26c:	9f 5f       	subi	r25, 0xFF	; 255
+}
+
+void stringCopy(uint8_t* source, uint8_t* destination)
+{
+    uint8_t u8_loopIndex=0;
+    while(source[u8_loopIndex] != '\0')
+ 26e:	29 2f       	mov	r18, r25
+ 270:	30 e0       	ldi	r19, 0x00	; 0
+ 272:	fd 01       	movw	r30, r26
+ 274:	e2 0f       	add	r30, r18
+ 276:	f3 1f       	adc	r31, r19
+ 278:	40 81       	ld	r20, Z
+ 27a:	41 11       	cpse	r20, r1
+ 27c:	f3 cf       	rjmp	.-26     	; 0x264 <stringCopy+0x6>
+    {
+	    destination[u8_loopIndex] = source[u8_loopIndex];
+	    u8_loopIndex++;
+    }
+}
+ 27e:	08 95       	ret
+
+00000280 <Uart_RXC_ISR>:
+uint8_t gau8_data[MAX_INPUT_SIZE]={0};
+uint8_t gu8_counter=0;
+uint8_t gu8_flag=0;
+
+void Uart_RXC_ISR(void)
+{
+ 280:	cf 93       	push	r28
+ 282:	df 93       	push	r29
+	gau8_data[gu8_counter] = Uart_DataRegister();
+ 284:	c0 91 c4 00 	lds	r28, 0x00C4	; 0x8000c4 <gu8_counter>
+ 288:	d0 e0       	ldi	r29, 0x00	; 0
+ 28a:	0e 94 a4 03 	call	0x748	; 0x748 <Uart_DataRegister>
+ 28e:	cb 53       	subi	r28, 0x3B	; 59
+ 290:	df 4f       	sbci	r29, 0xFF	; 255
+ 292:	88 83       	st	Y, r24
+	Uart_sendByte(gau8_data[gu8_counter]);
+ 294:	e0 91 c4 00 	lds	r30, 0x00C4	; 0x8000c4 <gu8_counter>
+ 298:	f0 e0       	ldi	r31, 0x00	; 0
+ 29a:	eb 53       	subi	r30, 0x3B	; 59
+ 29c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 29e:	80 81       	ld	r24, Z
+ 2a0:	0e 94 5d 03 	call	0x6ba	; 0x6ba <Uart_sendByte>
+	if (gau8_data[gu8_counter] == '\r')
+ 2a4:	80 91 c4 00 	lds	r24, 0x00C4	; 0x8000c4 <gu8_counter>
+ 2a8:	28 2f       	mov	r18, r24
+ 2aa:	30 e0       	ldi	r19, 0x00	; 0
+ 2ac:	f9 01       	movw	r30, r18
+ 2ae:	eb 53       	subi	r30, 0x3B	; 59
+ 2b0:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2b2:	90 81       	ld	r25, Z
+ 2b4:	9d 30       	cpi	r25, 0x0D	; 13
+ 2b6:	51 f4       	brne	.+20     	; 0x2cc <Uart_RXC_ISR+0x4c>
+	{
+		gau8_data[gu8_counter] = '\0';
+ 2b8:	f9 01       	movw	r30, r18
+ 2ba:	eb 53       	subi	r30, 0x3B	; 59
+ 2bc:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2be:	10 82       	st	Z, r1
+		gu8_counter = 0;
+ 2c0:	10 92 c4 00 	sts	0x00C4, r1	; 0x8000c4 <gu8_counter>
+		gu8_flag = 1;
+ 2c4:	81 e0       	ldi	r24, 0x01	; 1
+ 2c6:	80 93 c3 00 	sts	0x00C3, r24	; 0x8000c3 <gu8_flag>
+ 2ca:	09 c0       	rjmp	.+18     	; 0x2de <Uart_RXC_ISR+0x5e>
+	}else if (gau8_data[gu8_counter] == '\b')
+ 2cc:	98 30       	cpi	r25, 0x08	; 8
+ 2ce:	21 f4       	brne	.+8      	; 0x2d8 <Uart_RXC_ISR+0x58>
+	{
+		gu8_counter--;
+ 2d0:	81 50       	subi	r24, 0x01	; 1
+ 2d2:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <gu8_counter>
+ 2d6:	03 c0       	rjmp	.+6      	; 0x2de <Uart_RXC_ISR+0x5e>
+	}
+	else
+	{
+		gu8_counter++;
+ 2d8:	8f 5f       	subi	r24, 0xFF	; 255
+ 2da:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <gu8_counter>
+	}
+}
+ 2de:	df 91       	pop	r29
+ 2e0:	cf 91       	pop	r28
+ 2e2:	08 95       	ret
+
+000002e4 <Terminal_init>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the Terminal module is already initialized */
+	if (genu_TerminalModuleState == TERMINAL_STATUS_INIT)
+ 2e4:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <genu_TerminalModuleState>
+ 2e8:	83 30       	cpi	r24, 0x03	; 3
+ 2ea:	81 f0       	breq	.+32     	; 0x30c <Terminal_init+0x28>
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Initialize the Uart Module */
+	enuUart_Status_t Uart_State = Uart_init();
+ 2ec:	0e 94 47 03 	call	0x68e	; 0x68e <Uart_init>
+	if((UART_STATUS_ERROR_OK != Uart_State) && (UART_STATUS_ALREADY_INIT != Uart_State))
+ 2f0:	81 30       	cpi	r24, 0x01	; 1
+ 2f2:	11 f0       	breq	.+4      	; 0x2f8 <Terminal_init+0x14>
+ 2f4:	87 30       	cpi	r24, 0x07	; 7
+ 2f6:	49 f4       	brne	.+18     	; 0x30a <Terminal_init+0x26>
+		return TERMINAL_STATUS_ERROR_NOK;
+	Uart_EnableNotification_RXC(Uart_RXC_ISR);	
+ 2f8:	80 e4       	ldi	r24, 0x40	; 64
+ 2fa:	91 e0       	ldi	r25, 0x01	; 1
+ 2fc:	0e 94 8f 03 	call	0x71e	; 0x71e <Uart_EnableNotification_RXC>
+	/* Change the state of the Terminal module to Initialized */
+	genu_TerminalModuleState = TERMINAL_STATUS_INIT;
+ 300:	83 e0       	ldi	r24, 0x03	; 3
+ 302:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <genu_TerminalModuleState>
+	return TERMINAL_STATUS_ERROR_OK;
+ 306:	81 e0       	ldi	r24, 0x01	; 1
+ 308:	08 95       	ret
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Initialize the Uart Module */
+	enuUart_Status_t Uart_State = Uart_init();
+	if((UART_STATUS_ERROR_OK != Uart_State) && (UART_STATUS_ALREADY_INIT != Uart_State))
+		return TERMINAL_STATUS_ERROR_NOK;
+ 30a:	80 e0       	ldi	r24, 0x00	; 0
+	Uart_EnableNotification_RXC(Uart_RXC_ISR);	
+	/* Change the state of the Terminal module to Initialized */
+	genu_TerminalModuleState = TERMINAL_STATUS_INIT;
+	return TERMINAL_STATUS_ERROR_OK;
+}
+ 30c:	08 95       	ret
+
+0000030e <Terminal_Out>:
+* Parameters (out): None
+* Return value: enuLed_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to print a string on the terminal
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuTerminal_Status_t Terminal_Out(uint8_t *pu8_OutputData)
+{
+ 30e:	cf 93       	push	r28
+ 310:	df 93       	push	r29
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the argument is null pointer */
+	if (pu8_OutputData == NULL_PTR)
+ 312:	00 97       	sbiw	r24, 0x00	; 0
+ 314:	81 f0       	breq	.+32     	; 0x336 <Terminal_Out+0x28>
+	{
+		return TERMINAL_STATUS_ERROR_NULL;
+	}else{/*Nothing to here*/}
+	/* Check if the Terminal module is not initialized */
+	if (genu_TerminalModuleState == TERMINAL_STATUS_NOT_INIT)
+ 316:	20 91 65 00 	lds	r18, 0x0065	; 0x800065 <genu_TerminalModuleState>
+ 31a:	22 30       	cpi	r18, 0x02	; 2
+ 31c:	79 f0       	breq	.+30     	; 0x33c <Terminal_Out+0x2e>
+ 31e:	ec 01       	movw	r28, r24
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Put Output String on Terminal */
+	enuUart_Status_t Uart_State = Uart_sendPacket(pu8_OutputData, stringLength(pu8_OutputData));
+ 320:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <stringLength>
+ 324:	68 2f       	mov	r22, r24
+ 326:	70 e0       	ldi	r23, 0x00	; 0
+ 328:	ce 01       	movw	r24, r28
+ 32a:	0e 94 68 03 	call	0x6d0	; 0x6d0 <Uart_sendPacket>
+	if(UART_STATUS_ERROR_OK != Uart_State)
+ 32e:	81 30       	cpi	r24, 0x01	; 1
+ 330:	21 f0       	breq	.+8      	; 0x33a <Terminal_Out+0x2c>
+		return TERMINAL_STATUS_ERROR_NOK;
+ 332:	20 e0       	ldi	r18, 0x00	; 0
+ 334:	03 c0       	rjmp	.+6      	; 0x33c <Terminal_Out+0x2e>
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the argument is null pointer */
+	if (pu8_OutputData == NULL_PTR)
+	{
+		return TERMINAL_STATUS_ERROR_NULL;
+ 336:	24 e0       	ldi	r18, 0x04	; 4
+ 338:	01 c0       	rjmp	.+2      	; 0x33c <Terminal_Out+0x2e>
+/**************************************************************************************/
+	/* Put Output String on Terminal */
+	enuUart_Status_t Uart_State = Uart_sendPacket(pu8_OutputData, stringLength(pu8_OutputData));
+	if(UART_STATUS_ERROR_OK != Uart_State)
+		return TERMINAL_STATUS_ERROR_NOK;
+	return TERMINAL_STATUS_ERROR_OK;
+ 33a:	21 e0       	ldi	r18, 0x01	; 1
+}
+ 33c:	82 2f       	mov	r24, r18
+ 33e:	df 91       	pop	r29
+ 340:	cf 91       	pop	r28
+ 342:	08 95       	ret
+
+00000344 <Terminal_In>:
+* Parameters (out): pu8_InputData - Pointer to an input string from the terminal.
+* Return value: enuLed_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to get the input from the terminal.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuTerminal_Status_t Terminal_In(uint8_t *pu8_InputData)
+{
+ 344:	bc 01       	movw	r22, r24
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the argument is null pointer */
+	if (pu8_InputData == NULL_PTR)
+ 346:	89 2b       	or	r24, r25
+ 348:	a1 f0       	breq	.+40     	; 0x372 <Terminal_In+0x2e>
+	{
+		return TERMINAL_STATUS_ERROR_NULL;
+	}else{/*Nothing to here*/}
+	/* Check if the Terminal module is not initialized */
+	if (genu_TerminalModuleState == TERMINAL_STATUS_NOT_INIT)
+ 34a:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <genu_TerminalModuleState>
+ 34e:	82 30       	cpi	r24, 0x02	; 2
+ 350:	99 f0       	breq	.+38     	; 0x378 <Terminal_In+0x34>
+/**************************************************************************************/
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	if(gu8_flag == 1)
+ 352:	80 91 c3 00 	lds	r24, 0x00C3	; 0x8000c3 <gu8_flag>
+ 356:	81 30       	cpi	r24, 0x01	; 1
+ 358:	71 f4       	brne	.+28     	; 0x376 <Terminal_In+0x32>
+	{
+		gu8_flag = 0;
+ 35a:	10 92 c3 00 	sts	0x00C3, r1	; 0x8000c3 <gu8_flag>
+		stringCopy(gau8_data, pu8_InputData);
+ 35e:	85 ec       	ldi	r24, 0xC5	; 197
+ 360:	90 e0       	ldi	r25, 0x00	; 0
+ 362:	0e 94 2f 01 	call	0x25e	; 0x25e <stringCopy>
+		EmptyString(gau8_data);
+ 366:	85 ec       	ldi	r24, 0xC5	; 197
+ 368:	90 e0       	ldi	r25, 0x00	; 0
+ 36a:	0e 94 23 01 	call	0x246	; 0x246 <EmptyString>
+	}
+	return TERMINAL_STATUS_ERROR_OK;
+ 36e:	81 e0       	ldi	r24, 0x01	; 1
+ 370:	08 95       	ret
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the argument is null pointer */
+	if (pu8_InputData == NULL_PTR)
+	{
+		return TERMINAL_STATUS_ERROR_NULL;
+ 372:	84 e0       	ldi	r24, 0x04	; 4
+ 374:	08 95       	ret
+	{
+		gu8_flag = 0;
+		stringCopy(gau8_data, pu8_InputData);
+		EmptyString(gau8_data);
+	}
+	return TERMINAL_STATUS_ERROR_OK;
+ 376:	81 e0       	ldi	r24, 0x01	; 1
+}
+ 378:	08 95       	ret
+
+0000037a <main>:
+
+#include "App Layer/App.h"
+
+int main(void)
+{
+	TrafficApp_start();
+ 37a:	0e 94 a4 00 	call	0x148	; 0x148 <TrafficApp_start>
+ 37e:	ff cf       	rjmp	.-2      	; 0x37e <main+0x4>
+
+00000380 <Dio_init>:
+* Parameters (out): None
+* Return value: enuDio_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Initialize the Dio module.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuDio_Status_t Dio_init(strDio_Config_t* pstrDio_pins)
+{
+ 380:	ac 01       	movw	r20, r24
+	uint8_t u8_loopIndex=0;
+	/*-* check if the input configuration pointer is not a NULL_PTR *-*/
+	if (NULL_PTR == pstrDio_pins)
+ 382:	89 2b       	or	r24, r25
+ 384:	09 f4       	brne	.+2      	; 0x388 <Dio_init+0x8>
+ 386:	e4 c0       	rjmp	.+456    	; 0x550 <__EEPROM_REGION_LENGTH__+0x150>
+ 388:	90 e0       	ldi	r25, 0x00	; 0
+ 38a:	d7 c0       	rjmp	.+430    	; 0x53a <__EEPROM_REGION_LENGTH__+0x13a>
+	{
+		return DIO_STATUS_NULL_ARGUMENT;
+	}
+	for (u8_loopIndex=0; u8_loopIndex<DIO_USED_PINS_NUM; u8_loopIndex++)
+	{
+		if ((pstrDio_pins[u8_loopIndex].u8_PinNum) > PIN_7)
+ 38c:	e9 2f       	mov	r30, r25
+ 38e:	f0 e0       	ldi	r31, 0x00	; 0
+ 390:	ee 0f       	add	r30, r30
+ 392:	ff 1f       	adc	r31, r31
+ 394:	ee 0f       	add	r30, r30
+ 396:	ff 1f       	adc	r31, r31
+ 398:	e4 0f       	add	r30, r20
+ 39a:	f5 1f       	adc	r31, r21
+ 39c:	81 81       	ldd	r24, Z+1	; 0x01
+ 39e:	88 30       	cpi	r24, 0x08	; 8
+ 3a0:	08 f0       	brcs	.+2      	; 0x3a4 <Dio_init+0x24>
+ 3a2:	d8 c0       	rjmp	.+432    	; 0x554 <__EEPROM_REGION_LENGTH__+0x154>
+		{
+			return DIO_STATUS_PIN_NUM_INVALID;
+		}
+		switch (pstrDio_pins[u8_loopIndex].u8_PortNum)
+ 3a4:	20 81       	ld	r18, Z
+ 3a6:	21 30       	cpi	r18, 0x01	; 1
+ 3a8:	c1 f1       	breq	.+112    	; 0x41a <__EEPROM_REGION_LENGTH__+0x1a>
+ 3aa:	38 f0       	brcs	.+14     	; 0x3ba <Dio_init+0x3a>
+ 3ac:	22 30       	cpi	r18, 0x02	; 2
+ 3ae:	09 f4       	brne	.+2      	; 0x3b2 <Dio_init+0x32>
+ 3b0:	64 c0       	rjmp	.+200    	; 0x47a <__EEPROM_REGION_LENGTH__+0x7a>
+ 3b2:	23 30       	cpi	r18, 0x03	; 3
+ 3b4:	09 f4       	brne	.+2      	; 0x3b8 <Dio_init+0x38>
+ 3b6:	91 c0       	rjmp	.+290    	; 0x4da <__EEPROM_REGION_LENGTH__+0xda>
+ 3b8:	cf c0       	rjmp	.+414    	; 0x558 <__EEPROM_REGION_LENGTH__+0x158>
+		{
+			case PORT_A:
+				DIO_PORTA_DIR &= ~(1<<(pstrDio_pins[u8_loopIndex].u8_PinNum));
+ 3ba:	2a b3       	in	r18, 0x1a	; 26
+ 3bc:	61 e0       	ldi	r22, 0x01	; 1
+ 3be:	70 e0       	ldi	r23, 0x00	; 0
+ 3c0:	db 01       	movw	r26, r22
+ 3c2:	02 c0       	rjmp	.+4      	; 0x3c8 <Dio_init+0x48>
+ 3c4:	aa 0f       	add	r26, r26
+ 3c6:	bb 1f       	adc	r27, r27
+ 3c8:	8a 95       	dec	r24
+ 3ca:	e2 f7       	brpl	.-8      	; 0x3c4 <Dio_init+0x44>
+ 3cc:	8a 2f       	mov	r24, r26
+ 3ce:	80 95       	com	r24
+ 3d0:	82 23       	and	r24, r18
+ 3d2:	8a bb       	out	0x1a, r24	; 26
+				DIO_PORTA_DIR |= (pstrDio_pins[u8_loopIndex].u8_Direction)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+ 3d4:	aa b3       	in	r26, 0x1a	; 26
+ 3d6:	82 81       	ldd	r24, Z+2	; 0x02
+ 3d8:	28 2f       	mov	r18, r24
+ 3da:	30 e0       	ldi	r19, 0x00	; 0
+ 3dc:	01 80       	ldd	r0, Z+1	; 0x01
+ 3de:	02 c0       	rjmp	.+4      	; 0x3e4 <Dio_init+0x64>
+ 3e0:	22 0f       	add	r18, r18
+ 3e2:	33 1f       	adc	r19, r19
+ 3e4:	0a 94       	dec	r0
+ 3e6:	e2 f7       	brpl	.-8      	; 0x3e0 <Dio_init+0x60>
+ 3e8:	2a 2b       	or	r18, r26
+ 3ea:	2a bb       	out	0x1a, r18	; 26
+				DIO_PORTA_DATA &= ~(1<<(pstrDio_pins[u8_loopIndex].u8_PinNum));
+ 3ec:	8b b3       	in	r24, 0x1b	; 27
+ 3ee:	01 80       	ldd	r0, Z+1	; 0x01
+ 3f0:	02 c0       	rjmp	.+4      	; 0x3f6 <Dio_init+0x76>
+ 3f2:	66 0f       	add	r22, r22
+ 3f4:	77 1f       	adc	r23, r23
+ 3f6:	0a 94       	dec	r0
+ 3f8:	e2 f7       	brpl	.-8      	; 0x3f2 <Dio_init+0x72>
+ 3fa:	60 95       	com	r22
+ 3fc:	68 23       	and	r22, r24
+ 3fe:	6b bb       	out	0x1b, r22	; 27
+				DIO_PORTA_DATA |= (pstrDio_pins[u8_loopIndex].u8_InitState)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+ 400:	6b b3       	in	r22, 0x1b	; 27
+ 402:	83 81       	ldd	r24, Z+3	; 0x03
+ 404:	28 2f       	mov	r18, r24
+ 406:	30 e0       	ldi	r19, 0x00	; 0
+ 408:	01 80       	ldd	r0, Z+1	; 0x01
+ 40a:	02 c0       	rjmp	.+4      	; 0x410 <__EEPROM_REGION_LENGTH__+0x10>
+ 40c:	22 0f       	add	r18, r18
+ 40e:	33 1f       	adc	r19, r19
+ 410:	0a 94       	dec	r0
+ 412:	e2 f7       	brpl	.-8      	; 0x40c <__EEPROM_REGION_LENGTH__+0xc>
+ 414:	26 2b       	or	r18, r22
+ 416:	2b bb       	out	0x1b, r18	; 27
+				break;
+ 418:	8f c0       	rjmp	.+286    	; 0x538 <__EEPROM_REGION_LENGTH__+0x138>
+			case PORT_B:
+				DIO_PORTB_DIR &= ~(1<<(pstrDio_pins[u8_loopIndex].u8_PinNum));
+ 41a:	27 b3       	in	r18, 0x17	; 23
+ 41c:	61 e0       	ldi	r22, 0x01	; 1
+ 41e:	70 e0       	ldi	r23, 0x00	; 0
+ 420:	db 01       	movw	r26, r22
+ 422:	02 c0       	rjmp	.+4      	; 0x428 <__EEPROM_REGION_LENGTH__+0x28>
+ 424:	aa 0f       	add	r26, r26
+ 426:	bb 1f       	adc	r27, r27
+ 428:	8a 95       	dec	r24
+ 42a:	e2 f7       	brpl	.-8      	; 0x424 <__EEPROM_REGION_LENGTH__+0x24>
+ 42c:	8a 2f       	mov	r24, r26
+ 42e:	80 95       	com	r24
+ 430:	82 23       	and	r24, r18
+ 432:	87 bb       	out	0x17, r24	; 23
+				DIO_PORTB_DIR |= (pstrDio_pins[u8_loopIndex].u8_Direction)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+ 434:	a7 b3       	in	r26, 0x17	; 23
+ 436:	82 81       	ldd	r24, Z+2	; 0x02
+ 438:	28 2f       	mov	r18, r24
+ 43a:	30 e0       	ldi	r19, 0x00	; 0
+ 43c:	01 80       	ldd	r0, Z+1	; 0x01
+ 43e:	02 c0       	rjmp	.+4      	; 0x444 <__EEPROM_REGION_LENGTH__+0x44>
+ 440:	22 0f       	add	r18, r18
+ 442:	33 1f       	adc	r19, r19
+ 444:	0a 94       	dec	r0
+ 446:	e2 f7       	brpl	.-8      	; 0x440 <__EEPROM_REGION_LENGTH__+0x40>
+ 448:	2a 2b       	or	r18, r26
+ 44a:	27 bb       	out	0x17, r18	; 23
+				DIO_PORTB_DATA &= ~(1<<(pstrDio_pins[u8_loopIndex].u8_PinNum));
+ 44c:	88 b3       	in	r24, 0x18	; 24
+ 44e:	01 80       	ldd	r0, Z+1	; 0x01
+ 450:	02 c0       	rjmp	.+4      	; 0x456 <__EEPROM_REGION_LENGTH__+0x56>
+ 452:	66 0f       	add	r22, r22
+ 454:	77 1f       	adc	r23, r23
+ 456:	0a 94       	dec	r0
+ 458:	e2 f7       	brpl	.-8      	; 0x452 <__EEPROM_REGION_LENGTH__+0x52>
+ 45a:	60 95       	com	r22
+ 45c:	68 23       	and	r22, r24
+ 45e:	68 bb       	out	0x18, r22	; 24
+				DIO_PORTB_DATA |= (pstrDio_pins[u8_loopIndex].u8_InitState)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+ 460:	68 b3       	in	r22, 0x18	; 24
+ 462:	83 81       	ldd	r24, Z+3	; 0x03
+ 464:	28 2f       	mov	r18, r24
+ 466:	30 e0       	ldi	r19, 0x00	; 0
+ 468:	01 80       	ldd	r0, Z+1	; 0x01
+ 46a:	02 c0       	rjmp	.+4      	; 0x470 <__EEPROM_REGION_LENGTH__+0x70>
+ 46c:	22 0f       	add	r18, r18
+ 46e:	33 1f       	adc	r19, r19
+ 470:	0a 94       	dec	r0
+ 472:	e2 f7       	brpl	.-8      	; 0x46c <__EEPROM_REGION_LENGTH__+0x6c>
+ 474:	26 2b       	or	r18, r22
+ 476:	28 bb       	out	0x18, r18	; 24
+				break;
+ 478:	5f c0       	rjmp	.+190    	; 0x538 <__EEPROM_REGION_LENGTH__+0x138>
+			case PORT_C:
+				DIO_PORTC_DIR &= ~(1<<(pstrDio_pins[u8_loopIndex].u8_PinNum));
+ 47a:	24 b3       	in	r18, 0x14	; 20
+ 47c:	61 e0       	ldi	r22, 0x01	; 1
+ 47e:	70 e0       	ldi	r23, 0x00	; 0
+ 480:	db 01       	movw	r26, r22
+ 482:	02 c0       	rjmp	.+4      	; 0x488 <__EEPROM_REGION_LENGTH__+0x88>
+ 484:	aa 0f       	add	r26, r26
+ 486:	bb 1f       	adc	r27, r27
+ 488:	8a 95       	dec	r24
+ 48a:	e2 f7       	brpl	.-8      	; 0x484 <__EEPROM_REGION_LENGTH__+0x84>
+ 48c:	8a 2f       	mov	r24, r26
+ 48e:	80 95       	com	r24
+ 490:	82 23       	and	r24, r18
+ 492:	84 bb       	out	0x14, r24	; 20
+				DIO_PORTC_DIR |= (pstrDio_pins[u8_loopIndex].u8_Direction)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+ 494:	a4 b3       	in	r26, 0x14	; 20
+ 496:	82 81       	ldd	r24, Z+2	; 0x02
+ 498:	28 2f       	mov	r18, r24
+ 49a:	30 e0       	ldi	r19, 0x00	; 0
+ 49c:	01 80       	ldd	r0, Z+1	; 0x01
+ 49e:	02 c0       	rjmp	.+4      	; 0x4a4 <__EEPROM_REGION_LENGTH__+0xa4>
+ 4a0:	22 0f       	add	r18, r18
+ 4a2:	33 1f       	adc	r19, r19
+ 4a4:	0a 94       	dec	r0
+ 4a6:	e2 f7       	brpl	.-8      	; 0x4a0 <__EEPROM_REGION_LENGTH__+0xa0>
+ 4a8:	2a 2b       	or	r18, r26
+ 4aa:	24 bb       	out	0x14, r18	; 20
+				DIO_PORTC_DATA &= ~(1<<(pstrDio_pins[u8_loopIndex].u8_PinNum));
+ 4ac:	85 b3       	in	r24, 0x15	; 21
+ 4ae:	01 80       	ldd	r0, Z+1	; 0x01
+ 4b0:	02 c0       	rjmp	.+4      	; 0x4b6 <__EEPROM_REGION_LENGTH__+0xb6>
+ 4b2:	66 0f       	add	r22, r22
+ 4b4:	77 1f       	adc	r23, r23
+ 4b6:	0a 94       	dec	r0
+ 4b8:	e2 f7       	brpl	.-8      	; 0x4b2 <__EEPROM_REGION_LENGTH__+0xb2>
+ 4ba:	60 95       	com	r22
+ 4bc:	68 23       	and	r22, r24
+ 4be:	65 bb       	out	0x15, r22	; 21
+				DIO_PORTC_DATA |= (pstrDio_pins[u8_loopIndex].u8_InitState)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+ 4c0:	65 b3       	in	r22, 0x15	; 21
+ 4c2:	83 81       	ldd	r24, Z+3	; 0x03
+ 4c4:	28 2f       	mov	r18, r24
+ 4c6:	30 e0       	ldi	r19, 0x00	; 0
+ 4c8:	01 80       	ldd	r0, Z+1	; 0x01
+ 4ca:	02 c0       	rjmp	.+4      	; 0x4d0 <__EEPROM_REGION_LENGTH__+0xd0>
+ 4cc:	22 0f       	add	r18, r18
+ 4ce:	33 1f       	adc	r19, r19
+ 4d0:	0a 94       	dec	r0
+ 4d2:	e2 f7       	brpl	.-8      	; 0x4cc <__EEPROM_REGION_LENGTH__+0xcc>
+ 4d4:	26 2b       	or	r18, r22
+ 4d6:	25 bb       	out	0x15, r18	; 21
+				break;
+ 4d8:	2f c0       	rjmp	.+94     	; 0x538 <__EEPROM_REGION_LENGTH__+0x138>
+			case PORT_D:
+				DIO_PORTD_DIR &= ~(1<<(pstrDio_pins[u8_loopIndex].u8_PinNum));
+ 4da:	21 b3       	in	r18, 0x11	; 17
+ 4dc:	61 e0       	ldi	r22, 0x01	; 1
+ 4de:	70 e0       	ldi	r23, 0x00	; 0
+ 4e0:	db 01       	movw	r26, r22
+ 4e2:	02 c0       	rjmp	.+4      	; 0x4e8 <__EEPROM_REGION_LENGTH__+0xe8>
+ 4e4:	aa 0f       	add	r26, r26
+ 4e6:	bb 1f       	adc	r27, r27
+ 4e8:	8a 95       	dec	r24
+ 4ea:	e2 f7       	brpl	.-8      	; 0x4e4 <__EEPROM_REGION_LENGTH__+0xe4>
+ 4ec:	8a 2f       	mov	r24, r26
+ 4ee:	80 95       	com	r24
+ 4f0:	82 23       	and	r24, r18
+ 4f2:	81 bb       	out	0x11, r24	; 17
+				DIO_PORTD_DIR |= (pstrDio_pins[u8_loopIndex].u8_Direction)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+ 4f4:	a1 b3       	in	r26, 0x11	; 17
+ 4f6:	82 81       	ldd	r24, Z+2	; 0x02
+ 4f8:	28 2f       	mov	r18, r24
+ 4fa:	30 e0       	ldi	r19, 0x00	; 0
+ 4fc:	01 80       	ldd	r0, Z+1	; 0x01
+ 4fe:	02 c0       	rjmp	.+4      	; 0x504 <__EEPROM_REGION_LENGTH__+0x104>
+ 500:	22 0f       	add	r18, r18
+ 502:	33 1f       	adc	r19, r19
+ 504:	0a 94       	dec	r0
+ 506:	e2 f7       	brpl	.-8      	; 0x500 <__EEPROM_REGION_LENGTH__+0x100>
+ 508:	2a 2b       	or	r18, r26
+ 50a:	21 bb       	out	0x11, r18	; 17
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pins[u8_loopIndex].u8_PinNum));
+ 50c:	82 b3       	in	r24, 0x12	; 18
+ 50e:	01 80       	ldd	r0, Z+1	; 0x01
+ 510:	02 c0       	rjmp	.+4      	; 0x516 <__EEPROM_REGION_LENGTH__+0x116>
+ 512:	66 0f       	add	r22, r22
+ 514:	77 1f       	adc	r23, r23
+ 516:	0a 94       	dec	r0
+ 518:	e2 f7       	brpl	.-8      	; 0x512 <__EEPROM_REGION_LENGTH__+0x112>
+ 51a:	60 95       	com	r22
+ 51c:	68 23       	and	r22, r24
+ 51e:	62 bb       	out	0x12, r22	; 18
+				DIO_PORTD_DATA |= (pstrDio_pins[u8_loopIndex].u8_InitState)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+ 520:	62 b3       	in	r22, 0x12	; 18
+ 522:	83 81       	ldd	r24, Z+3	; 0x03
+ 524:	28 2f       	mov	r18, r24
+ 526:	30 e0       	ldi	r19, 0x00	; 0
+ 528:	01 80       	ldd	r0, Z+1	; 0x01
+ 52a:	02 c0       	rjmp	.+4      	; 0x530 <__EEPROM_REGION_LENGTH__+0x130>
+ 52c:	22 0f       	add	r18, r18
+ 52e:	33 1f       	adc	r19, r19
+ 530:	0a 94       	dec	r0
+ 532:	e2 f7       	brpl	.-8      	; 0x52c <__EEPROM_REGION_LENGTH__+0x12c>
+ 534:	26 2b       	or	r18, r22
+ 536:	22 bb       	out	0x12, r18	; 18
+	/*-* check if the input configuration pointer is not a NULL_PTR *-*/
+	if (NULL_PTR == pstrDio_pins)
+	{
+		return DIO_STATUS_NULL_ARGUMENT;
+	}
+	for (u8_loopIndex=0; u8_loopIndex<DIO_USED_PINS_NUM; u8_loopIndex++)
+ 538:	9f 5f       	subi	r25, 0xFF	; 255
+ 53a:	93 30       	cpi	r25, 0x03	; 3
+ 53c:	08 f4       	brcc	.+2      	; 0x540 <__EEPROM_REGION_LENGTH__+0x140>
+ 53e:	26 cf       	rjmp	.-436    	; 0x38c <Dio_init+0xc>
+				break;
+			default:
+				return DIO_STATUS_PORT_NUM_INVALID;
+		}
+	}
+	pstrDio_pinsConfig = pstrDio_pins;
+ 540:	50 93 cd 00 	sts	0x00CD, r21	; 0x8000cd <pstrDio_pinsConfig+0x1>
+ 544:	40 93 cc 00 	sts	0x00CC, r20	; 0x8000cc <pstrDio_pinsConfig>
+	u8_Dio_Status = DIO_INITIALIZED;
+ 548:	81 e0       	ldi	r24, 0x01	; 1
+ 54a:	80 93 cb 00 	sts	0x00CB, r24	; 0x8000cb <u8_Dio_Status>
+	return DIO_STATUS_ERROR_OK;
+ 54e:	08 95       	ret
+{
+	uint8_t u8_loopIndex=0;
+	/*-* check if the input configuration pointer is not a NULL_PTR *-*/
+	if (NULL_PTR == pstrDio_pins)
+	{
+		return DIO_STATUS_NULL_ARGUMENT;
+ 550:	85 e0       	ldi	r24, 0x05	; 5
+ 552:	08 95       	ret
+	}
+	for (u8_loopIndex=0; u8_loopIndex<DIO_USED_PINS_NUM; u8_loopIndex++)
+	{
+		if ((pstrDio_pins[u8_loopIndex].u8_PinNum) > PIN_7)
+		{
+			return DIO_STATUS_PIN_NUM_INVALID;
+ 554:	83 e0       	ldi	r24, 0x03	; 3
+ 556:	08 95       	ret
+				DIO_PORTD_DIR |= (pstrDio_pins[u8_loopIndex].u8_Direction)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pins[u8_loopIndex].u8_PinNum));
+				DIO_PORTD_DATA |= (pstrDio_pins[u8_loopIndex].u8_InitState)<<(pstrDio_pins[u8_loopIndex].u8_PinNum);
+				break;
+			default:
+				return DIO_STATUS_PORT_NUM_INVALID;
+ 558:	84 e0       	ldi	r24, 0x04	; 4
+		}
+	}
+	pstrDio_pinsConfig = pstrDio_pins;
+	u8_Dio_Status = DIO_INITIALIZED;
+	return DIO_STATUS_ERROR_OK;
+}
+ 55a:	08 95       	ret
+
+0000055c <Dio_writePin>:
+* Description: Function to Write data on a Pin.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuDio_Status_t Dio_writePin(uint8_t u8_pinID, uint8_t u8_pinValue)
+{
+	/*-* Check if the pinID is out of configured range *-*/
+	if(u8_pinID > DIO_USED_PINS_NUM)
+ 55c:	84 30       	cpi	r24, 0x04	; 4
+ 55e:	08 f0       	brcs	.+2      	; 0x562 <Dio_writePin+0x6>
+ 560:	90 c0       	rjmp	.+288    	; 0x682 <Dio_writePin+0x126>
+	{
+		return DIO_STATUS_PIN_ID_INVALID;
+	}
+	/*-* Check if the module is not initialized *-*/
+	if(u8_Dio_Status == DIO_NOT_INITIALIZED)
+ 562:	90 91 cb 00 	lds	r25, 0x00CB	; 0x8000cb <u8_Dio_Status>
+ 566:	99 23       	and	r25, r25
+ 568:	09 f4       	brne	.+2      	; 0x56c <Dio_writePin+0x10>
+ 56a:	8d c0       	rjmp	.+282    	; 0x686 <Dio_writePin+0x12a>
+	{
+		return DIO_STATUS_NOT_INIT;
+	}
+	switch (pstrDio_pinsConfig[u8_pinID].u8_PortNum)
+ 56c:	e8 2f       	mov	r30, r24
+ 56e:	f0 e0       	ldi	r31, 0x00	; 0
+ 570:	cf 01       	movw	r24, r30
+ 572:	88 0f       	add	r24, r24
+ 574:	99 1f       	adc	r25, r25
+ 576:	88 0f       	add	r24, r24
+ 578:	99 1f       	adc	r25, r25
+ 57a:	e0 91 cc 00 	lds	r30, 0x00CC	; 0x8000cc <pstrDio_pinsConfig>
+ 57e:	f0 91 cd 00 	lds	r31, 0x00CD	; 0x8000cd <pstrDio_pinsConfig+0x1>
+ 582:	e8 0f       	add	r30, r24
+ 584:	f9 1f       	adc	r31, r25
+ 586:	80 81       	ld	r24, Z
+ 588:	81 30       	cpi	r24, 0x01	; 1
+ 58a:	21 f1       	breq	.+72     	; 0x5d4 <Dio_writePin+0x78>
+ 58c:	30 f0       	brcs	.+12     	; 0x59a <Dio_writePin+0x3e>
+ 58e:	82 30       	cpi	r24, 0x02	; 2
+ 590:	f1 f1       	breq	.+124    	; 0x60e <Dio_writePin+0xb2>
+ 592:	83 30       	cpi	r24, 0x03	; 3
+ 594:	09 f4       	brne	.+2      	; 0x598 <Dio_writePin+0x3c>
+ 596:	58 c0       	rjmp	.+176    	; 0x648 <Dio_writePin+0xec>
+ 598:	78 c0       	rjmp	.+240    	; 0x68a <Dio_writePin+0x12e>
+	{
+		case PORT_A:
+		if(u8_pinValue == PIN_HIGH)
+ 59a:	61 30       	cpi	r22, 0x01	; 1
+ 59c:	69 f4       	brne	.+26     	; 0x5b8 <Dio_writePin+0x5c>
+			DIO_PORTA_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+ 59e:	2b b3       	in	r18, 0x1b	; 27
+ 5a0:	81 e0       	ldi	r24, 0x01	; 1
+ 5a2:	90 e0       	ldi	r25, 0x00	; 0
+ 5a4:	01 80       	ldd	r0, Z+1	; 0x01
+ 5a6:	02 c0       	rjmp	.+4      	; 0x5ac <Dio_writePin+0x50>
+ 5a8:	88 0f       	add	r24, r24
+ 5aa:	99 1f       	adc	r25, r25
+ 5ac:	0a 94       	dec	r0
+ 5ae:	e2 f7       	brpl	.-8      	; 0x5a8 <Dio_writePin+0x4c>
+ 5b0:	82 2b       	or	r24, r18
+ 5b2:	8b bb       	out	0x1b, r24	; 27
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		default:
+		return DIO_STATUS_PORT_NUM_INVALID;
+	}
+	return DIO_STATUS_ERROR_OK;
+ 5b4:	81 e0       	ldi	r24, 0x01	; 1
+ 5b6:	08 95       	ret
+	{
+		case PORT_A:
+		if(u8_pinValue == PIN_HIGH)
+			DIO_PORTA_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+		else	
+			DIO_PORTA_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+ 5b8:	2b b3       	in	r18, 0x1b	; 27
+ 5ba:	81 e0       	ldi	r24, 0x01	; 1
+ 5bc:	90 e0       	ldi	r25, 0x00	; 0
+ 5be:	01 80       	ldd	r0, Z+1	; 0x01
+ 5c0:	02 c0       	rjmp	.+4      	; 0x5c6 <Dio_writePin+0x6a>
+ 5c2:	88 0f       	add	r24, r24
+ 5c4:	99 1f       	adc	r25, r25
+ 5c6:	0a 94       	dec	r0
+ 5c8:	e2 f7       	brpl	.-8      	; 0x5c2 <Dio_writePin+0x66>
+ 5ca:	80 95       	com	r24
+ 5cc:	82 23       	and	r24, r18
+ 5ce:	8b bb       	out	0x1b, r24	; 27
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		default:
+		return DIO_STATUS_PORT_NUM_INVALID;
+	}
+	return DIO_STATUS_ERROR_OK;
+ 5d0:	81 e0       	ldi	r24, 0x01	; 1
+ 5d2:	08 95       	ret
+		else	
+			DIO_PORTA_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+		
+		break;
+		case PORT_B:
+			if(u8_pinValue == PIN_HIGH)
+ 5d4:	61 30       	cpi	r22, 0x01	; 1
+ 5d6:	69 f4       	brne	.+26     	; 0x5f2 <Dio_writePin+0x96>
+				DIO_PORTB_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+ 5d8:	28 b3       	in	r18, 0x18	; 24
+ 5da:	81 e0       	ldi	r24, 0x01	; 1
+ 5dc:	90 e0       	ldi	r25, 0x00	; 0
+ 5de:	01 80       	ldd	r0, Z+1	; 0x01
+ 5e0:	02 c0       	rjmp	.+4      	; 0x5e6 <Dio_writePin+0x8a>
+ 5e2:	88 0f       	add	r24, r24
+ 5e4:	99 1f       	adc	r25, r25
+ 5e6:	0a 94       	dec	r0
+ 5e8:	e2 f7       	brpl	.-8      	; 0x5e2 <Dio_writePin+0x86>
+ 5ea:	82 2b       	or	r24, r18
+ 5ec:	88 bb       	out	0x18, r24	; 24
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		default:
+		return DIO_STATUS_PORT_NUM_INVALID;
+	}
+	return DIO_STATUS_ERROR_OK;
+ 5ee:	81 e0       	ldi	r24, 0x01	; 1
+ 5f0:	08 95       	ret
+		break;
+		case PORT_B:
+			if(u8_pinValue == PIN_HIGH)
+				DIO_PORTB_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+			else
+				DIO_PORTB_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+ 5f2:	28 b3       	in	r18, 0x18	; 24
+ 5f4:	81 e0       	ldi	r24, 0x01	; 1
+ 5f6:	90 e0       	ldi	r25, 0x00	; 0
+ 5f8:	01 80       	ldd	r0, Z+1	; 0x01
+ 5fa:	02 c0       	rjmp	.+4      	; 0x600 <Dio_writePin+0xa4>
+ 5fc:	88 0f       	add	r24, r24
+ 5fe:	99 1f       	adc	r25, r25
+ 600:	0a 94       	dec	r0
+ 602:	e2 f7       	brpl	.-8      	; 0x5fc <Dio_writePin+0xa0>
+ 604:	80 95       	com	r24
+ 606:	82 23       	and	r24, r18
+ 608:	88 bb       	out	0x18, r24	; 24
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		default:
+		return DIO_STATUS_PORT_NUM_INVALID;
+	}
+	return DIO_STATUS_ERROR_OK;
+ 60a:	81 e0       	ldi	r24, 0x01	; 1
+ 60c:	08 95       	ret
+				DIO_PORTB_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+			else
+				DIO_PORTB_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		case PORT_C:
+			if(u8_pinValue == PIN_HIGH)
+ 60e:	61 30       	cpi	r22, 0x01	; 1
+ 610:	69 f4       	brne	.+26     	; 0x62c <Dio_writePin+0xd0>
+				DIO_PORTC_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+ 612:	25 b3       	in	r18, 0x15	; 21
+ 614:	81 e0       	ldi	r24, 0x01	; 1
+ 616:	90 e0       	ldi	r25, 0x00	; 0
+ 618:	01 80       	ldd	r0, Z+1	; 0x01
+ 61a:	02 c0       	rjmp	.+4      	; 0x620 <Dio_writePin+0xc4>
+ 61c:	88 0f       	add	r24, r24
+ 61e:	99 1f       	adc	r25, r25
+ 620:	0a 94       	dec	r0
+ 622:	e2 f7       	brpl	.-8      	; 0x61c <Dio_writePin+0xc0>
+ 624:	82 2b       	or	r24, r18
+ 626:	85 bb       	out	0x15, r24	; 21
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		default:
+		return DIO_STATUS_PORT_NUM_INVALID;
+	}
+	return DIO_STATUS_ERROR_OK;
+ 628:	81 e0       	ldi	r24, 0x01	; 1
+ 62a:	08 95       	ret
+			break;
+		case PORT_C:
+			if(u8_pinValue == PIN_HIGH)
+				DIO_PORTC_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+			else
+				DIO_PORTC_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+ 62c:	25 b3       	in	r18, 0x15	; 21
+ 62e:	81 e0       	ldi	r24, 0x01	; 1
+ 630:	90 e0       	ldi	r25, 0x00	; 0
+ 632:	01 80       	ldd	r0, Z+1	; 0x01
+ 634:	02 c0       	rjmp	.+4      	; 0x63a <Dio_writePin+0xde>
+ 636:	88 0f       	add	r24, r24
+ 638:	99 1f       	adc	r25, r25
+ 63a:	0a 94       	dec	r0
+ 63c:	e2 f7       	brpl	.-8      	; 0x636 <Dio_writePin+0xda>
+ 63e:	80 95       	com	r24
+ 640:	82 23       	and	r24, r18
+ 642:	85 bb       	out	0x15, r24	; 21
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		default:
+		return DIO_STATUS_PORT_NUM_INVALID;
+	}
+	return DIO_STATUS_ERROR_OK;
+ 644:	81 e0       	ldi	r24, 0x01	; 1
+ 646:	08 95       	ret
+				DIO_PORTC_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+			else
+				DIO_PORTC_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		case PORT_D:
+			if(u8_pinValue == PIN_HIGH)
+ 648:	61 30       	cpi	r22, 0x01	; 1
+ 64a:	69 f4       	brne	.+26     	; 0x666 <Dio_writePin+0x10a>
+				DIO_PORTD_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+ 64c:	22 b3       	in	r18, 0x12	; 18
+ 64e:	81 e0       	ldi	r24, 0x01	; 1
+ 650:	90 e0       	ldi	r25, 0x00	; 0
+ 652:	01 80       	ldd	r0, Z+1	; 0x01
+ 654:	02 c0       	rjmp	.+4      	; 0x65a <Dio_writePin+0xfe>
+ 656:	88 0f       	add	r24, r24
+ 658:	99 1f       	adc	r25, r25
+ 65a:	0a 94       	dec	r0
+ 65c:	e2 f7       	brpl	.-8      	; 0x656 <Dio_writePin+0xfa>
+ 65e:	82 2b       	or	r24, r18
+ 660:	82 bb       	out	0x12, r24	; 18
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		default:
+		return DIO_STATUS_PORT_NUM_INVALID;
+	}
+	return DIO_STATUS_ERROR_OK;
+ 662:	81 e0       	ldi	r24, 0x01	; 1
+ 664:	08 95       	ret
+			break;
+		case PORT_D:
+			if(u8_pinValue == PIN_HIGH)
+				DIO_PORTD_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+			else
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+ 666:	22 b3       	in	r18, 0x12	; 18
+ 668:	81 e0       	ldi	r24, 0x01	; 1
+ 66a:	90 e0       	ldi	r25, 0x00	; 0
+ 66c:	01 80       	ldd	r0, Z+1	; 0x01
+ 66e:	02 c0       	rjmp	.+4      	; 0x674 <Dio_writePin+0x118>
+ 670:	88 0f       	add	r24, r24
+ 672:	99 1f       	adc	r25, r25
+ 674:	0a 94       	dec	r0
+ 676:	e2 f7       	brpl	.-8      	; 0x670 <Dio_writePin+0x114>
+ 678:	80 95       	com	r24
+ 67a:	82 23       	and	r24, r18
+ 67c:	82 bb       	out	0x12, r24	; 18
+			break;
+		default:
+		return DIO_STATUS_PORT_NUM_INVALID;
+	}
+	return DIO_STATUS_ERROR_OK;
+ 67e:	81 e0       	ldi	r24, 0x01	; 1
+ 680:	08 95       	ret
+enuDio_Status_t Dio_writePin(uint8_t u8_pinID, uint8_t u8_pinValue)
+{
+	/*-* Check if the pinID is out of configured range *-*/
+	if(u8_pinID > DIO_USED_PINS_NUM)
+	{
+		return DIO_STATUS_PIN_ID_INVALID;
+ 682:	82 e0       	ldi	r24, 0x02	; 2
+ 684:	08 95       	ret
+	}
+	/*-* Check if the module is not initialized *-*/
+	if(u8_Dio_Status == DIO_NOT_INITIALIZED)
+	{
+		return DIO_STATUS_NOT_INIT;
+ 686:	86 e0       	ldi	r24, 0x06	; 6
+ 688:	08 95       	ret
+				DIO_PORTD_DATA |= 1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum);
+			else
+				DIO_PORTD_DATA &= ~(1<<(pstrDio_pinsConfig[u8_pinID].u8_PinNum));
+			break;
+		default:
+		return DIO_STATUS_PORT_NUM_INVALID;
+ 68a:	84 e0       	ldi	r24, 0x04	; 4
+	}
+	return DIO_STATUS_ERROR_OK;
+}
+ 68c:	08 95       	ret
+
+0000068e <Uart_init>:
+/**************************************************************************************/
+	/*- Enable the Uart UDRE Interrupt -*/
+	UART_UCSRB_REG &= ~(u8_InterruptFlags);
+			
+	return UART_STATUS_ERROR_OK;
+}
+ 68e:	80 91 ce 00 	lds	r24, 0x00CE	; 0x8000ce <u8_Uart_Status>
+ 692:	81 30       	cpi	r24, 0x01	; 1
+ 694:	81 f0       	breq	.+32     	; 0x6b6 <Uart_init+0x28>
+ 696:	10 bc       	out	0x20, r1	; 32
+ 698:	8c e0       	ldi	r24, 0x0C	; 12
+ 69a:	89 b9       	out	0x09, r24	; 9
+ 69c:	82 e0       	ldi	r24, 0x02	; 2
+ 69e:	8b b9       	out	0x0b, r24	; 11
+ 6a0:	88 e1       	ldi	r24, 0x18	; 24
+ 6a2:	8a b9       	out	0x0a, r24	; 10
+ 6a4:	80 e8       	ldi	r24, 0x80	; 128
+ 6a6:	80 bd       	out	0x20, r24	; 32
+ 6a8:	80 b5       	in	r24, 0x20	; 32
+ 6aa:	86 68       	ori	r24, 0x86	; 134
+ 6ac:	80 bd       	out	0x20, r24	; 32
+ 6ae:	81 e0       	ldi	r24, 0x01	; 1
+ 6b0:	80 93 ce 00 	sts	0x00CE, r24	; 0x8000ce <u8_Uart_Status>
+ 6b4:	08 95       	ret
+ 6b6:	87 e0       	ldi	r24, 0x07	; 7
+ 6b8:	08 95       	ret
+
+000006ba <Uart_sendByte>:
+ 6ba:	90 91 ce 00 	lds	r25, 0x00CE	; 0x8000ce <u8_Uart_Status>
+ 6be:	99 23       	and	r25, r25
+ 6c0:	29 f0       	breq	.+10     	; 0x6cc <Uart_sendByte+0x12>
+ 6c2:	5d 9b       	sbis	0x0b, 5	; 11
+ 6c4:	fe cf       	rjmp	.-4      	; 0x6c2 <Uart_sendByte+0x8>
+ 6c6:	8c b9       	out	0x0c, r24	; 12
+ 6c8:	81 e0       	ldi	r24, 0x01	; 1
+ 6ca:	08 95       	ret
+ 6cc:	86 e0       	ldi	r24, 0x06	; 6
+ 6ce:	08 95       	ret
+
+000006d0 <Uart_sendPacket>:
+ 6d0:	ef 92       	push	r14
+ 6d2:	ff 92       	push	r15
+ 6d4:	0f 93       	push	r16
+ 6d6:	1f 93       	push	r17
+ 6d8:	cf 93       	push	r28
+ 6da:	df 93       	push	r29
+ 6dc:	20 91 ce 00 	lds	r18, 0x00CE	; 0x8000ce <u8_Uart_Status>
+ 6e0:	22 23       	and	r18, r18
+ 6e2:	99 f0       	breq	.+38     	; 0x70a <Uart_sendPacket+0x3a>
+ 6e4:	8b 01       	movw	r16, r22
+ 6e6:	7c 01       	movw	r14, r24
+ 6e8:	c0 e0       	ldi	r28, 0x00	; 0
+ 6ea:	d0 e0       	ldi	r29, 0x00	; 0
+ 6ec:	09 c0       	rjmp	.+18     	; 0x700 <Uart_sendPacket+0x30>
+ 6ee:	f7 01       	movw	r30, r14
+ 6f0:	ec 0f       	add	r30, r28
+ 6f2:	fd 1f       	adc	r31, r29
+ 6f4:	80 81       	ld	r24, Z
+ 6f6:	0e 94 5d 03 	call	0x6ba	; 0x6ba <Uart_sendByte>
+ 6fa:	81 30       	cpi	r24, 0x01	; 1
+ 6fc:	41 f4       	brne	.+16     	; 0x70e <Uart_sendPacket+0x3e>
+ 6fe:	21 96       	adiw	r28, 0x01	; 1
+ 700:	c0 17       	cp	r28, r16
+ 702:	d1 07       	cpc	r29, r17
+ 704:	a0 f3       	brcs	.-24     	; 0x6ee <Uart_sendPacket+0x1e>
+ 706:	81 e0       	ldi	r24, 0x01	; 1
+ 708:	03 c0       	rjmp	.+6      	; 0x710 <Uart_sendPacket+0x40>
+ 70a:	86 e0       	ldi	r24, 0x06	; 6
+ 70c:	01 c0       	rjmp	.+2      	; 0x710 <Uart_sendPacket+0x40>
+ 70e:	80 e0       	ldi	r24, 0x00	; 0
+ 710:	df 91       	pop	r29
+ 712:	cf 91       	pop	r28
+ 714:	1f 91       	pop	r17
+ 716:	0f 91       	pop	r16
+ 718:	ff 90       	pop	r15
+ 71a:	ef 90       	pop	r14
+ 71c:	08 95       	ret
+
+0000071e <Uart_EnableNotification_RXC>:
+ 71e:	9c 01       	movw	r18, r24
+ 720:	90 91 ce 00 	lds	r25, 0x00CE	; 0x8000ce <u8_Uart_Status>
+ 724:	99 23       	and	r25, r25
+ 726:	61 f0       	breq	.+24     	; 0x740 <Uart_EnableNotification_RXC+0x22>
+ 728:	21 15       	cp	r18, r1
+ 72a:	31 05       	cpc	r19, r1
+ 72c:	59 f0       	breq	.+22     	; 0x744 <Uart_EnableNotification_RXC+0x26>
+ 72e:	8a b1       	in	r24, 0x0a	; 10
+ 730:	80 68       	ori	r24, 0x80	; 128
+ 732:	8a b9       	out	0x0a, r24	; 10
+ 734:	30 93 d2 00 	sts	0x00D2, r19	; 0x8000d2 <Uart_RXC_CallBackPtr+0x1>
+ 738:	20 93 d1 00 	sts	0x00D1, r18	; 0x8000d1 <Uart_RXC_CallBackPtr>
+ 73c:	81 e0       	ldi	r24, 0x01	; 1
+ 73e:	08 95       	ret
+ 740:	86 e0       	ldi	r24, 0x06	; 6
+ 742:	08 95       	ret
+ 744:	85 e0       	ldi	r24, 0x05	; 5
+ 746:	08 95       	ret
+
+00000748 <Uart_DataRegister>:
+*				the content of the data registers
+* Mainly used by the ISR Callback funtions
+*********************************************************/
+uint8_t Uart_DataRegister(void)
+{
+	return UART_UDR_REG;
+ 748:	8c b1       	in	r24, 0x0c	; 12
+}
+ 74a:	08 95       	ret
+
+0000074c <__vector_15>:
+
+
+ISR(USART_TXC_IRQ){(*Uart_TXC_CallBackPtr)();}
+ 74c:	1f 92       	push	r1
+ 74e:	0f 92       	push	r0
+ 750:	0f b6       	in	r0, 0x3f	; 63
+ 752:	0f 92       	push	r0
+ 754:	11 24       	eor	r1, r1
+ 756:	2f 93       	push	r18
+ 758:	3f 93       	push	r19
+ 75a:	4f 93       	push	r20
+ 75c:	5f 93       	push	r21
+ 75e:	6f 93       	push	r22
+ 760:	7f 93       	push	r23
+ 762:	8f 93       	push	r24
+ 764:	9f 93       	push	r25
+ 766:	af 93       	push	r26
+ 768:	bf 93       	push	r27
+ 76a:	ef 93       	push	r30
+ 76c:	ff 93       	push	r31
+ 76e:	e0 91 d3 00 	lds	r30, 0x00D3	; 0x8000d3 <Uart_TXC_CallBackPtr>
+ 772:	f0 91 d4 00 	lds	r31, 0x00D4	; 0x8000d4 <Uart_TXC_CallBackPtr+0x1>
+ 776:	09 95       	icall
+ 778:	ff 91       	pop	r31
+ 77a:	ef 91       	pop	r30
+ 77c:	bf 91       	pop	r27
+ 77e:	af 91       	pop	r26
+ 780:	9f 91       	pop	r25
+ 782:	8f 91       	pop	r24
+ 784:	7f 91       	pop	r23
+ 786:	6f 91       	pop	r22
+ 788:	5f 91       	pop	r21
+ 78a:	4f 91       	pop	r20
+ 78c:	3f 91       	pop	r19
+ 78e:	2f 91       	pop	r18
+ 790:	0f 90       	pop	r0
+ 792:	0f be       	out	0x3f, r0	; 63
+ 794:	0f 90       	pop	r0
+ 796:	1f 90       	pop	r1
+ 798:	18 95       	reti
+
+0000079a <__vector_13>:
+ISR(USART_RXC_IRQ){(*Uart_RXC_CallBackPtr)();}
+ 79a:	1f 92       	push	r1
+ 79c:	0f 92       	push	r0
+ 79e:	0f b6       	in	r0, 0x3f	; 63
+ 7a0:	0f 92       	push	r0
+ 7a2:	11 24       	eor	r1, r1
+ 7a4:	2f 93       	push	r18
+ 7a6:	3f 93       	push	r19
+ 7a8:	4f 93       	push	r20
+ 7aa:	5f 93       	push	r21
+ 7ac:	6f 93       	push	r22
+ 7ae:	7f 93       	push	r23
+ 7b0:	8f 93       	push	r24
+ 7b2:	9f 93       	push	r25
+ 7b4:	af 93       	push	r26
+ 7b6:	bf 93       	push	r27
+ 7b8:	ef 93       	push	r30
+ 7ba:	ff 93       	push	r31
+ 7bc:	e0 91 d1 00 	lds	r30, 0x00D1	; 0x8000d1 <Uart_RXC_CallBackPtr>
+ 7c0:	f0 91 d2 00 	lds	r31, 0x00D2	; 0x8000d2 <Uart_RXC_CallBackPtr+0x1>
+ 7c4:	09 95       	icall
+ 7c6:	ff 91       	pop	r31
+ 7c8:	ef 91       	pop	r30
+ 7ca:	bf 91       	pop	r27
+ 7cc:	af 91       	pop	r26
+ 7ce:	9f 91       	pop	r25
+ 7d0:	8f 91       	pop	r24
+ 7d2:	7f 91       	pop	r23
+ 7d4:	6f 91       	pop	r22
+ 7d6:	5f 91       	pop	r21
+ 7d8:	4f 91       	pop	r20
+ 7da:	3f 91       	pop	r19
+ 7dc:	2f 91       	pop	r18
+ 7de:	0f 90       	pop	r0
+ 7e0:	0f be       	out	0x3f, r0	; 63
+ 7e2:	0f 90       	pop	r0
+ 7e4:	1f 90       	pop	r1
+ 7e6:	18 95       	reti
+
+000007e8 <__vector_14>:
+ISR(USART_UDRE_IRQ){(*Uart_UDRE_CallBackPtr)();}
+ 7e8:	1f 92       	push	r1
+ 7ea:	0f 92       	push	r0
+ 7ec:	0f b6       	in	r0, 0x3f	; 63
+ 7ee:	0f 92       	push	r0
+ 7f0:	11 24       	eor	r1, r1
+ 7f2:	2f 93       	push	r18
+ 7f4:	3f 93       	push	r19
+ 7f6:	4f 93       	push	r20
+ 7f8:	5f 93       	push	r21
+ 7fa:	6f 93       	push	r22
+ 7fc:	7f 93       	push	r23
+ 7fe:	8f 93       	push	r24
+ 800:	9f 93       	push	r25
+ 802:	af 93       	push	r26
+ 804:	bf 93       	push	r27
+ 806:	ef 93       	push	r30
+ 808:	ff 93       	push	r31
+ 80a:	e0 91 cf 00 	lds	r30, 0x00CF	; 0x8000cf <Uart_UDRE_CallBackPtr>
+ 80e:	f0 91 d0 00 	lds	r31, 0x00D0	; 0x8000d0 <Uart_UDRE_CallBackPtr+0x1>
+ 812:	09 95       	icall
+ 814:	ff 91       	pop	r31
+ 816:	ef 91       	pop	r30
+ 818:	bf 91       	pop	r27
+ 81a:	af 91       	pop	r26
+ 81c:	9f 91       	pop	r25
+ 81e:	8f 91       	pop	r24
+ 820:	7f 91       	pop	r23
+ 822:	6f 91       	pop	r22
+ 824:	5f 91       	pop	r21
+ 826:	4f 91       	pop	r20
+ 828:	3f 91       	pop	r19
+ 82a:	2f 91       	pop	r18
+ 82c:	0f 90       	pop	r0
+ 82e:	0f be       	out	0x3f, r0	; 63
+ 830:	0f 90       	pop	r0
+ 832:	1f 90       	pop	r1
+ 834:	18 95       	reti
+
+00000836 <Service_init>:
+* Description: Function to Initialize the Service layer -- Initialize all the below layers.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuSrvc_Status_t Service_init(void)
+{
+	/* Check if the Service Layer has been already initialized */
+	if(genu_SrvcStatus == SRVC_STATUS_INITIALIZED)
+ 836:	80 91 72 00 	lds	r24, 0x0072	; 0x800072 <genu_SrvcStatus>
+ 83a:	84 30       	cpi	r24, 0x04	; 4
+ 83c:	81 f0       	breq	.+32     	; 0x85e <Service_init+0x28>
+		return SRVC_STATUS_INITIALIZED;
+		
+	/* Call the initializer in Button and Motor*/
+	if(LED_STATUS_ERROR_OK != Led_init())
+ 83e:	0e 94 b1 00 	call	0x162	; 0x162 <Led_init>
+ 842:	81 30       	cpi	r24, 0x01	; 1
+ 844:	49 f4       	brne	.+18     	; 0x858 <Service_init+0x22>
+		return SRVC_STATUS_ERROR_NOK;
+	if(TERMINAL_STATUS_ERROR_OK != Terminal_init())
+ 846:	0e 94 72 01 	call	0x2e4	; 0x2e4 <Terminal_init>
+ 84a:	81 30       	cpi	r24, 0x01	; 1
+ 84c:	39 f4       	brne	.+14     	; 0x85c <Service_init+0x26>
+		return SRVC_STATUS_ERROR_NOK;
+	
+	genu_SrvcStatus = SRVC_STATUS_INITIALIZED;
+ 84e:	84 e0       	ldi	r24, 0x04	; 4
+ 850:	80 93 72 00 	sts	0x0072, r24	; 0x800072 <genu_SrvcStatus>
+	return SRVC_STATUS_ERROR_OK;
+ 854:	81 e0       	ldi	r24, 0x01	; 1
+ 856:	08 95       	ret
+	if(genu_SrvcStatus == SRVC_STATUS_INITIALIZED)
+		return SRVC_STATUS_INITIALIZED;
+		
+	/* Call the initializer in Button and Motor*/
+	if(LED_STATUS_ERROR_OK != Led_init())
+		return SRVC_STATUS_ERROR_NOK;
+ 858:	80 e0       	ldi	r24, 0x00	; 0
+ 85a:	08 95       	ret
+	if(TERMINAL_STATUS_ERROR_OK != Terminal_init())
+		return SRVC_STATUS_ERROR_NOK;
+ 85c:	80 e0       	ldi	r24, 0x00	; 0
+	
+	genu_SrvcStatus = SRVC_STATUS_INITIALIZED;
+	return SRVC_STATUS_ERROR_OK;
+}
+ 85e:	08 95       	ret
+
+00000860 <Service_ReportTerminal>:
+* Parameters (out): pu8_button - Pointer to variable to hold the button pressed
+* Return value: enuSrvc_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Start the Application.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuSrvc_Status_t Service_ReportTerminal(uint8_t* pu8_terminal)
+{
+ 860:	0f 93       	push	r16
+ 862:	1f 93       	push	r17
+ 864:	cf 93       	push	r28
+ 866:	df 93       	push	r29
+ 868:	00 d0       	rcall	.+0      	; 0x86a <Service_ReportTerminal+0xa>
+ 86a:	00 d0       	rcall	.+0      	; 0x86c <Service_ReportTerminal+0xc>
+ 86c:	00 d0       	rcall	.+0      	; 0x86e <Service_ReportTerminal+0xe>
+ 86e:	cd b7       	in	r28, 0x3d	; 61
+ 870:	de b7       	in	r29, 0x3e	; 62
+ 872:	8c 01       	movw	r16, r24
+	uint8_t au8_inputString[MAX_INPUT_SIZE]={0};
+ 874:	ce 01       	movw	r24, r28
+ 876:	01 96       	adiw	r24, 0x01	; 1
+ 878:	26 e0       	ldi	r18, 0x06	; 6
+ 87a:	fc 01       	movw	r30, r24
+ 87c:	11 92       	st	Z+, r1
+ 87e:	2a 95       	dec	r18
+ 880:	e9 f7       	brne	.-6      	; 0x87c <Service_ReportTerminal+0x1c>
+	if(Terminal_In(au8_inputString) != TERMINAL_STATUS_ERROR_OK)
+ 882:	0e 94 a2 01 	call	0x344	; 0x344 <Terminal_In>
+ 886:	81 30       	cpi	r24, 0x01	; 1
+ 888:	09 f0       	breq	.+2      	; 0x88c <Service_ReportTerminal+0x2c>
+ 88a:	42 c0       	rjmp	.+132    	; 0x910 <Service_ReportTerminal+0xb0>
+		return SRVC_STATUS_ERROR_NOK;
+	if (stringCompare((uint8_t*)au8_inputString,(uint8_t*)cgau8_startString) == 1)
+ 88c:	6b eb       	ldi	r22, 0xBB	; 187
+ 88e:	70 e0       	ldi	r23, 0x00	; 0
+ 890:	ce 01       	movw	r24, r28
+ 892:	01 96       	adiw	r24, 0x01	; 1
+ 894:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <stringCompare>
+ 898:	81 30       	cpi	r24, 0x01	; 1
+ 89a:	39 f4       	brne	.+14     	; 0x8aa <Service_ReportTerminal+0x4a>
+	{
+		*pu8_terminal = TERM_SRVC_START;
+ 89c:	82 e0       	ldi	r24, 0x02	; 2
+ 89e:	f8 01       	movw	r30, r16
+ 8a0:	80 83       	st	Z, r24
+		gu8_terminalInput = TERM_SRVC_START;
+ 8a2:	80 93 d5 00 	sts	0x00D5, r24	; 0x8000d5 <gu8_terminalInput>
+		return SRVC_STATUS_ERROR_OK;
+ 8a6:	81 e0       	ldi	r24, 0x01	; 1
+ 8a8:	36 c0       	rjmp	.+108    	; 0x916 <Service_ReportTerminal+0xb6>
+	}
+	else if (stringCompare((uint8_t*)au8_inputString,(uint8_t*)cgau8_waitString) == 1)
+ 8aa:	65 eb       	ldi	r22, 0xB5	; 181
+ 8ac:	70 e0       	ldi	r23, 0x00	; 0
+ 8ae:	ce 01       	movw	r24, r28
+ 8b0:	01 96       	adiw	r24, 0x01	; 1
+ 8b2:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <stringCompare>
+ 8b6:	81 30       	cpi	r24, 0x01	; 1
+ 8b8:	39 f4       	brne	.+14     	; 0x8c8 <Service_ReportTerminal+0x68>
+	{
+		*pu8_terminal = TERM_SRVC_WAIT;
+ 8ba:	83 e0       	ldi	r24, 0x03	; 3
+ 8bc:	f8 01       	movw	r30, r16
+ 8be:	80 83       	st	Z, r24
+		gu8_terminalInput = TERM_SRVC_WAIT;
+ 8c0:	80 93 d5 00 	sts	0x00D5, r24	; 0x8000d5 <gu8_terminalInput>
+		return SRVC_STATUS_ERROR_OK;
+ 8c4:	81 e0       	ldi	r24, 0x01	; 1
+ 8c6:	27 c0       	rjmp	.+78     	; 0x916 <Service_ReportTerminal+0xb6>
+	}
+	else if (stringCompare((uint8_t*)au8_inputString,(uint8_t*)cgau8_stopString) == 1)
+ 8c8:	6f ea       	ldi	r22, 0xAF	; 175
+ 8ca:	70 e0       	ldi	r23, 0x00	; 0
+ 8cc:	ce 01       	movw	r24, r28
+ 8ce:	01 96       	adiw	r24, 0x01	; 1
+ 8d0:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <stringCompare>
+ 8d4:	81 30       	cpi	r24, 0x01	; 1
+ 8d6:	39 f4       	brne	.+14     	; 0x8e6 <Service_ReportTerminal+0x86>
+	{
+		*pu8_terminal = TERM_SRVC_STOP;
+ 8d8:	84 e0       	ldi	r24, 0x04	; 4
+ 8da:	f8 01       	movw	r30, r16
+ 8dc:	80 83       	st	Z, r24
+		gu8_terminalInput = TERM_SRVC_STOP;
+ 8de:	80 93 d5 00 	sts	0x00D5, r24	; 0x8000d5 <gu8_terminalInput>
+		return SRVC_STATUS_ERROR_OK;
+ 8e2:	81 e0       	ldi	r24, 0x01	; 1
+ 8e4:	18 c0       	rjmp	.+48     	; 0x916 <Service_ReportTerminal+0xb6>
+	}
+	else if (stringCompare((uint8_t*)au8_inputString,(uint8_t*)cgau8_atString) == 1)
+ 8e6:	69 ea       	ldi	r22, 0xA9	; 169
+ 8e8:	70 e0       	ldi	r23, 0x00	; 0
+ 8ea:	ce 01       	movw	r24, r28
+ 8ec:	01 96       	adiw	r24, 0x01	; 1
+ 8ee:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <stringCompare>
+ 8f2:	81 30       	cpi	r24, 0x01	; 1
+ 8f4:	29 f4       	brne	.+10     	; 0x900 <Service_ReportTerminal+0xa0>
+	{
+		*pu8_terminal = TERM_SRVC_AT;
+ 8f6:	f8 01       	movw	r30, r16
+ 8f8:	80 83       	st	Z, r24
+		gu8_terminalInput = TERM_SRVC_AT;
+ 8fa:	80 93 d5 00 	sts	0x00D5, r24	; 0x8000d5 <gu8_terminalInput>
+		return SRVC_STATUS_ERROR_OK;
+ 8fe:	0b c0       	rjmp	.+22     	; 0x916 <Service_ReportTerminal+0xb6>
+	}else
+	{
+		if (gu8_terminalInput != TERM_SRVC_AT)
+ 900:	80 91 d5 00 	lds	r24, 0x00D5	; 0x8000d5 <gu8_terminalInput>
+ 904:	81 30       	cpi	r24, 0x01	; 1
+ 906:	31 f0       	breq	.+12     	; 0x914 <Service_ReportTerminal+0xb4>
+		{
+			*pu8_terminal = gu8_terminalInput;
+ 908:	f8 01       	movw	r30, r16
+ 90a:	80 83       	st	Z, r24
+		}
+		return SRVC_STATUS_ERROR_OK;
+ 90c:	81 e0       	ldi	r24, 0x01	; 1
+ 90e:	03 c0       	rjmp	.+6      	; 0x916 <Service_ReportTerminal+0xb6>
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuSrvc_Status_t Service_ReportTerminal(uint8_t* pu8_terminal)
+{
+	uint8_t au8_inputString[MAX_INPUT_SIZE]={0};
+	if(Terminal_In(au8_inputString) != TERMINAL_STATUS_ERROR_OK)
+		return SRVC_STATUS_ERROR_NOK;
+ 910:	80 e0       	ldi	r24, 0x00	; 0
+ 912:	01 c0       	rjmp	.+2      	; 0x916 <Service_ReportTerminal+0xb6>
+	{
+		if (gu8_terminalInput != TERM_SRVC_AT)
+		{
+			*pu8_terminal = gu8_terminalInput;
+		}
+		return SRVC_STATUS_ERROR_OK;
+ 914:	81 e0       	ldi	r24, 0x01	; 1
+	}
+	return SRVC_STATUS_ERROR_NOK;
+}
+ 916:	26 96       	adiw	r28, 0x06	; 6
+ 918:	0f b6       	in	r0, 0x3f	; 63
+ 91a:	f8 94       	cli
+ 91c:	de bf       	out	0x3e, r29	; 62
+ 91e:	0f be       	out	0x3f, r0	; 63
+ 920:	cd bf       	out	0x3d, r28	; 61
+ 922:	df 91       	pop	r29
+ 924:	cf 91       	pop	r28
+ 926:	1f 91       	pop	r17
+ 928:	0f 91       	pop	r16
+ 92a:	08 95       	ret
+
+0000092c <Service_UpdateLeds>:
+* Description: Function to Update the the terminal of the output.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuSrvc_Status_t Service_UpdateLeds(uint8_t u8_ledAction)
+{
+	
+	switch (u8_ledAction)
+ 92c:	82 30       	cpi	r24, 0x02	; 2
+ 92e:	09 f1       	breq	.+66     	; 0x972 <Service_UpdateLeds+0x46>
+ 930:	28 f4       	brcc	.+10     	; 0x93c <Service_UpdateLeds+0x10>
+ 932:	88 23       	and	r24, r24
+ 934:	41 f0       	breq	.+16     	; 0x946 <Service_UpdateLeds+0x1a>
+ 936:	81 30       	cpi	r24, 0x01	; 1
+ 938:	89 f0       	breq	.+34     	; 0x95c <Service_UpdateLeds+0x30>
+ 93a:	3c c0       	rjmp	.+120    	; 0x9b4 <Service_UpdateLeds+0x88>
+ 93c:	83 30       	cpi	r24, 0x03	; 3
+ 93e:	21 f1       	breq	.+72     	; 0x988 <Service_UpdateLeds+0x5c>
+ 940:	84 30       	cpi	r24, 0x04	; 4
+ 942:	69 f1       	breq	.+90     	; 0x99e <Service_UpdateLeds+0x72>
+ 944:	37 c0       	rjmp	.+110    	; 0x9b4 <Service_UpdateLeds+0x88>
+	{
+		case SRVC_ACTION_IDLE:
+			Led_Off(LED_GREEN);
+ 946:	80 e0       	ldi	r24, 0x00	; 0
+ 948:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_Off(LED_YELLOW);
+ 94c:	81 e0       	ldi	r24, 0x01	; 1
+ 94e:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_Off(LED_RED);
+ 952:	82 e0       	ldi	r24, 0x02	; 2
+ 954:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_On(LED_RED);
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ 958:	81 e0       	ldi	r24, 0x01	; 1
+	{
+		case SRVC_ACTION_IDLE:
+			Led_Off(LED_GREEN);
+			Led_Off(LED_YELLOW);
+			Led_Off(LED_RED);
+			break;
+ 95a:	08 95       	ret
+		case SRVC_ACTION_OK:
+			Led_Off(LED_GREEN);
+ 95c:	80 e0       	ldi	r24, 0x00	; 0
+ 95e:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_Off(LED_YELLOW);
+ 962:	81 e0       	ldi	r24, 0x01	; 1
+ 964:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_Off(LED_RED);
+ 968:	82 e0       	ldi	r24, 0x02	; 2
+ 96a:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_On(LED_RED);
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ 96e:	81 e0       	ldi	r24, 0x01	; 1
+			break;
+		case SRVC_ACTION_OK:
+			Led_Off(LED_GREEN);
+			Led_Off(LED_YELLOW);
+			Led_Off(LED_RED);
+			break;
+ 970:	08 95       	ret
+		case SRVC_ACTION_GREEN:
+			Led_On(LED_GREEN);
+ 972:	80 e0       	ldi	r24, 0x00	; 0
+ 974:	0e 94 c4 00 	call	0x188	; 0x188 <Led_On>
+			Led_Off(LED_YELLOW);
+ 978:	81 e0       	ldi	r24, 0x01	; 1
+ 97a:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_Off(LED_RED);
+ 97e:	82 e0       	ldi	r24, 0x02	; 2
+ 980:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_On(LED_RED);
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ 984:	81 e0       	ldi	r24, 0x01	; 1
+			break;
+		case SRVC_ACTION_GREEN:
+			Led_On(LED_GREEN);
+			Led_Off(LED_YELLOW);
+			Led_Off(LED_RED);
+			break;
+ 986:	08 95       	ret
+		case SRVC_ACTION_YELLOW:
+			Led_Off(LED_GREEN);
+ 988:	80 e0       	ldi	r24, 0x00	; 0
+ 98a:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_On(LED_YELLOW);
+ 98e:	81 e0       	ldi	r24, 0x01	; 1
+ 990:	0e 94 c4 00 	call	0x188	; 0x188 <Led_On>
+			Led_Off(LED_RED);
+ 994:	82 e0       	ldi	r24, 0x02	; 2
+ 996:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_On(LED_RED);
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ 99a:	81 e0       	ldi	r24, 0x01	; 1
+			break;
+		case SRVC_ACTION_YELLOW:
+			Led_Off(LED_GREEN);
+			Led_On(LED_YELLOW);
+			Led_Off(LED_RED);
+			break;
+ 99c:	08 95       	ret
+		case SRVC_ACTION_RED:
+			Led_Off(LED_GREEN);
+ 99e:	80 e0       	ldi	r24, 0x00	; 0
+ 9a0:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_Off(LED_YELLOW);
+ 9a4:	81 e0       	ldi	r24, 0x01	; 1
+ 9a6:	0e 94 d6 00 	call	0x1ac	; 0x1ac <Led_Off>
+			Led_On(LED_RED);
+ 9aa:	82 e0       	ldi	r24, 0x02	; 2
+ 9ac:	0e 94 c4 00 	call	0x188	; 0x188 <Led_On>
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ 9b0:	81 e0       	ldi	r24, 0x01	; 1
+			break;
+		case SRVC_ACTION_RED:
+			Led_Off(LED_GREEN);
+			Led_Off(LED_YELLOW);
+			Led_On(LED_RED);
+			break;
+ 9b2:	08 95       	ret
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+ 9b4:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	return  SRVC_STATUS_ERROR_OK;
+}
+ 9b6:	08 95       	ret
+
+000009b8 <Service_UpdateTerminal>:
+* Return value: enuSrvc_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Update the the output on the terminal.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuSrvc_Status_t Service_UpdateTerminal(uint8_t u8_terminalAction)
+{
+	switch (u8_terminalAction)
+ 9b8:	82 30       	cpi	r24, 0x02	; 2
+ 9ba:	91 f0       	breq	.+36     	; 0x9e0 <Service_UpdateTerminal+0x28>
+ 9bc:	28 f4       	brcc	.+10     	; 0x9c8 <Service_UpdateTerminal+0x10>
+ 9be:	88 23       	and	r24, r24
+ 9c0:	09 f1       	breq	.+66     	; 0xa04 <Service_UpdateTerminal+0x4c>
+ 9c2:	81 30       	cpi	r24, 0x01	; 1
+ 9c4:	39 f0       	breq	.+14     	; 0x9d4 <Service_UpdateTerminal+0x1c>
+ 9c6:	04 c0       	rjmp	.+8      	; 0x9d0 <Service_UpdateTerminal+0x18>
+ 9c8:	83 30       	cpi	r24, 0x03	; 3
+ 9ca:	81 f0       	breq	.+32     	; 0x9ec <Service_UpdateTerminal+0x34>
+ 9cc:	84 30       	cpi	r24, 0x04	; 4
+ 9ce:	a1 f0       	breq	.+40     	; 0x9f8 <Service_UpdateTerminal+0x40>
+			break;
+		case SRVC_ACTION_RED:
+			Terminal_Out((uint8_t*)"Red Led is On\r");
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+ 9d0:	80 e0       	ldi	r24, 0x00	; 0
+ 9d2:	08 95       	ret
+	switch (u8_terminalAction)
+	{
+		case SRVC_ACTION_IDLE:
+			break;
+		case SRVC_ACTION_OK:
+			Terminal_Out((uint8_t*)"OK\r");
+ 9d4:	83 e7       	ldi	r24, 0x73	; 115
+ 9d6:	90 e0       	ldi	r25, 0x00	; 0
+ 9d8:	0e 94 87 01 	call	0x30e	; 0x30e <Terminal_Out>
+			Terminal_Out((uint8_t*)"Red Led is On\r");
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ 9dc:	81 e0       	ldi	r24, 0x01	; 1
+	{
+		case SRVC_ACTION_IDLE:
+			break;
+		case SRVC_ACTION_OK:
+			Terminal_Out((uint8_t*)"OK\r");
+			break;
+ 9de:	08 95       	ret
+		case SRVC_ACTION_GREEN:
+			Terminal_Out((uint8_t*)"Green Led is On\r");
+ 9e0:	87 e7       	ldi	r24, 0x77	; 119
+ 9e2:	90 e0       	ldi	r25, 0x00	; 0
+ 9e4:	0e 94 87 01 	call	0x30e	; 0x30e <Terminal_Out>
+			Terminal_Out((uint8_t*)"Red Led is On\r");
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ 9e8:	81 e0       	ldi	r24, 0x01	; 1
+		case SRVC_ACTION_OK:
+			Terminal_Out((uint8_t*)"OK\r");
+			break;
+		case SRVC_ACTION_GREEN:
+			Terminal_Out((uint8_t*)"Green Led is On\r");
+			break;
+ 9ea:	08 95       	ret
+		case SRVC_ACTION_YELLOW:
+			Terminal_Out((uint8_t*)"Yellow Led is On\r");
+ 9ec:	88 e8       	ldi	r24, 0x88	; 136
+ 9ee:	90 e0       	ldi	r25, 0x00	; 0
+ 9f0:	0e 94 87 01 	call	0x30e	; 0x30e <Terminal_Out>
+			Terminal_Out((uint8_t*)"Red Led is On\r");
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ 9f4:	81 e0       	ldi	r24, 0x01	; 1
+		case SRVC_ACTION_GREEN:
+			Terminal_Out((uint8_t*)"Green Led is On\r");
+			break;
+		case SRVC_ACTION_YELLOW:
+			Terminal_Out((uint8_t*)"Yellow Led is On\r");
+			break;
+ 9f6:	08 95       	ret
+		case SRVC_ACTION_RED:
+			Terminal_Out((uint8_t*)"Red Led is On\r");
+ 9f8:	8a e9       	ldi	r24, 0x9A	; 154
+ 9fa:	90 e0       	ldi	r25, 0x00	; 0
+ 9fc:	0e 94 87 01 	call	0x30e	; 0x30e <Terminal_Out>
+			break;
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ a00:	81 e0       	ldi	r24, 0x01	; 1
+		case SRVC_ACTION_YELLOW:
+			Terminal_Out((uint8_t*)"Yellow Led is On\r");
+			break;
+		case SRVC_ACTION_RED:
+			Terminal_Out((uint8_t*)"Red Led is On\r");
+			break;
+ a02:	08 95       	ret
+		default:
+			return SRVC_STATUS_ERROR_NOK;
+	}
+	return  SRVC_STATUS_ERROR_OK;
+ a04:	81 e0       	ldi	r24, 0x01	; 1
+ a06:	08 95       	ret
+
+00000a08 <_exit>:
+ a08:	f8 94       	cli
+
+00000a0a <__stop_program>:
+ a0a:	ff cf       	rjmp	.-2      	; 0xa0a <__stop_program>
