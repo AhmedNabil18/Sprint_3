@@ -143,6 +143,48 @@ enuSpi_Status_t Spi_MasterSendByte(uint8_t u8_data)
 #endif
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: Spi_MasterSendPacket
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): pu8_Data - Pointer Data to be sent by the SPI Master to the slave
+*				  u16_packetSize - Size of the given data string.
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: enuSpi_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Send Byte by the Master to the slave.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+#if SPI_ROLE == SPI_MASTER
+enuSpi_Status_t Spi_MasterSendPacket(uint8_t *pu8_Data, uint16_t u16_packetSize)
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the Spi module is not initialized */
+	if (SPI_STATUS_INIT != genuSpi_Status)
+	{
+		return SPI_STATUS_NOT_INIT;
+	}else{/*Nothing to here*/}
+		
+/**************************************************************************************/
+/*								End of Error Checking								  */
+/**************************************************************************************/
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	uint8_t u8_loopIndex=0;
+	
+	for(u8_loopIndex=0; u8_loopIndex<u16_packetSize; u8_loopIndex++)
+	{
+		if(Spi_MasterSendByte(pu8_Data[u8_loopIndex]) != SPI_STATUS_ERROR_OK)
+			return SPI_STATUS_ERROR_NOK;
+	}
+		
+	return SPI_STATUS_ERROR_OK;
+}
+#endif
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 * Service Name: Spi_MasterReceiveByte
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant

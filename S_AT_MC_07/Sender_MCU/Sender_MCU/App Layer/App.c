@@ -12,12 +12,12 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- GLOBAL STATIC VARIABLES *-*-*-*-*-*/
 static enuApp_Status_t enuCurrentAppStatus = APP_STATUS_UNINITIALIZED;
-enuTrafficState_t genu_AppState = TRAFFIC_ACTION_IDLE;
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*--*-*-*- FUNCTIONS IMPLEMENTATION -*-*-*-*-*-*/
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-* Service Name: TrafficApp_start
+* Service Name: App_start
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant
 * Parameters (in): None
@@ -26,27 +26,27 @@ enuTrafficState_t genu_AppState = TRAFFIC_ACTION_IDLE;
 * Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
 * Description: Function to Start the Application.
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-enuApp_Status_t TrafficApp_start(void)
+enuApp_Status_t App_start(void)
 {
 	/**************************************************************************************/
 	/*								Function Implementation								  */
 	/**************************************************************************************/
 	/* Initialize the Traffic application */
-	if(TrafficApp_init() != APP_STATUS_ERROR_OK)
+	if(App_init() != APP_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	EnableGlbl_Interrupt();
 	/* Application Super Loop */
 	while (1)
 	{
-		/* Update the Traffic status */
-		if(TrafficApp_update() != APP_STATUS_ERROR_OK)
+		/* Update the App Status */
+		if(App_update() != APP_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
 			
 	}
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-* Service Name: TrafficApp_init
+* Service Name: App_init
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant
 * Parameters (in): None
@@ -55,7 +55,7 @@ enuApp_Status_t TrafficApp_start(void)
 * Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
 * Description: Function to Initialize the Application.
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-enuApp_Status_t TrafficApp_init(void)
+enuApp_Status_t App_init(void)
 {
 /**************************************************************************************/
 /*								Start of Error Checking								  */
@@ -73,8 +73,13 @@ enuApp_Status_t TrafficApp_init(void)
 /*								Function Implementation								  */
 /**************************************************************************************/
 
-	/* Call the initializer in service layer */
-	if(SRVC_STATUS_ERROR_OK != Service_init())
+	/* Call the initializer of the Terminal */
+	if(TERMINAL_STATUS_ERROR_OK != Terminal_init())
+	{
+		return APP_STATUS_ERROR_NOK;
+	}
+	/* Call the initializer of the Spi */
+	if(SPI_STATUS_ERROR_OK != Spi_init())
 	{
 		return APP_STATUS_ERROR_NOK;
 	}
@@ -84,7 +89,7 @@ enuApp_Status_t TrafficApp_init(void)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-* Service Name: TrafficApp_update
+* Service Name: App_update
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant
 * Parameters (in): None
@@ -93,7 +98,7 @@ enuApp_Status_t TrafficApp_init(void)
 * Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
 * Description: Function to Update the state of the application.
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-enuApp_Status_t TrafficApp_update(void)
+enuApp_Status_t App_update(void)
 {
 /**************************************************************************************/
 /*								Start of Error Checking								  */
@@ -110,41 +115,16 @@ enuApp_Status_t TrafficApp_update(void)
 /**************************************************************************************/
 /*								Function Implementation								  */
 /**************************************************************************************/
-	/* Get the input from the service layer */
-	enuTrafficState_t enu_trafficState = TRAFFIC_OFF;
-	if(Service_ReportTerminal( (uint8_t*) &enu_trafficState) != SRVC_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
-	if( (genu_AppState != enu_trafficState) || (TRAFFIC_AT == enu_trafficState))
+	uint8_t au8_inputString[MAX_INPUT_SIZE]={0};
+	enuTerminal_Status_t enuTermStatus = Terminal_In(au8_inputString);
+	if (enuTermStatus == TERMINAL_STATUS_INPUT_CHANGED)
 	{
-		genu_AppState = enu_trafficState;
-		/* Check the input of the Terminal */
-		uint8_t u8_Action = TRAFFIC_ACTION_IDLE;
-		switch (enu_trafficState)
-		{	/* Decide the Action of the application */
-			case TRAFFIC_OFF:
-				u8_Action = TRAFFIC_ACTION_IDLE;
-				break;
-			case TRAFFIC_AT:
-				u8_Action = TRAFFIC_ACTION_OK;
-				break;
-			case TRAFFIC_GO:
-				u8_Action = TRAFFIC_ACTION_GREEN;
-				break;
-			case TRAFFIC_WAIT:
-				u8_Action = TRAFFIC_ACTION_YELLOW;
-				break;
-			case TRAFFIC_STOP:
-				u8_Action = TRAFFIC_ACTION_RED;
-				break;
-			default:
-				return APP_STATUS_ERROR_NOK;
-		}
-		
-		/* Send Action to the Service Layer */
-		if(Service_UpdateLeds(u8_Action) != SRVC_STATUS_ERROR_OK)
+		SPI_SS_ENABLE();
+		if(Spi_MasterSendPacket(au8_inputString, stringLength(au8_inputString)) != SPI_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
-		if(Service_UpdateTerminal(u8_Action) != SRVC_STATUS_ERROR_OK)
-			return APP_STATUS_ERROR_NOK;	
-	}
+		SPI_SS_DISABLE();
+	}else if(enuTermStatus != TERMINAL_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
+	
 	return APP_STATUS_ERROR_OK;
 }

@@ -115,6 +115,7 @@ enuTerminal_Status_t Terminal_Out(uint8_t *pu8_OutputData)
 	enuUart_Status_t Uart_State = Uart_sendPacket(pu8_OutputData, stringLength(pu8_OutputData));
 	if(UART_STATUS_ERROR_OK != Uart_State)
 		return TERMINAL_STATUS_ERROR_NOK;
+	Uart_State = Uart_sendByte('\r');
 	return TERMINAL_STATUS_ERROR_OK;
 }
 
@@ -156,6 +157,7 @@ enuTerminal_Status_t Terminal_In(uint8_t *pu8_InputData)
 		gu8_flag = 0;
 		stringCopy(gau8_data, pu8_InputData);
 		EmptyString(gau8_data);
+		return TERMINAL_STATUS_INPUT_CHANGED;
 	}
 	return TERMINAL_STATUS_ERROR_OK;
 }

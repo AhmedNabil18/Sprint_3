@@ -24,18 +24,20 @@ uint8_t gu8_flag=0;
 void Uart_RXC_ISR(void)
 {
 	gau8_data[gu8_counter] = Uart_DataRegister();
-	Uart_sendByte(gau8_data[gu8_counter]);
 	if (gau8_data[gu8_counter] == '\r')
 	{
+		Uart_sendByte(gau8_data[gu8_counter]);
 		gau8_data[gu8_counter] = '\0';
 		gu8_counter = 0;
 		gu8_flag = 1;
-	}else if (gau8_data[gu8_counter] == '\b')
+	}else if( (gau8_data[gu8_counter] == '\b') && (gu8_counter != 0))
 	{
+		Uart_sendByte(gau8_data[gu8_counter]);
 		gu8_counter--;
 	}
-	else
+	else if(gau8_data[gu8_counter] != '\b')
 	{
+		Uart_sendByte(gau8_data[gu8_counter]);
 		gu8_counter++;
 	}
 }
@@ -151,11 +153,14 @@ enuTerminal_Status_t Terminal_In(uint8_t *pu8_InputData)
 /**************************************************************************************/
 /*								Function Implementation								  */
 /**************************************************************************************/
+	
 	if(gu8_flag == 1)
 	{
+		
 		gu8_flag = 0;
 		stringCopy(gau8_data, pu8_InputData);
 		EmptyString(gau8_data);
+		return TERMINAL_STATUS_INPUT_CHANGED;
 	}
 	return TERMINAL_STATUS_ERROR_OK;
 }

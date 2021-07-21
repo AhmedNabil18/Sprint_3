@@ -12,21 +12,12 @@
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
-#include "../Srvc Layer/Service.h"
+#include "../MCAL/Spi Module/Spi.h"
+#include "../ECUAL/Terminal Module/Terminal.h"
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- CONSTANTS -*-*-*-*-*-*/
-#define LED_ALL_OFF						0U
-#define LED_GREEN_ON					1U
-#define LED_YELLOW_ON					2U
-#define LED_RED_ON						3U
 
-
-#define TRAFFIC_ACTION_IDLE				0U
-#define TRAFFIC_ACTION_OK				1U
-#define TRAFFIC_ACTION_GREEN			2U
-#define TRAFFIC_ACTION_YELLOW			3U
-#define TRAFFIC_ACTION_RED				4U
 /*******************************************************************************
  *                          Module Data Types                                  *
  *******************************************************************************/
@@ -43,30 +34,18 @@ typedef enum
 	APP_STATUS_UNINITIALIZED
 }enuApp_Status_t;
 
-/*
- * Data Type for Traffic state
- */
-typedef enum
-{
-	TRAFFIC_OFF,
-	TRAFFIC_AT,
-	TRAFFIC_GO,
-	TRAFFIC_WAIT,
-	TRAFFIC_STOP
-}enuTrafficState_t;
-
 
 /*******************************************************************************
  *                      Function Prototypes                                    *
  *******************************************************************************/
 /* Function to Start the application */
-enuApp_Status_t TrafficApp_start(void);
+enuApp_Status_t App_start(void);
 
 /* Function to initialize the Application */
-enuApp_Status_t TrafficApp_init(void);
+enuApp_Status_t App_init(void);
 
 /* Function to update the application */
-enuApp_Status_t TrafficApp_update(void);
+enuApp_Status_t App_update(void);
 
 
 

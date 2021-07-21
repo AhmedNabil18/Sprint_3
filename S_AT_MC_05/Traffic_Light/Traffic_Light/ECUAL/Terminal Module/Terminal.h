@@ -25,7 +25,8 @@ typedef enum
 	TERMINAL_STATUS_ERROR_OK,
 	TERMINAL_STATUS_NOT_INIT,
 	TERMINAL_STATUS_INIT,
-	TERMINAL_STATUS_ERROR_NULL
+	TERMINAL_STATUS_ERROR_NULL,
+	TERMINAL_STATUS_INPUT_CHANGED
 }enuTerminal_Status_t;
 
 /*******************************************************************************

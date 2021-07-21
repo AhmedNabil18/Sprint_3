@@ -59,7 +59,9 @@ enuSrvc_Status_t Service_init(void)
 enuSrvc_Status_t Service_ReportTerminal(uint8_t* pu8_terminal)
 {
 	uint8_t au8_inputString[MAX_INPUT_SIZE]={0};
-	if(Terminal_In(au8_inputString) != TERMINAL_STATUS_ERROR_OK)
+	enuTerminal_Status_t enuTermStatus = Terminal_In(au8_inputString);
+	
+	if( (enuTermStatus != TERMINAL_STATUS_ERROR_OK) && (enuTermStatus != TERMINAL_STATUS_INPUT_CHANGED))
 		return SRVC_STATUS_ERROR_NOK;
 	if (stringCompare((uint8_t*)au8_inputString,(uint8_t*)cgau8_startString) == 1)
 	{
