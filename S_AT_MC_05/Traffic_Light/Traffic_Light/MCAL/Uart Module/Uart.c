@@ -384,7 +384,7 @@ enuUart_Status_t Uart_EnableNotification_UDRE(pfUart_CallBack_t Uart_Callback)
 
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-* Service Name: Uart_EnableNotification_UDRE
+* Service Name: Uart_DisableNotification
 * Sync/Async: Synchronous
 * Reentrancy: Reentrant
 * Parameters (in): u8_InterruptFlags - Interrupt Flags to be stopped.
@@ -431,44 +431,3 @@ uint8_t Uart_DataRegister(void)
 ISR(USART_TXC_IRQ){(*Uart_TXC_CallBackPtr)();}
 ISR(USART_RXC_IRQ){(*Uart_RXC_CallBackPtr)();}
 ISR(USART_UDRE_IRQ){(*Uart_UDRE_CallBackPtr)();}
-
-
-
-// /************************************************************************************
-// * Service Name: Uart_ISRHandler
-// * Sync/Async: ASynchronous
-// * Reentrancy: Non Reentrant
-// * Parameters (in): u8_InterruptCaller - The Cause of the interrupt (TXC, RXC, UDRE)
-// * Parameters (inout): None
-// * Parameters (out): None
-// * Return value: None
-// * Description: Function to handle the ISR calling along with the callback functions.
-// ************************************************************************************/
-// static void Uart_ISRHandler(uint8_t u8_InterruptCaller)
-// {
-// 	switch (u8_InterruptCaller)
-// 	{
-// 		case UART_UCSRA_TXC:
-// 			
-// 			(*Uart_TXC_CallBackPtr)();
-// 			break;
-// 		case UART_UCSRA_RXC:
-// 		
-// 			(*Uart_RXC_CallBackPtr)();
-// 			break;
-// 		case UART_UCSRA_UDRE:
-// 		
-// 			(*Uart_UDRE_CallBackPtr)();
-// 			break;
-// 		default:
-// 			return;
-// 	}
-// 	/* CallBack the notification function */
-// 	(*Gpt_Timer0_CallBackPtr)();
-// }
-
-
-/*
-ISR(USART_TXC_IRQ){Uart_ISRHandler(UART_UCSRA_TXC);}
-ISR(USART_RXC_IRQ){Uart_ISRHandler(UART_UCSRA_RXC);}
-ISR(USART_UDRE_IRQ){Uart_ISRHandler(UART_UCSRA_UDRE);}*/
