@@ -1,0 +1,614 @@
+
+I2C_Slave.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000270  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  00000270  000002e4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000002e6  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000318  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000068  00000000  00000000  00000354  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000925  00000000  00000000  000003bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000064b  00000000  00000000  00000ce1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000004b4  00000000  00000000  0000132c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000c8  00000000  00000000  000017e0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000559  00000000  00000000  000018a8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000395  00000000  00000000  00001e01  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000048  00000000  00000000  00002196  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 e7       	ldi	r30, 0x70	; 112
+  68:	f2 e0       	ldi	r31, 0x02	; 2
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a2 36       	cpi	r26, 0x62	; 98
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 36 01 	jmp	0x26c	; 0x26c <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+
+#include "MCAL/I2C Module/I2C.h"
+
+
+int main(void)
+{
+  82:	cf 93       	push	r28
+  84:	df 93       	push	r29
+  86:	00 d0       	rcall	.+0      	; 0x88 <main+0x6>
+  88:	00 d0       	rcall	.+0      	; 0x8a <main+0x8>
+  8a:	cd b7       	in	r28, 0x3d	; 61
+  8c:	de b7       	in	r29, 0x3e	; 62
+	uint8_t u8_data[4]={7,1,6,3};
+  8e:	87 e0       	ldi	r24, 0x07	; 7
+  90:	89 83       	std	Y+1, r24	; 0x01
+  92:	81 e0       	ldi	r24, 0x01	; 1
+  94:	8a 83       	std	Y+2, r24	; 0x02
+  96:	86 e0       	ldi	r24, 0x06	; 6
+  98:	8b 83       	std	Y+3, r24	; 0x03
+  9a:	83 e0       	ldi	r24, 0x03	; 3
+  9c:	8c 83       	std	Y+4, r24	; 0x04
+	DIO_PORTA_DIR = 0xFF;
+  9e:	8f ef       	ldi	r24, 0xFF	; 255
+  a0:	8a bb       	out	0x1a, r24	; 26
+	DIO_PORTB_DIR = 0xFF;
+  a2:	87 bb       	out	0x17, r24	; 23
+	DIO_PORTD_DIR = 0xFF;
+  a4:	81 bb       	out	0x11, r24	; 17
+	I2C_SlaveInit(0x10);
+  a6:	80 e1       	ldi	r24, 0x10	; 16
+  a8:	0e 94 6f 00 	call	0xde	; 0xde <I2C_SlaveInit>
+    /* Replace with your application code */
+    while (1)
+    {
+	    switch(I2C_SlaveCheck())
+  ac:	0e 94 7e 00 	call	0xfc	; 0xfc <I2C_SlaveCheck>
+  b0:	8c 30       	cpi	r24, 0x0C	; 12
+  b2:	19 f0       	breq	.+6      	; 0xba <main+0x38>
+  b4:	8d 30       	cpi	r24, 0x0D	; 13
+  b6:	31 f0       	breq	.+12     	; 0xc4 <main+0x42>
+  b8:	0b c0       	rjmp	.+22     	; 0xd0 <main+0x4e>
+	    {
+			case I2C_STATUS_SLAVE_READ:
+				
+				I2C_SlaveReceive(u8_data);
+  ba:	ce 01       	movw	r24, r28
+  bc:	01 96       	adiw	r24, 0x01	; 1
+  be:	0e 94 f2 00 	call	0x1e4	; 0x1e4 <I2C_SlaveReceive>
+				break;
+  c2:	06 c0       	rjmp	.+12     	; 0xd0 <main+0x4e>
+			case I2C_STATUS_SLAVE_WRITE:
+				I2C_SlaveSend(u8_data,3);
+  c4:	63 e0       	ldi	r22, 0x03	; 3
+  c6:	70 e0       	ldi	r23, 0x00	; 0
+  c8:	ce 01       	movw	r24, r28
+  ca:	01 96       	adiw	r24, 0x01	; 1
+  cc:	0e 94 0e 01 	call	0x21c	; 0x21c <I2C_SlaveSend>
+				break;
+			default:
+				break;
+		}
+		DIO_PORTA_DATA = u8_data[0];
+  d0:	89 81       	ldd	r24, Y+1	; 0x01
+  d2:	8b bb       	out	0x1b, r24	; 27
+		DIO_PORTB_DATA = u8_data[1];
+  d4:	8a 81       	ldd	r24, Y+2	; 0x02
+  d6:	88 bb       	out	0x18, r24	; 24
+		DIO_PORTD_DATA = u8_data[3];
+  d8:	8c 81       	ldd	r24, Y+4	; 0x04
+  da:	82 bb       	out	0x12, r24	; 18
+    }
+  dc:	e7 cf       	rjmp	.-50     	; 0xac <main+0x2a>
+
+000000de <I2C_SlaveInit>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is already initialized */
+	if (I2C_STATUS_INIT == genuI2C_Status)
+  de:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  e2:	97 30       	cpi	r25, 0x07	; 7
+  e4:	49 f0       	breq	.+18     	; 0xf8 <I2C_SlaveInit+0x1a>
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Set own slave address of the device */
+	I2C_TWAR_REG = u8_OwnSlaveAddress << 1;
+  e6:	88 0f       	add	r24, r24
+  e8:	82 b9       	out	0x02, r24	; 2
+	I2C_ENABLE_FLAG_ACK;
+  ea:	84 ec       	ldi	r24, 0xC4	; 196
+  ec:	86 bf       	out	0x36, r24	; 54
+	/* Set the I2C Module State to Initialized*/
+	genuI2C_Status = I2C_STATUS_INIT;
+  ee:	87 e0       	ldi	r24, 0x07	; 7
+  f0:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+	return I2C_STATUS_ERROR_OK;
+  f4:	81 e0       	ldi	r24, 0x01	; 1
+  f6:	08 95       	ret
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is already initialized */
+	if (I2C_STATUS_INIT == genuI2C_Status)
+	{
+		return I2C_STATUS_ALREADY_INIT;
+  f8:	88 e0       	ldi	r24, 0x08	; 8
+	I2C_TWAR_REG = u8_OwnSlaveAddress << 1;
+	I2C_ENABLE_FLAG_ACK;
+	/* Set the I2C Module State to Initialized*/
+	genuI2C_Status = I2C_STATUS_INIT;
+	return I2C_STATUS_ERROR_OK;
+}
+  fa:	08 95       	ret
+
+000000fc <I2C_SlaveCheck>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is not initialized */
+	if (I2C_STATUS_INIT != genuI2C_Status)
+  fc:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 100:	87 30       	cpi	r24, 0x07	; 7
+ 102:	99 f4       	brne	.+38     	; 0x12a <I2C_SlaveCheck+0x2e>
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	uint8_t u8_status;
+	
+	while(!(I2C_TWCR_REG & (1<<I2C_TWCR_TWINT)));
+ 104:	06 b6       	in	r0, 0x36	; 54
+ 106:	07 fe       	sbrs	r0, 7
+ 108:	fd cf       	rjmp	.-6      	; 0x104 <I2C_SlaveCheck+0x8>
+	u8_status = I2C_readSTATUS();
+ 10a:	81 b1       	in	r24, 0x01	; 1
+ 10c:	88 7f       	andi	r24, 0xF8	; 248
+	
+	if((u8_status==I2C_SLV_OWN_ADDRESS_W) || (u8_status==I2C_SLV_ACK_RETURNED_W))
+ 10e:	80 36       	cpi	r24, 0x60	; 96
+ 110:	71 f0       	breq	.+28     	; 0x12e <I2C_SlaveCheck+0x32>
+ 112:	88 36       	cpi	r24, 0x68	; 104
+ 114:	71 f0       	breq	.+28     	; 0x132 <I2C_SlaveCheck+0x36>
+	return I2C_STATUS_SLAVE_READ;
+	if((u8_status == I2C_SLV_OWN_ADDRESS_R) || (u8_status== I2C_SLV_ACK_RETURNED_R))
+ 116:	88 3a       	cpi	r24, 0xA8	; 168
+ 118:	71 f0       	breq	.+28     	; 0x136 <I2C_SlaveCheck+0x3a>
+ 11a:	80 3b       	cpi	r24, 0xB0	; 176
+ 11c:	71 f0       	breq	.+28     	; 0x13a <I2C_SlaveCheck+0x3e>
+	return I2C_STATUS_SLAVE_WRITE;
+	if((u8_status == I2C_SLV_GNRL_CALL) || (u8_status== I2C_SLV_GNRL_CALL_ARB_LST))
+ 11e:	80 37       	cpi	r24, 0x70	; 112
+ 120:	71 f0       	breq	.+28     	; 0x13e <I2C_SlaveCheck+0x42>
+ 122:	88 37       	cpi	r24, 0x78	; 120
+ 124:	71 f4       	brne	.+28     	; 0x142 <I2C_SlaveCheck+0x46>
+	return I2C_STATUS_SLAVE_GNRL_CALL;
+ 126:	8e e0       	ldi	r24, 0x0E	; 14
+ 128:	08 95       	ret
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is not initialized */
+	if (I2C_STATUS_INIT != genuI2C_Status)
+	{
+		return I2C_STATUS_NOT_INIT;
+ 12a:	86 e0       	ldi	r24, 0x06	; 6
+ 12c:	08 95       	ret
+	
+	while(!(I2C_TWCR_REG & (1<<I2C_TWCR_TWINT)));
+	u8_status = I2C_readSTATUS();
+	
+	if((u8_status==I2C_SLV_OWN_ADDRESS_W) || (u8_status==I2C_SLV_ACK_RETURNED_W))
+	return I2C_STATUS_SLAVE_READ;
+ 12e:	8c e0       	ldi	r24, 0x0C	; 12
+ 130:	08 95       	ret
+ 132:	8c e0       	ldi	r24, 0x0C	; 12
+ 134:	08 95       	ret
+	if((u8_status == I2C_SLV_OWN_ADDRESS_R) || (u8_status== I2C_SLV_ACK_RETURNED_R))
+	return I2C_STATUS_SLAVE_WRITE;
+ 136:	8d e0       	ldi	r24, 0x0D	; 13
+ 138:	08 95       	ret
+ 13a:	8d e0       	ldi	r24, 0x0D	; 13
+ 13c:	08 95       	ret
+	if((u8_status == I2C_SLV_GNRL_CALL) || (u8_status== I2C_SLV_GNRL_CALL_ARB_LST))
+	return I2C_STATUS_SLAVE_GNRL_CALL;
+ 13e:	8e e0       	ldi	r24, 0x0E	; 14
+ 140:	08 95       	ret
+	
+	return I2C_STATUS_SLAVE_DEAF;
+ 142:	8f e0       	ldi	r24, 0x0F	; 15
+}
+ 144:	08 95       	ret
+
+00000146 <I2C_SlaveSendByte>:
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is not initialized */
+	if (I2C_STATUS_INIT != genuI2C_Status)
+ 146:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 14a:	97 30       	cpi	r25, 0x07	; 7
+ 14c:	e1 f4       	brne	.+56     	; 0x186 <I2C_SlaveSendByte+0x40>
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	uint8_t u8_status;
+	
+	I2C_TWDR_REG = u8_data;
+ 14e:	83 b9       	out	0x03, r24	; 3
+	I2C_ENABLE_FLAG_ACK; 
+ 150:	84 ec       	ldi	r24, 0xC4	; 196
+ 152:	86 bf       	out	0x36, r24	; 54
+	while(!(I2C_TWCR_REG & (1<<I2C_TWCR_TWINT)));
+ 154:	06 b6       	in	r0, 0x36	; 54
+ 156:	07 fe       	sbrs	r0, 7
+ 158:	fd cf       	rjmp	.-6      	; 0x154 <I2C_SlaveSendByte+0xe>
+	
+	u8_status = I2C_readSTATUS();
+ 15a:	81 b1       	in	r24, 0x01	; 1
+ 15c:	88 7f       	andi	r24, 0xF8	; 248
+	if(u8_status == I2C_SLV_STOP_REP_START)	
+ 15e:	80 3a       	cpi	r24, 0xA0	; 160
+ 160:	29 f4       	brne	.+10     	; 0x16c <I2C_SlaveSendByte+0x26>
+	{
+		I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT);
+ 162:	86 b7       	in	r24, 0x36	; 54
+ 164:	80 68       	ori	r24, 0x80	; 128
+ 166:	86 bf       	out	0x36, r24	; 54
+		return I2C_STATUS_SLAVE_STOP;
+ 168:	89 e0       	ldi	r24, 0x09	; 9
+ 16a:	08 95       	ret
+	}
+	if(u8_status==I2C_SLV_ACK_BY_MASTER)
+ 16c:	88 3b       	cpi	r24, 0xB8	; 184
+ 16e:	69 f0       	breq	.+26     	; 0x18a <I2C_SlaveSendByte+0x44>
+		return I2C_STATUS_SLAVE_ACK;
+	if(u8_status==I2C_SLV_NACK_BY_MASTER)
+ 170:	80 3c       	cpi	r24, 0xC0	; 192
+ 172:	29 f4       	brne	.+10     	; 0x17e <I2C_SlaveSendByte+0x38>
+	{
+		I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT);
+ 174:	86 b7       	in	r24, 0x36	; 54
+ 176:	80 68       	ori	r24, 0x80	; 128
+ 178:	86 bf       	out	0x36, r24	; 54
+		return I2C_STATUS_SLAVE_NACK;
+ 17a:	8b e0       	ldi	r24, 0x0B	; 11
+ 17c:	08 95       	ret
+	}
+	if(u8_status==I2C_SLV_LAST_DATA_ACK)
+ 17e:	88 3c       	cpi	r24, 0xC8	; 200
+ 180:	31 f4       	brne	.+12     	; 0x18e <I2C_SlaveSendByte+0x48>
+		return I2C_STATUS_SLAVE_NACK;	
+ 182:	8b e0       	ldi	r24, 0x0B	; 11
+ 184:	08 95       	ret
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is not initialized */
+	if (I2C_STATUS_INIT != genuI2C_Status)
+	{
+		return I2C_STATUS_NOT_INIT;
+ 186:	86 e0       	ldi	r24, 0x06	; 6
+ 188:	08 95       	ret
+	{
+		I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT);
+		return I2C_STATUS_SLAVE_STOP;
+	}
+	if(u8_status==I2C_SLV_ACK_BY_MASTER)
+		return I2C_STATUS_SLAVE_ACK;
+ 18a:	8a e0       	ldi	r24, 0x0A	; 10
+ 18c:	08 95       	ret
+		I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT);
+		return I2C_STATUS_SLAVE_NACK;
+	}
+	if(u8_status==I2C_SLV_LAST_DATA_ACK)
+		return I2C_STATUS_SLAVE_NACK;	
+	return I2C_STATUS_ERROR_NOK;
+ 18e:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 190:	08 95       	ret
+
+00000192 <I2C_SlaveReceiveByte>:
+* Parameters (out): pu8_data - Pointer to Variable to hold the data received by the Master
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to receive byte from the master.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuI2C_Status_t I2C_SlaveReceiveByte(uint8_t *pu8_data)
+{
+ 192:	fc 01       	movw	r30, r24
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is not initialized */
+	if (I2C_STATUS_INIT != genuI2C_Status)
+ 194:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 198:	97 30       	cpi	r25, 0x07	; 7
+ 19a:	01 f5       	brne	.+64     	; 0x1dc <I2C_SlaveReceiveByte+0x4a>
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	uint8_t u8_status;
+	
+	I2C_ENABLE_FLAG_ACK	;
+ 19c:	84 ec       	ldi	r24, 0xC4	; 196
+ 19e:	86 bf       	out	0x36, r24	; 54
+	while(!(I2C_TWCR_REG & (1<<I2C_TWCR_TWINT)));
+ 1a0:	06 b6       	in	r0, 0x36	; 54
+ 1a2:	07 fe       	sbrs	r0, 7
+ 1a4:	fd cf       	rjmp	.-6      	; 0x1a0 <I2C_SlaveReceiveByte+0xe>
+	
+	u8_status = I2C_readSTATUS();
+ 1a6:	81 b1       	in	r24, 0x01	; 1
+ 1a8:	88 7f       	andi	r24, 0xF8	; 248
+	if((u8_status == I2C_SLV_ACK_DATA_RX) || (u8_status == I2C_SLV_ACK_GENERAL_CALL))
+ 1aa:	80 38       	cpi	r24, 0x80	; 128
+ 1ac:	11 f0       	breq	.+4      	; 0x1b2 <I2C_SlaveReceiveByte+0x20>
+ 1ae:	88 39       	cpi	r24, 0x98	; 152
+ 1b0:	21 f4       	brne	.+8      	; 0x1ba <I2C_SlaveReceiveByte+0x28>
+	{
+		*pu8_data = I2C_TWDR_REG;
+ 1b2:	83 b1       	in	r24, 0x03	; 3
+ 1b4:	80 83       	st	Z, r24
+		return I2C_STATUS_SLAVE_ACK;
+ 1b6:	8a e0       	ldi	r24, 0x0A	; 10
+ 1b8:	08 95       	ret
+	}else if((u8_status == I2C_SLV_NACK_DATA_RX) || (u8_status == I2C_SLV_NACK_GENERAL_CALL))
+ 1ba:	88 38       	cpi	r24, 0x88	; 136
+ 1bc:	11 f0       	breq	.+4      	; 0x1c2 <I2C_SlaveReceiveByte+0x30>
+ 1be:	88 39       	cpi	r24, 0x98	; 152
+ 1c0:	21 f4       	brne	.+8      	; 0x1ca <I2C_SlaveReceiveByte+0x38>
+	{
+		*pu8_data = I2C_TWDR_REG;
+ 1c2:	83 b1       	in	r24, 0x03	; 3
+ 1c4:	80 83       	st	Z, r24
+		return I2C_STATUS_SLAVE_NACK;	
+ 1c6:	8b e0       	ldi	r24, 0x0B	; 11
+ 1c8:	08 95       	ret
+	}else if(u8_status == I2C_SLV_STOP_REP_START)		
+ 1ca:	80 3a       	cpi	r24, 0xA0	; 160
+ 1cc:	49 f4       	brne	.+18     	; 0x1e0 <I2C_SlaveReceiveByte+0x4e>
+	{
+		I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT);
+ 1ce:	86 b7       	in	r24, 0x36	; 54
+ 1d0:	80 68       	ori	r24, 0x80	; 128
+ 1d2:	86 bf       	out	0x36, r24	; 54
+		DIO_PORTB_DATA = 1<<0;
+ 1d4:	81 e0       	ldi	r24, 0x01	; 1
+ 1d6:	88 bb       	out	0x18, r24	; 24
+		return I2C_STATUS_SLAVE_STOP;
+ 1d8:	89 e0       	ldi	r24, 0x09	; 9
+ 1da:	08 95       	ret
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is not initialized */
+	if (I2C_STATUS_INIT != genuI2C_Status)
+	{
+		return I2C_STATUS_NOT_INIT;
+ 1dc:	86 e0       	ldi	r24, 0x06	; 6
+ 1de:	08 95       	ret
+	{
+		I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT);
+		DIO_PORTB_DATA = 1<<0;
+		return I2C_STATUS_SLAVE_STOP;
+	}
+	return I2C_STATUS_ERROR_NOK;
+ 1e0:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 1e2:	08 95       	ret
+
+000001e4 <I2C_SlaveReceive>:
+* Parameters (out): pu8_data - Pointer to Variable to hold the data received by the Master
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to receive multiple bytes from the master.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuI2C_Status_t I2C_SlaveReceive(uint8_t *pu8_data)
+{
+ 1e4:	cf 93       	push	r28
+ 1e6:	df 93       	push	r29
+ 1e8:	ec 01       	movw	r28, r24
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+/* Check if the I2C module is not initialized */
+if (I2C_STATUS_INIT != genuI2C_Status)
+ 1ea:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1ee:	87 30       	cpi	r24, 0x07	; 7
+ 1f0:	79 f4       	brne	.+30     	; 0x210 <I2C_SlaveReceive+0x2c>
+ 1f2:	01 c0       	rjmp	.+2      	; 0x1f6 <I2C_SlaveReceive+0x12>
+/**************************************************************************************/
+	do
+	{
+		if (I2C_SlaveReceiveByte(pu8_data) == I2C_STATUS_SLAVE_STOP)
+			return I2C_STATUS_ERROR_OK;
+		if(*(pu8_data++) == '\0') return I2C_STATUS_ERROR_OK;
+ 1f4:	e9 01       	movw	r28, r18
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	do
+	{
+		if (I2C_SlaveReceiveByte(pu8_data) == I2C_STATUS_SLAVE_STOP)
+ 1f6:	ce 01       	movw	r24, r28
+ 1f8:	0e 94 c9 00 	call	0x192	; 0x192 <I2C_SlaveReceiveByte>
+ 1fc:	89 30       	cpi	r24, 0x09	; 9
+ 1fe:	51 f0       	breq	.+20     	; 0x214 <I2C_SlaveReceive+0x30>
+			return I2C_STATUS_ERROR_OK;
+		if(*(pu8_data++) == '\0') return I2C_STATUS_ERROR_OK;
+ 200:	9e 01       	movw	r18, r28
+ 202:	2f 5f       	subi	r18, 0xFF	; 255
+ 204:	3f 4f       	sbci	r19, 0xFF	; 255
+ 206:	88 81       	ld	r24, Y
+ 208:	81 11       	cpse	r24, r1
+ 20a:	f4 cf       	rjmp	.-24     	; 0x1f4 <I2C_SlaveReceive+0x10>
+ 20c:	81 e0       	ldi	r24, 0x01	; 1
+ 20e:	03 c0       	rjmp	.+6      	; 0x216 <I2C_SlaveReceive+0x32>
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+/* Check if the I2C module is not initialized */
+if (I2C_STATUS_INIT != genuI2C_Status)
+{
+	return I2C_STATUS_NOT_INIT;
+ 210:	86 e0       	ldi	r24, 0x06	; 6
+ 212:	01 c0       	rjmp	.+2      	; 0x216 <I2C_SlaveReceive+0x32>
+/*								Function Implementation								  */
+/**************************************************************************************/
+	do
+	{
+		if (I2C_SlaveReceiveByte(pu8_data) == I2C_STATUS_SLAVE_STOP)
+			return I2C_STATUS_ERROR_OK;
+ 214:	81 e0       	ldi	r24, 0x01	; 1
+		if(*(pu8_data++) == '\0') return I2C_STATUS_ERROR_OK;
+	}while (1);
+	return I2C_STATUS_ERROR_NOK;
+}
+ 216:	df 91       	pop	r29
+ 218:	cf 91       	pop	r28
+ 21a:	08 95       	ret
+
+0000021c <I2C_SlaveSend>:
+* Parameters (out): None
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to send multiple bytes to the master.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuI2C_Status_t I2C_SlaveSend(uint8_t *pu8_data, uint16_t u16_dataLength)
+{
+ 21c:	0f 93       	push	r16
+ 21e:	1f 93       	push	r17
+ 220:	cf 93       	push	r28
+ 222:	df 93       	push	r29
+ 224:	ec 01       	movw	r28, r24
+ 226:	8b 01       	movw	r16, r22
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is not initialized */
+	if (I2C_STATUS_INIT != genuI2C_Status)
+ 228:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 22c:	87 30       	cpi	r24, 0x07	; 7
+ 22e:	a1 f4       	brne	.+40     	; 0x258 <I2C_SlaveSend+0x3c>
+ 230:	02 c0       	rjmp	.+4      	; 0x236 <I2C_SlaveSend+0x1a>
+	do
+	{
+		if (I2C_SlaveSendByte(*pu8_data) != I2C_STATUS_SLAVE_ACK)
+			return I2C_STATUS_ERROR_OK;
+		if(*(pu8_data++) == '\0') return I2C_STATUS_ERROR_OK;
+	}while (u16_dataLength--);
+ 232:	8c 01       	movw	r16, r24
+/**************************************************************************************/
+	do
+	{
+		if (I2C_SlaveSendByte(*pu8_data) != I2C_STATUS_SLAVE_ACK)
+			return I2C_STATUS_ERROR_OK;
+		if(*(pu8_data++) == '\0') return I2C_STATUS_ERROR_OK;
+ 234:	e9 01       	movw	r28, r18
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	do
+	{
+		if (I2C_SlaveSendByte(*pu8_data) != I2C_STATUS_SLAVE_ACK)
+ 236:	88 81       	ld	r24, Y
+ 238:	0e 94 a3 00 	call	0x146	; 0x146 <I2C_SlaveSendByte>
+ 23c:	8a 30       	cpi	r24, 0x0A	; 10
+ 23e:	71 f4       	brne	.+28     	; 0x25c <I2C_SlaveSend+0x40>
+			return I2C_STATUS_ERROR_OK;
+		if(*(pu8_data++) == '\0') return I2C_STATUS_ERROR_OK;
+ 240:	9e 01       	movw	r18, r28
+ 242:	2f 5f       	subi	r18, 0xFF	; 255
+ 244:	3f 4f       	sbci	r19, 0xFF	; 255
+ 246:	88 81       	ld	r24, Y
+ 248:	88 23       	and	r24, r24
+ 24a:	51 f0       	breq	.+20     	; 0x260 <I2C_SlaveSend+0x44>
+	}while (u16_dataLength--);
+ 24c:	c8 01       	movw	r24, r16
+ 24e:	01 97       	sbiw	r24, 0x01	; 1
+ 250:	01 2b       	or	r16, r17
+ 252:	79 f7       	brne	.-34     	; 0x232 <I2C_SlaveSend+0x16>
+	return I2C_STATUS_ERROR_NOK;
+ 254:	80 e0       	ldi	r24, 0x00	; 0
+ 256:	05 c0       	rjmp	.+10     	; 0x262 <I2C_SlaveSend+0x46>
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is not initialized */
+	if (I2C_STATUS_INIT != genuI2C_Status)
+	{
+		return I2C_STATUS_NOT_INIT;
+ 258:	86 e0       	ldi	r24, 0x06	; 6
+ 25a:	03 c0       	rjmp	.+6      	; 0x262 <I2C_SlaveSend+0x46>
+/*								Function Implementation								  */
+/**************************************************************************************/
+	do
+	{
+		if (I2C_SlaveSendByte(*pu8_data) != I2C_STATUS_SLAVE_ACK)
+			return I2C_STATUS_ERROR_OK;
+ 25c:	81 e0       	ldi	r24, 0x01	; 1
+ 25e:	01 c0       	rjmp	.+2      	; 0x262 <I2C_SlaveSend+0x46>
+		if(*(pu8_data++) == '\0') return I2C_STATUS_ERROR_OK;
+ 260:	81 e0       	ldi	r24, 0x01	; 1
+	}while (u16_dataLength--);
+	return I2C_STATUS_ERROR_NOK;
+}
+ 262:	df 91       	pop	r29
+ 264:	cf 91       	pop	r28
+ 266:	1f 91       	pop	r17
+ 268:	0f 91       	pop	r16
+ 26a:	08 95       	ret
+
+0000026c <_exit>:
+ 26c:	f8 94       	cli
+
+0000026e <__stop_program>:
+ 26e:	ff cf       	rjmp	.-2      	; 0x26e <__stop_program>
