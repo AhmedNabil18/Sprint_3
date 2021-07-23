@@ -96,8 +96,9 @@
 #define I2C_TWSR_TWPS1			1U
 #define I2C_TWSR_TWPS0			0U
 
-#define I2C_READ				1U
+
 #define I2C_WRITE				0U
+#define I2C_READ				1U
 /*-*-*-*-*-*-*-*-*--*-*-*-*-*-*/
 /*-*-*-*-*- MACROS -*-*-*-*-*-*/
 #define I2C_CLR_TWINT			(I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT))
@@ -115,6 +116,7 @@
 #define I2C_ENABLE_FLAG			(I2C_TWCR_REG = (1<<I2C_TWCR_TWEN)|(1<<I2C_TWCR_TWINT))
 #define I2C_ENABLE_FLAG_ACK		(I2C_TWCR_REG = (1<<I2C_TWCR_TWEN)|(1<<I2C_TWCR_TWINT)|(1<<I2C_TWCR_TWEA))
 
+
 /*
  * Data Type for a pointer to notification call back function
  * Parameter (In) : None
@@ -129,9 +131,8 @@ typedef void (*pfI2C_CallBack_t)(void);
 typedef enum{
 	I2C_STATUS_ERROR_NOK,
 	I2C_STATUS_ERROR_OK,
-	I2C_STATUS_PIN_ID_INVALID,
-	I2C_STATUS_PIN_NUM_INVALID,
-	I2C_STATUS_PORT_NUM_INVALID,
+	I2C_STATUS_INVALID_ARGUMENT,
+	I2C_STATUS_INVALID_SLV_ADDR,
 	I2C_STATUS_NULL_ARGUMENT,
 	I2C_STATUS_NOT_INIT,
 	I2C_STATUS_INIT,
@@ -181,13 +182,16 @@ enuI2C_Status_t I2C_MasterSendPacket(uint8_t u8_slaveAddress, uint8_t * pu8_data
 enuI2C_Status_t I2C_MasterReceivePacket(uint8_t u8_slaveAddress, uint8_t * pu8_data, uint16_t u16_dataLen);
 
 /*- Receive Multiple Data Bytes with multiple Commands from Slave -*/
-enuI2C_Status_t I2C_MasterReceiveGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_source, uint16_t u16_sourceLen, uint8_t * pu8_destination, uint16_t u16_destinationLen);
+enuI2C_Status_t I2C_MasterReceiveGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_source, uint16_t u16_sourceLen,\
+										 uint8_t * pu8_destination, uint16_t u16_destinationLen);
 
 /*- Send Multiple Data Bytes to a specific location to the Slave -*/
-enuI2C_Status_t I2C_MasterSendToLocation(uint8_t u8_slaveAddress, uint8_t u8_location ,uint8_t * pu8_data, uint16_t u16_dataLen);
+enuI2C_Status_t I2C_MasterSendToLocation(uint8_t u8_slaveAddress, uint8_t u8_location ,\
+										uint8_t * pu8_data, uint16_t u16_dataLen);
 
 /*- Receive Multiple Data Bytes from specific location from Slave -*/
-enuI2C_Status_t I2C_MasterReceiveFromLocation(uint8_t u8_slaveAddress, uint8_t u8_location ,uint8_t * pu8_data, uint16_t u16_dataLen);
+enuI2C_Status_t I2C_MasterReceiveFromLocation(uint8_t u8_slaveAddress, uint8_t u8_location ,\
+												uint8_t * pu8_data, uint16_t u16_dataLen);
 #endif
 
 #if I2C_MODE == I2C_MODE_SLAVE

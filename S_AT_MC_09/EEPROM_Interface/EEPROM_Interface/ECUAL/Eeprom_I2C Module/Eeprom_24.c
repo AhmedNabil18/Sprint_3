@@ -67,6 +67,7 @@ enuEeprom_24_Status_t Eeprom_24_init(void)
 /**************************************************************************************/
 /*								Function Implementation								  */
 /**************************************************************************************/
+	/* Initialize the Master I2C Module */
 	enuI2C_Status_t enu_I2CStatus = I2C_MasterInit();
 	if((enu_I2CStatus == I2C_STATUS_NOT_INIT) && (enu_I2CStatus != I2C_STATUS_ALREADY_INIT))
 	{
@@ -137,6 +138,12 @@ enuEeprom_24_Status_t  Eeprom_24_readByte(uint16_t u16_location, uint8_t* pu8_da
 	{
 		return EEPROM_24_STATUS_NOT_INIT;
 	}else{/*Nothing to here*/}
+	/* Check if Argument is NULL PTR */
+	if (pu8_data == NULL_PTR)
+	{
+		return EEPROM_24_STATUS_ERROR_NULL;
+	}
+	else{/*Nothing to here*/}
 		
 /**************************************************************************************/
 /*								End of Error Checking								  */
@@ -176,6 +183,12 @@ enuEeprom_24_Status_t  Eeprom_24_writePage(uint8_t u8_page, uint8_t *pu8_data)
 	{
 		return EEPROM_24_STATUS_NOT_INIT;
 	}else{/*Nothing to here*/}
+	/* Check if Argument is NULL PTR */
+	if (pu8_data == NULL_PTR)
+	{
+		return EEPROM_24_STATUS_ERROR_NULL;
+	}
+	else{/*Nothing to here*/}
 	
 /**************************************************************************************/
 /*								End of Error Checking								  */
@@ -217,6 +230,12 @@ enuEeprom_24_Status_t  Eeprom_24_readPage(uint8_t u8_page, uint8_t *pu8_data)
 	{
 		return EEPROM_24_STATUS_NOT_INIT;
 	}else{/*Nothing to here*/}
+	/* Check if Argument is NULL PTR */
+	if (pu8_data == NULL_PTR)
+	{
+		return EEPROM_24_STATUS_ERROR_NULL;
+	}
+	else{/*Nothing to here*/}
 	
 /**************************************************************************************/
 /*								End of Error Checking								  */
@@ -260,6 +279,12 @@ enuEeprom_24_Status_t  Eeprom_24_writePacket(uint16_t u16_location, uint8_t *pu8
 	{
 		return EEPROM_24_STATUS_NOT_INIT;
 	}else{/*Nothing to here*/}
+	/* Check if Argument is NULL PTR */
+	if (pu8_data == NULL_PTR)
+	{
+		return EEPROM_24_STATUS_ERROR_NULL;
+	}
+	else{/*Nothing to here*/}
 /**************************************************************************************/
 /*								End of Error Checking								  */
 /**************************************************************************************/
@@ -331,6 +356,12 @@ enuEeprom_24_Status_t  Eeprom_24_readPacket(uint16_t u16_location, uint8_t *pu8_
 	{
 		return EEPROM_24_STATUS_NOT_INIT;
 	}else{/*Nothing to here*/}
+	/* Check if Argument is NULL PTR */
+	if (pu8_data == NULL_PTR)
+	{
+		return EEPROM_24_STATUS_ERROR_NULL;
+	}
+	else{/*Nothing to here*/}
 	
 /**************************************************************************************/
 /*								End of Error Checking								  */
