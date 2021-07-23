@@ -29,9 +29,9 @@ int main(void)
 // 	DIO_PORTA_DATA = u8_data;
 	
 	/* Sending String to the slave */
-	uint8_t u8_data[4] = {1,2,3,4};
+	uint8_t u8_data[4] = {255,7,6,4};
 	I2C_MasterInit();
-	I2C_MasterSendPacket(0x10,u8_data,4);
+	I2C_MasterSendPacket(0x10,u8_data,3);
 	
 	/* Sending Character to the slave */
 // 	uint8_t u8_data = 3;

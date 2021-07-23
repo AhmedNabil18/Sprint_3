@@ -102,7 +102,6 @@ enuI2C_Status_t I2C_MasterSendSTART(void)
 /*								Function Implementation								  */
 /**************************************************************************************/
 	I2C_START_ENABLE_FLAG;
-	DIO_PORTB_DATA = 1<<0;
 	while (I2C_WAIT_TWINT());
 	if (I2C_readSTATUS() != I2C_SYMB_START)
 		return I2C_STATUS_ERROR_NOK;
@@ -352,6 +351,18 @@ enuI2C_Status_t I2C_MasterReceiveByte_NACK(uint8_t *pu8_data)
 	return I2C_STATUS_ERROR_OK;
 }
 
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: I2C_MasterSendPacket
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): u8_salveAddress - Address of the slave to communicate with.
+*				   pu8_data -  Pointer to packet of data to be sent to slave
+*				   u16_dataLen - Length of Data packet to be sent.
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Send Multiple data bytes to a slave.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 enuI2C_Status_t I2C_MasterSendPacket(uint8_t u8_slaveAddress, uint8_t * pu8_data, uint16_t u16_dataLen)
 {
 /**************************************************************************************/
@@ -380,6 +391,17 @@ enuI2C_Status_t I2C_MasterSendPacket(uint8_t u8_slaveAddress, uint8_t * pu8_data
 	return I2C_STATUS_ERROR_OK;
 }
 
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: I2C_MasterReceivePacket
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): u8_salveAddress - Address of the slave to communicate with.
+*				   u16_dataLen - Length of Data packet to be sent.
+* Parameters (inout): None
+* Parameters (out): pu8_data -  Pointer to a variable to hold the received data.
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Receive Multiple data bytes from a slave.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 enuI2C_Status_t I2C_MasterReceivePacket(uint8_t u8_slaveAddress, uint8_t * pu8_data, uint16_t u16_dataLen)
 {
 /**************************************************************************************/
@@ -402,15 +424,34 @@ enuI2C_Status_t I2C_MasterReceivePacket(uint8_t u8_slaveAddress, uint8_t * pu8_d
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_READ) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
 	
 	while (--u16_dataLen)
-	I2C_MasterReceiveByte_ACK(pu8_data++);
+	{
+		if(I2C_MasterReceiveByte_ACK(pu8_data++) != I2C_STATUS_ERROR_OK)
+			return I2C_STATUS_ERROR_NOK;
+	}
 	
-	I2C_MasterReceiveByte_NACK(pu8_data);
+	
+	if(I2C_MasterReceiveByte_NACK(pu8_data) != I2C_STATUS_ERROR_OK)
+		return I2C_STATUS_ERROR_NOK;
 	if (I2C_MasterSendSTOP() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	return I2C_STATUS_ERROR_OK;
 	
 }
 
-enuI2C_Status_t I2C_MasterReceiveGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_source, uint16_t u16_sourceLen, uint8_t * pu8_destination, uint16_t u16_destinationLen)
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: I2C_MasterReceiveGeneral
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): u8_salveAddress - Address of the slave to communicate with.
+*				   u16_sourceLen - Length of Data packet to be sent.
+*					pu8_source - Pointer to a packet or array of data to be sent.
+*				   u16_destinationLen - Length of received bytes.
+* Parameters (inout): None
+* Parameters (out): pu8_destination -  Pointer to a variable to hold the received data.
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Send multiple data bytes and receive multiple data bytes with repeated start.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuI2C_Status_t I2C_MasterReceiveGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_source, uint16_t u16_sourceLen, \
+										uint8_t * pu8_destination, uint16_t u16_destinationLen)
 {
 /**************************************************************************************/
 /*								Start of Error Checking								  */
@@ -434,20 +475,38 @@ enuI2C_Status_t I2C_MasterReceiveGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_
 	while (u16_sourceLen--)
 	if (I2C_MasterSendByte(*pu8_source++) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	
-	I2C_MasterSendRepSTART();
+	if(I2C_MasterSendRepSTART() != I2C_STATUS_ERROR_OK)
+		return I2C_STATUS_ERROR_NOK;
 	
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_READ) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
 	
 	while (--u16_destinationLen)
-	I2C_MasterReceiveByte_ACK(pu8_destination++);
+	if(I2C_MasterReceiveByte_ACK(pu8_destination++) != I2C_STATUS_ERROR_OK)
+		return I2C_STATUS_ERROR_NOK;
 	
-	I2C_MasterReceiveByte_NACK(pu8_destination);
-	I2C_MasterSendSTOP();
+	if(I2C_MasterReceiveByte_NACK(pu8_destination) != I2C_STATUS_ERROR_OK)
+		return I2C_STATUS_ERROR_NOK;
+	if(I2C_MasterSendSTOP() != I2C_STATUS_ERROR_OK)
+		return I2C_STATUS_ERROR_NOK;
 	
 	return I2C_STATUS_ERROR_OK;
 }
 
-enuI2C_Status_t I2C_MasterSendToLocation(uint8_t u8_slaveAddress, uint8_t u8_location ,uint8_t * pu8_data, uint16_t u16_dataLen)
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: I2C_MasterSendToLocation
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): u8_salveAddress - Address of the slave to communicate with.
+*				   u8_location - Location to send the data to.(used in eeproms)
+*				   pu8_data -  Pointer to packet of data to be sent to slave
+*				   u16_dataLen - Length of Data packet to be sent.
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Send Multiple data bytes to a specific location in slave.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuI2C_Status_t I2C_MasterSendToLocation(uint8_t u8_slaveAddress, uint8_t u8_location ,\
+										 uint8_t * pu8_data, uint16_t u16_dataLen)
 {
 /**************************************************************************************/
 /*								Start of Error Checking								  */
@@ -476,7 +535,20 @@ enuI2C_Status_t I2C_MasterSendToLocation(uint8_t u8_slaveAddress, uint8_t u8_loc
 	return I2C_STATUS_ERROR_OK;
 }
 
-enuI2C_Status_t I2C_MasterReceiveFromLocation(uint8_t u8_slaveAddress, uint8_t u8_location ,uint8_t * pu8_data, uint16_t u16_dataLen)
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: I2C_MasterReceiveFromLocation
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): u8_salveAddress - Address of the slave to communicate with.
+*				   u8_location - Location to receive data from.
+*				   u16_dataLen - Length of received bytes.
+* Parameters (inout): None
+* Parameters (out): pu8_data -  Pointer to a variable to hold the received data.
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Receive Multiple bytes from a specific location in the slave.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuI2C_Status_t I2C_MasterReceiveFromLocation(uint8_t u8_slaveAddress, uint8_t u8_location ,\
+												uint8_t * pu8_data, uint16_t u16_dataLen)
 {
 	return I2C_MasterReceiveGeneral(u8_slaveAddress, &u8_location, 1, pu8_data, u16_dataLen);
 }

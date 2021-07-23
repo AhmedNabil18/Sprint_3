@@ -10,7 +10,7 @@
 
 int main(void)
 {
-	uint8_t u8_data[4]={7,1,6,3};
+	uint8_t u8_data[3]={0};
 	DIO_PORTA_DIR = 0xFF;
 	DIO_PORTB_DIR = 0xFF;
 	DIO_PORTD_DIR = 0xFF;
@@ -20,8 +20,7 @@ int main(void)
     {
 	    switch(I2C_SlaveCheck())
 	    {
-			case I2C_STATUS_SLAVE_READ:
-				
+			case I2C_STATUS_SLAVE_READ:	
 				I2C_SlaveReceive(u8_data);
 				break;
 			case I2C_STATUS_SLAVE_WRITE:
@@ -32,7 +31,7 @@ int main(void)
 		}
 		DIO_PORTA_DATA = u8_data[0];
 		DIO_PORTB_DATA = u8_data[1];
-		DIO_PORTD_DATA = u8_data[3];
+		DIO_PORTD_DATA = u8_data[2];
     }
 }
 
