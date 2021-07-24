@@ -24,18 +24,20 @@ uint8_t gu8_flag=0;
 void Uart_RXC_ISR(void)
 {
 	gau8_data[gu8_counter] = Uart_DataRegister();
-	Uart_sendByte(gau8_data[gu8_counter]);
 	if (gau8_data[gu8_counter] == '\r')
 	{
+		Uart_sendByte(gau8_data[gu8_counter]);
 		gau8_data[gu8_counter] = '\0';
 		gu8_counter = 0;
 		gu8_flag = 1;
-	}else if (gau8_data[gu8_counter] == '\b')
+	}else if( (gau8_data[gu8_counter] == '\b') && (gu8_counter != 0))
 	{
+		Uart_sendByte(gau8_data[gu8_counter]);
 		gu8_counter--;
 	}
-	else
+	else if(gau8_data[gu8_counter] != '\b')
 	{
+		Uart_sendByte(gau8_data[gu8_counter]);
 		gu8_counter++;
 	}
 }

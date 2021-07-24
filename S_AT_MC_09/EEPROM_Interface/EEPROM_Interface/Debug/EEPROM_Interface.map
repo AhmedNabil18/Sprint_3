@@ -268,7 +268,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xbd2
+.text           0x00000000      0xbe0
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -384,87 +384,87 @@ END GROUP
                 0x000004d0       0xe4 ECUAL/Terminal Module/StringManipulation.o
                 0x000004d0                stringHexToNum
  .text.Uart_RXC_ISR
-                0x000005b4       0x64 ECUAL/Terminal Module/Terminal.o
+                0x000005b4       0x72 ECUAL/Terminal Module/Terminal.o
                 0x000005b4                Uart_RXC_ISR
  .text.Terminal_init
-                0x00000618       0x2a ECUAL/Terminal Module/Terminal.o
-                0x00000618                Terminal_init
+                0x00000626       0x2a ECUAL/Terminal Module/Terminal.o
+                0x00000626                Terminal_init
  .text.Terminal_Out
-                0x00000642       0x36 ECUAL/Terminal Module/Terminal.o
-                0x00000642                Terminal_Out
+                0x00000650       0x36 ECUAL/Terminal Module/Terminal.o
+                0x00000650                Terminal_Out
  .text.Terminal_In
-                0x00000678       0x36 ECUAL/Terminal Module/Terminal.o
-                0x00000678                Terminal_In
- .text.main     0x000006ae        0x6 main.o
-                0x000006ae                main
+                0x00000686       0x36 ECUAL/Terminal Module/Terminal.o
+                0x00000686                Terminal_In
+ .text.main     0x000006bc        0x6 main.o
+                0x000006bc                main
  .text.I2C_MasterInit
-                0x000006b4       0x1c MCAL/I2C Module/I2C.o
-                0x000006b4                I2C_MasterInit
+                0x000006c2       0x1c MCAL/I2C Module/I2C.o
+                0x000006c2                I2C_MasterInit
  .text.I2C_MasterSendSTART
-                0x000006d0       0x26 MCAL/I2C Module/I2C.o
-                0x000006d0                I2C_MasterSendSTART
+                0x000006de       0x26 MCAL/I2C Module/I2C.o
+                0x000006de                I2C_MasterSendSTART
  .text.I2C_MasterSendSlaveAddress
-                0x000006f6       0x62 MCAL/I2C Module/I2C.o
-                0x000006f6                I2C_MasterSendSlaveAddress
+                0x00000704       0x62 MCAL/I2C Module/I2C.o
+                0x00000704                I2C_MasterSendSlaveAddress
  .text.I2C_MasterSendRepSTART
-                0x00000758       0x26 MCAL/I2C Module/I2C.o
-                0x00000758                I2C_MasterSendRepSTART
+                0x00000766       0x26 MCAL/I2C Module/I2C.o
+                0x00000766                I2C_MasterSendRepSTART
  .text.I2C_MasterSendSTOP
-                0x0000077e       0x1a MCAL/I2C Module/I2C.o
-                0x0000077e                I2C_MasterSendSTOP
+                0x0000078c       0x1a MCAL/I2C Module/I2C.o
+                0x0000078c                I2C_MasterSendSTOP
  .text.I2C_MasterSendByte
-                0x00000798       0x2e MCAL/I2C Module/I2C.o
-                0x00000798                I2C_MasterSendByte
+                0x000007a6       0x2e MCAL/I2C Module/I2C.o
+                0x000007a6                I2C_MasterSendByte
  .text.I2C_MasterReceiveByte_ACK
-                0x000007c6       0x34 MCAL/I2C Module/I2C.o
-                0x000007c6                I2C_MasterReceiveByte_ACK
+                0x000007d4       0x34 MCAL/I2C Module/I2C.o
+                0x000007d4                I2C_MasterReceiveByte_ACK
  .text.I2C_MasterReceiveByte_NACK
-                0x000007fa       0x34 MCAL/I2C Module/I2C.o
-                0x000007fa                I2C_MasterReceiveByte_NACK
+                0x00000808       0x34 MCAL/I2C Module/I2C.o
+                0x00000808                I2C_MasterReceiveByte_NACK
  .text.I2C_MasterReceiveGeneral
-                0x0000082e       0xf8 MCAL/I2C Module/I2C.o
-                0x0000082e                I2C_MasterReceiveGeneral
+                0x0000083c       0xf8 MCAL/I2C Module/I2C.o
+                0x0000083c                I2C_MasterReceiveGeneral
  .text.I2C_MasterSendToLocation
-                0x00000926       0x9e MCAL/I2C Module/I2C.o
-                0x00000926                I2C_MasterSendToLocation
+                0x00000934       0x9e MCAL/I2C Module/I2C.o
+                0x00000934                I2C_MasterSendToLocation
  .text.I2C_MasterReceiveFromLocation
-                0x000009c4       0x2e MCAL/I2C Module/I2C.o
-                0x000009c4                I2C_MasterReceiveFromLocation
+                0x000009d2       0x2e MCAL/I2C Module/I2C.o
+                0x000009d2                I2C_MasterReceiveFromLocation
  .text.Uart_init
-                0x000009f2       0x2c MCAL/Uart Module/Uart.o
-                0x000009f2                Uart_init
+                0x00000a00       0x2c MCAL/Uart Module/Uart.o
+                0x00000a00                Uart_init
  .text.Uart_sendByte
-                0x00000a1e       0x16 MCAL/Uart Module/Uart.o
-                0x00000a1e                Uart_sendByte
+                0x00000a2c       0x16 MCAL/Uart Module/Uart.o
+                0x00000a2c                Uart_sendByte
  .text.Uart_sendPacket
-                0x00000a34       0x4e MCAL/Uart Module/Uart.o
-                0x00000a34                Uart_sendPacket
+                0x00000a42       0x4e MCAL/Uart Module/Uart.o
+                0x00000a42                Uart_sendPacket
  .text.Uart_EnableNotification_RXC
-                0x00000a82       0x2a MCAL/Uart Module/Uart.o
-                0x00000a82                Uart_EnableNotification_RXC
+                0x00000a90       0x2a MCAL/Uart Module/Uart.o
+                0x00000a90                Uart_EnableNotification_RXC
  .text.Uart_DataRegister
-                0x00000aac        0x4 MCAL/Uart Module/Uart.o
-                0x00000aac                Uart_DataRegister
+                0x00000aba        0x4 MCAL/Uart Module/Uart.o
+                0x00000aba                Uart_DataRegister
  .text.__vector_15
-                0x00000ab0       0x4e MCAL/Uart Module/Uart.o
-                0x00000ab0                __vector_15
+                0x00000abe       0x4e MCAL/Uart Module/Uart.o
+                0x00000abe                __vector_15
  .text.__vector_13
-                0x00000afe       0x4e MCAL/Uart Module/Uart.o
-                0x00000afe                __vector_13
+                0x00000b0c       0x4e MCAL/Uart Module/Uart.o
+                0x00000b0c                __vector_13
  .text.__vector_14
-                0x00000b4c       0x4e MCAL/Uart Module/Uart.o
-                0x00000b4c                __vector_14
+                0x00000b5a       0x4e MCAL/Uart Module/Uart.o
+                0x00000b5a                __vector_14
  .text.libgcc.mul
-                0x00000b9a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
-                0x00000b9a                __muluhisi3
+                0x00000ba8       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+                0x00000ba8                __muluhisi3
  .text.libgcc.mul
-                0x00000bb0       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00000bb0                __umulhisi3
-                0x00000bce                . = ALIGN (0x2)
+                0x00000bbe       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00000bbe                __umulhisi3
+                0x00000bdc                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000bce        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000bce                _exit
-                0x00000bce                exit
+ .fini9         0x00000bdc        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000bdc                _exit
+                0x00000bdc                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -483,11 +483,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000bce        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000bdc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000bd2                _etext = .
+                0x00000be0                _etext = .
 
-.data           0x00800060       0x64 load address 0x00000bd2
+.data           0x00800060       0x64 load address 0x00000be0
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -543,8 +543,8 @@ END GROUP
                 0x008001ce        0x2 MCAL/Uart Module/Uart.o
  *(COMMON)
                 0x008001d0                PROVIDE (__bss_end, .)
-                0x00000bd2                __data_load_start = LOADADDR (.data)
-                0x00000c36                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000be0                __data_load_start = LOADADDR (.data)
+                0x00000c44                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008001d0        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -641,16 +641,16 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x235e
+.debug_info     0x00000000     0x2370
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x50c App Layer/App.o
  .debug_info    0x000009f2      0x836 ECUAL/Eeprom_I2C Module/Eeprom_24.o
  .debug_info    0x00001228      0x38a ECUAL/Terminal Module/StringManipulation.o
- .debug_info    0x000015b2      0x32e ECUAL/Terminal Module/Terminal.o
- .debug_info    0x000018e0       0xb4 main.o
- .debug_info    0x00001994      0x5e0 MCAL/I2C Module/I2C.o
- .debug_info    0x00001f74      0x3ea MCAL/Uart Module/Uart.o
+ .debug_info    0x000015b2      0x340 ECUAL/Terminal Module/Terminal.o
+ .debug_info    0x000018f2       0xb4 main.o
+ .debug_info    0x000019a6      0x5e0 MCAL/I2C Module/I2C.o
+ .debug_info    0x00001f86      0x3ea MCAL/Uart Module/Uart.o
 
 .debug_abbrev   0x00000000      0xcad
  *(.debug_abbrev)
@@ -663,16 +663,16 @@ END GROUP
  .debug_abbrev  0x000009f0      0x137 MCAL/I2C Module/I2C.o
  .debug_abbrev  0x00000b27      0x186 MCAL/Uart Module/Uart.o
 
-.debug_line     0x00000000     0x1565
+.debug_line     0x00000000     0x1583
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x300 App Layer/App.o
  .debug_line    0x00000416      0x42b ECUAL/Eeprom_I2C Module/Eeprom_24.o
  .debug_line    0x00000841      0x28f ECUAL/Terminal Module/StringManipulation.o
- .debug_line    0x00000ad0      0x20e ECUAL/Terminal Module/Terminal.o
- .debug_line    0x00000cde       0x57 main.o
- .debug_line    0x00000d35      0x515 MCAL/I2C Module/I2C.o
- .debug_line    0x0000124a      0x31b MCAL/Uart Module/Uart.o
+ .debug_line    0x00000ad0      0x22c ECUAL/Terminal Module/Terminal.o
+ .debug_line    0x00000cfc       0x57 main.o
+ .debug_line    0x00000d53      0x515 MCAL/I2C Module/I2C.o
+ .debug_line    0x00001268      0x31b MCAL/Uart Module/Uart.o
 
 .debug_frame    0x00000000      0x72c
  *(.debug_frame)
