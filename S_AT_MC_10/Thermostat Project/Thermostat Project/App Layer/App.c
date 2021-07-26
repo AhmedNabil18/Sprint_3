@@ -127,7 +127,7 @@ enuApp_Status_t App_update(void)
 	if(KeypdaStatus == SRVC_KPD_NUM)
 	{
 		stringToInteger((uint32_t*)&gu32_Tref, gau8_threshold);
-		if(Lcd_setCursor(1,5) != LCD_STATUS_ERROR_OK)
+		if(Lcd_setCursor(LCD_TREF_POS_X, LCD_TREF_POS_Y) != LCD_STATUS_ERROR_OK)
 			return SRVC_STATUS_ERROR_NOK;
 		if(Lcd_printString(gau8_threshold) != LCD_STATUS_ERROR_OK)
 			return SRVC_STATUS_ERROR_NOK;
@@ -135,7 +135,7 @@ enuApp_Status_t App_update(void)
 	if (LM35_readTemp(&gu8_temp) == LM35_STATUS_ERROR_OK)
 	{
 		integerToString((uint16_t)gu8_temp, gau8_temp, DEC);
-		if(Lcd_setCursor(0,5) != LCD_STATUS_ERROR_OK)
+		if(Lcd_setCursor(LCD_TEMP_POS_X, LCD_TEMP_POS_Y) != LCD_STATUS_ERROR_OK)
 		return SRVC_STATUS_ERROR_NOK;
 		if(Lcd_printString(gau8_temp) != LCD_STATUS_ERROR_OK)
 		return SRVC_STATUS_ERROR_NOK;
@@ -144,12 +144,12 @@ enuApp_Status_t App_update(void)
 	su8_fanSpeed = (100*(gu8_temp-gu32_Tref))/(MAX_TEMP-gu32_Tref);
 	if(su8_fanSpeed>100) su8_fanSpeed=0;
 	
-	if(Lcd_setCursor(0,12) != LCD_STATUS_ERROR_OK)
+	if(Lcd_setCursor(LCD_FAN_POS_X, LCD_FAN_POS_Y) != LCD_STATUS_ERROR_OK)
 	return SRVC_STATUS_ERROR_NOK;
 	if(Lcd_printString((uint8_t*)"   %") != LCD_STATUS_ERROR_OK)
 	return SRVC_STATUS_ERROR_NOK;
 	
-	if(Lcd_setCursor(0,12) != LCD_STATUS_ERROR_OK)
+	if(Lcd_setCursor(LCD_FAN_POS_X, LCD_FAN_POS_Y) != LCD_STATUS_ERROR_OK)
 	return SRVC_STATUS_ERROR_NOK;
 	if(Lcd_printDecimal(su8_fanSpeed) != LCD_STATUS_ERROR_OK)
 	return SRVC_STATUS_ERROR_NOK;
@@ -159,6 +159,6 @@ enuApp_Status_t App_update(void)
 	Motor_run(MOTOR_FAN_ID,su8_fanSpeed,MOTOR_DIR_CLK_WISE);
 
 	
-	Delay_ms(175);
+	Delay_ms(155);
 	return APP_STATUS_ERROR_OK;
 }

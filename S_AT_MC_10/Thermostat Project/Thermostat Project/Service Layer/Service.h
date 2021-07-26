@@ -21,17 +21,17 @@
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- CONSTANTS -*-*-*-*-*-*/
+#define LCD_TEMP_POS_X			0
+#define LCD_TEMP_POS_Y			5
 
-#define ACTION_STOP		0U
-#define ACTION_MOVE		1U
-#define ACTION_LEFT		2U
-#define ACTION_RIGHT	3U
+#define LCD_FAN_POS_X			0
+#define LCD_FAN_POS_Y			12
 
-#define SPEED_IDLE		0U
-#define SPEED_30F		1U
-#define SPEED_60F		2U
-#define SPEED_90F		3U
-#define SPEED_30B		4U
+#define LCD_TREF_POS_X			1
+#define LCD_TREF_POS_Y			5
+
+#define LCD_SET_POS_X			1
+#define LCD_SET_POS_Y			14
 /*******************************************************************************
  *                          Module Data Types                                  *
  *******************************************************************************/
@@ -57,8 +57,5 @@ enuSrvc_Status_t Service_init(void);
 
 /* Function to report the value pressed in the keypad */
 enuSrvc_Status_t Service_ReportKeypad(uint8_t* pu8_key);
-
-/* Function to update the motors Action */
-enuSrvc_Status_t Service_UpdateMotors(uint8_t u8_motorAction, uint8_t u8_motorSpeed);
 
 #endif /* SERVICE_H_ */

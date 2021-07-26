@@ -8,7 +8,6 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
 #include "LM35.h"
-
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- GLOBAL STATIC VARIABLES *-*-*-*-*-*/
 static enuLM35_Status_t genu_LM35ModuleState = LM35_STATUS_NOT_INIT;
@@ -87,6 +86,5 @@ enuLM35_Status_t LM35_readTemp(uint8_t * pu8_Temp)
 	if(Adc_start(LM35_ID_CHANNEL, &u32_tempMilliVolt) != ADC_STATUS_ERROR_OK)
 		return LM35_STATUS_ERROR_NOK;
 	*pu8_Temp = u32_tempMilliVolt/LM35_STEP_VALUE;
-		
 	return LM35_STATUS_ERROR_OK;
 }

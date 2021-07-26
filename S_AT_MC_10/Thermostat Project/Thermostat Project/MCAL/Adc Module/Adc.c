@@ -149,17 +149,17 @@ enuAdc_Status_t Adc_start(uint8_t u8_channelID, uint32_t* pu32_data)
 	float32_t f32_Resolution=0;
 	if(str_ADCchannels[u8_channelID].u8_Vref == ADC_VREF_2p56V)
 	{
-		f32_Resolution = (1000*2.56)/ADC_STEPS_NUM;
+		f32_Resolution = ((float32_t)1000*2.56)/ADC_STEPS_NUM;
 	}else if(str_ADCchannels[u8_channelID].u8_Vref == ADC_VREF_VCC)
 	{
-		f32_Resolution = (1000*ADC_AVCC_VALUE)/ADC_STEPS_NUM;
+		f32_Resolution = ((float32_t)1000*ADC_AVCC_VALUE)/ADC_STEPS_NUM;
 	}else if(str_ADCchannels[u8_channelID].u8_Vref == ADC_VREF_AREF)
 	{
-		f32_Resolution = (1000*ADC_AREF_VALUE)/ADC_STEPS_NUM;
+		f32_Resolution = ((float32_t)1000*ADC_AREF_VALUE)/ADC_STEPS_NUM;
 	}
 	*pu32_data = u16_Result*f32_Resolution;
 	ADC_ADCSRA_REG |= 1<<ADC_ADCSRA_ADIF;
-	
+
 	return ADC_STATUS_ERROR_OK;
 }
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -257,7 +257,7 @@ enuAdc_Status_t ADC_readFromISR(uint8_t u8_channelID, uint32_t* pu32_data)
 		f32_Resolution = (1000*ADC_AREF_VALUE)/ADC_STEPS_NUM;
 	}
 	*pu32_data = u16_Result*f32_Resolution;
-			
+		
 	return ADC_STATUS_ERROR_OK;
 }
 
