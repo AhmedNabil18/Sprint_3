@@ -41,6 +41,21 @@
 #define SFIOR_ADTS1		6U
 #define SFIOR_ADTS0		5U
 
+#define GICR_REG				(*((volatile uint8_t*)(0x5B)))
+#define GICR_INT1_BIT		7U
+#define GICR_INT0_BIT		6U
+#define GICR_INT2_BIT		5U
+
+#define GIFR_REG				(*((volatile uint8_t*)(0x5A)))
+#define GIFR_INTF1_BIT		7U
+#define GIFR_INTF0_BIT		6U
+#define GIFR_INTF2_BIT		5U
+
+#define MCUCR_REG				(*((volatile uint8_t*)(0x55)))
+#define MCUCR_ISC00			0U
+#define MCUCR_ISC01			1U
+#define MCUCR_ISC10			2U
+#define MCUCR_ISC11			3U
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*-*-*-*-*-*-*-*- DIO REGISTERS -*-*-*-*-*-*-*-*-*-*-*-*/
 /*-* PORT A Registers *-*/

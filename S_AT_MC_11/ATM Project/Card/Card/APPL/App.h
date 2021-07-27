@@ -17,6 +17,7 @@
 #include "../MCAL/Spi Module/Spi.h"
 #include "../MCAL/Delay Module/Delay.h"
 #include "../MCAL/StringManipulation.h"
+#include "../MCAL/Ext Interrupt Module/Ext_INT.h"
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- CONSTANTS -*-*-*-*-*-*/
@@ -36,6 +37,16 @@
 #define MAX_NAME_LENGTH			9U
 #define MAX_PAN_LENGTH			9U
 #define MAX_PIN_LENGTH			4U
+
+#define USER_IDLE				0U
+#define USER_BUSY				1U
+
+#define ADMIN_NOT_REQUESTED		0U
+#define ADMIN_REQUESTED			1U
+
+#define ATM_NOT_REQUESTED		0U
+#define ATM_REQUESTED			1U
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- Data Types -*-*-*-*-*-*/
 typedef struct
@@ -83,4 +94,6 @@ enuApp_Status_t AppADMIN_getCardPAN(uint8_t* pu8_data);
 enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data);
 
 enuApp_Status_t AppADMIN_saveCardData(strCardData_t* pstr_CardData);
+
+enuApp_Status_t AppUSER_sendCardData(strCardData_t* pstr_CardData);
 #endif /* APP_H_ */

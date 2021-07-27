@@ -162,6 +162,12 @@
     <Compile Include="MCAL\Delay Module\Delay_Cfg.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\Ext Interrupt Module\Ext_INT.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Ext Interrupt Module\Ext_INT.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL\I2C Module\I2C.c">
       <SubType>compile</SubType>
     </Compile>
@@ -214,6 +220,7 @@
     <Folder Include="MCAL\" />
     <Folder Include="MCAL\Delay Module\" />
     <Folder Include="MCAL\I2C Module\" />
+    <Folder Include="MCAL\Ext Interrupt Module" />
     <Folder Include="MCAL\Spi Module\" />
     <Folder Include="MCAL\Uart Module\" />
   </ItemGroup>

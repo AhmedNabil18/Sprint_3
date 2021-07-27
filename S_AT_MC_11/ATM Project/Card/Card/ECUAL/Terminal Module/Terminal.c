@@ -163,7 +163,6 @@ enuTerminal_Status_t Terminal_In(uint8_t *pu8_InputData)
 
 	if(gu8_flag == 1)
 	{
-		DIO_PORTA_DATA = 0x00;
 		gu8_flag = 0;
 		stringCopy(gau8_data, pu8_InputData);
 		EmptyString(gau8_data);

@@ -12,6 +12,8 @@ main.c
 
 MCAL\Delay Module\Delay.c
 
+MCAL\Ext Interrupt Module\Ext_INT.c
+
 MCAL\I2C Module\I2C.c
 
 MCAL\Spi Module\Spi.c

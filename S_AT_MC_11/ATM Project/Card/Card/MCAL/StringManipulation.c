@@ -66,6 +66,14 @@ uint8_t stringCompare(uint8_t* string1, uint8_t* string2)
     return 1;
 }
 
+void stringConcatenate(uint8_t* destination, uint8_t* source)
+{
+	uint8_t index = 0;
+	uint8_t sourceLength = stringLength(source);
+	uint8_t destinationLength = stringLength(destination)-1;
+	for(index=0;index<=(sourceLength-1);index++)
+		destination[destinationLength+index] = source[index];
+}
 
 uint8_t Max_String_Num(uint8_t* string1, uint8_t* string2)
 {

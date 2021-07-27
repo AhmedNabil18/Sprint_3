@@ -236,7 +236,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x4c2
+.text           0x00000000      0x4ca
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -315,69 +315,69 @@ END GROUP
                 0x00000092                . = ALIGN (0x2)
  *(.text.*)
  .text.App_init
-                0x00000092       0x2a App Layer/App.o
+                0x00000092       0x30 App Layer/App.o
                 0x00000092                App_init
  .text.App_update
-                0x000000bc       0x54 App Layer/App.o
-                0x000000bc                App_update
+                0x000000c2       0x56 App Layer/App.o
+                0x000000c2                App_update
  .text.App_start
-                0x00000110       0x1a App Layer/App.o
-                0x00000110                App_start
+                0x00000118       0x1a App Layer/App.o
+                0x00000118                App_start
  .text.stringLength
-                0x0000012a       0x18 ECUAL/Terminal Module/StringManipulation.o
-                0x0000012a                stringLength
+                0x00000132       0x18 ECUAL/Terminal Module/StringManipulation.o
+                0x00000132                stringLength
  .text.Uart_RXC_ISR
-                0x00000142       0x64 ECUAL/Terminal Module/Terminal.o
-                0x00000142                Uart_RXC_ISR
+                0x0000014a       0x64 ECUAL/Terminal Module/Terminal.o
+                0x0000014a                Uart_RXC_ISR
  .text.Terminal_init
-                0x000001a6       0x2a ECUAL/Terminal Module/Terminal.o
-                0x000001a6                Terminal_init
+                0x000001ae       0x2a ECUAL/Terminal Module/Terminal.o
+                0x000001ae                Terminal_init
  .text.Terminal_Out
-                0x000001d0       0x3c ECUAL/Terminal Module/Terminal.o
-                0x000001d0                Terminal_Out
- .text.main     0x0000020c        0x6 main.o
-                0x0000020c                main
+                0x000001d8       0x3c ECUAL/Terminal Module/Terminal.o
+                0x000001d8                Terminal_Out
+ .text.main     0x00000214        0x6 main.o
+                0x00000214                main
  .text.Spi_init
-                0x00000212       0x3a MCAL/Spi Module/Spi.o
-                0x00000212                Spi_init
+                0x0000021a       0x3a MCAL/Spi Module/Spi.o
+                0x0000021a                Spi_init
  .text.Spi_SlaveReceiveByte
-                0x0000024c       0x22 MCAL/Spi Module/Spi.o
-                0x0000024c                Spi_SlaveReceiveByte
+                0x00000254       0x22 MCAL/Spi Module/Spi.o
+                0x00000254                Spi_SlaveReceiveByte
  .text.Spi_SlaveReceivePacket
-                0x0000026e       0x5a MCAL/Spi Module/Spi.o
-                0x0000026e                Spi_SlaveReceivePacket
+                0x00000276       0x5a MCAL/Spi Module/Spi.o
+                0x00000276                Spi_SlaveReceivePacket
  .text.__vector_12
-                0x000002c8       0x4e MCAL/Spi Module/Spi.o
-                0x000002c8                __vector_12
+                0x000002d0       0x4e MCAL/Spi Module/Spi.o
+                0x000002d0                __vector_12
  .text.Uart_init
-                0x00000316       0x2c MCAL/Uart Module/Uart.o
-                0x00000316                Uart_init
+                0x0000031e       0x2c MCAL/Uart Module/Uart.o
+                0x0000031e                Uart_init
  .text.Uart_sendByte
-                0x00000342       0x16 MCAL/Uart Module/Uart.o
-                0x00000342                Uart_sendByte
+                0x0000034a       0x16 MCAL/Uart Module/Uart.o
+                0x0000034a                Uart_sendByte
  .text.Uart_sendPacket
-                0x00000358       0x4e MCAL/Uart Module/Uart.o
-                0x00000358                Uart_sendPacket
+                0x00000360       0x4e MCAL/Uart Module/Uart.o
+                0x00000360                Uart_sendPacket
  .text.Uart_EnableNotification_RXC
-                0x000003a6       0x2a MCAL/Uart Module/Uart.o
-                0x000003a6                Uart_EnableNotification_RXC
+                0x000003ae       0x2a MCAL/Uart Module/Uart.o
+                0x000003ae                Uart_EnableNotification_RXC
  .text.Uart_DataRegister
-                0x000003d0        0x4 MCAL/Uart Module/Uart.o
-                0x000003d0                Uart_DataRegister
+                0x000003d8        0x4 MCAL/Uart Module/Uart.o
+                0x000003d8                Uart_DataRegister
  .text.__vector_15
-                0x000003d4       0x4e MCAL/Uart Module/Uart.o
-                0x000003d4                __vector_15
+                0x000003dc       0x4e MCAL/Uart Module/Uart.o
+                0x000003dc                __vector_15
  .text.__vector_13
-                0x00000422       0x4e MCAL/Uart Module/Uart.o
-                0x00000422                __vector_13
+                0x0000042a       0x4e MCAL/Uart Module/Uart.o
+                0x0000042a                __vector_13
  .text.__vector_14
-                0x00000470       0x4e MCAL/Uart Module/Uart.o
-                0x00000470                __vector_14
-                0x000004be                . = ALIGN (0x2)
+                0x00000478       0x4e MCAL/Uart Module/Uart.o
+                0x00000478                __vector_14
+                0x000004c6                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000004be        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000004be                _exit
-                0x000004be                exit
+ .fini9         0x000004c6        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000004c6                _exit
+                0x000004c6                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -396,11 +396,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000004be        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000004c6        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000004c2                _etext = .
+                0x000004ca                _etext = .
 
-.data           0x00800060        0x4 load address 0x000004c2
+.data           0x00800060        0x4 load address 0x000004ca
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -443,8 +443,8 @@ END GROUP
                 0x00800073        0x2 MCAL/Uart Module/Uart.o
  *(COMMON)
                 0x00800075                PROVIDE (__bss_end, .)
-                0x000004c2                __data_load_start = LOADADDR (.data)
-                0x000004c6                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000004ca                __data_load_start = LOADADDR (.data)
+                0x000004ce                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800075        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -558,15 +558,15 @@ END GROUP
  .debug_abbrev  0x00000830      0x149 MCAL/Spi Module/Spi.o
  .debug_abbrev  0x00000979      0x186 MCAL/Uart Module/Uart.o
 
-.debug_line     0x00000000      0xc05
+.debug_line     0x00000000      0xc17
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000116      0x176 App Layer/App.o
- .debug_line    0x0000028c      0x1c5 ECUAL/Terminal Module/StringManipulation.o
- .debug_line    0x00000451      0x214 ECUAL/Terminal Module/Terminal.o
- .debug_line    0x00000665       0x57 main.o
- .debug_line    0x000006bc      0x22e MCAL/Spi Module/Spi.o
- .debug_line    0x000008ea      0x31b MCAL/Uart Module/Uart.o
+ .debug_line    0x00000116      0x188 App Layer/App.o
+ .debug_line    0x0000029e      0x1c5 ECUAL/Terminal Module/StringManipulation.o
+ .debug_line    0x00000463      0x214 ECUAL/Terminal Module/Terminal.o
+ .debug_line    0x00000677       0x57 main.o
+ .debug_line    0x000006ce      0x22e MCAL/Spi Module/Spi.o
+ .debug_line    0x000008fc      0x31b MCAL/Uart Module/Uart.o
 
 .debug_frame    0x00000000      0x474
  *(.debug_frame)

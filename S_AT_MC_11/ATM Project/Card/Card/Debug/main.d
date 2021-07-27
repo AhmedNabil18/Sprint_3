@@ -24,7 +24,10 @@ main.d main.o: .././main.c .././APPL/App.h \
  .././APPL/../MCAL/Delay\ Module/Delay.h \
  .././APPL/../MCAL/Delay\ Module/Delay_Cfg.h \
  .././APPL/../MCAL/Delay\ Module/../Platform_Types.h \
- .././APPL/../MCAL/StringManipulation.h
+ .././APPL/../MCAL/StringManipulation.h \
+ .././APPL/../MCAL/Ext\ Interrupt\ Module/Ext_INT.h \
+ .././APPL/../MCAL/Ext\ Interrupt\ Module/../ATMega32_Registers.h \
+ .././APPL/../MCAL/Ext\ Interrupt\ Module/../ATMega32_Interrupts.h
 
 .././APPL/App.h:
 
@@ -79,3 +82,9 @@ main.d main.o: .././main.c .././APPL/App.h \
 .././APPL/../MCAL/Delay\ Module/../Platform_Types.h:
 
 .././APPL/../MCAL/StringManipulation.h:
+
+.././APPL/../MCAL/Ext\ Interrupt\ Module/Ext_INT.h:
+
+.././APPL/../MCAL/Ext\ Interrupt\ Module/../ATMega32_Registers.h:
+
+.././APPL/../MCAL/Ext\ Interrupt\ Module/../ATMega32_Interrupts.h:
