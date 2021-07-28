@@ -491,10 +491,8 @@ enuI2C_Status_t I2C_MasterReceivePacket(uint8_t u8_slaveAddress, uint8_t * pu8_d
 	
 	/* Loop for data length and receive Byte by Byte and report back with Ack */
 	while (--u16_dataLen)
-	{
 		if(I2C_MasterReceiveByte_ACK(pu8_data++) != I2C_STATUS_ERROR_OK)
 			return I2C_STATUS_ERROR_NOK;
-	}
 	
 	/* Receive the last byte and report back with NACK */
 	if(I2C_MasterReceiveByte_NACK(pu8_data) != I2C_STATUS_ERROR_OK)
@@ -572,17 +570,8 @@ enuI2C_Status_t I2C_MasterReceiveGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_
 	
 	/* Loop for data length and receive Byte by Byte and report back with Ack */
 	while (--u16_destinationLen)
-	{
-		if(I2C_MasterReceiveByte_ACK(pu8_destination) != I2C_STATUS_ERROR_OK)
+		if(I2C_MasterReceiveByte_ACK(pu8_destination++) != I2C_STATUS_ERROR_OK)
 			return I2C_STATUS_ERROR_NOK;
-		if(*pu8_destination == '\0')
-		{
-			if(I2C_MasterSendSTOP() != I2C_STATUS_ERROR_OK)
-				return I2C_STATUS_ERROR_NOK;
-			return I2C_STATUS_ERROR_OK;
-		}
-		pu8_destination++;
-	}
 	
 	/* Receive the last byte and report back with NACK */
 	if(I2C_MasterReceiveByte_NACK(pu8_destination) != I2C_STATUS_ERROR_OK)
@@ -646,10 +635,7 @@ enuI2C_Status_t I2C_MasterSendToLocation(uint8_t u8_slaveAddress, uint8_t u8_loc
 	if (I2C_MasterSendByte(u8_location) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	/* Loop for data length and send Byte by Byte */
 	while (u16_dataLen--)
-	{		
 		if (I2C_MasterSendByte(*pu8_data++) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
-		if(*pu8_data == '\0') break;
-	}
 	/* Send a Stop Bit */
 	if (I2C_MasterSendSTOP() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	return I2C_STATUS_ERROR_OK;
@@ -852,7 +838,6 @@ enuI2C_Status_t I2C_SlaveReceiveByte(uint8_t *pu8_data)
 	}else if(u8_status == I2C_SLV_STOP_REP_START)		
 	{
 		I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT);
-		DIO_PORTB_DATA = 1<<0;
 		return I2C_STATUS_SLAVE_STOP;
 	}
 	return I2C_STATUS_ERROR_NOK;

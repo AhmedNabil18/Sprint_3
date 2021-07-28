@@ -14,25 +14,41 @@
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
 #include "../ECUAL/Eeprom_I2C Module/Eeprom_24.h"
 #include "../ECUAL/Terminal Module/Terminal.h"
+#include "../ECUAL/Keypad Module/Keypad.h"
+#include "../ECUAL/Lcd Module/Lcd.h"
+#include "../ECUAL/LM35 Module/LM35.h"
+#include "../ECUAL/Motor Module/Motor.h"
+#include "../ECUAL/Button Module/Button.h"
+#include "../MCAL/Dio Module/Dio.h"
 #include "../MCAL/Spi Module/Spi.h"
 #include "../MCAL/Delay Module/Delay.h"
 #include "../MCAL/StringManipulation.h"
-#include "../MCAL/Ext Interrupt Module/Ext_INT.h"
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- CONSTANTS -*-*-*-*-*-*/
-#define CARD_MODE_ADMIN				0U
-#define CARD_MODE_USER				1U
+#define ATM_MODE_ADMIN				0U
+#define ATM_MODE_USER				1U
+#define ATM_MODE_IDLE				2U
 
-#define CARD_INIT_ADDRESS			0x00U
-#define CARD_INITIALIZED			0xAAU
-#define CARD_NAME_PAGE_NUM			2U
-#define CARD_PAN_PAGE_NUM			3U
-#define CARD_PIN_PAGE_NUM			4U
+#define ATM_DB_FLAG_ADDR						0x00 // 1 Byte
+#define ATM_DB_FLAG_SET_VAL						0xAA
 
-#define CARD_NAME				0U
-#define CARD_PAN				1U
-#define CARD_PIN				2U
+#define ATM_DB_CLIENT_DATA_LEN_ADDR				0x01 // 1 Byte
+#define ATM_DB_CLIENT_DATA_LEN_VAL				0x0F
+
+#define ATM_DB_ACC_NUM_ADDR						0x02 // 1 Byte
+
+#define ATM_DB_MAX_AMNT_ADDR					0x03 // 8 Bytes
+
+#define ATM_DB_ATM_PIN_ADDR						0x0B // 5 Bytes
+
+#define ATM_DB_MAX_ACC_NUM_ADDR					0x10 // 2 Bytes
+
+#define ATM_DB_CUSTOMER_PAN_BASE_ADDR			0x20 // 1 Page for each customer PAN
+#define ATM_DB_CUSTOMER_BAL_BASE_ADDR			0x30 // 1 Page for each customer Balance
+
+#define CARD_IN					1U
+#define CARD_OUT				0U
 
 #define MAX_NAME_LENGTH			9U
 #define MAX_PAN_LENGTH			9U
@@ -56,6 +72,11 @@ typedef struct
 	uint8_t au8_pinNum[5];
 }strCardData_t;
 
+typedef struct
+{
+	uint8_t au8_PAN[10];
+	uint8_t au8_Balance[8];
+}strClientData_t;
 /*******************************************************************************
  *                          Module Data Types                                  *
  *******************************************************************************/
@@ -70,7 +91,8 @@ typedef enum
 	APP_STATUS_ERROR_NULL,
 	APP_STATUS_INITIALIZED,
 	APP_STATUS_UNINITIALIZED,
-	APP_STATUS_NO_OP
+	APP_STATUS_NO_OP,
+	APP_STATUS_KPD_NUM
 }enuApp_Status_t;
 
 /*******************************************************************************
@@ -85,15 +107,21 @@ enuApp_Status_t App_init(void);
 /* Function to update the application */
 enuApp_Status_t App_update(void);
 
+enuApp_Status_t AppUSER_ReportKeypad(uint8_t* pu8_key);
+
 enuApp_Status_t App_ReportTerminal(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_getCardName(uint8_t* pu8_data);
+enuApp_Status_t AppADMIN_getInput(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_getCardPAN(uint8_t* pu8_data);
+enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data);
+enuApp_Status_t AppADMIN_getCustomerBalance(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_saveCardData(strCardData_t* pstr_CardData);
+enuApp_Status_t AppADMIN_getAtmPIN(uint8_t* pu8_data);
 
-enuApp_Status_t AppUSER_sendCardData(strCardData_t* pstr_CardData);
+enuApp_Status_t AppADMIN_saveNewCustomerData(void);
+
+enuApp_Status_t AppUSER_getCardData(strCardData_t* pstr_CardData);
+
+enuApp_Status_t AppADMIN_getnewMaxAmount(uint8_t* pu8_data);
 #endif /* APP_H_ */

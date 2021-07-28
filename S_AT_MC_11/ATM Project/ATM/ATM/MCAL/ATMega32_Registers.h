@@ -56,6 +56,8 @@
 #define MCUCR_ISC01			1U
 #define MCUCR_ISC10			2U
 #define MCUCR_ISC11			3U
+
+#define MCUCSR_REG				(*((volatile uint8_t*)(0x54)))
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*-*-*-*-*-*-*-*- DIO REGISTERS -*-*-*-*-*-*-*-*-*-*-*-*/
 /*-* PORT A Registers *-*/

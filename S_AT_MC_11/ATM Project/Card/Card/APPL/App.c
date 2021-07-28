@@ -110,10 +110,9 @@ enuApp_Status_t App_init(void)
 	
 	/**************************/
 	/* Only for Testing */
-	DIO_PORTA_DIR=0xFF;
-	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
-	Delay_ms(10);
+// 	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
+// 		return APP_STATUS_ERROR_NOK;
+// 	Delay_ms(10);
 	/**************************/
 	if(Terminal_Out((uint8_t*)"CARD Terminal\r") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
@@ -128,6 +127,7 @@ enuApp_Status_t App_init(void)
 	}else
 	{
 		gu8_CardMode = CARD_MODE_USER;
+		AppMemory_getCardData(&gstr_userCardData);
 	}
 	
 	/* Update enuCurrentAppStatus to initialized */
@@ -407,12 +407,11 @@ enuApp_Status_t AppADMIN_saveCardData(strCardData_t* pstr_CardData)
 * Service Name: AppUSER_sendCardData
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant
-* Parameters (in): pstr_CardData - Structure of data to be saved in EEPROM.
+* Parameters (in): pstr_CardData - Structure of data to be send to ATM.
 * Parameters (inout): None
 * Parameters (out): None
 * Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
-* Description: Function to save the Name, PAN and the PIN of the Card in the EEPROM
-*			   Also this function sets the INIT Flag in the memory.
+* Description: Function to send the Card's Data to the ATM.
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 enuApp_Status_t AppUSER_sendCardData(strCardData_t* pstr_CardData)
 {
@@ -434,39 +433,28 @@ enuApp_Status_t AppUSER_sendCardData(strCardData_t* pstr_CardData)
 	SPI_SS_DISABLE();
 	
 	return APP_STATUS_ERROR_OK;
-	/*
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('#');
-	SPI_SS_DISABLE();
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: AppMemory_getCardData
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): None
+* Parameters (inout): None
+* Parameters (out): pstr_CardData - Structure of data to hold the data saved in EEPROM.
+* Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to get the Card's data from eeprom.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuApp_Status_t AppMemory_getCardData(strCardData_t* pstr_CardData)
+{
+	if(Eeprom_24_readPage(CARD_NAME_PAGE_NUM, (pstr_CardData->au8_cardHolderName)) != EEPROM_24_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
 	Delay_ms(10);
-	SPI_SS_ENABLE();
-	if(Spi_MasterSendPacket(gstr_userCardData.au8_cardHolderName, stringLength(gstr_userCardData.au8_cardHolderName)) != SPI_STATUS_ERROR_OK)
+	if(Eeprom_24_readPage(CARD_PAN_PAGE_NUM, (pstr_CardData->au8_primaryAccountNumber)) != EEPROM_24_STATUS_ERROR_OK)
 	return APP_STATUS_ERROR_NOK;
-	SPI_SS_DISABLE();
 	Delay_ms(10);
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('-');
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	if(Spi_MasterSendPacket(gstr_userCardData.au8_primaryAccountNumber, stringLength(gstr_userCardData.au8_primaryAccountNumber)) != SPI_STATUS_ERROR_OK)
+	if(Eeprom_24_readPage(CARD_PIN_PAGE_NUM, (pstr_CardData->au8_pinNum)) != EEPROM_24_STATUS_ERROR_OK)
 	return APP_STATUS_ERROR_NOK;
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('-');
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	if(Spi_MasterSendPacket(gstr_userCardData.au8_pinNum, stringLength(gstr_userCardData.au8_pinNum)) != SPI_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('#');
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('-');
-	SPI_SS_DISABLE();*/
+	
+	return APP_STATUS_ERROR_OK;
 }

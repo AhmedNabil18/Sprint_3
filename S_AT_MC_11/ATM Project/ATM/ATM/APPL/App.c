@@ -12,34 +12,25 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- GLOBAL STATIC VARIABLES *-*-*-*-*-*/
 static enuApp_Status_t enuCurrentAppStatus = APP_STATUS_UNINITIALIZED;
-static uint8_t gu8_CardMode = CARD_MODE_ADMIN;
+static uint8_t gu8_ATMMode = ATM_MODE_IDLE;
 const uint8_t cgau8_ADMIN_Word[6] = "ADMIN";
 static uint8_t gu8_USER_Mode_State = USER_IDLE;
 static uint8_t gu8_ADMIN_Request = ADMIN_NOT_REQUESTED;
 uint8_t cgu8_ATM_Req = ATM_NOT_REQUESTED;
 static strCardData_t  gstr_userCardData = {0};
-const uint8_t cgu8_ATM_SPI_CARD_Busy[3] = "CB";
+strClientData_t	gstr_clientdata = {0};
+uint8_t gu8_initData = 0;
+uint8_t gu8_registeredAccNum = 0;
+uint8_t gu8_ATMPin[5]={0};
+uint8_t gau8_maxAmount[8]={0};
+const uint8_t ATM_TERM_NEW_CUSTOMER[2] = "1";
+const uint8_t ATM_TERM_MAX_AMOUNT[2] = "2";
+const uint8_t ATM_TERM_EXIT[2] = "3";
+uint8_t ATM_DB_ATM_PIN_VAL[5] = "8520";
+const uint8_t cgau8_LoadingString[] = "Loading..";
+const uint8_t cgau8_ATMString[] = "ATM Terminal\r";
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*--*-*-*- FUNCTIONS IMPLEMENTATION -*-*-*-*-*-*/
-void ATM_REQ_ISR(void)
-{	
-	if(cgu8_ATM_Req == ATM_REQUESTED)
-		cgu8_ATM_Req = ATM_NOT_REQUESTED;
-	else
-	{/* ATM Request Data from Card */
-		cgu8_ATM_Req = ATM_REQUESTED;
-		if (gu8_CardMode == CARD_MODE_ADMIN)
-		{	
-			DIO_PORTA_DATA = 0xFF;
-			SPI_SS_ENABLE();
-			Spi_MasterSendByte('*');
-			SPI_SS_DISABLE();
-		}else
-		{
-			gu8_USER_Mode_State = USER_BUSY;
-		}
-	}
-}
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 * Service Name: App_start
@@ -66,7 +57,6 @@ enuApp_Status_t App_start(void)
 		/* Update the App Status */
 		if(App_update() != APP_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
-			
 	}
 }
 
@@ -104,30 +94,71 @@ enuApp_Status_t App_init(void)
 		return APP_STATUS_ERROR_NOK;
 	if(SPI_STATUS_ERROR_OK != Spi_init())
 		return APP_STATUS_ERROR_NOK;
-	
-	Ext_INT0_init(EXT_INT0_EDGE_FALL_RISE);
-	INT0_setCallBack(ATM_REQ_ISR);
-	
+	if(KEYPAD_STATUS_ERROR_OK != Keypad_init())
+		return APP_STATUS_ERROR_NOK;
+	if(LCD_STATUS_ERROR_OK != Lcd_init())
+		return APP_STATUS_ERROR_NOK;
+	if(LM35_STATUS_ERROR_OK != LM35_init())
+		return APP_STATUS_ERROR_NOK;
+	if(MOTOR_STATUS_ERROR_OK != Motor_init())
+		return APP_STATUS_ERROR_NOK;
+	if(BTTN_STATUS_ERROR_OK != Button_init())
+		return APP_STATUS_ERROR_NOK;
 	/**************************/
 	/* Only for Testing */
-	DIO_PORTA_DIR=0xFF;
-	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
+	if(Eeprom_24_writeByte(ATM_DB_FLAG_ADDR, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	Delay_ms(10);
 	/**************************/
-	if(Terminal_Out((uint8_t*)"CARD Terminal\r") != TERMINAL_STATUS_ERROR_OK)
+	if(Lcd_printString((uint8_t*)cgau8_LoadingString) != LCD_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
-	uint8_t u8_initData = 0;
-	/* Check if the card was previously registered and has its data in the eeprom */
-	if(Eeprom_24_readByte(CARD_INIT_ADDRESS, &u8_initData) != EEPROM_24_STATUS_ERROR_OK)
+	if(Terminal_Out((uint8_t*)cgau8_ATMString) != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
+	
+	/* Check if the ATM was previously registered and has its database in the eeprom */
+	if(Eeprom_24_readByte(ATM_DB_FLAG_ADDR, &gu8_initData) != EEPROM_24_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
+	Delay_ms(10);
+	if(gu8_initData != ATM_DB_FLAG_SET_VAL)
+	{
+		gu8_ATMMode = ATM_MODE_ADMIN;
 		
-	if(u8_initData != CARD_INITIALIZED)
-	{
-		gu8_CardMode = CARD_MODE_ADMIN;
+		if(Eeprom_24_writePacket(ATM_DB_ATM_PIN_ADDR, ATM_DB_ATM_PIN_VAL,stringLength(ATM_DB_ATM_PIN_VAL)) != EEPROM_24_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+		
+		if(Lcd_setCursor(0,0) != LCD_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_OK;
+		if(Lcd_printString((uint8_t*)"*******ATM******") != LCD_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+		if(Lcd_setCursor(1,0) != LCD_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_OK;
+		if(Lcd_printString((uint8_t*)"*****LOCKED*****") != LCD_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+		
+		if(Terminal_Out((uint8_t*)"Programming Mode\r") != TERMINAL_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
 	}else
-	{
-		gu8_CardMode = CARD_MODE_USER;
+	{//gu8_ATMPin
+		gu8_ATMMode = ATM_MODE_USER;
+		
+		if(Eeprom_24_readPacket(ATM_DB_MAX_AMNT_ADDR, gau8_maxAmount, 8) != EEPROM_24_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+		if(Eeprom_24_readByte(ATM_DB_ACC_NUM_ADDR, &gu8_registeredAccNum) != EEPROM_24_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+		if(Eeprom_24_readPacket(ATM_DB_ATM_PIN_ADDR, gu8_ATMPin, 8) != EEPROM_24_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+		
+		if(Lcd_setCursor(0,0) != LCD_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_OK;
+		if(Lcd_printString((uint8_t*)"1.Insert Card") != LCD_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+		if(Lcd_setCursor(1,0) != LCD_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_OK;
+		if(Lcd_printString((uint8_t*)"2.Display Temp") != LCD_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
+			
+		if(Terminal_Out((uint8_t*)"USER Mode\r") != TERMINAL_STATUS_ERROR_OK)
+			return APP_STATUS_ERROR_NOK;
 	}
 	
 	/* Update enuCurrentAppStatus to initialized */
@@ -164,41 +195,88 @@ enuApp_Status_t App_update(void)
 /**************************************************************************************/
 	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
 	uint8_t au8_termInput[10] = {0};
-	if(gu8_CardMode == CARD_MODE_ADMIN)
+	static uint8_t u8_passFlag = 0;
+	if(gu8_ATMMode == ATM_MODE_ADMIN)
 	{ /**************** PROGRAMMING MODE ****************/
-			if(Terminal_Out((uint8_t*)"Programming Mode\rEnter the Following Data\r") != TERMINAL_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
-			uint8_t au8_tempCardHolderName[10]={0};
 			uint8_t au8_tempPAN[10]={0};
+			uint8_t au8_tempBalance[8]={0};
+			uint8_t au8_Input[2]={0};
 			uint8_t au8_tempPinNum[5]={0};
-		
-			/* Get the Card Holder Name from the ADMIN Terminal */
-			if(AppADMIN_getCardName(au8_tempCardHolderName) != APP_STATUS_ERROR_OK)
+			uint8_t au8_tempMaxAmount[8]={0};
+			
+			if(u8_passFlag == 0)
+			{
+				/* Get the ATM PIN from the ADMIN Terminal and check if it's correct */
+				if(AppADMIN_getAtmPIN(au8_tempPinNum) != APP_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
+				u8_passFlag = 1;
+			}
+			
+			if(Terminal_Out((uint8_t*)"1.Add New Customer\r2.Update Max Amount\r3.Exit\r") != TERMINAL_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
-			/* Get the Card Primary Account Number from the ADMIN Terminal */
-			if(AppADMIN_getCardPAN(au8_tempPAN) != APP_STATUS_ERROR_OK)
-			return APP_STATUS_ERROR_NOK;
-		
-			if(AppADMIN_getCardPIN(au8_tempPinNum) != APP_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
-		
-			stringCopy(au8_tempCardHolderName, gstr_userCardData.au8_cardHolderName);
-			stringCopy(au8_tempPAN, gstr_userCardData.au8_primaryAccountNumber);
-			stringCopy(au8_tempPinNum, gstr_userCardData.au8_pinNum);
-		
-			if(AppADMIN_saveCardData(&gstr_userCardData) != APP_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
-		
-			gu8_CardMode = CARD_MODE_USER;
-			if(Terminal_Out((uint8_t*)"USER Mode\r") != TERMINAL_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
+				
+			AppADMIN_getInput(au8_Input);
+			if(au8_Input[0] == '1')//--------- New Customer OPTION -----------//
+			{
+				/* Get the Customer's Primary Account Number from the ADMIN Terminal */
+				if(AppADMIN_getCustomerPAN(au8_tempPAN) != APP_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
+				stringCopy(au8_tempPAN, gstr_clientdata.au8_PAN);
+				
+				/* Get the Customer's Balance from the ADMIN Terminal */
+				if(AppADMIN_getCustomerBalance(au8_tempBalance) != APP_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
+				stringCopy(au8_tempBalance, gstr_clientdata.au8_Balance);
+				
+				if(AppADMIN_saveNewCustomerData() != APP_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
+				EmptyString(au8_Input);
+				if(gu8_registeredAccNum == 1)
+				{
+					gu8_initData = ATM_DB_FLAG_SET_VAL;
+					if(Eeprom_24_writeByte(ATM_DB_FLAG_ADDR, ATM_DB_FLAG_SET_VAL) != EEPROM_24_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
+				}
+
+			}else if(au8_Input[0] == '2')//--------- Max Amount OPTION -----------//
+			{
+				AppADMIN_getnewMaxAmount(au8_tempMaxAmount);
+				if(Eeprom_24_writePacket(ATM_DB_MAX_AMNT_ADDR, au8_tempMaxAmount, stringLength(au8_tempMaxAmount)) != EEPROM_24_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
+					
+			}else if(au8_Input[0] == '3')//--------- EXIT OPTION -----------//
+			{
+				if(gu8_initData == ATM_DB_FLAG_SET_VAL)
+				{
+					u8_passFlag = 0;
+					gu8_ATMMode = ATM_MODE_USER;
+					Lcd_clear();
+					if(Terminal_Out((uint8_t*)"USER Mode\r") != TERMINAL_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_NOK;
+					if(Lcd_setCursor(0,0) != LCD_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_OK;
+					if(Lcd_printString((uint8_t*)"1.Insert Card") != LCD_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_NOK;
+					if(Lcd_setCursor(1,0) != LCD_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_OK;
+					if(Lcd_printString((uint8_t*)"2.Display Temp") != LCD_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_NOK;
+					
+					return APP_STATUS_ERROR_OK;
+				}else
+				{
+					if(Terminal_Out((uint8_t*)"Data Base is empty, you must register at least one customer\r") != TERMINAL_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_NOK;
+					return APP_STATUS_ERROR_OK;
+				}
+			}
 	/****************************************************************/
 	}else
 	{/************* User Mode **************/
 			/********************Handling ADMIN Requesting Programming Mode************************/
 			if((gu8_ADMIN_Request == ADMIN_REQUESTED) && (gu8_USER_Mode_State == USER_IDLE))
 			{
-				gu8_CardMode = CARD_MODE_ADMIN;
+				gu8_ATMMode = ATM_MODE_ADMIN;
 			}
 			App_terminalStatus = App_ReportTerminal(au8_termInput);
 			if(App_terminalStatus == APP_STATUS_ERROR_OK)
@@ -208,35 +286,113 @@ enuApp_Status_t App_update(void)
 					if(gu8_USER_Mode_State == USER_BUSY) /* CARD is Busy in transaction */
 					{
 						gu8_ADMIN_Request = ADMIN_REQUESTED;
-						if(Terminal_Out((uint8_t*)"CARD is Busy Now, Programming Mode will start after current Process\r") != TERMINAL_STATUS_ERROR_OK)
+						if(Terminal_Out((uint8_t*)"ATM is Busy Now, Programming Mode will start after current Process\r") != TERMINAL_STATUS_ERROR_OK)
 							return APP_STATUS_ERROR_NOK;
-					}else /* User Mode is Idle ==> The Card is not used by ATM */
+					}else /* User Mode is Idle ==> The ATM is not used by User */
 					{
-						gu8_CardMode = CARD_MODE_ADMIN;
+						gu8_ATMMode = ATM_MODE_ADMIN;
 						return APP_STATUS_ERROR_OK;
 					}
 				}
 			}else if((App_terminalStatus != APP_STATUS_ERROR_OK) && (App_terminalStatus != APP_STATUS_NO_OP))
 				return APP_STATUS_ERROR_NOK;
 			/****************************************************************/
-			if (cgu8_ATM_Req == ATM_REQUESTED)
+// 			if (cgu8_ATM_Req == ATM_REQUESTED)
+// 			{
+// 				AppUSER_sendCardData(&gstr_userCardData);
+// 				
+// 				Delay_ms(100);
+// 				
+// 				if (gu8_ADMIN_Request == ADMIN_NOT_REQUESTED)
+// 				{
+// 					if(Terminal_Out((uint8_t*)"Data Successfully Sent\r") != TERMINAL_STATUS_ERROR_OK)
+// 						return APP_STATUS_ERROR_NOK;
+// 				}
+// 			}
+			/********************** Getting Input from User ************************/
+			uint8_t sau8_data={0};
+			enuKeypad_Status_t enuKeypadStatus = Keypad_readKey(&sau8_data);
+			if(enuKeypadStatus == KEYPAD_STATUS_PRESSED)
 			{
-				AppUSER_sendCardData(&gstr_userCardData);
-				
-				Delay_ms(100);
-				
-				if (gu8_ADMIN_Request == ADMIN_NOT_REQUESTED)
+				if(sau8_data == '1') /* Insert Card Chosen */
 				{
-					if(Terminal_Out((uint8_t*)"Data Successfully Sent\r") != TERMINAL_STATUS_ERROR_OK)
+					uint8_t u8_cardState = CARD_OUT;
+					uint8_t u8_buttonVal = PIN_LOW;
+					Lcd_clear();
+					if(Lcd_setCursor(0,0) != LCD_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_OK;
+					if(Lcd_printString((uint8_t*)"Waiting for Card") != LCD_STATUS_ERROR_OK)
 						return APP_STATUS_ERROR_NOK;
+					if(Lcd_setCursor(1,0) != LCD_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_OK;
+					if(Lcd_printString((uint8_t*)"Press Button ;)") != LCD_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_NOK;
+					while(u8_buttonVal == PIN_LOW)
+					{
+						if(Button_updateState(BUTTON_CARD)!=BTTN_STATUS_ERROR_OK)
+							return APP_STATUS_ERROR_NOK;
+						if(Button_getState(BUTTON_CARD, &u8_buttonVal) != BTTN_STATUS_ERROR_OK)
+							return APP_STATUS_ERROR_NOK;
+					}
 				}
 			}
 	/****************************************************************/
 	}
 	
-	Delay_ms(155);
 	return APP_STATUS_ERROR_OK;
 }
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: AppUSER_ReportKeypad
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): None
+* Parameters (inout): None
+* Parameters (out): pu8_key - Pointer to variable to hold the button pressed
+* Return value: enuSrvc_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to report the value pressed in the keypad.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuApp_Status_t AppUSER_ReportKeypad(uint8_t* pu8_key)
+{
+	static uint8_t u8_index = 0;
+	static uint8_t sau8_data[3]={0};
+	enuKeypad_Status_t enuKeypadStatus = Keypad_readKey(&sau8_data[u8_index]);
+	
+	if(enuKeypadStatus == KEYPAD_STATUS_PRESSED)
+	{
+		if(sau8_data[u8_index] == '1')
+		{
+			sau8_data[u8_index] = '\0';
+			u8_index = 0;
+			if(Lcd_setCursor(LCD_SET_POS_X, LCD_SET_POS_Y) != LCD_STATUS_ERROR_OK)
+			return SRVC_STATUS_ERROR_NOK;
+			if(Lcd_printString((uint8_t*)"  ") != LCD_STATUS_ERROR_OK)
+			return SRVC_STATUS_ERROR_NOK;
+			if(Lcd_setCursor(LCD_SET_POS_X, LCD_SET_POS_Y) != LCD_STATUS_ERROR_OK)
+			return SRVC_STATUS_ERROR_NOK;
+			stringCopy(sau8_data, pu8_key);
+			return APP_STATUS_KPD_NUM;
+		}else if(sau8_data[u8_index] == '2')
+		{
+			u8_index--;
+			sau8_data[u8_index] = '\0';
+			if(Lcd_setCursor(LCD_SET_POS_X, u8_index+LCD_SET_POS_Y) != LCD_STATUS_ERROR_OK)
+			return SRVC_STATUS_ERROR_NOK;
+			if(Lcd_printChar(' ') != LCD_STATUS_ERROR_OK)
+			return APP_STATUS_KPD_NUM;
+		}else
+		{
+			
+			
+		}
+	}else if(enuKeypadStatus == KEYPAD_STATUS_NOT_PRESSED)
+	{
+		return APP_STATUS_ERROR_OK;
+	}
+	
+	return APP_STATUS_ERROR_OK;
+}
+
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 * Service Name: App_ReportTerminal
@@ -262,22 +418,60 @@ enuApp_Status_t App_ReportTerminal(uint8_t* pu8_data)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-* Service Name: AppADMIN_getCardName
+* Service Name: AppADMIN_getInput
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant
 * Parameters (in): None
 * Parameters (inout): None
-* Parameters (out): pu8_data - Pointer to variable to hold the input CARD Holder Name by terminal.
+* Parameters (out): pu8_data - Pointer to variable to hold the input Customer's PAN by terminal.
 * Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
-* Description: Function to get the card holder's name.
+* Description: Function to get the ADMIN Input Choice.
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-enuApp_Status_t AppADMIN_getCardName(uint8_t* pu8_data)
+enuApp_Status_t AppADMIN_getInput(uint8_t* pu8_data)
 {
 	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
 	do
 	{
-		if(Terminal_Out((uint8_t*)"Card Holder Name: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"Your Input: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
+		
+		do
+		{
+			App_terminalStatus = App_ReportTerminal(pu8_data);
+			if(App_terminalStatus == APP_STATUS_ERROR_OK)
+			{
+				break;
+			}else if((App_terminalStatus != APP_STATUS_ERROR_OK) && (App_terminalStatus != APP_STATUS_NO_OP))
+			return APP_STATUS_ERROR_NOK;
+		} while (App_terminalStatus == APP_STATUS_NO_OP);
+		
+		if (pu8_data[1] == '\0')
+		break;
+		EmptyString(pu8_data);
+		if(Terminal_Out((uint8_t*)"Invalid Choice, Only Choose from 1 to 3\r") != TERMINAL_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
+	} while (1);
+	return APP_STATUS_ERROR_OK;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: AppADMIN_getnewMaxAmount
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): None
+* Parameters (inout): None
+* Parameters (out): pu8_data - Pointer to variable to hold the input Customer's PAN by terminal.
+* Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to get the customer's pan.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuApp_Status_t AppADMIN_getnewMaxAmount(uint8_t* pu8_data)
+{
+	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
+	do
+	{
+		if(Terminal_Out((uint8_t*)"Max Amount: ") != TERMINAL_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
+		
 		do
 		{
 			App_terminalStatus = App_ReportTerminal(pu8_data);
@@ -288,32 +482,31 @@ enuApp_Status_t AppADMIN_getCardName(uint8_t* pu8_data)
 				return APP_STATUS_ERROR_NOK;
 		} while (App_terminalStatus == APP_STATUS_NO_OP);
 		
-		
-		if (pu8_data[MAX_NAME_LENGTH] == '\0')
+		if ((pu8_data[7] == '\0') && (pu8_data[4] == '.'))
 			break;
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid Name, Only 9 characters\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"Invalid Balance, Only 7 characters eg. 1234.56\r") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
 	} while (1);
 	return APP_STATUS_ERROR_OK;
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-* Service Name: AppADMIN_getCardPAN
+* Service Name: AppADMIN_getCustomerPAN
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant
 * Parameters (in): None
 * Parameters (inout): None
-* Parameters (out): pu8_data - Pointer to variable to hold the input CARD PAN by terminal.
+* Parameters (out): pu8_data - Pointer to variable to hold the input Customer's PAN by terminal.
 * Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
-* Description: Function to get the card pan.
+* Description: Function to get the customer's pan.
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-enuApp_Status_t AppADMIN_getCardPAN(uint8_t* pu8_data)
+enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data)
 {
 	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
 	do
 	{
-		if(Terminal_Out((uint8_t*)"Card PAN: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"PAN: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 		do
@@ -336,22 +529,21 @@ enuApp_Status_t AppADMIN_getCardPAN(uint8_t* pu8_data)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-* Service Name: AppADMIN_getCardPIN
+* Service Name: AppADMIN_getCustomerBalance
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant
 * Parameters (in): None
 * Parameters (inout): None
-* Parameters (out): pu8_data - Pointer to variable to hold the input CARD PIN by terminal.
+* Parameters (out): pu8_data - Pointer to variable to hold the input Balance by terminal.
 * Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
-* Description: Function to get the card pin.
+* Description: Function to get the balance of the customer.
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data)
+enuApp_Status_t AppADMIN_getCustomerBalance(uint8_t* pu8_data)
 {
 	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
-	Terminal_enablePasswordMode();
 	do
 	{
-		if(Terminal_Out((uint8_t*)"Card PIN: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"Balance: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 		do
@@ -364,8 +556,55 @@ enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data)
 			return APP_STATUS_ERROR_NOK;
 		} while (App_terminalStatus == APP_STATUS_NO_OP);
 		
-		if (pu8_data[4] == '\0')
+		if (pu8_data[7] == '\0')
+		break;
+		EmptyString(pu8_data);
+		if(Terminal_Out((uint8_t*)"Invalid Balance, Only 7 characters\r") != TERMINAL_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
+	} while (1);
+	return APP_STATUS_ERROR_OK;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: AppADMIN_getAtmPIN
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): None
+* Parameters (inout): None
+* Parameters (out): pu8_data - Pointer to variable to hold the input ATM PIN by terminal.
+* Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to get the atm pin.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enuApp_Status_t AppADMIN_getAtmPIN(uint8_t* pu8_data)
+{
+	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
+	
+	Terminal_enablePasswordMode();
+	do
+	{
+		if(Terminal_Out((uint8_t*)"ATM PIN: ") != TERMINAL_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
+		
+		do
+		{
+			App_terminalStatus = App_ReportTerminal(pu8_data);
+			if(App_terminalStatus == APP_STATUS_ERROR_OK)
+			{
+				break;
+			}else if((App_terminalStatus != APP_STATUS_ERROR_OK) && (App_terminalStatus != APP_STATUS_NO_OP))
+				return APP_STATUS_ERROR_NOK;
+		} while (App_terminalStatus == APP_STATUS_NO_OP);
+		
+		if(stringCompare(ATM_DB_ATM_PIN_VAL ,pu8_data) != 1)
+		{
+			if(Terminal_Out((uint8_t*)"Incorrect PIN\r") != TERMINAL_STATUS_ERROR_OK)
+				return APP_STATUS_ERROR_NOK;
+		}else
+		{
+			if(Terminal_Out((uint8_t*)"Loading...\r") != TERMINAL_STATUS_ERROR_OK)
+				return APP_STATUS_ERROR_NOK;
 			break;
+		}
 		EmptyString(pu8_data);
 		if(Terminal_Out((uint8_t*)"Invalid PIN, Only 4 characters\r") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
@@ -376,28 +615,29 @@ enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data)
 
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-* Service Name: AppADMIN_saveCardData
+* Service Name: AppADMIN_saveNewCustomerData
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant
-* Parameters (in): pstr_CardData - Structure of data to be saved in EEPROM.
+* Parameters (in): None
 * Parameters (inout): None
 * Parameters (out): None
 * Return value: enuApp_Status_t - return the status of the function ERROR_OK or NOT_OK
-* Description: Function to save the Name, PAN and the PIN of the Card in the EEPROM
+* Description: Function to save PAN and Balance of a new Customer in the EEPROM
 *			   Also this function sets the INIT Flag in the memory.
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-enuApp_Status_t AppADMIN_saveCardData(strCardData_t* pstr_CardData)
+enuApp_Status_t AppADMIN_saveNewCustomerData(void)
 {
-	if(Eeprom_24_writePage(CARD_NAME_PAGE_NUM, (pstr_CardData->au8_cardHolderName)) != EEPROM_24_STATUS_ERROR_OK)
+	uint8_t u8_newCustomerPanAddr = ATM_DB_CUSTOMER_PAN_BASE_ADDR + gu8_registeredAccNum*16 ;
+	uint8_t u8_newCustomerBalAddr = ATM_DB_CUSTOMER_BAL_BASE_ADDR + gu8_registeredAccNum*16 ;
+	uint8_t au8_cardData[16] = {0};
+	
+	if(Eeprom_24_writePacket(u8_newCustomerPanAddr, gstr_clientdata.au8_PAN, stringLength(gstr_clientdata.au8_PAN)) != EEPROM_24_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
-	Delay_ms(10);
-	if(Eeprom_24_writePage(CARD_PAN_PAGE_NUM, (pstr_CardData->au8_primaryAccountNumber)) != EEPROM_24_STATUS_ERROR_OK)
+		
+	if(Eeprom_24_writePacket(u8_newCustomerBalAddr, gstr_clientdata.au8_Balance, stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
-	Delay_ms(10);
-	if(Eeprom_24_writePage(CARD_PIN_PAGE_NUM, (pstr_CardData->au8_pinNum)) != EEPROM_24_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
-	Delay_ms(10);
-	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, CARD_INITIALIZED) != EEPROM_24_STATUS_ERROR_OK)
+	
+	if(Eeprom_24_writeByte(ATM_DB_ACC_NUM_ADDR, ++gu8_registeredAccNum) != EEPROM_24_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	
 	return APP_STATUS_ERROR_OK;
@@ -414,7 +654,7 @@ enuApp_Status_t AppADMIN_saveCardData(strCardData_t* pstr_CardData)
 * Description: Function to save the Name, PAN and the PIN of the Card in the EEPROM
 *			   Also this function sets the INIT Flag in the memory.
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-enuApp_Status_t AppUSER_sendCardData(strCardData_t* pstr_CardData)
+enuApp_Status_t AppUSER_getCardData(strCardData_t* pstr_CardData)
 {
 	if(Terminal_Out((uint8_t*)"Data is being sent to the ATM...\r") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
@@ -428,45 +668,10 @@ enuApp_Status_t AppUSER_sendCardData(strCardData_t* pstr_CardData)
 	stringConcatenate(au8_DataFrame, pstr_CardData->au8_pinNum);
 	stringConcatenate(au8_DataFrame, (uint8_t*)"#-");
 	
-	SPI_SS_ENABLE();
-	if(Spi_MasterSendPacket(au8_DataFrame, stringLength(au8_DataFrame)) != SPI_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
-	SPI_SS_DISABLE();
+// 	SPI_SS_ENABLE();
+// 	if(Spi_MasterSendPacket(au8_DataFrame, stringLength(au8_DataFrame)) != SPI_STATUS_ERROR_OK)
+// 		return APP_STATUS_ERROR_NOK;
+// 	SPI_SS_DISABLE();
 	
 	return APP_STATUS_ERROR_OK;
-	/*
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('#');
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	if(Spi_MasterSendPacket(gstr_userCardData.au8_cardHolderName, stringLength(gstr_userCardData.au8_cardHolderName)) != SPI_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('-');
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	if(Spi_MasterSendPacket(gstr_userCardData.au8_primaryAccountNumber, stringLength(gstr_userCardData.au8_primaryAccountNumber)) != SPI_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('-');
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	if(Spi_MasterSendPacket(gstr_userCardData.au8_pinNum, stringLength(gstr_userCardData.au8_pinNum)) != SPI_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('#');
-	SPI_SS_DISABLE();
-	Delay_ms(10);
-	SPI_SS_ENABLE();
-	Spi_MasterSendByte('-');
-	SPI_SS_DISABLE();*/
 }

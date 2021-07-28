@@ -11,7 +11,7 @@
 
 #include "..\ATMega32_Registers.h"
 
-#define DIO_USED_PINS_NUM		17
+#define DIO_USED_PINS_NUM		19
 
 /* DIO Configured Port ID's  */
 #define DioConf_COL_1_PORT_NUM				PORT_A
@@ -31,6 +31,8 @@
 #define DioConf_IN1_B0_PORT_NUM				PORT_B
 #define DioConf_IN2_B1_PORT_NUM				PORT_B
 #define DioConf_PWM_B2_PORT_NUM				PORT_B
+#define DioConf_BTN1_B3_PORT_NUM			PORT_B
+#define DioConf_SIG_C2_PORT_NUM				PORT_C
 
 /* DIO Configured Channel ID's */
 #define DioConf_COL_1_PIN_NUM				PIN_1
@@ -50,6 +52,8 @@
 #define DioConf_IN1_B0_PIN_NUM				PIN_0
 #define DioConf_IN2_B1_PIN_NUM				PIN_1
 #define DioConf_PWM_B2_PIN_NUM				PIN_2
+#define DioConf_BTN1_B3_PIN_NUM				PIN_3
+#define DioConf_SIG_C2_PIN_NUM				PIN_2
 
 /* Channel Index in the array of structures in Dio_Cfg.c */
 #define DIO_COL_1_CHANNEL_ID				0
@@ -69,4 +73,7 @@
 #define DIO_IN1_CHANNEL_ID					14
 #define DIO_IN2_CHANNEL_ID					15
 #define DIO_PWM_CHANNEL_ID					16
+#define DIO_BTN1_CHANNEL_ID					17
+#define DIO_SIG_CHANNEL_ID					18
+
 #endif /* DIO_CFG_H_ */

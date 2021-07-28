@@ -120,9 +120,209 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="APPL\App.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="APPL\App.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Eeprom_I2C Module\Eeprom_24.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Eeprom_I2C Module\Eeprom_24.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Eeprom_I2C Module\Eeprom_24_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Keypad Module\Keypad.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Keypad Module\Keypad.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Keypad Module\Keypad_Cfg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Keypad Module\Keypad_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Lcd Module\Lcd.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Lcd Module\Lcd.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Lcd Module\Lcd_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\LM35 Module\LM35.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\LM35 Module\LM35.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\LM35 Module\LM35_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Motor Module\Motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Motor Module\Motor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Motor Module\Motor_Cfg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Motor Module\Motor_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Terminal Module\Terminal.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Terminal Module\Terminal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Terminal Module\Terminal_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\Adc Module\Adc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Adc Module\Adc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Adc Module\Adc_Cfg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Adc Module\Adc_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\ATMega32_Interrupts.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\ATMega32_Registers.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Delay Module\Delay.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Delay Module\Delay.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Delay Module\Delay_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Dio Module\Dio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Dio Module\Dio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Dio Module\Dio_Cfg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Dio Module\Dio_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Ext Interrupt Module\Ext_INT.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Ext Interrupt Module\Ext_INT.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Gpt Module\Gpt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Gpt Module\Gpt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Gpt Module\Gpt_Cfg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Gpt Module\Gpt_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Gpt Module\Gpt_Symbols.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\I2C Module\I2C.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\I2C Module\I2C.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\I2C Module\I2C_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Platform_Types.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Spi Module\Spi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Spi Module\Spi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Spi Module\Spi_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Spi Module\Spi_Symbols.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\StringManipulation.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\StringManipulation.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\SWPwm Module\SWPwm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\SWPwm Module\SWPwm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\SWPwm Module\SWPwm_Cfg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\SWPwm Module\SWPwm_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Uart Module\Uart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Uart Module\Uart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Uart Module\Uart_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Uart Module\Uart_Symbols.h">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="APPL\" />
+    <Folder Include="ECUAL\" />
+    <Folder Include="ECUAL\Eeprom_I2C Module\" />
+    <Folder Include="ECUAL\Keypad Module\" />
+    <Folder Include="ECUAL\Lcd Module\" />
+    <Folder Include="ECUAL\LM35 Module\" />
+    <Folder Include="ECUAL\Motor Module\" />
+    <Folder Include="ECUAL\Terminal Module\" />
+    <Folder Include="MCAL\" />
+    <Folder Include="MCAL\Adc Module\" />
+    <Folder Include="MCAL\Delay Module\" />
+    <Folder Include="MCAL\Dio Module\" />
+    <Folder Include="MCAL\Ext Interrupt Module\" />
+    <Folder Include="MCAL\Gpt Module\" />
+    <Folder Include="MCAL\I2C Module\" />
+    <Folder Include="MCAL\Spi Module\" />
+    <Folder Include="MCAL\SWPwm Module\" />
+    <Folder Include="MCAL\Uart Module\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

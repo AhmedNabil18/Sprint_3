@@ -12,7 +12,7 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
 #include "Eeprom_24_Cfg.h"
-
+#include "../../MCAL/Delay Module/Delay.h"
 
 #define SINGLE_BYTE			1U
 

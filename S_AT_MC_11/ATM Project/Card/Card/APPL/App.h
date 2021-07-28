@@ -96,4 +96,7 @@ enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data);
 enuApp_Status_t AppADMIN_saveCardData(strCardData_t* pstr_CardData);
 
 enuApp_Status_t AppUSER_sendCardData(strCardData_t* pstr_CardData);
+
+enuApp_Status_t AppMemory_getCardData(strCardData_t* pstr_CardData);
+
 #endif /* APP_H_ */

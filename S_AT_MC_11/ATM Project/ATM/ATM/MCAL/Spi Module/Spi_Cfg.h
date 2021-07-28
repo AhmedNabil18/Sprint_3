@@ -15,7 +15,7 @@
  * SPI_MASTER
  * SPI_SLAVE
  */
-#define SPI_ROLE		SPI_MASTER
+#define SPI_ROLE		SPI_SLAVE
 
 /*- SPI LSB First On/Off -*/
 /* :Options:
