@@ -4,6 +4,10 @@
 
 APPL\App.c
 
+ECUAL\Button Module\Button.c
+
+ECUAL\Button Module\Button_Cfg.c
+
 ECUAL\Eeprom_I2C Module\Eeprom_24.c
 
 ECUAL\Keypad Module\Keypad.c

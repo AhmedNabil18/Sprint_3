@@ -126,6 +126,18 @@
     <Compile Include="APPL\App.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ECUAL\Button Module\Button.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Button Module\Button.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Button Module\Button_Cfg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\Button Module\Button_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="ECUAL\Eeprom_I2C Module\Eeprom_24.c">
       <SubType>compile</SubType>
     </Compile>
@@ -307,6 +319,7 @@
   <ItemGroup>
     <Folder Include="APPL\" />
     <Folder Include="ECUAL\" />
+    <Folder Include="ECUAL\Button Module\" />
     <Folder Include="ECUAL\Eeprom_I2C Module\" />
     <Folder Include="ECUAL\Keypad Module\" />
     <Folder Include="ECUAL\Lcd Module\" />

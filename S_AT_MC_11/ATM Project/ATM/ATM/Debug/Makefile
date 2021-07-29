@@ -35,6 +35,7 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../APPL/ \
 ../ECUAL/ \
+../ECUAL/Button\ Module/ \
 ../ECUAL/Eeprom_I2C\ Module/ \
 ../ECUAL/Keypad\ Module/ \
 ../ECUAL/Lcd\ Module/ \
@@ -56,6 +57,8 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../APPL/App.c \
+../ECUAL/Button\ Module/Button.c \
+../ECUAL/Button\ Module/Button_Cfg.c \
 ../ECUAL/Eeprom_I2C\ Module/Eeprom_24.c \
 ../ECUAL/Keypad\ Module/Keypad.c \
 ../ECUAL/Keypad\ Module/Keypad_Cfg.c \
@@ -89,6 +92,8 @@ ASM_SRCS +=
 
 OBJS +=  \
 APPL/App.o \
+ECUAL/Button\ Module/Button.o \
+ECUAL/Button\ Module/Button_Cfg.o \
 ECUAL/Eeprom_I2C\ Module/Eeprom_24.o \
 ECUAL/Keypad\ Module/Keypad.o \
 ECUAL/Keypad\ Module/Keypad_Cfg.o \
@@ -115,6 +120,8 @@ MCAL/Uart\ Module/Uart.o
 
 OBJS_AS_ARGS +=  \
 APPL/App.o \
+"ECUAL/Button Module/Button.o" \
+"ECUAL/Button Module/Button_Cfg.o" \
 "ECUAL/Eeprom_I2C Module/Eeprom_24.o" \
 "ECUAL/Keypad Module/Keypad.o" \
 "ECUAL/Keypad Module/Keypad_Cfg.o" \
@@ -141,6 +148,8 @@ MCAL/StringManipulation.o \
 
 C_DEPS +=  \
 APPL/App.d \
+ECUAL/Button\ Module/Button.d \
+ECUAL/Button\ Module/Button_Cfg.d \
 ECUAL/Eeprom_I2C\ Module/Eeprom_24.d \
 ECUAL/Keypad\ Module/Keypad.d \
 ECUAL/Keypad\ Module/Keypad_Cfg.d \
@@ -167,6 +176,8 @@ MCAL/Uart\ Module/Uart.d
 
 C_DEPS_AS_ARGS +=  \
 APPL/App.d \
+"ECUAL/Button Module/Button.d" \
+"ECUAL/Button Module/Button_Cfg.d" \
 "ECUAL/Eeprom_I2C Module/Eeprom_24.d" \
 "ECUAL/Keypad Module/Keypad.d" \
 "ECUAL/Keypad Module/Keypad_Cfg.d" \
@@ -206,6 +217,20 @@ LINKER_SCRIPT_DEP+=
 
 # AVR32/GNU C Compiler
 APPL/App.o: ../APPL/App.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/Button\ Module/Button.o: ../ECUAL/Button\ Module/Button.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/Button\ Module/Button_Cfg.o: ../ECUAL/Button\ Module/Button_Cfg.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

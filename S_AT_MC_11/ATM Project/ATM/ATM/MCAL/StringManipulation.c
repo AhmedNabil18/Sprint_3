@@ -52,18 +52,20 @@ uint8_t stringLength(uint8_t* string1)
 
 uint8_t stringCompare(uint8_t* string1, uint8_t* string2)
 {
-    uint8_t u8_loopIndex=0;
-    if(stringLength(string1) > stringLength(string2))
-        return 2;
-    if(stringLength(string1) < stringLength(string2))
-        return 3;
-    while(string1[u8_loopIndex] != '\0')
-    {
-        if(string1[u8_loopIndex] != string2[u8_loopIndex])
-            return 0;
-        u8_loopIndex++;
-    }
-    return 1;
+	uint8_t u8_loopIndex=0;
+	if(stringLength(string1) > stringLength(string2))
+		return 2;
+	if(stringLength(string1) < stringLength(string2))
+		return 3;
+	while(string1[u8_loopIndex] != '\0')
+	{
+		if(string1[u8_loopIndex] > string2[u8_loopIndex])
+			return 2;
+		else if(string1[u8_loopIndex] < string2[u8_loopIndex])
+			return 3;
+		u8_loopIndex++;
+	}
+	return 1;
 }
 
 void stringConcatenate(uint8_t* destination, uint8_t* source)

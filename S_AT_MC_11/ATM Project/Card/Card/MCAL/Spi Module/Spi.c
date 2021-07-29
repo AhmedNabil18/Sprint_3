@@ -85,8 +85,8 @@ enuSpi_Status_t Spi_init(void)
 	SPI_SPCR_REG &= ~(1<<SPI_SPCR_SPR1); //fosc/2
 	SPI_SPCR_REG |= ((SPI_FOSC_DIV & 0x03)<<SPI_SPCR_SPR0); //fosc/2
 	#else		/* If chosen to be slave */
-	DIO_PORTB_DIR |= (1<<SPI_MOSI_PIN);
-	DIO_PORTB_DIR &= ~(1<<SPI_MISO_PIN);
+	DIO_PORTB_DIR |= (1<<SPI_MISO_PIN);
+	DIO_PORTB_DIR &= ~(1<<SPI_MOSI_PIN);
 	DIO_PORTB_DIR &= ~(1<<SPI_SS_PIN);
 	DIO_PORTB_DIR &= ~(1<<SPI_SCK_PIN);
 	SPI_SPCR_REG &= ~(1<<SPI_SPCR_MSTR); //slave enable

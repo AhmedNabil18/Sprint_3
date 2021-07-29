@@ -19,6 +19,6 @@
 #define MOTOR_FAN_DIO2_CHANNEL			DIO_IN2_CHANNEL_ID	/* 2nd Direction Pin for the Motor */
 
 /* ID for the Motors Used */
-#define MOTOR_FAN_ID				0U
+#define MOTOR_CASH_ID				0U
 
 #endif /* MOTOR_CFG_H_ */

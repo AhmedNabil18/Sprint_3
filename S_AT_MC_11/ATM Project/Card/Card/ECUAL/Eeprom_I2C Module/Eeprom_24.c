@@ -114,7 +114,7 @@ enuEeprom_24_Status_t  Eeprom_24_writeByte(uint16_t u16_location, uint8_t u8_dat
 		return EEPROM_24_STATUS_ERROR_NOK;
 	
 	if(I2C_MasterSendToLocation(u8_slaveAddr, u8_wordAddr, &u8_data, SINGLE_BYTE) != I2C_STATUS_ERROR_OK)
-		return EEPROM_24_STATUS_ERROR_NOK;	Delay_ms(5);
+		return EEPROM_24_STATUS_ERROR_NOK;	Delay_ms(15);
 	return EEPROM_24_STATUS_ERROR_OK;
 }
 
@@ -335,7 +335,6 @@ enuEeprom_24_Status_t  Eeprom_24_writePacket(uint16_t u16_location, uint8_t *pu8
 	
 	if (u16_dataLen > 0)
 	{
-		DIO_PORTC_DATA |= 1<<2;
 		uint16_t u16_newLocation = (u8_pageStart + i) << 4;
 		if(EEPROM_getAddresses(&u8_slaveAddr, &u8_wordAddr, u16_newLocation) != EEPROM_24_STATUS_ERROR_OK)
 			return EEPROM_24_STATUS_ERROR_NOK;
@@ -396,6 +395,12 @@ enuEeprom_24_Status_t  Eeprom_24_readPacket(uint16_t u16_location, uint8_t *pu8_
 	if(u8_byteOffset != 0)
 	{
 		uint8_t length = EEPROM_24_PAGE_BYTES - u8_byteOffset;
+		if (u16_dataLen < length)
+		{
+			if(I2C_MasterReceiveFromLocation(u8_slaveAddr, u8_wordAddr, pu8_data, length) != I2C_STATUS_ERROR_OK)
+				return EEPROM_24_STATUS_ERROR_NOK;
+			return EEPROM_24_STATUS_ERROR_OK;
+		}
 		if(I2C_MasterReceiveFromLocation(u8_slaveAddr, u8_wordAddr, pu8_data, length) != I2C_STATUS_ERROR_OK)
 			return EEPROM_24_STATUS_ERROR_NOK;
 		u16dataIndex = length;

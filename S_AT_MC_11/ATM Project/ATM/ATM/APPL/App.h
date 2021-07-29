@@ -47,13 +47,18 @@
 #define ATM_DB_CUSTOMER_PAN_BASE_ADDR			0x20 // 1 Page for each customer PAN
 #define ATM_DB_CUSTOMER_BAL_BASE_ADDR			0x30 // 1 Page for each customer Balance
 
+#define LCD_IN_POS_X			1U
+#define LCD_IN_POS_Y			6U
+
+#define DISPLAY_TEMP			1U
 #define CARD_IN					1U
 #define CARD_OUT				0U
 
+#define CARD_FRAME_LENGTH		28U
 #define MAX_NAME_LENGTH			9U
 #define MAX_PAN_LENGTH			9U
 #define MAX_PIN_LENGTH			4U
-
+#define MAX_BAL_LENGTH			8U
 #define USER_IDLE				0U
 #define USER_BUSY				1U
 
@@ -92,7 +97,9 @@ typedef enum
 	APP_STATUS_INITIALIZED,
 	APP_STATUS_UNINITIALIZED,
 	APP_STATUS_NO_OP,
-	APP_STATUS_KPD_NUM
+	APP_STATUS_KPD_NUM,
+	APP_STATUS_PIN_CORRECT,
+	APP_STATUS_PAN_FOUND
 }enuApp_Status_t;
 
 /*******************************************************************************
@@ -109,6 +116,12 @@ enuApp_Status_t App_update(void);
 
 enuApp_Status_t AppUSER_ReportKeypad(uint8_t* pu8_key);
 
+enuApp_Status_t AppUSER_startTransaction(void);
+
+enuApp_Status_t AppUSER_checkPin(void);
+
+enuApp_Status_t AppUSER_checkPan(void);
+
 enuApp_Status_t App_ReportTerminal(uint8_t* pu8_data);
 
 enuApp_Status_t AppADMIN_getInput(uint8_t* pu8_data);
@@ -121,7 +134,11 @@ enuApp_Status_t AppADMIN_getAtmPIN(uint8_t* pu8_data);
 
 enuApp_Status_t AppADMIN_saveNewCustomerData(void);
 
-enuApp_Status_t AppUSER_getCardData(strCardData_t* pstr_CardData);
+enuApp_Status_t AppUSER_getCardData(strCardData_t* pstr_CardData, uint8_t *pu8_dataString);
+
+enuApp_Status_t AppUSER_getCardData(strCardData_t* pstr_CardData, uint8_t *pu8_dataString);
+
+enuApp_Status_t AppUSER_startProcess(strCardData_t* pstr_CardData);
 
 enuApp_Status_t AppADMIN_getnewMaxAmount(uint8_t* pu8_data);
 #endif /* APP_H_ */

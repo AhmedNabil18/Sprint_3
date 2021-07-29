@@ -24,13 +24,12 @@ const uint8_t cgu8_ATM_SPI_CARD_Busy[3] = "CB";
 void ATM_REQ_ISR(void)
 {	
 	if(cgu8_ATM_Req == ATM_REQUESTED)
-		cgu8_ATM_Req = ATM_NOT_REQUESTED;
+	cgu8_ATM_Req = ATM_NOT_REQUESTED;
 	else
 	{/* ATM Request Data from Card */
 		cgu8_ATM_Req = ATM_REQUESTED;
 		if (gu8_CardMode == CARD_MODE_ADMIN)
-		{	
-			DIO_PORTA_DATA = 0xFF;
+		{
 			SPI_SS_ENABLE();
 			Spi_MasterSendByte('*');
 			SPI_SS_DISABLE();
@@ -59,7 +58,10 @@ enuApp_Status_t App_start(void)
 	/* Initialize the application */
 	if(App_init() != APP_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
+	Ext_INT0_init(EXT_INT0_EDGE_FALL);
+	INT0_setCallBack(ATM_REQ_ISR);
 	EnableGlbl_Interrupt();
+	DIO_PORTA_DIR = 0xFF;
 	/* Application Super Loop */
 	while (1)
 	{
@@ -104,9 +106,6 @@ enuApp_Status_t App_init(void)
 		return APP_STATUS_ERROR_NOK;
 	if(SPI_STATUS_ERROR_OK != Spi_init())
 		return APP_STATUS_ERROR_NOK;
-	
-	Ext_INT0_init(EXT_INT0_EDGE_FALL_RISE);
-	INT0_setCallBack(ATM_REQ_ISR);
 	
 	/**************************/
 	/* Only for Testing */
@@ -221,9 +220,10 @@ enuApp_Status_t App_update(void)
 			/****************************************************************/
 			if (cgu8_ATM_Req == ATM_REQUESTED)
 			{
+				DIO_PORTA_DATA = 0xFF;
 				AppUSER_sendCardData(&gstr_userCardData);
 				
-				Delay_ms(100);
+				Delay_ms(5000);
 				
 				if (gu8_ADMIN_Request == ADMIN_NOT_REQUESTED)
 				{
@@ -388,13 +388,13 @@ enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data)
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 enuApp_Status_t AppADMIN_saveCardData(strCardData_t* pstr_CardData)
 {
-	if(Eeprom_24_writePage(CARD_NAME_PAGE_NUM, (pstr_CardData->au8_cardHolderName)) != EEPROM_24_STATUS_ERROR_OK)
+	if(Eeprom_24_writePacket(CARD_NAME_PAGE_ADDR, (pstr_CardData->au8_cardHolderName), MAX_NAME_LENGTH+1) != EEPROM_24_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	Delay_ms(10);
-	if(Eeprom_24_writePage(CARD_PAN_PAGE_NUM, (pstr_CardData->au8_primaryAccountNumber)) != EEPROM_24_STATUS_ERROR_OK)
+	if(Eeprom_24_writePacket(CARD_PAN_PAGE_ADDR, (pstr_CardData->au8_primaryAccountNumber), MAX_PAN_LENGTH+1) != EEPROM_24_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	Delay_ms(10);
-	if(Eeprom_24_writePage(CARD_PIN_PAGE_NUM, (pstr_CardData->au8_pinNum)) != EEPROM_24_STATUS_ERROR_OK)
+	if(Eeprom_24_writePacket(CARD_PIN_PAGE_ADDR, (pstr_CardData->au8_pinNum), MAX_PIN_LENGTH+1) != EEPROM_24_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	Delay_ms(10);
 	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, CARD_INITIALIZED) != EEPROM_24_STATUS_ERROR_OK)
@@ -447,13 +447,13 @@ enuApp_Status_t AppUSER_sendCardData(strCardData_t* pstr_CardData)
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 enuApp_Status_t AppMemory_getCardData(strCardData_t* pstr_CardData)
 {
-	if(Eeprom_24_readPage(CARD_NAME_PAGE_NUM, (pstr_CardData->au8_cardHolderName)) != EEPROM_24_STATUS_ERROR_OK)
+	if(Eeprom_24_readPacket(CARD_NAME_PAGE_ADDR, (pstr_CardData->au8_cardHolderName),MAX_NAME_LENGTH+1) != EEPROM_24_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	Delay_ms(10);
-	if(Eeprom_24_readPage(CARD_PAN_PAGE_NUM, (pstr_CardData->au8_primaryAccountNumber)) != EEPROM_24_STATUS_ERROR_OK)
+	if(Eeprom_24_readPacket(CARD_PAN_PAGE_ADDR, (pstr_CardData->au8_primaryAccountNumber),MAX_PAN_LENGTH+1) != EEPROM_24_STATUS_ERROR_OK)
 	return APP_STATUS_ERROR_NOK;
 	Delay_ms(10);
-	if(Eeprom_24_readPage(CARD_PIN_PAGE_NUM, (pstr_CardData->au8_pinNum)) != EEPROM_24_STATUS_ERROR_OK)
+	if(Eeprom_24_readPacket(CARD_PIN_PAGE_ADDR, (pstr_CardData->au8_pinNum),MAX_PIN_LENGTH+1) != EEPROM_24_STATUS_ERROR_OK)
 	return APP_STATUS_ERROR_NOK;
 	
 	return APP_STATUS_ERROR_OK;

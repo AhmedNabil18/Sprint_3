@@ -26,9 +26,9 @@
 
 #define CARD_INIT_ADDRESS			0x00U
 #define CARD_INITIALIZED			0xAAU
-#define CARD_NAME_PAGE_NUM			2U
-#define CARD_PAN_PAGE_NUM			3U
-#define CARD_PIN_PAGE_NUM			4U
+#define CARD_NAME_PAGE_ADDR			0x20U
+#define CARD_PAN_PAGE_ADDR			0x30U
+#define CARD_PIN_PAGE_ADDR			0x40U
 
 #define CARD_NAME				0U
 #define CARD_PAN				1U

@@ -8,6 +8,7 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
 #include "Eeprom_24.h"
+#include "../../MCAL/Delay Module/Delay.h"
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- GLOBAL STATIC VARIABLES *-*-*-*-*-*/
 static enuEeprom_24_Status_t genu_eepromModuleState = EEPROM_24_STATUS_NOT_INIT;
@@ -394,6 +395,12 @@ enuEeprom_24_Status_t  Eeprom_24_readPacket(uint16_t u16_location, uint8_t *pu8_
 	if(u8_byteOffset != 0)
 	{
 		uint8_t length = EEPROM_24_PAGE_BYTES - u8_byteOffset;
+		if (u16_dataLen < length)
+		{
+			if(I2C_MasterReceiveFromLocation(u8_slaveAddr, u8_wordAddr, pu8_data, length) != I2C_STATUS_ERROR_OK)
+				return EEPROM_24_STATUS_ERROR_NOK;
+			return EEPROM_24_STATUS_ERROR_OK;
+		}
 		if(I2C_MasterReceiveFromLocation(u8_slaveAddr, u8_wordAddr, pu8_data, length) != I2C_STATUS_ERROR_OK)
 			return EEPROM_24_STATUS_ERROR_NOK;
 		u16dataIndex = length;
