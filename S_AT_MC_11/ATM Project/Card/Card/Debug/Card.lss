@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000380  00000000  00000000  000018ac  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000335e  00000000  00000000  00001c2c  2**0
+  6 .debug_info   0000335a  00000000  00000000  00001c2c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000ff5  00000000  00000000  00004f8a  2**0
+  7 .debug_abbrev 00001004  00000000  00000000  00004f86  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001f42  00000000  00000000  00005f7f  2**0
+  8 .debug_line   00001f41  00000000  00000000  00005f8a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000c18  00000000  00000000  00007ec4  2**2
+  9 .debug_frame  00000c18  00000000  00000000  00007ecc  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000014c7  00000000  00000000  00008adc  2**0
+ 10 .debug_str    000014c7  00000000  00000000  00008ae4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000033ff  00000000  00000000  00009fa3  2**0
+ 11 .debug_loc    000033ff  00000000  00000000  00009fab  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000340  00000000  00000000  0000d3a2  2**0
+ 12 .debug_ranges 00000340  00000000  00000000  0000d3aa  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -931,9 +931,9 @@ enuApp_Status_t App_update(void)
      4d0:	91 e0       	ldi	r25, 0x01	; 1
      4d2:	0e 94 69 01 	call	0x2d2	; 0x2d2 <AppUSER_sendCardData>
 				
-				Delay_ms(5000);
-     4d6:	28 e8       	ldi	r18, 0x88	; 136
-     4d8:	33 e1       	ldi	r19, 0x13	; 19
+				Delay_ms(1000);
+     4d6:	28 ee       	ldi	r18, 0xE8	; 232
+     4d8:	33 e0       	ldi	r19, 0x03	; 3
      4da:	40 e0       	ldi	r20, 0x00	; 0
      4dc:	50 e0       	ldi	r21, 0x00	; 0
      4de:	60 e0       	ldi	r22, 0x00	; 0
@@ -995,7 +995,7 @@ enuApp_Status_t App_update(void)
 				return APP_STATUS_ERROR_NOK;
      51e:	80 e0       	ldi	r24, 0x00	; 0
      520:	01 c0       	rjmp	.+2      	; 0x524 <__EEPROM_REGION_LENGTH__+0x124>
-				Delay_ms(5000);
+				Delay_ms(1000);
 				
 				if (gu8_ADMIN_Request == ADMIN_NOT_REQUESTED)
 				{

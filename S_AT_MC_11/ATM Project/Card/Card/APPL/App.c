@@ -223,7 +223,7 @@ enuApp_Status_t App_update(void)
 				DIO_PORTA_DATA = 0xFF;
 				AppUSER_sendCardData(&gstr_userCardData);
 				
-				Delay_ms(5000);
+				Delay_ms(1000);
 				
 				if (gu8_ADMIN_Request == ADMIN_NOT_REQUESTED)
 				{

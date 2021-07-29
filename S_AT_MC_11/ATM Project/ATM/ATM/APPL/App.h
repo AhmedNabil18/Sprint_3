@@ -99,7 +99,8 @@ typedef enum
 	APP_STATUS_NO_OP,
 	APP_STATUS_KPD_NUM,
 	APP_STATUS_PIN_CORRECT,
-	APP_STATUS_PAN_FOUND
+	APP_STATUS_PAN_FOUND,
+	APP_STATUS_PAN_NOT_FOUND
 }enuApp_Status_t;
 
 /*******************************************************************************
