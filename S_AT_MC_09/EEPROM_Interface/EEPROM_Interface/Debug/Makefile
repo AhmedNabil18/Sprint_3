@@ -38,6 +38,7 @@ SUBDIRS :=  \
 ../ECUAL/Eeprom_I2C\ Module/ \
 ../ECUAL/Terminal\ Module/ \
 ../MCAL/ \
+../MCAL/Delay\ Module/ \
 ../MCAL/I2C\ Module/ \
 ../MCAL/Uart\ Module/
 
@@ -46,10 +47,11 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../App\ Layer/App.c \
 ../ECUAL/Eeprom_I2C\ Module/Eeprom_24.c \
-../ECUAL/Terminal\ Module/StringManipulation.c \
 ../ECUAL/Terminal\ Module/Terminal.c \
 ../main.c \
+../MCAL/Delay\ Module/Delay.c \
 ../MCAL/I2C\ Module/I2C.c \
+../MCAL/StringManipulation.c \
 ../MCAL/Uart\ Module/Uart.c
 
 
@@ -62,37 +64,41 @@ ASM_SRCS +=
 OBJS +=  \
 App\ Layer/App.o \
 ECUAL/Eeprom_I2C\ Module/Eeprom_24.o \
-ECUAL/Terminal\ Module/StringManipulation.o \
 ECUAL/Terminal\ Module/Terminal.o \
 main.o \
+MCAL/Delay\ Module/Delay.o \
 MCAL/I2C\ Module/I2C.o \
+MCAL/StringManipulation.o \
 MCAL/Uart\ Module/Uart.o
 
 OBJS_AS_ARGS +=  \
 "App Layer/App.o" \
 "ECUAL/Eeprom_I2C Module/Eeprom_24.o" \
-"ECUAL/Terminal Module/StringManipulation.o" \
 "ECUAL/Terminal Module/Terminal.o" \
 main.o \
+"MCAL/Delay Module/Delay.o" \
 "MCAL/I2C Module/I2C.o" \
+MCAL/StringManipulation.o \
 "MCAL/Uart Module/Uart.o"
 
 C_DEPS +=  \
 App\ Layer/App.d \
 ECUAL/Eeprom_I2C\ Module/Eeprom_24.d \
-ECUAL/Terminal\ Module/StringManipulation.d \
 ECUAL/Terminal\ Module/Terminal.d \
 main.d \
+MCAL/Delay\ Module/Delay.d \
 MCAL/I2C\ Module/I2C.d \
+MCAL/StringManipulation.d \
 MCAL/Uart\ Module/Uart.d
 
 C_DEPS_AS_ARGS +=  \
 "App Layer/App.d" \
 "ECUAL/Eeprom_I2C Module/Eeprom_24.d" \
-"ECUAL/Terminal Module/StringManipulation.d" \
 "ECUAL/Terminal Module/Terminal.d" \
 main.d \
+"MCAL/Delay Module/Delay.d" \
 "MCAL/I2C Module/I2C.d" \
+MCAL/StringManipulation.d \
 "MCAL/Uart Module/Uart.d"
 
 OUTPUT_FILE_PATH +=EEPROM_Interface.elf
@@ -123,13 +129,6 @@ ECUAL/Eeprom_I2C\ Module/Eeprom_24.o: ../ECUAL/Eeprom_I2C\ Module/Eeprom_24.c
 	@echo Finished building: $<
 	
 
-ECUAL/Terminal\ Module/StringManipulation.o: ../ECUAL/Terminal\ Module/StringManipulation.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
 ECUAL/Terminal\ Module/Terminal.o: ../ECUAL/Terminal\ Module/Terminal.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -144,7 +143,21 @@ ECUAL/Terminal\ Module/Terminal.o: ../ECUAL/Terminal\ Module/Terminal.c
 	@echo Finished building: $<
 	
 
+MCAL/Delay\ Module/Delay.o: ../MCAL/Delay\ Module/Delay.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 MCAL/I2C\ Module/I2C.o: ../MCAL/I2C\ Module/I2C.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/StringManipulation.o: ../MCAL/StringManipulation.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

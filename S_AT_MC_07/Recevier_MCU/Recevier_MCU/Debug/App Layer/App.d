@@ -13,9 +13,7 @@ App Layer/App.d App Layer/App.o: ../App\ Layer/App.c ../App\ Layer/App.h \
  ../App\ Layer/../ECUAL/Terminal\ Module/../../MCAL/Uart\ Module/..\Platform_Types.h \
  ../App\ Layer/../ECUAL/Terminal\ Module/../../MCAL/Uart\ Module/Uart_Symbols.h \
  ../App\ Layer/../ECUAL/Terminal\ Module/../../MCAL/Uart\ Module/..\ATMega32_Interrupts.h \
- ../App\ Layer/../ECUAL/Terminal\ Module/StringManipulation.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
+ ../App\ Layer/../ECUAL/Terminal\ Module/../../MCAL/StringManipulation.h \
  ../App\ Layer/../ECUAL/Terminal\ Module/../../MCAL/Platform_Types.h
 
 ../App\ Layer/App.h:
@@ -48,10 +46,6 @@ App Layer/App.d App Layer/App.o: ../App\ Layer/App.c ../App\ Layer/App.h \
 
 ../App\ Layer/../ECUAL/Terminal\ Module/../../MCAL/Uart\ Module/..\ATMega32_Interrupts.h:
 
-../App\ Layer/../ECUAL/Terminal\ Module/StringManipulation.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
+../App\ Layer/../ECUAL/Terminal\ Module/../../MCAL/StringManipulation.h:
 
 ../App\ Layer/../ECUAL/Terminal\ Module/../../MCAL/Platform_Types.h:

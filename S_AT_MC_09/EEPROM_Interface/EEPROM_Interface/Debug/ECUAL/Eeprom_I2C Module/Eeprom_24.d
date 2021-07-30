@@ -7,7 +7,10 @@ ECUAL/Eeprom_I2C Module/Eeprom_24.d ECUAL/Eeprom_I2C Module/Eeprom_24.o: \
  ../ECUAL/Eeprom_I2C\ Module/../../MCAL/I2C\ Module/..\Platform_Types.h \
  ../ECUAL/Eeprom_I2C\ Module/../../MCAL/I2C\ Module/..\ATMega32_Interrupts.h \
  ../ECUAL/Eeprom_I2C\ Module/../../MCAL/I2C\ Module/..\ATMega32_Registers.h \
- ../ECUAL/Eeprom_I2C\ Module/../../MCAL/I2C\ Module/..\Platform_Types.h
+ ../ECUAL/Eeprom_I2C\ Module/../../MCAL/I2C\ Module/..\Platform_Types.h \
+ ../ECUAL/Eeprom_I2C\ Module/../../MCAL/Delay\ Module/Delay.h \
+ ../ECUAL/Eeprom_I2C\ Module/../../MCAL/Delay\ Module/Delay_Cfg.h \
+ ../ECUAL/Eeprom_I2C\ Module/../../MCAL/Delay\ Module/../Platform_Types.h
 
 ../ECUAL/Eeprom_I2C\ Module/Eeprom_24.h:
 
@@ -24,3 +27,9 @@ ECUAL/Eeprom_I2C Module/Eeprom_24.d ECUAL/Eeprom_I2C Module/Eeprom_24.o: \
 ../ECUAL/Eeprom_I2C\ Module/../../MCAL/I2C\ Module/..\ATMega32_Registers.h:
 
 ../ECUAL/Eeprom_I2C\ Module/../../MCAL/I2C\ Module/..\Platform_Types.h:
+
+../ECUAL/Eeprom_I2C\ Module/../../MCAL/Delay\ Module/Delay.h:
+
+../ECUAL/Eeprom_I2C\ Module/../../MCAL/Delay\ Module/Delay_Cfg.h:
+
+../ECUAL/Eeprom_I2C\ Module/../../MCAL/Delay\ Module/../Platform_Types.h:

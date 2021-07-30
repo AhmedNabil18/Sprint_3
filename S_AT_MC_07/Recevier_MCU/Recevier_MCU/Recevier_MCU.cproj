@@ -126,12 +126,6 @@
     <Compile Include="App Layer\App.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="ECUAL\Terminal Module\StringManipulation.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="ECUAL\Terminal Module\StringManipulation.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="ECUAL\Terminal Module\Terminal.c">
       <SubType>compile</SubType>
     </Compile>
@@ -163,6 +157,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\Spi Module\Spi_Symbols.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\StringManipulation.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\StringManipulation.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\Uart Module\Uart.c">

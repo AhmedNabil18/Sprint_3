@@ -14,6 +14,7 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- GLOBAL STATIC VARIABLES *-*-*-*-*-*/
 static enuTerminal_Status_t genu_TerminalModuleState = TERMINAL_STATUS_NOT_INIT;
+static uint8_t gu8_visibility = INPUT_VISIBLE;
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*--*-*-*- FUNCTIONS IMPLEMENTATION -*-*-*-*-*-*/
 
@@ -24,18 +25,26 @@ uint8_t gu8_flag=0;
 void Uart_RXC_ISR(void)
 {
 	gau8_data[gu8_counter] = Uart_DataRegister();
-	Uart_sendByte(gau8_data[gu8_counter]);
 	if (gau8_data[gu8_counter] == '\r')
 	{
+		Uart_sendByte(gau8_data[gu8_counter]);
 		gau8_data[gu8_counter] = '\0';
 		gu8_counter = 0;
 		gu8_flag = 1;
-	}else if (gau8_data[gu8_counter] == '\b')
+	}else if( (gau8_data[gu8_counter] == '\b') && (gu8_counter != 0))
 	{
+		Uart_sendByte(gau8_data[gu8_counter]);
 		gu8_counter--;
 	}
-	else
+	else if(gau8_data[gu8_counter] != '\b')
 	{
+		if(gu8_visibility == INPUT_INVISIBLE)
+		{
+			Uart_sendByte('*');	
+		}else
+		{
+			Uart_sendByte(gau8_data[gu8_counter]);	
+		}
 		gu8_counter++;
 	}
 }
@@ -115,7 +124,6 @@ enuTerminal_Status_t Terminal_Out(uint8_t *pu8_OutputData)
 	enuUart_Status_t Uart_State = Uart_sendPacket(pu8_OutputData, stringLength(pu8_OutputData));
 	if(UART_STATUS_ERROR_OK != Uart_State)
 		return TERMINAL_STATUS_ERROR_NOK;
-	Uart_State = Uart_sendByte('\r');
 	return TERMINAL_STATUS_ERROR_OK;
 }
 
@@ -152,6 +160,7 @@ enuTerminal_Status_t Terminal_In(uint8_t *pu8_InputData)
 /**************************************************************************************/
 /*								Function Implementation								  */
 /**************************************************************************************/
+
 	if(gu8_flag == 1)
 	{
 		gu8_flag = 0;
@@ -159,5 +168,16 @@ enuTerminal_Status_t Terminal_In(uint8_t *pu8_InputData)
 		EmptyString(gau8_data);
 		return TERMINAL_STATUS_INPUT_CHANGED;
 	}
+	return TERMINAL_STATUS_ERROR_OK;
+}
+
+enuTerminal_Status_t Terminal_enablePasswordMode(void)
+{
+	gu8_visibility = INPUT_INVISIBLE;
+	return TERMINAL_STATUS_ERROR_OK;
+}
+enuTerminal_Status_t Terminal_disablePasswordMode(void)
+{
+	gu8_visibility = INPUT_VISIBLE;
 	return TERMINAL_STATUS_ERROR_OK;
 }

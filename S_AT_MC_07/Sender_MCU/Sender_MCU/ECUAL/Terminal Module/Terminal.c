@@ -14,6 +14,7 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- GLOBAL STATIC VARIABLES *-*-*-*-*-*/
 static enuTerminal_Status_t genu_TerminalModuleState = TERMINAL_STATUS_NOT_INIT;
+static uint8_t gu8_visibility = INPUT_VISIBLE;
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*--*-*-*- FUNCTIONS IMPLEMENTATION -*-*-*-*-*-*/
 
@@ -37,7 +38,13 @@ void Uart_RXC_ISR(void)
 	}
 	else if(gau8_data[gu8_counter] != '\b')
 	{
-		Uart_sendByte(gau8_data[gu8_counter]);
+		if(gu8_visibility == INPUT_INVISIBLE)
+		{
+			Uart_sendByte('*');	
+		}else
+		{
+			Uart_sendByte(gau8_data[gu8_counter]);	
+		}
 		gu8_counter++;
 	}
 }
@@ -153,6 +160,7 @@ enuTerminal_Status_t Terminal_In(uint8_t *pu8_InputData)
 /**************************************************************************************/
 /*								Function Implementation								  */
 /**************************************************************************************/
+
 	if(gu8_flag == 1)
 	{
 		gu8_flag = 0;
@@ -160,5 +168,16 @@ enuTerminal_Status_t Terminal_In(uint8_t *pu8_InputData)
 		EmptyString(gau8_data);
 		return TERMINAL_STATUS_INPUT_CHANGED;
 	}
+	return TERMINAL_STATUS_ERROR_OK;
+}
+
+enuTerminal_Status_t Terminal_enablePasswordMode(void)
+{
+	gu8_visibility = INPUT_INVISIBLE;
+	return TERMINAL_STATUS_ERROR_OK;
+}
+enuTerminal_Status_t Terminal_disablePasswordMode(void)
+{
+	gu8_visibility = INPUT_VISIBLE;
 	return TERMINAL_STATUS_ERROR_OK;
 }

@@ -1,11 +1,11 @@
 Archive member included to satisfy reference by file (symbol)
 
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                              MCAL/SWPwm Module/SWPwm.o (__subsf3)
+                              MCAL/StringManipulation.o (__subsf3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o) (__addsf3x)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                              MCAL/SWPwm Module/SWPwm.o (__divsf3)
+                              MCAL/StringManipulation.o (__divsf3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o) (__divsf3x)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
@@ -75,6 +75,8 @@ Discarded input sections
  .bss           0x00000000        0x0 ECUAL/Lcd Module/Lcd.o
  .text.Lcd_clear
                 0x00000000        0xa ECUAL/Lcd Module/Lcd.o
+ .text.Lcd_printLCD
+                0x00000000       0x52 ECUAL/Lcd Module/Lcd.o
  .text.Lcd_shiftRight
                 0x00000000        0xa ECUAL/Lcd Module/Lcd.o
  .text.Lcd_shiftLeft
@@ -132,11 +134,17 @@ Discarded input sections
  .bss           0x00000000        0x0 MCAL/StringManipulation.o
  .text.power    0x00000000       0x48 MCAL/StringManipulation.o
  .text.stringCompare
-                0x00000000       0x5e MCAL/StringManipulation.o
+                0x00000000       0x66 MCAL/StringManipulation.o
+ .text.stringConcatenate
+                0x00000000       0x56 MCAL/StringManipulation.o
  .text.Max_String_Num
                 0x00000000       0x62 MCAL/StringManipulation.o
  .text.stringHexToNum
                 0x00000000       0xe4 MCAL/StringManipulation.o
+ .text.stringToFloat
+                0x00000000       0xfc MCAL/StringManipulation.o
+ .text.floatToString
+                0x00000000      0x11e MCAL/StringManipulation.o
  .text          0x00000000        0x0 MCAL/SWPwm Module/SWPwm.o
  .data          0x00000000        0x0 MCAL/SWPwm Module/SWPwm.o
  .bss           0x00000000        0x0 MCAL/SWPwm Module/SWPwm.o
@@ -867,7 +875,7 @@ END GROUP
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.sau8_fanSpeed.1889
+ .data.sau8_fanSpeed.1900
                 0x00800060        0x5 App Layer/App.o
  .data.enuCurrentAppStatus
                 0x00800065        0x1 App Layer/App.o
@@ -927,7 +935,7 @@ END GROUP
                 0x008000f6                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.su8_fanSpeed.1890
+ .bss.su8_fanSpeed.1901
                 0x008000f6        0x1 App Layer/App.o
  .bss.gu8_temp  0x008000f7        0x1 App Layer/App.o
                 0x008000f7                gu8_temp
@@ -969,9 +977,9 @@ END GROUP
  .bss.gstr_ChannelsData
                 0x00800112        0xe MCAL/SWPwm Module/SWPwm.o
                 0x00800112                gstr_ChannelsData
- .bss.sau8_data.1867
+ .bss.sau8_data.1878
                 0x00800120        0x3 Service Layer/Service.o
- .bss.u8_index.1866
+ .bss.u8_index.1877
                 0x00800123        0x1 Service Layer/Service.o
  *(COMMON)
                 0x00800124                PROVIDE (__bss_end, .)
@@ -1065,7 +1073,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x3d0
+.debug_aranges  0x00000000      0x3f0
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x30 App Layer/App.o
@@ -1074,127 +1082,127 @@ END GROUP
  .debug_aranges
                 0x00000058       0x18 ECUAL/Keypad Module/Keypad_Cfg.o
  .debug_aranges
-                0x00000070       0x80 ECUAL/Lcd Module/Lcd.o
+                0x00000070       0x88 ECUAL/Lcd Module/Lcd.o
  .debug_aranges
-                0x000000f0       0x28 ECUAL/LM35 Module/LM35.o
+                0x000000f8       0x28 ECUAL/LM35 Module/LM35.o
  .debug_aranges
-                0x00000118       0x30 ECUAL/Motor Module/Motor.o
+                0x00000120       0x30 ECUAL/Motor Module/Motor.o
  .debug_aranges
-                0x00000148       0x18 ECUAL/Motor Module/Motor_Cfg.o
+                0x00000150       0x18 ECUAL/Motor Module/Motor_Cfg.o
  .debug_aranges
-                0x00000160       0x20 main.o
+                0x00000168       0x20 main.o
  .debug_aranges
-                0x00000180       0x48 MCAL/Adc Module/Adc.o
+                0x00000188       0x48 MCAL/Adc Module/Adc.o
  .debug_aranges
-                0x000001c8       0x18 MCAL/Adc Module/Adc_Cfg.o
+                0x000001d0       0x18 MCAL/Adc Module/Adc_Cfg.o
  .debug_aranges
-                0x000001e0       0x30 MCAL/Delay Module/Delay.o
+                0x000001e8       0x30 MCAL/Delay Module/Delay.o
  .debug_aranges
-                0x00000210       0x38 MCAL/Dio Module/Dio.o
+                0x00000218       0x38 MCAL/Dio Module/Dio.o
  .debug_aranges
-                0x00000248       0x18 MCAL/Dio Module/Dio_Cfg.o
+                0x00000250       0x18 MCAL/Dio Module/Dio_Cfg.o
  .debug_aranges
-                0x00000260       0x80 MCAL/Gpt Module/Gpt.o
+                0x00000268       0x80 MCAL/Gpt Module/Gpt.o
  .debug_aranges
-                0x000002e0       0x18 MCAL/Gpt Module/Gpt_Cfg.o
+                0x000002e8       0x18 MCAL/Gpt Module/Gpt_Cfg.o
  .debug_aranges
-                0x000002f8       0x60 MCAL/StringManipulation.o
+                0x00000300       0x78 MCAL/StringManipulation.o
  .debug_aranges
-                0x00000358       0x38 MCAL/SWPwm Module/SWPwm.o
+                0x00000378       0x38 MCAL/SWPwm Module/SWPwm.o
  .debug_aranges
-                0x00000390       0x18 MCAL/SWPwm Module/SWPwm_Cfg.o
+                0x000003b0       0x18 MCAL/SWPwm Module/SWPwm_Cfg.o
  .debug_aranges
-                0x000003a8       0x28 Service Layer/Service.o
+                0x000003c8       0x28 Service Layer/Service.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x3adc
+.debug_info     0x00000000     0x3d10
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x537 App Layer/App.o
  .debug_info    0x00000a1d      0x31a ECUAL/Keypad Module/Keypad.o
  .debug_info    0x00000d37       0xe2 ECUAL/Keypad Module/Keypad_Cfg.o
- .debug_info    0x00000e19      0x7d2 ECUAL/Lcd Module/Lcd.o
- .debug_info    0x000015eb      0x1c0 ECUAL/LM35 Module/LM35.o
- .debug_info    0x000017ab      0x379 ECUAL/Motor Module/Motor.o
- .debug_info    0x00001b24       0xf9 ECUAL/Motor Module/Motor_Cfg.o
- .debug_info    0x00001c1d       0xad main.o
- .debug_info    0x00001cca      0x2ec MCAL/Adc Module/Adc.o
- .debug_info    0x00001fb6       0xc8 MCAL/Adc Module/Adc_Cfg.o
- .debug_info    0x0000207e      0x138 MCAL/Delay Module/Delay.o
- .debug_info    0x000021b6      0x247 MCAL/Dio Module/Dio.o
- .debug_info    0x000023fd      0x108 MCAL/Dio Module/Dio_Cfg.o
- .debug_info    0x00002505      0x54f MCAL/Gpt Module/Gpt.o
- .debug_info    0x00002a54      0x169 MCAL/Gpt Module/Gpt_Cfg.o
- .debug_info    0x00002bbd      0x470 MCAL/StringManipulation.o
- .debug_info    0x0000302d      0x627 MCAL/SWPwm Module/SWPwm.o
- .debug_info    0x00003654       0xd2 MCAL/SWPwm Module/SWPwm_Cfg.o
- .debug_info    0x00003726      0x3b6 Service Layer/Service.o
+ .debug_info    0x00000e19      0x879 ECUAL/Lcd Module/Lcd.o
+ .debug_info    0x00001692      0x1c0 ECUAL/LM35 Module/LM35.o
+ .debug_info    0x00001852      0x379 ECUAL/Motor Module/Motor.o
+ .debug_info    0x00001bcb       0xf9 ECUAL/Motor Module/Motor_Cfg.o
+ .debug_info    0x00001cc4       0xad main.o
+ .debug_info    0x00001d71      0x2ec MCAL/Adc Module/Adc.o
+ .debug_info    0x0000205d       0xc8 MCAL/Adc Module/Adc_Cfg.o
+ .debug_info    0x00002125      0x138 MCAL/Delay Module/Delay.o
+ .debug_info    0x0000225d      0x247 MCAL/Dio Module/Dio.o
+ .debug_info    0x000024a4      0x108 MCAL/Dio Module/Dio_Cfg.o
+ .debug_info    0x000025ac      0x54f MCAL/Gpt Module/Gpt.o
+ .debug_info    0x00002afb      0x169 MCAL/Gpt Module/Gpt_Cfg.o
+ .debug_info    0x00002c64      0x5fd MCAL/StringManipulation.o
+ .debug_info    0x00003261      0x627 MCAL/SWPwm Module/SWPwm.o
+ .debug_info    0x00003888       0xd2 MCAL/SWPwm Module/SWPwm_Cfg.o
+ .debug_info    0x0000395a      0x3b6 Service Layer/Service.o
 
-.debug_abbrev   0x00000000     0x1543
+.debug_abbrev   0x00000000     0x15b1
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3      0x100 App Layer/App.o
  .debug_abbrev  0x000005a3      0x134 ECUAL/Keypad Module/Keypad.o
  .debug_abbrev  0x000006d7       0x4b ECUAL/Keypad Module/Keypad_Cfg.o
- .debug_abbrev  0x00000722      0x173 ECUAL/Lcd Module/Lcd.o
- .debug_abbrev  0x00000895       0xd9 ECUAL/LM35 Module/LM35.o
- .debug_abbrev  0x0000096e      0x134 ECUAL/Motor Module/Motor.o
- .debug_abbrev  0x00000aa2       0x6e ECUAL/Motor Module/Motor_Cfg.o
- .debug_abbrev  0x00000b10       0x68 main.o
- .debug_abbrev  0x00000b78      0x13b MCAL/Adc Module/Adc.o
- .debug_abbrev  0x00000cb3       0x67 MCAL/Adc Module/Adc_Cfg.o
- .debug_abbrev  0x00000d1a       0xa7 MCAL/Delay Module/Delay.o
- .debug_abbrev  0x00000dc1       0xc3 MCAL/Dio Module/Dio.o
- .debug_abbrev  0x00000e84       0x7f MCAL/Dio Module/Dio_Cfg.o
- .debug_abbrev  0x00000f03      0x1a4 MCAL/Gpt Module/Gpt.o
- .debug_abbrev  0x000010a7       0x86 MCAL/Gpt Module/Gpt_Cfg.o
- .debug_abbrev  0x0000112d      0x131 MCAL/StringManipulation.o
- .debug_abbrev  0x0000125e      0x16a MCAL/SWPwm Module/SWPwm.o
- .debug_abbrev  0x000013c8       0x6e MCAL/SWPwm Module/SWPwm_Cfg.o
- .debug_abbrev  0x00001436      0x10d Service Layer/Service.o
+ .debug_abbrev  0x00000722      0x19e ECUAL/Lcd Module/Lcd.o
+ .debug_abbrev  0x000008c0       0xd9 ECUAL/LM35 Module/LM35.o
+ .debug_abbrev  0x00000999      0x134 ECUAL/Motor Module/Motor.o
+ .debug_abbrev  0x00000acd       0x6e ECUAL/Motor Module/Motor_Cfg.o
+ .debug_abbrev  0x00000b3b       0x68 main.o
+ .debug_abbrev  0x00000ba3      0x13b MCAL/Adc Module/Adc.o
+ .debug_abbrev  0x00000cde       0x67 MCAL/Adc Module/Adc_Cfg.o
+ .debug_abbrev  0x00000d45       0xa7 MCAL/Delay Module/Delay.o
+ .debug_abbrev  0x00000dec       0xc3 MCAL/Dio Module/Dio.o
+ .debug_abbrev  0x00000eaf       0x7f MCAL/Dio Module/Dio_Cfg.o
+ .debug_abbrev  0x00000f2e      0x1a4 MCAL/Gpt Module/Gpt.o
+ .debug_abbrev  0x000010d2       0x86 MCAL/Gpt Module/Gpt_Cfg.o
+ .debug_abbrev  0x00001158      0x174 MCAL/StringManipulation.o
+ .debug_abbrev  0x000012cc      0x16a MCAL/SWPwm Module/SWPwm.o
+ .debug_abbrev  0x00001436       0x6e MCAL/SWPwm Module/SWPwm_Cfg.o
+ .debug_abbrev  0x000014a4      0x10d Service Layer/Service.o
 
-.debug_line     0x00000000     0x2346
+.debug_line     0x00000000     0x251e
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x361 App Layer/App.o
  .debug_line    0x00000477      0x1b8 ECUAL/Keypad Module/Keypad.o
  .debug_line    0x0000062f       0x85 ECUAL/Keypad Module/Keypad_Cfg.o
- .debug_line    0x000006b4      0x404 ECUAL/Lcd Module/Lcd.o
- .debug_line    0x00000ab8      0x139 ECUAL/LM35 Module/LM35.o
- .debug_line    0x00000bf1      0x247 ECUAL/Motor Module/Motor.o
- .debug_line    0x00000e38       0x8d ECUAL/Motor Module/Motor_Cfg.o
- .debug_line    0x00000ec5       0x57 main.o
- .debug_line    0x00000f1c      0x278 MCAL/Adc Module/Adc.o
- .debug_line    0x00001194       0x6d MCAL/Adc Module/Adc_Cfg.o
- .debug_line    0x00001201       0xd4 MCAL/Delay Module/Delay.o
- .debug_line    0x000012d5      0x2f6 MCAL/Dio Module/Dio.o
- .debug_line    0x000015cb       0x6d MCAL/Dio Module/Dio_Cfg.o
- .debug_line    0x00001638      0x39c MCAL/Gpt Module/Gpt.o
- .debug_line    0x000019d4       0x6d MCAL/Gpt Module/Gpt_Cfg.o
- .debug_line    0x00001a41      0x30c MCAL/StringManipulation.o
- .debug_line    0x00001d4d      0x2ce MCAL/SWPwm Module/SWPwm.o
- .debug_line    0x0000201b       0x75 MCAL/SWPwm Module/SWPwm_Cfg.o
- .debug_line    0x00002090      0x2b6 Service Layer/Service.o
+ .debug_line    0x000006b4      0x451 ECUAL/Lcd Module/Lcd.o
+ .debug_line    0x00000b05      0x139 ECUAL/LM35 Module/LM35.o
+ .debug_line    0x00000c3e      0x247 ECUAL/Motor Module/Motor.o
+ .debug_line    0x00000e85       0x8d ECUAL/Motor Module/Motor_Cfg.o
+ .debug_line    0x00000f12       0x57 main.o
+ .debug_line    0x00000f69      0x278 MCAL/Adc Module/Adc.o
+ .debug_line    0x000011e1       0x6d MCAL/Adc Module/Adc_Cfg.o
+ .debug_line    0x0000124e       0xd4 MCAL/Delay Module/Delay.o
+ .debug_line    0x00001322      0x2f6 MCAL/Dio Module/Dio.o
+ .debug_line    0x00001618       0x6d MCAL/Dio Module/Dio_Cfg.o
+ .debug_line    0x00001685      0x39c MCAL/Gpt Module/Gpt.o
+ .debug_line    0x00001a21       0x6d MCAL/Gpt Module/Gpt_Cfg.o
+ .debug_line    0x00001a8e      0x497 MCAL/StringManipulation.o
+ .debug_line    0x00001f25      0x2ce MCAL/SWPwm Module/SWPwm.o
+ .debug_line    0x000021f3       0x75 MCAL/SWPwm Module/SWPwm_Cfg.o
+ .debug_line    0x00002268      0x2b6 Service Layer/Service.o
 
-.debug_frame    0x00000000      0xa8c
+.debug_frame    0x00000000      0xb74
  *(.debug_frame)
  .debug_frame   0x00000000       0x64 App Layer/App.o
  .debug_frame   0x00000064       0x6c ECUAL/Keypad Module/Keypad.o
- .debug_frame   0x000000d0      0x138 ECUAL/Lcd Module/Lcd.o
- .debug_frame   0x00000208       0x50 ECUAL/LM35 Module/LM35.o
- .debug_frame   0x00000258       0x84 ECUAL/Motor Module/Motor.o
- .debug_frame   0x000002dc       0x24 main.o
- .debug_frame   0x00000300       0xfc MCAL/Adc Module/Adc.o
- .debug_frame   0x000003fc       0xa4 MCAL/Delay Module/Delay.o
- .debug_frame   0x000004a0       0x54 MCAL/Dio Module/Dio.o
- .debug_frame   0x000004f4      0x344 MCAL/Gpt Module/Gpt.o
- .debug_frame   0x00000838      0x150 MCAL/StringManipulation.o
- .debug_frame   0x00000988       0xc4 MCAL/SWPwm Module/SWPwm.o
- .debug_frame   0x00000a4c       0x40 Service Layer/Service.o
+ .debug_frame   0x000000d0      0x15c ECUAL/Lcd Module/Lcd.o
+ .debug_frame   0x0000022c       0x50 ECUAL/LM35 Module/LM35.o
+ .debug_frame   0x0000027c       0x84 ECUAL/Motor Module/Motor.o
+ .debug_frame   0x00000300       0x24 main.o
+ .debug_frame   0x00000324       0xfc MCAL/Adc Module/Adc.o
+ .debug_frame   0x00000420       0xa4 MCAL/Delay Module/Delay.o
+ .debug_frame   0x000004c4       0x54 MCAL/Dio Module/Dio.o
+ .debug_frame   0x00000518      0x344 MCAL/Gpt Module/Gpt.o
+ .debug_frame   0x0000085c      0x214 MCAL/StringManipulation.o
+ .debug_frame   0x00000a70       0xc4 MCAL/SWPwm Module/SWPwm.o
+ .debug_frame   0x00000b34       0x40 Service Layer/Service.o
 
-.debug_str      0x00000000     0x194f
+.debug_str      0x00000000     0x19f2
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x569 App Layer/App.o
@@ -1203,53 +1211,53 @@ END GROUP
                                 0x4a8 (size before relaxing)
  .debug_str     0x000009eb       0x24 ECUAL/Keypad Module/Keypad_Cfg.o
                                 0x1f2 (size before relaxing)
- .debug_str     0x00000a0f      0x112 ECUAL/Lcd Module/Lcd.o
-                                0x51e (size before relaxing)
- .debug_str     0x00000b21      0x149 ECUAL/LM35 Module/LM35.o
+ .debug_str     0x00000a0f      0x133 ECUAL/Lcd Module/Lcd.o
+                                0x53f (size before relaxing)
+ .debug_str     0x00000b42      0x149 ECUAL/LM35 Module/LM35.o
                                 0x3ac (size before relaxing)
- .debug_str     0x00000c6a      0x27d ECUAL/Motor Module/Motor.o
+ .debug_str     0x00000c8b      0x27d ECUAL/Motor Module/Motor.o
                                 0x44c (size before relaxing)
- .debug_str     0x00000ee7       0x22 ECUAL/Motor Module/Motor_Cfg.o
+ .debug_str     0x00000f08       0x22 ECUAL/Motor Module/Motor_Cfg.o
                                 0x233 (size before relaxing)
- .debug_str     0x00000f09       0x11 main.o
+ .debug_str     0x00000f2a       0x11 main.o
                                 0x1ae (size before relaxing)
- .debug_str     0x00000f1a      0x118 MCAL/Adc Module/Adc.o
+ .debug_str     0x00000f3b      0x118 MCAL/Adc Module/Adc.o
                                 0x3bd (size before relaxing)
- .debug_str     0x00001032       0x1d MCAL/Adc Module/Adc_Cfg.o
+ .debug_str     0x00001053       0x1d MCAL/Adc Module/Adc_Cfg.o
                                 0x1f2 (size before relaxing)
- .debug_str     0x0000104f       0x5a MCAL/Delay Module/Delay.o
+ .debug_str     0x00001070       0x5a MCAL/Delay Module/Delay.o
                                 0x1ff (size before relaxing)
- .debug_str     0x000010a9       0x62 MCAL/Dio Module/Dio.o
+ .debug_str     0x000010ca       0x62 MCAL/Dio Module/Dio.o
                                 0x387 (size before relaxing)
- .debug_str     0x0000110b       0x1d MCAL/Dio Module/Dio_Cfg.o
+ .debug_str     0x0000112c       0x1d MCAL/Dio Module/Dio_Cfg.o
                                 0x244 (size before relaxing)
- .debug_str     0x00001128      0x47d MCAL/Gpt Module/Gpt.o
+ .debug_str     0x00001149      0x47d MCAL/Gpt Module/Gpt.o
                                 0x640 (size before relaxing)
- .debug_str     0x000015a5       0x1d MCAL/Gpt Module/Gpt_Cfg.o
+ .debug_str     0x000015c6       0x1d MCAL/Gpt Module/Gpt_Cfg.o
                                 0x36a (size before relaxing)
- .debug_str     0x000015c2      0x10f MCAL/StringManipulation.o
-                                0x30f (size before relaxing)
- .debug_str     0x000016d1      0x207 MCAL/SWPwm Module/SWPwm.o
+ .debug_str     0x000015e3      0x191 MCAL/StringManipulation.o
+                                0x3ac (size before relaxing)
+ .debug_str     0x00001774      0x207 MCAL/SWPwm Module/SWPwm.o
                                 0x8c9 (size before relaxing)
- .debug_str     0x000018d8       0x21 MCAL/SWPwm Module/SWPwm_Cfg.o
+ .debug_str     0x0000197b       0x21 MCAL/SWPwm Module/SWPwm_Cfg.o
                                 0x20d (size before relaxing)
- .debug_str     0x000018f9       0x56 Service Layer/Service.o
+ .debug_str     0x0000199c       0x56 Service Layer/Service.o
                                 0x627 (size before relaxing)
 
-.debug_loc      0x00000000     0x282b
+.debug_loc      0x00000000     0x2e78
  *(.debug_loc)
  .debug_loc     0x00000000       0x76 App Layer/App.o
  .debug_loc     0x00000076      0x18f ECUAL/Keypad Module/Keypad.o
- .debug_loc     0x00000205      0x385 ECUAL/Lcd Module/Lcd.o
- .debug_loc     0x0000058a       0xb8 ECUAL/LM35 Module/LM35.o
- .debug_loc     0x00000642      0x265 ECUAL/Motor Module/Motor.o
- .debug_loc     0x000008a7      0x3c2 MCAL/Adc Module/Adc.o
- .debug_loc     0x00000c69      0x2f2 MCAL/Delay Module/Delay.o
- .debug_loc     0x00000f5b      0x178 MCAL/Dio Module/Dio.o
- .debug_loc     0x000010d3      0x99b MCAL/Gpt Module/Gpt.o
- .debug_loc     0x00001a6e      0x878 MCAL/StringManipulation.o
- .debug_loc     0x000022e6      0x4c2 MCAL/SWPwm Module/SWPwm.o
- .debug_loc     0x000027a8       0x83 Service Layer/Service.o
+ .debug_loc     0x00000205      0x43a ECUAL/Lcd Module/Lcd.o
+ .debug_loc     0x0000063f       0xb8 ECUAL/LM35 Module/LM35.o
+ .debug_loc     0x000006f7      0x265 ECUAL/Motor Module/Motor.o
+ .debug_loc     0x0000095c      0x3c2 MCAL/Adc Module/Adc.o
+ .debug_loc     0x00000d1e      0x2f2 MCAL/Delay Module/Delay.o
+ .debug_loc     0x00001010      0x178 MCAL/Dio Module/Dio.o
+ .debug_loc     0x00001188      0x99b MCAL/Gpt Module/Gpt.o
+ .debug_loc     0x00001b23      0xe10 MCAL/StringManipulation.o
+ .debug_loc     0x00002933      0x4c2 MCAL/SWPwm Module/SWPwm.o
+ .debug_loc     0x00002df5       0x83 Service Layer/Service.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1269,21 +1277,21 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x270
+.debug_ranges   0x00000000      0x290
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x20 App Layer/App.o
  .debug_ranges  0x00000020       0x18 ECUAL/Keypad Module/Keypad.o
- .debug_ranges  0x00000038       0x70 ECUAL/Lcd Module/Lcd.o
- .debug_ranges  0x000000a8       0x18 ECUAL/LM35 Module/LM35.o
- .debug_ranges  0x000000c0       0x20 ECUAL/Motor Module/Motor.o
- .debug_ranges  0x000000e0       0x10 main.o
- .debug_ranges  0x000000f0       0x38 MCAL/Adc Module/Adc.o
- .debug_ranges  0x00000128       0x20 MCAL/Delay Module/Delay.o
- .debug_ranges  0x00000148       0x28 MCAL/Dio Module/Dio.o
- .debug_ranges  0x00000170       0x70 MCAL/Gpt Module/Gpt.o
- .debug_ranges  0x000001e0       0x50 MCAL/StringManipulation.o
- .debug_ranges  0x00000230       0x28 MCAL/SWPwm Module/SWPwm.o
- .debug_ranges  0x00000258       0x18 Service Layer/Service.o
+ .debug_ranges  0x00000038       0x78 ECUAL/Lcd Module/Lcd.o
+ .debug_ranges  0x000000b0       0x18 ECUAL/LM35 Module/LM35.o
+ .debug_ranges  0x000000c8       0x20 ECUAL/Motor Module/Motor.o
+ .debug_ranges  0x000000e8       0x10 main.o
+ .debug_ranges  0x000000f8       0x38 MCAL/Adc Module/Adc.o
+ .debug_ranges  0x00000130       0x20 MCAL/Delay Module/Delay.o
+ .debug_ranges  0x00000150       0x28 MCAL/Dio Module/Dio.o
+ .debug_ranges  0x00000178       0x70 MCAL/Gpt Module/Gpt.o
+ .debug_ranges  0x000001e8       0x68 MCAL/StringManipulation.o
+ .debug_ranges  0x00000250       0x28 MCAL/SWPwm Module/SWPwm.o
+ .debug_ranges  0x00000278       0x18 Service Layer/Service.o
 
 .debug_macro
  *(.debug_macro)

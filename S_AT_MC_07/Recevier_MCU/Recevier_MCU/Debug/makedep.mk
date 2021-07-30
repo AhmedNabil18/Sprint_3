@@ -4,13 +4,13 @@
 
 App Layer\App.c
 
-ECUAL\Terminal Module\StringManipulation.c
-
 ECUAL\Terminal Module\Terminal.c
 
 main.c
 
 MCAL\Spi Module\Spi.c
+
+MCAL\StringManipulation.c
 
 MCAL\Uart Module\Uart.c
 

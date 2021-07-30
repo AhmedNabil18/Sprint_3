@@ -135,12 +135,6 @@
     <Compile Include="ECUAL\Eeprom_I2C Module\Eeprom_24_Cfg.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="ECUAL\Terminal Module\StringManipulation.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="ECUAL\Terminal Module\StringManipulation.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="ECUAL\Terminal Module\Terminal.c">
       <SubType>compile</SubType>
     </Compile>
@@ -159,6 +153,15 @@
     <Compile Include="MCAL\ATMega32_Registers.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\Delay Module\Delay.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Delay Module\Delay.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Delay Module\Delay_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL\I2C Module\I2C.c">
       <SubType>compile</SubType>
     </Compile>
@@ -169,6 +172,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\Platform_Types.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\StringManipulation.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\StringManipulation.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\Uart Module\Uart.c">
@@ -190,6 +199,7 @@
     <Folder Include="ECUAL\Eeprom_I2C Module\" />
     <Folder Include="ECUAL\Terminal Module\" />
     <Folder Include="MCAL\" />
+    <Folder Include="MCAL\Delay Module\" />
     <Folder Include="MCAL\I2C Module\" />
     <Folder Include="MCAL\Uart Module\" />
   </ItemGroup>

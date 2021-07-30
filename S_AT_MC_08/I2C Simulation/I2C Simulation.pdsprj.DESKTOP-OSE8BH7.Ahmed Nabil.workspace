@@ -105,7 +105,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="1470" flags="00008023" y="414" h="250" pid="0" iid="6">
+   <POPUP w="634" x="1146" flags="00008023" y="160" h="305" pid="0" iid="6">
     <PROPERTIES>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>
@@ -118,7 +118,7 @@
      <ITEM name="ComboBox1008">A</ITEM>
      <ITEM name="ComboBox1009">N</ITEM>
      <ITEM name="HSplitter1Pos">125</ITEM>
-     <ITEM name="VSplitter1Pos">298</ITEM>
+     <ITEM name="VSplitter1Pos">6</ITEM>
     </PROPERTIES>
    </POPUP>
    <POPUP w="258" x="268" flags="00000008" y="375" h="255" pid="3" iid="5">

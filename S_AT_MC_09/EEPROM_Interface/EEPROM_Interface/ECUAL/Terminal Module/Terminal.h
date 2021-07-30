@@ -12,7 +12,10 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
 #include "Terminal_Cfg.h"
-#include "StringManipulation.h"
+#include "../../MCAL/StringManipulation.h"
+
+#define INPUT_VISIBLE			0U
+#define INPUT_INVISIBLE			1U
 /*******************************************************************************
  *                          Module Data Types                                  *
  *******************************************************************************/
@@ -40,5 +43,7 @@ enuTerminal_Status_t Terminal_Out(uint8_t *pu8_OutputData);
 
 /* Function to get string input from the terminal */
 enuTerminal_Status_t Terminal_In(uint8_t *pu8_InputData);
+enuTerminal_Status_t Terminal_enablePasswordMode(void);
+enuTerminal_Status_t Terminal_disablePasswordMode(void);
 
 #endif /* TERMINAL_H_ */

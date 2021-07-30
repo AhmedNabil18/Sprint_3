@@ -733,7 +733,7 @@ enuApp_Status_t App_update(void)
 /**************************************************************************************/
 	/* Check if the Application was already initialized */
 	if (enuCurrentAppStatus != APP_STATUS_INITIALIZED)
-     3ac:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+     3ac:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
      3b0:	84 30       	cpi	r24, 0x04	; 4
      3b2:	09 f0       	breq	.+2      	; 0x3b6 <App_update+0x1e>
      3b4:	b0 c0       	rjmp	.+352    	; 0x516 <__EEPROM_REGION_LENGTH__+0x116>
@@ -1124,7 +1124,7 @@ enuApp_Status_t App_init(void)
 /**************************************************************************************/
 	/* Check if the Application was already initialized */
 	if (enuCurrentAppStatus == APP_STATUS_INITIALIZED)
-     5c0:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+     5c0:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
      5c4:	84 30       	cpi	r24, 0x04	; 4
      5c6:	b9 f1       	breq	.+110    	; 0x636 <App_init+0x80>
 
@@ -1194,7 +1194,7 @@ enuApp_Status_t App_init(void)
 	/* Update enuCurrentAppStatus to initialized */
 	enuCurrentAppStatus = APP_STATUS_INITIALIZED;
      61a:	84 e0       	ldi	r24, 0x04	; 4
-     61c:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+     61c:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_start>
 	return APP_STATUS_ERROR_OK;
      620:	81 e0       	ldi	r24, 0x01	; 1
      622:	09 c0       	rjmp	.+18     	; 0x636 <App_init+0x80>

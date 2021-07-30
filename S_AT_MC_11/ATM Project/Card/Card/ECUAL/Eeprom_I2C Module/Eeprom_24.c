@@ -197,7 +197,7 @@ enuEeprom_24_Status_t  Eeprom_24_writePage(uint8_t u8_page, uint8_t *pu8_data)
 /**************************************************************************************/
 /*								Function Implementation								  */
 /**************************************************************************************/
-	uint16_t u8_startAddr = ((uint16_t)u8_page)<<4;
+	uint16_t u8_startAddr = ((uint16_t)u8_page)<<EEPROM_24_PAGE_SHIFT_BITS;
 	uint8_t u8_slaveAddr=0;
 	uint8_t u8_wordAddr=0;
 	
@@ -244,7 +244,7 @@ enuEeprom_24_Status_t  Eeprom_24_readPage(uint8_t u8_page, uint8_t *pu8_data)
 /**************************************************************************************/
 /*								Function Implementation								  */
 /**************************************************************************************/
-	uint16_t u8_startAddr = ((uint16_t)u8_page)<<4;
+	uint16_t u8_startAddr = ((uint16_t)u8_page)<<EEPROM_24_PAGE_SHIFT_BITS;
 	uint8_t u8_slaveAddr=0;
 	uint8_t u8_wordAddr=0;
 	
@@ -301,8 +301,8 @@ enuEeprom_24_Status_t  Eeprom_24_writePacket(uint16_t u16_location, uint8_t *pu8
 		return EEPROM_24_STATUS_ERROR_NOK;
 	
 	
-	uint8_t u8_pageStart = (u16_location & 0x7F0)>>4;
-	uint8_t u8_byteOffset = u16_location & 0x00F;
+	uint8_t u8_pageStart = (u16_location & EEPROM_24_PAGE_MASK)>>EEPROM_24_PAGE_SHIFT_BITS;
+	uint8_t u8_byteOffset = u16_location & EEPROM_24_BYTE_MASK;
 	
 	if(u8_byteOffset != 0)
 	{
@@ -328,14 +328,14 @@ enuEeprom_24_Status_t  Eeprom_24_writePacket(uint16_t u16_location, uint8_t *pu8
 		if(Eeprom_24_writePage(u8_pageStart+i, pu8_data+u8_dataIndex) != EEPROM_24_STATUS_ERROR_OK)
 			return EEPROM_24_STATUS_ERROR_NOK;
 		i++;
-		u16_dataLen -= 16;
-		u8_dataIndex += 16;
+		u16_dataLen -= EEPROM_24_PAGE_BYTES;
+		u8_dataIndex += EEPROM_24_PAGE_BYTES;
 		Delay_ms(15);
 	}
 	
 	if (u16_dataLen > 0)
 	{
-		uint16_t u16_newLocation = (u8_pageStart + i) << 4;
+		uint16_t u16_newLocation = (u8_pageStart + i) << EEPROM_24_PAGE_SHIFT_BITS;
 		if(EEPROM_getAddresses(&u8_slaveAddr, &u8_wordAddr, u16_newLocation) != EEPROM_24_STATUS_ERROR_OK)
 			return EEPROM_24_STATUS_ERROR_NOK;
 		if(I2C_MasterSendToLocation(u8_slaveAddr, u8_wordAddr, pu8_data+u8_dataIndex, u16_dataLen) != I2C_STATUS_ERROR_OK)
@@ -389,8 +389,8 @@ enuEeprom_24_Status_t  Eeprom_24_readPacket(uint16_t u16_location, uint8_t *pu8_
 		return EEPROM_24_STATUS_ERROR_NOK;
 	
 	
-	uint8_t u8_pageStart = (u16_location & 0x7F0)>>4;		//The first page to write in
-	uint8_t u8_byteOffset = u16_location & 0x00F;
+	uint8_t u8_pageStart = (u16_location & EEPROM_24_PAGE_MASK)>>EEPROM_24_PAGE_SHIFT_BITS;		//The first page to write in
+	uint8_t u8_byteOffset = u16_location & EEPROM_24_BYTE_MASK;
 	
 	if(u8_byteOffset != 0)
 	{
@@ -414,13 +414,13 @@ enuEeprom_24_Status_t  Eeprom_24_readPacket(uint16_t u16_location, uint8_t *pu8_
 		if(Eeprom_24_readPage(u8_pageStart+i, pu8_data+u16dataIndex) != EEPROM_24_STATUS_ERROR_OK)
 			return EEPROM_24_STATUS_ERROR_NOK;
 		i++;
-		u16_dataLen -= 16;
-		u16dataIndex += 16;
+		u16_dataLen -= EEPROM_24_PAGE_BYTES;
+		u16dataIndex += EEPROM_24_PAGE_BYTES;
 	}
 
 	if (u16_dataLen > 0)
 	{
-		uint16_t new_location = (u8_pageStart + i) << 4;
+		uint16_t new_location = (u8_pageStart + i) << EEPROM_24_PAGE_SHIFT_BITS;
 		if(EEPROM_getAddresses(&u8_slaveAddr, &u8_wordAddr, new_location) != EEPROM_24_STATUS_ERROR_OK)
 			return EEPROM_24_STATUS_ERROR_NOK;
 		if(I2C_MasterReceiveFromLocation(u8_slaveAddr, u8_wordAddr, pu8_data+u16dataIndex, u16_dataLen) != I2C_STATUS_ERROR_OK)

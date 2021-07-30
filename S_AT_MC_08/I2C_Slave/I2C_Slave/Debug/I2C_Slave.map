@@ -174,7 +174,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x266
+.text           0x00000000      0x262
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -266,19 +266,19 @@ END GROUP
                 0x0000013c       0x4c MCAL/I2C Module/I2C.o
                 0x0000013c                I2C_SlaveSendByte
  .text.I2C_SlaveReceiveByte
-                0x00000188       0x52 MCAL/I2C Module/I2C.o
+                0x00000188       0x4e MCAL/I2C Module/I2C.o
                 0x00000188                I2C_SlaveReceiveByte
  .text.I2C_SlaveReceive
-                0x000001da       0x38 MCAL/I2C Module/I2C.o
-                0x000001da                I2C_SlaveReceive
+                0x000001d6       0x38 MCAL/I2C Module/I2C.o
+                0x000001d6                I2C_SlaveReceive
  .text.I2C_SlaveSend
-                0x00000212       0x50 MCAL/I2C Module/I2C.o
-                0x00000212                I2C_SlaveSend
-                0x00000262                . = ALIGN (0x2)
+                0x0000020e       0x50 MCAL/I2C Module/I2C.o
+                0x0000020e                I2C_SlaveSend
+                0x0000025e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000262        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000262                _exit
-                0x00000262                exit
+ .fini9         0x0000025e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000025e                _exit
+                0x0000025e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -297,11 +297,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000262        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000025e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000266                _etext = .
+                0x00000262                _etext = .
 
-.data           0x00800060        0x2 load address 0x00000266
+.data           0x00800060        0x2 load address 0x00000262
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -322,8 +322,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 [!provide]                PROVIDE (__bss_end, .)
-                0x00000266                __data_load_start = LOADADDR (.data)
-                0x00000268                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000262                __data_load_start = LOADADDR (.data)
+                0x00000264                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800062        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -405,11 +405,11 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x925
+.debug_info     0x00000000      0x919
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0x1bc main.o
- .debug_info    0x000006a2      0x283 MCAL/I2C Module/I2C.o
+ .debug_info    0x000004e6      0x1b6 main.o
+ .debug_info    0x0000069c      0x27d MCAL/I2C Module/I2C.o
 
 .debug_abbrev   0x00000000      0x64b
  *(.debug_abbrev)
@@ -417,24 +417,24 @@ END GROUP
  .debug_abbrev  0x000004a3       0xd2 main.o
  .debug_abbrev  0x00000575       0xd6 MCAL/I2C Module/I2C.o
 
-.debug_line     0x00000000      0x4b4
+.debug_line     0x00000000      0x4ae
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116       0xd1 main.o
- .debug_line    0x000001e7      0x2cd MCAL/I2C Module/I2C.o
+ .debug_line    0x000001e7      0x2c7 MCAL/I2C Module/I2C.o
 
 .debug_frame    0x00000000       0xc8
  *(.debug_frame)
  .debug_frame   0x00000000       0x34 main.o
  .debug_frame   0x00000034       0x94 MCAL/I2C Module/I2C.o
 
-.debug_str      0x00000000      0x559
+.debug_str      0x00000000      0x540
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x326 main.o
-                                0x355 (size before relaxing)
- .debug_str     0x000004bc       0x9d MCAL/I2C Module/I2C.o
-                                0x3d8 (size before relaxing)
+ .debug_str     0x00000196      0x30d main.o
+                                0x33c (size before relaxing)
+ .debug_str     0x000004a3       0x9d MCAL/I2C Module/I2C.o
+                                0x3bf (size before relaxing)
 
 .debug_loc      0x00000000      0x395
  *(.debug_loc)

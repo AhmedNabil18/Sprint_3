@@ -126,6 +126,12 @@
     <Compile Include="APPL\App.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="APPL\AppADMIN.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="APPL\AppUSER.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="ECUAL\Button Module\Button.c">
       <SubType>compile</SubType>
     </Compile>

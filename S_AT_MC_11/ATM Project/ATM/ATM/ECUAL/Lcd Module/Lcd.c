@@ -221,6 +221,21 @@ enuLcd_Status_t Lcd_printString(uint8_t *pu8_data)
 	return LCD_STATUS_ERROR_OK;
 }
 
+
+enuLcd_Status_t Lcd_printLCD(uint8_t *pu8_data1, uint8_t *pu8_data2)
+{
+	Lcd_clear();
+	if(Lcd_setCursor(0, 0) != LCD_STATUS_ERROR_OK)
+		return LCD_STATUS_ERROR_NOK;
+	if(Lcd_printString(pu8_data1) != LCD_STATUS_ERROR_OK)
+		return LCD_STATUS_ERROR_NOK;
+	if(Lcd_setCursor(1,0) != LCD_STATUS_ERROR_OK)
+		return LCD_STATUS_ERROR_NOK;
+	if(Lcd_printString(pu8_data2) != LCD_STATUS_ERROR_OK)
+		return LCD_STATUS_ERROR_NOK;
+	return LCD_STATUS_ERROR_OK;
+}
+
 enuLcd_Status_t Lcd_clear(void)
 {
 	Lcd_sendCommand(0x01);

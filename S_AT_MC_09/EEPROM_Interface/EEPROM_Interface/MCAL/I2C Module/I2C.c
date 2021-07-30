@@ -491,10 +491,8 @@ enuI2C_Status_t I2C_MasterReceivePacket(uint8_t u8_slaveAddress, uint8_t * pu8_d
 	
 	/* Loop for data length and receive Byte by Byte and report back with Ack */
 	while (--u16_dataLen)
-	{
 		if(I2C_MasterReceiveByte_ACK(pu8_data++) != I2C_STATUS_ERROR_OK)
 			return I2C_STATUS_ERROR_NOK;
-	}
 	
 	/* Receive the last byte and report back with NACK */
 	if(I2C_MasterReceiveByte_NACK(pu8_data) != I2C_STATUS_ERROR_OK)
@@ -558,22 +556,28 @@ enuI2C_Status_t I2C_MasterReceiveGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_
 	if (I2C_MasterSendSTART() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	/* Sened the Slave Address Along with Write Command */
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_WRITE) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
+	
 	/* Loop for data length and Send Byte by Byte */
 	while (u16_sourceLen--)
 	if (I2C_MasterSendByte(*pu8_source++) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
+	
 	/* Initiate a Repeated Start Bit */
 	if(I2C_MasterSendRepSTART() != I2C_STATUS_ERROR_OK)
 		return I2C_STATUS_ERROR_NOK;
+	
 	/* Sened the Slave Address Along with Read Command */
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_READ) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
+	
 	/* Loop for data length and receive Byte by Byte and report back with Ack */
 	while (--u16_destinationLen)
-	if(I2C_MasterReceiveByte_ACK(pu8_destination++) != I2C_STATUS_ERROR_OK)
-		return I2C_STATUS_ERROR_NOK;
+		if(I2C_MasterReceiveByte_ACK(pu8_destination++) != I2C_STATUS_ERROR_OK)
+			return I2C_STATUS_ERROR_NOK;
+	
 	/* Receive the last byte and report back with NACK */
 	if(I2C_MasterReceiveByte_NACK(pu8_destination) != I2C_STATUS_ERROR_OK)
 		return I2C_STATUS_ERROR_NOK;
 	/* Send a Stop Bit */
+	
 	if(I2C_MasterSendSTOP() != I2C_STATUS_ERROR_OK)
 		return I2C_STATUS_ERROR_NOK;
 	
@@ -625,7 +629,7 @@ enuI2C_Status_t I2C_MasterSendToLocation(uint8_t u8_slaveAddress, uint8_t u8_loc
 /**************************************************************************************/
 	/* Initiate Start Bit */
 	if (I2C_MasterSendSTART() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
-	/* Sened the Slave Address Along with Write Command */
+	/* Send the Slave Address Along with Write Command */
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_WRITE) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
 	/* Send the first Byte (Location or Address or Command) */
 	if (I2C_MasterSendByte(u8_location) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
@@ -834,7 +838,6 @@ enuI2C_Status_t I2C_SlaveReceiveByte(uint8_t *pu8_data)
 	}else if(u8_status == I2C_SLV_STOP_REP_START)		
 	{
 		I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT);
-		DIO_PORTB_DATA = 1<<0;
 		return I2C_STATUS_SLAVE_STOP;
 	}
 	return I2C_STATUS_ERROR_NOK;

@@ -9,9 +9,7 @@ ECUAL/Terminal Module/Terminal.d ECUAL/Terminal Module/Terminal.o: \
  ../ECUAL/Terminal\ Module/../../MCAL/Uart\ Module/..\ATMega32_Interrupts.h \
  ../ECUAL/Terminal\ Module/../../MCAL/Uart\ Module/..\ATMega32_Registers.h \
  ../ECUAL/Terminal\ Module/../../MCAL/Uart\ Module/..\Platform_Types.h \
- ../ECUAL/Terminal\ Module/StringManipulation.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
+ ../ECUAL/Terminal\ Module/../../MCAL/StringManipulation.h \
  ../ECUAL/Terminal\ Module/../../MCAL/Platform_Types.h
 
 ../ECUAL/Terminal\ Module/Terminal.h:
@@ -32,10 +30,6 @@ ECUAL/Terminal Module/Terminal.d ECUAL/Terminal Module/Terminal.o: \
 
 ../ECUAL/Terminal\ Module/../../MCAL/Uart\ Module/..\Platform_Types.h:
 
-../ECUAL/Terminal\ Module/StringManipulation.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
+../ECUAL/Terminal\ Module/../../MCAL/StringManipulation.h:
 
 ../ECUAL/Terminal\ Module/../../MCAL/Platform_Types.h:

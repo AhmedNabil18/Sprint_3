@@ -26,4 +26,13 @@
 /* Number fo Bytes in a Page */
 #define EEPROM_24_PAGE_BYTES			16U
 
+/* Mask of the Page Num in the Address */
+#define EEPROM_24_PAGE_MASK				0x7F0U
+
+/* Number of Bits for the Byte Mask in the Address */
+#define EEPROM_24_PAGE_SHIFT_BITS			4U
+
+/* Mask of the Byte offset in the Address */
+#define EEPROM_24_BYTE_MASK				0x00FU
+
 #endif /* EEPROM_24_CFG_H_ */

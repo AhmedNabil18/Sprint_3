@@ -57,7 +57,8 @@ APPL/App.d APPL/App.o: ../APPL/App.c ../APPL/App.h \
  ../APPL/../MCAL/Delay\ Module/Delay.h \
  ../APPL/../MCAL/Delay\ Module/Delay_Cfg.h \
  ../APPL/../MCAL/Delay\ Module/../Platform_Types.h \
- ../APPL/../MCAL/StringManipulation.h
+ ../APPL/../MCAL/StringManipulation.h ../APPL/AppADMIN.h \
+ ../APPL/AppUSER.h
 
 ../APPL/App.h:
 
@@ -180,3 +181,7 @@ APPL/App.d APPL/App.o: ../APPL/App.c ../APPL/App.h \
 ../APPL/../MCAL/Delay\ Module/../Platform_Types.h:
 
 ../APPL/../MCAL/StringManipulation.h:
+
+../APPL/AppADMIN.h:
+
+../APPL/AppUSER.h:

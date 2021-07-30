@@ -30,7 +30,7 @@
  * @Options: I2C_MODE_MASTER
  *			 I2C_MODE_SLAVE
  */
-#define I2C_MODE			I2C_MODE_MASTER
+#define I2C_MODE			I2C_MODE_SLAVE
 
 
 

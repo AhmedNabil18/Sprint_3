@@ -115,6 +115,23 @@ enuApp_Status_t App_init(void);
 /* Function to update the application */
 enuApp_Status_t App_update(void);
 
+enuApp_Status_t AppADMIN_getAtmPIN(uint8_t* pu8_data);
+
+enuApp_Status_t AppADMIN_getInput(uint8_t* pu8_data);
+
+enuApp_Status_t AppADMIN_getnewMaxAmount(uint8_t* pu8_data);
+
+enuApp_Status_t AppADMIN_processNewCustomer(void);
+
+enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data);
+
+enuApp_Status_t AppADMIN_getCustomerBalance(uint8_t* pu8_data);
+
+enuApp_Status_t AppADMIN_saveNewCustomerData(void);
+
+
+
+
 enuApp_Status_t AppUSER_ReportKeypad(uint8_t* pu8_key);
 
 enuApp_Status_t AppUSER_startTransaction(void);
@@ -125,15 +142,10 @@ enuApp_Status_t AppUSER_checkPan(void);
 
 enuApp_Status_t App_ReportTerminal(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_getInput(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_getCustomerBalance(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_getAtmPIN(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_saveNewCustomerData(void);
 
 enuApp_Status_t AppUSER_getCardData(strCardData_t* pstr_CardData, uint8_t *pu8_dataString);
 
@@ -141,5 +153,10 @@ enuApp_Status_t AppUSER_getCardData(strCardData_t* pstr_CardData, uint8_t *pu8_d
 
 enuApp_Status_t AppUSER_startProcess(strCardData_t* pstr_CardData);
 
-enuApp_Status_t AppADMIN_getnewMaxAmount(uint8_t* pu8_data);
+
+
+enuApp_Status_t AppUSER_insertCard(void);
+
+
+enuApp_Status_t AppUSER_displayTemp(void);
 #endif /* APP_H_ */

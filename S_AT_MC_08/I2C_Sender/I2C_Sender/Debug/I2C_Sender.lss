@@ -3,29 +3,29 @@ I2C_Sender.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000226  00000000  00000000  00000074  2**1
+  0 .text         00000234  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000002  00800060  00000226  0000029a  2**0
+  1 .data         00000002  00800060  00000234  000002a8  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  0000029c  2**0
+  2 .comment      00000030  00000000  00000000  000002aa  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002cc  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002dc  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 000000a0  00000000  00000000  00000308  2**0
+  4 .debug_aranges 000000a0  00000000  00000000  00000318  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000bd6  00000000  00000000  000003a8  2**0
+  5 .debug_info   00000bd4  00000000  00000000  000003b8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000696  00000000  00000000  00000f7e  2**0
+  6 .debug_abbrev 00000687  00000000  00000000  00000f8c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000618  00000000  00000000  00001614  2**0
+  7 .debug_line   000006c0  00000000  00000000  00001613  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000204  00000000  00000000  00001c2c  2**2
+  8 .debug_frame  000001f8  00000000  00000000  00001cd4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000067e  00000000  00000000  00001e30  2**0
+  9 .debug_str    00000655  00000000  00000000  00001ecc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000009ce  00000000  00000000  000024ae  2**0
+ 10 .debug_loc    00000ab6  00000000  00000000  00002521  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000080  00000000  00000000  00002e7c  2**0
+ 11 .debug_ranges 00000080  00000000  00000000  00002fd7  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -65,7 +65,7 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e6 e2       	ldi	r30, 0x26	; 38
+  66:	e4 e3       	ldi	r30, 0x34	; 52
   68:	f2 e0       	ldi	r31, 0x02	; 2
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -74,7 +74,7 @@ Disassembly of section .text:
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
   76:	0e 94 41 00 	call	0x82	; 0x82 <main>
-  7a:	0c 94 11 01 	jmp	0x222	; 0x222 <_exit>
+  7a:	0c 94 18 01 	jmp	0x230	; 0x230 <_exit>
 
 0000007e <__bad_interrupt>:
   7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -89,126 +89,123 @@ int main(void)
   82:	cf 93       	push	r28
   84:	df 93       	push	r29
   86:	00 d0       	rcall	.+0      	; 0x88 <main+0x6>
-  88:	00 d0       	rcall	.+0      	; 0x8a <main+0x8>
+  88:	1f 92       	push	r1
   8a:	cd b7       	in	r28, 0x3d	; 61
   8c:	de b7       	in	r29, 0x3e	; 62
-// 	I2C_MasterReceivePacket(0x10,&u8_data,1);
-// 	DIO_PORTA_DIR = 0xFF;
-// 	DIO_PORTA_DATA = u8_data;
 	
 	/* Sending String to the slave */
-	uint8_t u8_data[4] = {255,7,6,4};
-  8e:	8f ef       	ldi	r24, 0xFF	; 255
+	uint8_t u8_data[3] = {1,2,3};
+  8e:	81 e0       	ldi	r24, 0x01	; 1
   90:	89 83       	std	Y+1, r24	; 0x01
-  92:	87 e0       	ldi	r24, 0x07	; 7
+  92:	82 e0       	ldi	r24, 0x02	; 2
   94:	8a 83       	std	Y+2, r24	; 0x02
-  96:	86 e0       	ldi	r24, 0x06	; 6
+  96:	83 e0       	ldi	r24, 0x03	; 3
   98:	8b 83       	std	Y+3, r24	; 0x03
-  9a:	84 e0       	ldi	r24, 0x04	; 4
-  9c:	8c 83       	std	Y+4, r24	; 0x04
 	I2C_MasterInit();
-  9e:	0e 94 5a 00 	call	0xb4	; 0xb4 <I2C_MasterInit>
+  9a:	0e 94 58 00 	call	0xb0	; 0xb0 <I2C_MasterInit>
 	I2C_MasterSendPacket(0x10,u8_data,3);
-  a2:	43 e0       	ldi	r20, 0x03	; 3
-  a4:	50 e0       	ldi	r21, 0x00	; 0
-  a6:	be 01       	movw	r22, r28
-  a8:	6f 5f       	subi	r22, 0xFF	; 255
-  aa:	7f 4f       	sbci	r23, 0xFF	; 255
-  ac:	80 e1       	ldi	r24, 0x10	; 16
-  ae:	0e 94 ce 00 	call	0x19c	; 0x19c <I2C_MasterSendPacket>
-  b2:	ff cf       	rjmp	.-2      	; 0xb2 <main+0x30>
+  9e:	43 e0       	ldi	r20, 0x03	; 3
+  a0:	50 e0       	ldi	r21, 0x00	; 0
+  a2:	be 01       	movw	r22, r28
+  a4:	6f 5f       	subi	r22, 0xFF	; 255
+  a6:	7f 4f       	sbci	r23, 0xFF	; 255
+  a8:	80 e1       	ldi	r24, 0x10	; 16
+  aa:	0e 94 ce 00 	call	0x19c	; 0x19c <I2C_MasterSendPacket>
+  ae:	ff cf       	rjmp	.-2      	; 0xae <main+0x2c>
 
-000000b4 <I2C_MasterInit>:
+000000b0 <I2C_MasterInit>:
 	if(I2C_SYMB_DATA_Rx_NACK != I2C_readSTATUS())
-	return I2C_STATUS_ERROR_NOK;
-	
+		return I2C_STATUS_ERROR_NOK;
+	/* Read the data from the data register */
 	*pu8_data = I2C_TWDR_REG;
 	return I2C_STATUS_ERROR_OK;
 }
-  b4:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
-  b8:	87 30       	cpi	r24, 0x07	; 7
-  ba:	41 f0       	breq	.+16     	; 0xcc <I2C_MasterInit+0x18>
-  bc:	11 b8       	out	0x01, r1	; 1
-  be:	80 e2       	ldi	r24, 0x20	; 32
-  c0:	80 b9       	out	0x00, r24	; 0
-  c2:	87 e0       	ldi	r24, 0x07	; 7
-  c4:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-  c8:	81 e0       	ldi	r24, 0x01	; 1
+  b0:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  b4:	86 30       	cpi	r24, 0x06	; 6
+  b6:	41 f0       	breq	.+16     	; 0xc8 <I2C_MasterInit+0x18>
+  b8:	11 b8       	out	0x01, r1	; 1
+  ba:	8a ef       	ldi	r24, 0xFA	; 250
+  bc:	80 b9       	out	0x00, r24	; 0
+  be:	86 e0       	ldi	r24, 0x06	; 6
+  c0:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+  c4:	81 e0       	ldi	r24, 0x01	; 1
+  c6:	08 95       	ret
+  c8:	87 e0       	ldi	r24, 0x07	; 7
   ca:	08 95       	ret
-  cc:	88 e0       	ldi	r24, 0x08	; 8
-  ce:	08 95       	ret
 
-000000d0 <I2C_MasterSendSTART>:
-  d0:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
-  d4:	87 30       	cpi	r24, 0x07	; 7
-  d6:	69 f4       	brne	.+26     	; 0xf2 <I2C_MasterSendSTART+0x22>
-  d8:	84 ea       	ldi	r24, 0xA4	; 164
-  da:	86 bf       	out	0x36, r24	; 54
-  dc:	81 e0       	ldi	r24, 0x01	; 1
-  de:	88 bb       	out	0x18, r24	; 24
-  e0:	06 b6       	in	r0, 0x36	; 54
-  e2:	07 fe       	sbrs	r0, 7
-  e4:	fd cf       	rjmp	.-6      	; 0xe0 <I2C_MasterSendSTART+0x10>
-  e6:	81 b1       	in	r24, 0x01	; 1
-  e8:	88 7f       	andi	r24, 0xF8	; 248
-  ea:	88 30       	cpi	r24, 0x08	; 8
-  ec:	21 f0       	breq	.+8      	; 0xf6 <I2C_MasterSendSTART+0x26>
-  ee:	80 e0       	ldi	r24, 0x00	; 0
+000000cc <I2C_MasterSendSTART>:
+  cc:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  d0:	86 30       	cpi	r24, 0x06	; 6
+  d2:	59 f4       	brne	.+22     	; 0xea <I2C_MasterSendSTART+0x1e>
+  d4:	84 ea       	ldi	r24, 0xA4	; 164
+  d6:	86 bf       	out	0x36, r24	; 54
+  d8:	06 b6       	in	r0, 0x36	; 54
+  da:	07 fe       	sbrs	r0, 7
+  dc:	fd cf       	rjmp	.-6      	; 0xd8 <I2C_MasterSendSTART+0xc>
+  de:	81 b1       	in	r24, 0x01	; 1
+  e0:	88 7f       	andi	r24, 0xF8	; 248
+  e2:	88 30       	cpi	r24, 0x08	; 8
+  e4:	21 f0       	breq	.+8      	; 0xee <I2C_MasterSendSTART+0x22>
+  e6:	80 e0       	ldi	r24, 0x00	; 0
+  e8:	08 95       	ret
+  ea:	85 e0       	ldi	r24, 0x05	; 5
+  ec:	08 95       	ret
+  ee:	81 e0       	ldi	r24, 0x01	; 1
   f0:	08 95       	ret
-  f2:	86 e0       	ldi	r24, 0x06	; 6
-  f4:	08 95       	ret
-  f6:	81 e0       	ldi	r24, 0x01	; 1
-  f8:	08 95       	ret
 
-000000fa <I2C_MasterSendSlaveAddress>:
-  fa:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
-  fe:	97 30       	cpi	r25, 0x07	; 7
- 100:	19 f5       	brne	.+70     	; 0x148 <I2C_MasterSendSlaveAddress+0x4e>
- 102:	67 30       	cpi	r22, 0x07	; 7
- 104:	19 f1       	breq	.+70     	; 0x14c <I2C_MasterSendSlaveAddress+0x52>
- 106:	90 e0       	ldi	r25, 0x00	; 0
- 108:	88 0f       	add	r24, r24
- 10a:	99 1f       	adc	r25, r25
- 10c:	86 2b       	or	r24, r22
- 10e:	83 b9       	out	0x03, r24	; 3
- 110:	84 e8       	ldi	r24, 0x84	; 132
- 112:	86 bf       	out	0x36, r24	; 54
- 114:	06 b6       	in	r0, 0x36	; 54
- 116:	07 fe       	sbrs	r0, 7
- 118:	fd cf       	rjmp	.-6      	; 0x114 <I2C_MasterSendSlaveAddress+0x1a>
- 11a:	81 b1       	in	r24, 0x01	; 1
- 11c:	88 7f       	andi	r24, 0xF8	; 248
- 11e:	88 33       	cpi	r24, 0x38	; 56
- 120:	59 f0       	breq	.+22     	; 0x138 <I2C_MasterSendSlaveAddress+0x3e>
- 122:	28 f4       	brcc	.+10     	; 0x12e <I2C_MasterSendSlaveAddress+0x34>
- 124:	88 31       	cpi	r24, 0x18	; 24
- 126:	a1 f0       	breq	.+40     	; 0x150 <I2C_MasterSendSlaveAddress+0x56>
- 128:	80 32       	cpi	r24, 0x20	; 32
- 12a:	41 f0       	breq	.+16     	; 0x13c <I2C_MasterSendSlaveAddress+0x42>
- 12c:	0b c0       	rjmp	.+22     	; 0x144 <I2C_MasterSendSlaveAddress+0x4a>
- 12e:	80 34       	cpi	r24, 0x40	; 64
- 130:	79 f0       	breq	.+30     	; 0x150 <I2C_MasterSendSlaveAddress+0x56>
- 132:	88 34       	cpi	r24, 0x48	; 72
- 134:	29 f0       	breq	.+10     	; 0x140 <I2C_MasterSendSlaveAddress+0x46>
- 136:	06 c0       	rjmp	.+12     	; 0x144 <I2C_MasterSendSlaveAddress+0x4a>
- 138:	88 e3       	ldi	r24, 0x38	; 56
+000000f2 <I2C_MasterSendSlaveAddress>:
+  f2:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  f6:	96 30       	cpi	r25, 0x06	; 6
+  f8:	29 f5       	brne	.+74     	; 0x144 <I2C_MasterSendSlaveAddress+0x52>
+  fa:	62 30       	cpi	r22, 0x02	; 2
+  fc:	28 f5       	brcc	.+74     	; 0x148 <I2C_MasterSendSlaveAddress+0x56>
+  fe:	88 23       	and	r24, r24
+ 100:	2c f1       	brlt	.+74     	; 0x14c <I2C_MasterSendSlaveAddress+0x5a>
+ 102:	90 e0       	ldi	r25, 0x00	; 0
+ 104:	88 0f       	add	r24, r24
+ 106:	99 1f       	adc	r25, r25
+ 108:	68 2b       	or	r22, r24
+ 10a:	63 b9       	out	0x03, r22	; 3
+ 10c:	84 e8       	ldi	r24, 0x84	; 132
+ 10e:	86 bf       	out	0x36, r24	; 54
+ 110:	06 b6       	in	r0, 0x36	; 54
+ 112:	07 fe       	sbrs	r0, 7
+ 114:	fd cf       	rjmp	.-6      	; 0x110 <I2C_MasterSendSlaveAddress+0x1e>
+ 116:	81 b1       	in	r24, 0x01	; 1
+ 118:	88 7f       	andi	r24, 0xF8	; 248
+ 11a:	88 33       	cpi	r24, 0x38	; 56
+ 11c:	59 f0       	breq	.+22     	; 0x134 <I2C_MasterSendSlaveAddress+0x42>
+ 11e:	28 f4       	brcc	.+10     	; 0x12a <I2C_MasterSendSlaveAddress+0x38>
+ 120:	88 31       	cpi	r24, 0x18	; 24
+ 122:	b1 f0       	breq	.+44     	; 0x150 <I2C_MasterSendSlaveAddress+0x5e>
+ 124:	80 32       	cpi	r24, 0x20	; 32
+ 126:	41 f0       	breq	.+16     	; 0x138 <I2C_MasterSendSlaveAddress+0x46>
+ 128:	0b c0       	rjmp	.+22     	; 0x140 <I2C_MasterSendSlaveAddress+0x4e>
+ 12a:	80 34       	cpi	r24, 0x40	; 64
+ 12c:	89 f0       	breq	.+34     	; 0x150 <I2C_MasterSendSlaveAddress+0x5e>
+ 12e:	88 34       	cpi	r24, 0x48	; 72
+ 130:	29 f0       	breq	.+10     	; 0x13c <I2C_MasterSendSlaveAddress+0x4a>
+ 132:	06 c0       	rjmp	.+12     	; 0x140 <I2C_MasterSendSlaveAddress+0x4e>
+ 134:	88 e3       	ldi	r24, 0x38	; 56
+ 136:	08 95       	ret
+ 138:	80 e2       	ldi	r24, 0x20	; 32
  13a:	08 95       	ret
- 13c:	80 e2       	ldi	r24, 0x20	; 32
+ 13c:	88 e4       	ldi	r24, 0x48	; 72
  13e:	08 95       	ret
- 140:	88 e4       	ldi	r24, 0x48	; 72
+ 140:	80 e0       	ldi	r24, 0x00	; 0
  142:	08 95       	ret
- 144:	80 e0       	ldi	r24, 0x00	; 0
+ 144:	85 e0       	ldi	r24, 0x05	; 5
  146:	08 95       	ret
- 148:	86 e0       	ldi	r24, 0x06	; 6
+ 148:	82 e0       	ldi	r24, 0x02	; 2
  14a:	08 95       	ret
- 14c:	86 e0       	ldi	r24, 0x06	; 6
+ 14c:	83 e0       	ldi	r24, 0x03	; 3
  14e:	08 95       	ret
  150:	81 e0       	ldi	r24, 0x01	; 1
  152:	08 95       	ret
 
 00000154 <I2C_MasterSendSTOP>:
  154:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 158:	87 30       	cpi	r24, 0x07	; 7
+ 158:	86 30       	cpi	r24, 0x06	; 6
  15a:	39 f4       	brne	.+14     	; 0x16a <I2C_MasterSendSTOP+0x16>
  15c:	84 e9       	ldi	r24, 0x94	; 148
  15e:	86 bf       	out	0x36, r24	; 54
@@ -217,12 +214,12 @@ int main(void)
  164:	fd cf       	rjmp	.-6      	; 0x160 <I2C_MasterSendSTOP+0xc>
  166:	81 e0       	ldi	r24, 0x01	; 1
  168:	08 95       	ret
- 16a:	86 e0       	ldi	r24, 0x06	; 6
+ 16a:	85 e0       	ldi	r24, 0x05	; 5
  16c:	08 95       	ret
 
 0000016e <I2C_MasterSendByte>:
  16e:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 172:	97 30       	cpi	r25, 0x07	; 7
+ 172:	96 30       	cpi	r25, 0x06	; 6
  174:	69 f4       	brne	.+26     	; 0x190 <I2C_MasterSendByte+0x22>
  176:	83 b9       	out	0x03, r24	; 3
  178:	84 e8       	ldi	r24, 0x84	; 132
@@ -237,7 +234,7 @@ int main(void)
  18a:	80 33       	cpi	r24, 0x30	; 48
  18c:	29 f4       	brne	.+10     	; 0x198 <I2C_MasterSendByte+0x2a>
  18e:	08 95       	ret
- 190:	86 e0       	ldi	r24, 0x06	; 6
+ 190:	85 e0       	ldi	r24, 0x05	; 5
  192:	08 95       	ret
  194:	88 e2       	ldi	r24, 0x28	; 40
  196:	08 95       	ret
@@ -245,7 +242,10 @@ int main(void)
  19a:	08 95       	ret
 
 0000019c <I2C_MasterSendPacket>:
-
+* Parameters (out): None
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Send Multiple data bytes to a slave.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 enuI2C_Status_t I2C_MasterSendPacket(uint8_t u8_slaveAddress, uint8_t * pu8_data, uint16_t u16_dataLen)
 {
  19c:	bf 92       	push	r11
@@ -258,111 +258,143 @@ enuI2C_Status_t I2C_MasterSendPacket(uint8_t u8_slaveAddress, uint8_t * pu8_data
  1aa:	cf 93       	push	r28
  1ac:	df 93       	push	r29
  1ae:	f8 2e       	mov	r15, r24
- 1b0:	8b 01       	movw	r16, r22
- 1b2:	ea 01       	movw	r28, r20
+ 1b0:	eb 01       	movw	r28, r22
+ 1b2:	8a 01       	movw	r16, r20
 /**************************************************************************************/
 /*								Start of Error Checking								  */
 /**************************************************************************************/
 	/* Check if the I2C module is not initialized */
 	if (I2C_STATUS_INIT != genuI2C_Status)
  1b4:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 1b8:	87 30       	cpi	r24, 0x07	; 7
- 1ba:	21 f5       	brne	.+72     	; 0x204 <I2C_MasterSendPacket+0x68>
-/**************************************************************************************/
+ 1b8:	86 30       	cpi	r24, 0x06	; 6
+ 1ba:	39 f5       	brne	.+78     	; 0x20a <I2C_MasterSendPacket+0x6e>
+	{
+		return I2C_STATUS_NOT_INIT;
+	}else{/*Nothing to here*/}
+	/* Check if Argument is NULL PTR */
+	if (pu8_data == NULL_PTR)
+ 1bc:	20 97       	sbiw	r28, 0x00	; 0
+ 1be:	39 f1       	breq	.+78     	; 0x20e <I2C_MasterSendPacket+0x72>
+	{
+		return I2C_STATUS_NULL_ARGUMENT;
+	}
+	else{/*Nothing to here*/}
+	/* Check if the slave address is out of range */
+	if(u8_slaveAddress > 0x7F)
+ 1c0:	ff 20       	and	r15, r15
+ 1c2:	3c f1       	brlt	.+78     	; 0x212 <I2C_MasterSendPacket+0x76>
 
 /**************************************************************************************/
 /*								Function Implementation								  */
 /**************************************************************************************/
+	/* Initiate Start Bit */
 	if (I2C_MasterSendSTART() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
- 1bc:	0e 94 68 00 	call	0xd0	; 0xd0 <I2C_MasterSendSTART>
- 1c0:	88 23       	and	r24, r24
- 1c2:	29 f1       	breq	.+74     	; 0x20e <I2C_MasterSendPacket+0x72>
+ 1c4:	0e 94 66 00 	call	0xcc	; 0xcc <I2C_MasterSendSTART>
+ 1c8:	88 23       	and	r24, r24
+ 1ca:	41 f1       	breq	.+80     	; 0x21c <I2C_MasterSendPacket+0x80>
+	/* Sened the Slave Address Along with Write Command */
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_WRITE) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
- 1c4:	60 e0       	ldi	r22, 0x00	; 0
- 1c6:	8f 2d       	mov	r24, r15
- 1c8:	0e 94 7d 00 	call	0xfa	; 0xfa <I2C_MasterSendSlaveAddress>
- 1cc:	b8 2e       	mov	r11, r24
- 1ce:	81 e0       	ldi	r24, 0x01	; 1
- 1d0:	b8 12       	cpse	r11, r24
- 1d2:	1a c0       	rjmp	.+52     	; 0x208 <I2C_MasterSendPacket+0x6c>
- 1d4:	0c c0       	rjmp	.+24     	; 0x1ee <I2C_MasterSendPacket+0x52>
+ 1cc:	60 e0       	ldi	r22, 0x00	; 0
+ 1ce:	8f 2d       	mov	r24, r15
+ 1d0:	0e 94 79 00 	call	0xf2	; 0xf2 <I2C_MasterSendSlaveAddress>
+ 1d4:	b8 2e       	mov	r11, r24
+ 1d6:	81 e0       	ldi	r24, 0x01	; 1
+ 1d8:	b8 12       	cpse	r11, r24
+ 1da:	1d c0       	rjmp	.+58     	; 0x216 <I2C_MasterSendPacket+0x7a>
+ 1dc:	0b c0       	rjmp	.+22     	; 0x1f4 <I2C_MasterSendPacket+0x58>
 	
+	/* Loop for length of data and send Byte by Byte */
 	while (u16_dataLen--)
 	if (I2C_MasterSendByte(*pu8_data++) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
- 1d6:	68 01       	movw	r12, r16
- 1d8:	ef ef       	ldi	r30, 0xFF	; 255
- 1da:	ce 1a       	sub	r12, r30
- 1dc:	de 0a       	sbc	r13, r30
- 1de:	f8 01       	movw	r30, r16
- 1e0:	80 81       	ld	r24, Z
- 1e2:	0e 94 b7 00 	call	0x16e	; 0x16e <I2C_MasterSendByte>
-/*								Function Implementation								  */
-/**************************************************************************************/
+ 1de:	6e 01       	movw	r12, r28
+ 1e0:	8f ef       	ldi	r24, 0xFF	; 255
+ 1e2:	c8 1a       	sub	r12, r24
+ 1e4:	d8 0a       	sbc	r13, r24
+ 1e6:	88 81       	ld	r24, Y
+ 1e8:	0e 94 b7 00 	call	0x16e	; 0x16e <I2C_MasterSendByte>
 	if (I2C_MasterSendSTART() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
+	/* Sened the Slave Address Along with Write Command */
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_WRITE) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
 	
+	/* Loop for length of data and send Byte by Byte */
 	while (u16_dataLen--)
- 1e6:	e7 01       	movw	r28, r14
+ 1ec:	87 01       	movw	r16, r14
 	if (I2C_MasterSendByte(*pu8_data++) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
- 1e8:	88 23       	and	r24, r24
- 1ea:	89 f0       	breq	.+34     	; 0x20e <I2C_MasterSendPacket+0x72>
- 1ec:	86 01       	movw	r16, r12
-/*								Function Implementation								  */
-/**************************************************************************************/
+ 1ee:	88 23       	and	r24, r24
+ 1f0:	a9 f0       	breq	.+42     	; 0x21c <I2C_MasterSendPacket+0x80>
+ 1f2:	e6 01       	movw	r28, r12
 	if (I2C_MasterSendSTART() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
+	/* Sened the Slave Address Along with Write Command */
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_WRITE) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
 	
+	/* Loop for length of data and send Byte by Byte */
 	while (u16_dataLen--)
- 1ee:	7e 01       	movw	r14, r28
- 1f0:	f1 e0       	ldi	r31, 0x01	; 1
- 1f2:	ef 1a       	sub	r14, r31
- 1f4:	f1 08       	sbc	r15, r1
- 1f6:	cd 2b       	or	r28, r29
- 1f8:	71 f7       	brne	.-36     	; 0x1d6 <I2C_MasterSendPacket+0x3a>
+ 1f4:	78 01       	movw	r14, r16
+ 1f6:	81 e0       	ldi	r24, 0x01	; 1
+ 1f8:	e8 1a       	sub	r14, r24
+ 1fa:	f1 08       	sbc	r15, r1
+ 1fc:	01 2b       	or	r16, r17
+ 1fe:	79 f7       	brne	.-34     	; 0x1de <I2C_MasterSendPacket+0x42>
 	if (I2C_MasterSendByte(*pu8_data++) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	
+	/* Send a Stop Bit */
 	if (I2C_MasterSendSTOP() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
- 1fa:	0e 94 aa 00 	call	0x154	; 0x154 <I2C_MasterSendSTOP>
- 1fe:	81 11       	cpse	r24, r1
- 200:	05 c0       	rjmp	.+10     	; 0x20c <I2C_MasterSendPacket+0x70>
- 202:	05 c0       	rjmp	.+10     	; 0x20e <I2C_MasterSendPacket+0x72>
+ 200:	0e 94 aa 00 	call	0x154	; 0x154 <I2C_MasterSendSTOP>
+ 204:	81 11       	cpse	r24, r1
+ 206:	09 c0       	rjmp	.+18     	; 0x21a <I2C_MasterSendPacket+0x7e>
+ 208:	09 c0       	rjmp	.+18     	; 0x21c <I2C_MasterSendPacket+0x80>
 /*								Start of Error Checking								  */
 /**************************************************************************************/
 	/* Check if the I2C module is not initialized */
 	if (I2C_STATUS_INIT != genuI2C_Status)
 	{
 		return I2C_STATUS_NOT_INIT;
- 204:	86 e0       	ldi	r24, 0x06	; 6
- 206:	03 c0       	rjmp	.+6      	; 0x20e <I2C_MasterSendPacket+0x72>
-
-/**************************************************************************************/
+ 20a:	85 e0       	ldi	r24, 0x05	; 5
+ 20c:	07 c0       	rjmp	.+14     	; 0x21c <I2C_MasterSendPacket+0x80>
+	}else{/*Nothing to here*/}
+	/* Check if Argument is NULL PTR */
+	if (pu8_data == NULL_PTR)
+	{
+		return I2C_STATUS_NULL_ARGUMENT;
+ 20e:	84 e0       	ldi	r24, 0x04	; 4
+ 210:	05 c0       	rjmp	.+10     	; 0x21c <I2C_MasterSendPacket+0x80>
+	}
+	else{/*Nothing to here*/}
+	/* Check if the slave address is out of range */
+	if(u8_slaveAddress > 0x7F)
+	{
+		return I2C_STATUS_INVALID_SLV_ADDR;
+ 212:	83 e0       	ldi	r24, 0x03	; 3
+ 214:	03 c0       	rjmp	.+6      	; 0x21c <I2C_MasterSendPacket+0x80>
 /*								Function Implementation								  */
 /**************************************************************************************/
+	/* Initiate Start Bit */
 	if (I2C_MasterSendSTART() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
+	/* Sened the Slave Address Along with Write Command */
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_WRITE) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
- 208:	80 e0       	ldi	r24, 0x00	; 0
- 20a:	01 c0       	rjmp	.+2      	; 0x20e <I2C_MasterSendPacket+0x72>
-	
+ 216:	80 e0       	ldi	r24, 0x00	; 0
+ 218:	01 c0       	rjmp	.+2      	; 0x21c <I2C_MasterSendPacket+0x80>
 	while (u16_dataLen--)
 	if (I2C_MasterSendByte(*pu8_data++) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	
+	/* Send a Stop Bit */
 	if (I2C_MasterSendSTOP() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	return I2C_STATUS_ERROR_OK;
- 20c:	8b 2d       	mov	r24, r11
+ 21a:	8b 2d       	mov	r24, r11
 }
- 20e:	df 91       	pop	r29
- 210:	cf 91       	pop	r28
- 212:	1f 91       	pop	r17
- 214:	0f 91       	pop	r16
- 216:	ff 90       	pop	r15
- 218:	ef 90       	pop	r14
- 21a:	df 90       	pop	r13
- 21c:	cf 90       	pop	r12
- 21e:	bf 90       	pop	r11
- 220:	08 95       	ret
+ 21c:	df 91       	pop	r29
+ 21e:	cf 91       	pop	r28
+ 220:	1f 91       	pop	r17
+ 222:	0f 91       	pop	r16
+ 224:	ff 90       	pop	r15
+ 226:	ef 90       	pop	r14
+ 228:	df 90       	pop	r13
+ 22a:	cf 90       	pop	r12
+ 22c:	bf 90       	pop	r11
+ 22e:	08 95       	ret
 
-00000222 <_exit>:
- 222:	f8 94       	cli
+00000230 <_exit>:
+ 230:	f8 94       	cli
 
-00000224 <__stop_program>:
- 224:	ff cf       	rjmp	.-2      	; 0x224 <__stop_program>
+00000232 <__stop_program>:
+ 232:	ff cf       	rjmp	.-2      	; 0x232 <__stop_program>

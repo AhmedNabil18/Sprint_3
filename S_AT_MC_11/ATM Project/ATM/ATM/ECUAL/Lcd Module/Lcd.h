@@ -71,6 +71,9 @@ enuLcd_Status_t Lcd_printChar(uint8_t u8_data);
 /* Function to print string on the LCD */
 enuLcd_Status_t Lcd_printString(uint8_t *pu8_data);
 
+/* Function to print 2 strings on the LCD 1st and 2nd rows */
+enuLcd_Status_t Lcd_printLCD(uint8_t *pu8_data1, uint8_t *pu8_data2);
+
 /* Function to set the cursor of the LCD */
 enuLcd_Status_t Lcd_setCursor(uint8_t u8_Row, uint8_t u8_Column);
 
