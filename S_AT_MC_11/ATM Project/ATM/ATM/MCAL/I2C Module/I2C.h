@@ -175,6 +175,10 @@ enuI2C_Status_t I2C_MasterReceiveByte_ACK(uint8_t *pu8_data);
 /*- Receive Single Data Byte from Slave with NACK -*/
 enuI2C_Status_t I2C_MasterReceiveByte_NACK(uint8_t *pu8_data);
 
+/*- Send Multiple Data Bytes with multiple Commands to Slave -*/
+enuI2C_Status_t I2C_MasterSendGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_location, uint16_t u16_locationLen,\
+										uint8_t * pu8_data, uint16_t u16_dataLen);
+
 /*- Send Multiple Data Bytes to Slave -*/
 enuI2C_Status_t I2C_MasterSendPacket(uint8_t u8_slaveAddress, uint8_t * pu8_data, uint16_t u16_dataLen);
 

@@ -11,8 +11,9 @@ uint8_t gau8_Rows[KEYPAD_ROWS_NUM] = {KEYPAD_ROW_A, KEYPAD_ROW_B, KEYPAD_ROW_C, 
 	
 uint8_t gau8_ButtonSymbols[KEYPAD_ROWS_NUM][KEYPAD_COLUMNS_NUM] =
 {
-	{'7','8','9','x'},
+	{'1','2','3','x'},
 	{'4','5','6','-'},
-	{'1','2','3','+'},
+	{'7','8','9','+'},
 	{'0','.','=','+'}
 } ;
+

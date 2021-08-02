@@ -219,13 +219,10 @@ enuSpi_Status_t Spi_SlaveSendByte(uint8_t u8_data)
 /**************************************************************************************/
 /*								Function Implementation								  */
 /**************************************************************************************/
-	volatile uint8_t u8_buffer;
 	/* Put the data in the Data Register */
 	SPI_SPDR_REG = u8_data;
 	/* Wait for the transfer to complete */
 	while(BIT_IS_CLR(SPI_SPSR_REG, SPI_SPSR_SPIF));
-	/* Flush the buffer to clear the SPIF bit */
-	u8_buffer = SPI_SPDR_REG;
 	
 	return SPI_STATUS_ERROR_OK;
 }

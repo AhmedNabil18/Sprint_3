@@ -58,7 +58,7 @@ enuApp_Status_t AppADMIN_getInput(uint8_t* pu8_data)
 	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
 	do
 	{
-		if(Terminal_Out((uint8_t*)"Your Input: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nYour Input: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 		do
@@ -74,7 +74,7 @@ enuApp_Status_t AppADMIN_getInput(uint8_t* pu8_data)
 		if (pu8_data[1] == '\0')
 		break;
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid Choice, Only Choose from 1 to 3\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nInvalid Choice, Only Choose from 1 to 3\r") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	} while (1);
 	return APP_STATUS_ERROR_OK;
@@ -95,7 +95,7 @@ enuApp_Status_t AppADMIN_getnewMaxAmount(uint8_t* pu8_data)
 	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
 	do
 	{
-		if(Terminal_Out((uint8_t*)"Max Amount: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nMax Amount: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 		do
@@ -111,7 +111,7 @@ enuApp_Status_t AppADMIN_getnewMaxAmount(uint8_t* pu8_data)
 		if ((pu8_data[7] == '\0') && (pu8_data[4] == '.'))
 		break;
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid Balance, Only 7 characters eg. 1234.56\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nInvalid Balance, Only 7 characters eg. 1234.56\r") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	} while (1);
 	return APP_STATUS_ERROR_OK;
@@ -132,7 +132,7 @@ enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data)
 	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
 	do
 	{
-		if(Terminal_Out((uint8_t*)"PAN: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nPAN: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 		do
@@ -148,7 +148,7 @@ enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data)
 		if (pu8_data[9] == '\0')
 		break;
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid PAN, Only 9 characters\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nInvalid PAN, Only 9 characters\r") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	} while (1);
 	return APP_STATUS_ERROR_OK;
@@ -169,7 +169,7 @@ enuApp_Status_t AppADMIN_getCustomerBalance(uint8_t* pu8_data)
 	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
 	do
 	{
-		if(Terminal_Out((uint8_t*)"Balance: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nBalance: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 		do
@@ -185,7 +185,7 @@ enuApp_Status_t AppADMIN_getCustomerBalance(uint8_t* pu8_data)
 		if (pu8_data[7] == '\0')
 		break;
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid Balance, Only 7 characters\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nInvalid Balance, Only 7 characters\r") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	} while (1);
 	return APP_STATUS_ERROR_OK;
@@ -208,7 +208,7 @@ enuApp_Status_t AppADMIN_getAtmPIN(uint8_t* pu8_data)
 	Terminal_enablePasswordMode();
 	do
 	{
-		if(Terminal_Out((uint8_t*)"ATM PIN: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nATM PIN: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 		do
@@ -223,16 +223,16 @@ enuApp_Status_t AppADMIN_getAtmPIN(uint8_t* pu8_data)
 		
 		if(stringCompare((uint8_t*)ATM_DB_ATM_PIN_VAL ,pu8_data) != 1)
 		{
-			if(Terminal_Out((uint8_t*)"Incorrect PIN\r") != TERMINAL_STATUS_ERROR_OK)
+			if(Terminal_Out((uint8_t*)"\nIncorrect PIN\r") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
 		}else
 		{
-			if(Terminal_Out((uint8_t*)"Loading...\r") != TERMINAL_STATUS_ERROR_OK)
+			if(Terminal_Out((uint8_t*)"\nLoading...\r") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
 			break;
 		}
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid PIN, Only 4 characters\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nInvalid PIN, Only 4 characters\r") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	} while (1);
 	Terminal_disablePasswordMode();

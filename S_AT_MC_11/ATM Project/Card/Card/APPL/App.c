@@ -61,7 +61,7 @@ enuApp_Status_t App_start(void)
 	Ext_INT0_init(EXT_INT0_EDGE_FALL);
 	INT0_setCallBack(ATM_REQ_ISR);
 	EnableGlbl_Interrupt();
-	DIO_PORTA_DIR = 0xFF;
+	
 	/* Application Super Loop */
 	while (1)
 	{
@@ -113,13 +113,13 @@ enuApp_Status_t App_init(void)
 // 		return APP_STATUS_ERROR_NOK;
 // 	Delay_ms(10);
 	/**************************/
-	if(Terminal_Out((uint8_t*)"CARD Terminal\r") != TERMINAL_STATUS_ERROR_OK)
+	if(Terminal_Out((uint8_t*)"CARD Terminal\r\n") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	uint8_t u8_initData = 0;
 	/* Check if the card was previously registered and has its data in the eeprom */
 	if(Eeprom_24_readByte(CARD_INIT_ADDRESS, &u8_initData) != EEPROM_24_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
-		
+	DIO_PORTD_DATA |= 1<<2;
 	if(u8_initData != CARD_INITIALIZED)
 	{
 		gu8_CardMode = CARD_MODE_ADMIN;
@@ -165,7 +165,7 @@ enuApp_Status_t App_update(void)
 	uint8_t au8_termInput[10] = {0};
 	if(gu8_CardMode == CARD_MODE_ADMIN)
 	{ /**************** PROGRAMMING MODE ****************/
-			if(Terminal_Out((uint8_t*)"Programming Mode\rEnter the Following Data\r") != TERMINAL_STATUS_ERROR_OK)
+			if(Terminal_Out((uint8_t*)"Programming Mode\r\nEnter the Following Data\r\n") != TERMINAL_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
 			uint8_t au8_tempCardHolderName[10]={0};
 			uint8_t au8_tempPAN[10]={0};
@@ -189,7 +189,7 @@ enuApp_Status_t App_update(void)
 				return APP_STATUS_ERROR_NOK;
 		
 			gu8_CardMode = CARD_MODE_USER;
-			if(Terminal_Out((uint8_t*)"USER Mode\r") != TERMINAL_STATUS_ERROR_OK)
+			if(Terminal_Out((uint8_t*)"\nUSER Mode\r\n") != TERMINAL_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
 	/****************************************************************/
 	}else
@@ -207,7 +207,7 @@ enuApp_Status_t App_update(void)
 					if(gu8_USER_Mode_State == USER_BUSY) /* CARD is Busy in transaction */
 					{
 						gu8_ADMIN_Request = ADMIN_REQUESTED;
-						if(Terminal_Out((uint8_t*)"CARD is Busy Now, Programming Mode will start after current Process\r") != TERMINAL_STATUS_ERROR_OK)
+						if(Terminal_Out((uint8_t*)"CARD is Busy Now, Programming Mode will start after current Process\r\n") != TERMINAL_STATUS_ERROR_OK)
 							return APP_STATUS_ERROR_NOK;
 					}else /* User Mode is Idle ==> The Card is not used by ATM */
 					{
@@ -227,7 +227,7 @@ enuApp_Status_t App_update(void)
 				
 				if (gu8_ADMIN_Request == ADMIN_NOT_REQUESTED)
 				{
-					if(Terminal_Out((uint8_t*)"Data Successfully Sent\r") != TERMINAL_STATUS_ERROR_OK)
+					if(Terminal_Out((uint8_t*)"Data Successfully Sent\r\n") != TERMINAL_STATUS_ERROR_OK)
 						return APP_STATUS_ERROR_NOK;
 				}
 			}
@@ -292,7 +292,7 @@ enuApp_Status_t AppADMIN_getCardName(uint8_t* pu8_data)
 		if (pu8_data[MAX_NAME_LENGTH] == '\0')
 			break;
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid Name, Only 9 characters\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nInvalid Name, Only 9 characters\r\n") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
 	} while (1);
 	return APP_STATUS_ERROR_OK;
@@ -313,7 +313,7 @@ enuApp_Status_t AppADMIN_getCardPAN(uint8_t* pu8_data)
 	enuApp_Status_t App_terminalStatus = APP_STATUS_ERROR_OK;
 	do
 	{
-		if(Terminal_Out((uint8_t*)"Card PAN: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nCard PAN: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 		do
@@ -329,7 +329,7 @@ enuApp_Status_t AppADMIN_getCardPAN(uint8_t* pu8_data)
 		if (pu8_data[9] == '\0')
 		break;
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid PAN, Only 9 characters\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nInvalid PAN, Only 9 characters\r\n") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	} while (1);
 	return APP_STATUS_ERROR_OK;
@@ -351,7 +351,7 @@ enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data)
 	Terminal_enablePasswordMode();
 	do
 	{
-		if(Terminal_Out((uint8_t*)"Card PIN: ") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nCard PIN: ") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 		do
@@ -367,7 +367,7 @@ enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data)
 		if (pu8_data[4] == '\0')
 			break;
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid PIN, Only 4 characters\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"Invalid PIN, Only 4 characters\r\n") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
 	} while (1);
 	Terminal_disablePasswordMode();
@@ -415,7 +415,7 @@ enuApp_Status_t AppADMIN_saveCardData(strCardData_t* pstr_CardData)
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 enuApp_Status_t AppUSER_sendCardData(strCardData_t* pstr_CardData)
 {
-	if(Terminal_Out((uint8_t*)"Data is being sent to the ATM...\r") != TERMINAL_STATUS_ERROR_OK)
+	if(Terminal_Out((uint8_t*)"Data is being sent to the ATM...\r\n") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
 	uint8_t au8_DataFrame[30] = {0};

@@ -409,7 +409,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x164c
+.text           0x00000000     0x164e
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -512,167 +512,167 @@ END GROUP
                 0x00000536       0x80 APPL/App.o
                 0x00000536                AppMemory_getCardData
  .text.App_init
-                0x000005b6       0x88 APPL/App.o
+                0x000005b6       0x8e APPL/App.o
                 0x000005b6                App_init
  .text.App_start
-                0x0000063e       0x2c APPL/App.o
-                0x0000063e                App_start
+                0x00000644       0x28 APPL/App.o
+                0x00000644                App_start
  .text.EEPROM_getAddresses
-                0x0000066a       0x1e ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x0000066c       0x1e ECUAL/Eeprom_I2C Module/Eeprom_24.o
  .text.Eeprom_24_init
-                0x00000688       0x1e ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x00000688                Eeprom_24_init
+                0x0000068a       0x1e ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x0000068a                Eeprom_24_init
  .text.Eeprom_24_writeByte
-                0x000006a6       0x78 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x000006a6                Eeprom_24_writeByte
+                0x000006a8       0x78 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x000006a8                Eeprom_24_writeByte
  .text.Eeprom_24_readByte
-                0x0000071e       0x82 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x0000071e                Eeprom_24_readByte
+                0x00000720       0x82 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x00000720                Eeprom_24_readByte
  .text.Eeprom_24_writePage
-                0x000007a0       0x72 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x000007a0                Eeprom_24_writePage
+                0x000007a2       0x72 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x000007a2                Eeprom_24_writePage
  .text.Eeprom_24_readPage
-                0x00000812       0x72 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x00000812                Eeprom_24_readPage
+                0x00000814       0x72 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x00000814                Eeprom_24_readPage
  .text.Eeprom_24_writePacket
-                0x00000884      0x1b2 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x00000884                Eeprom_24_writePacket
+                0x00000886      0x1b2 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x00000886                Eeprom_24_writePacket
  .text.Eeprom_24_readPacket
-                0x00000a36      0x174 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x00000a36                Eeprom_24_readPacket
+                0x00000a38      0x174 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x00000a38                Eeprom_24_readPacket
  .text.Uart_RXC_ISR
-                0x00000baa       0x82 ECUAL/Terminal Module/Terminal.o
-                0x00000baa                Uart_RXC_ISR
+                0x00000bac       0x82 ECUAL/Terminal Module/Terminal.o
+                0x00000bac                Uart_RXC_ISR
  .text.Terminal_init
-                0x00000c2c       0x2a ECUAL/Terminal Module/Terminal.o
-                0x00000c2c                Terminal_init
+                0x00000c2e       0x2a ECUAL/Terminal Module/Terminal.o
+                0x00000c2e                Terminal_init
  .text.Terminal_Out
-                0x00000c56       0x36 ECUAL/Terminal Module/Terminal.o
-                0x00000c56                Terminal_Out
+                0x00000c58       0x36 ECUAL/Terminal Module/Terminal.o
+                0x00000c58                Terminal_Out
  .text.Terminal_In
-                0x00000c8c       0x36 ECUAL/Terminal Module/Terminal.o
-                0x00000c8c                Terminal_In
+                0x00000c8e       0x36 ECUAL/Terminal Module/Terminal.o
+                0x00000c8e                Terminal_In
  .text.Terminal_enablePasswordMode
-                0x00000cc2        0x8 ECUAL/Terminal Module/Terminal.o
-                0x00000cc2                Terminal_enablePasswordMode
+                0x00000cc4        0x8 ECUAL/Terminal Module/Terminal.o
+                0x00000cc4                Terminal_enablePasswordMode
  .text.Terminal_disablePasswordMode
-                0x00000cca        0x8 ECUAL/Terminal Module/Terminal.o
-                0x00000cca                Terminal_disablePasswordMode
- .text.main     0x00000cd2        0x6 main.o
-                0x00000cd2                main
+                0x00000ccc        0x8 ECUAL/Terminal Module/Terminal.o
+                0x00000ccc                Terminal_disablePasswordMode
+ .text.main     0x00000cd4        0x6 main.o
+                0x00000cd4                main
  .text.Delay_ms
-                0x00000cd8      0x120 MCAL/Delay Module/Delay.o
-                0x00000cd8                Delay_ms
+                0x00000cda      0x120 MCAL/Delay Module/Delay.o
+                0x00000cda                Delay_ms
  .text.Ext_INT0_init
-                0x00000df8        0xe MCAL/Ext Interrupt Module/Ext_INT.o
-                0x00000df8                Ext_INT0_init
+                0x00000dfa        0xe MCAL/Ext Interrupt Module/Ext_INT.o
+                0x00000dfa                Ext_INT0_init
  .text.INT0_setCallBack
-                0x00000e06        0xa MCAL/Ext Interrupt Module/Ext_INT.o
-                0x00000e06                INT0_setCallBack
+                0x00000e08        0xa MCAL/Ext Interrupt Module/Ext_INT.o
+                0x00000e08                INT0_setCallBack
  .text.__vector_1
-                0x00000e10       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
-                0x00000e10                __vector_1
+                0x00000e12       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
+                0x00000e12                __vector_1
  .text.__vector_2
-                0x00000e5e       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
-                0x00000e5e                __vector_2
+                0x00000e60       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
+                0x00000e60                __vector_2
  .text.__vector_3
-                0x00000eac       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
-                0x00000eac                __vector_3
+                0x00000eae       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
+                0x00000eae                __vector_3
  .text.I2C_MasterInit
-                0x00000efa       0x1c MCAL/I2C Module/I2C.o
-                0x00000efa                I2C_MasterInit
+                0x00000efc       0x1c MCAL/I2C Module/I2C.o
+                0x00000efc                I2C_MasterInit
  .text.I2C_MasterSendSTART
-                0x00000f16       0x26 MCAL/I2C Module/I2C.o
-                0x00000f16                I2C_MasterSendSTART
+                0x00000f18       0x26 MCAL/I2C Module/I2C.o
+                0x00000f18                I2C_MasterSendSTART
  .text.I2C_MasterSendSlaveAddress
-                0x00000f3c       0x62 MCAL/I2C Module/I2C.o
-                0x00000f3c                I2C_MasterSendSlaveAddress
+                0x00000f3e       0x62 MCAL/I2C Module/I2C.o
+                0x00000f3e                I2C_MasterSendSlaveAddress
  .text.I2C_MasterSendRepSTART
-                0x00000f9e       0x26 MCAL/I2C Module/I2C.o
-                0x00000f9e                I2C_MasterSendRepSTART
+                0x00000fa0       0x26 MCAL/I2C Module/I2C.o
+                0x00000fa0                I2C_MasterSendRepSTART
  .text.I2C_MasterSendSTOP
-                0x00000fc4       0x1a MCAL/I2C Module/I2C.o
-                0x00000fc4                I2C_MasterSendSTOP
+                0x00000fc6       0x1a MCAL/I2C Module/I2C.o
+                0x00000fc6                I2C_MasterSendSTOP
  .text.I2C_MasterSendByte
-                0x00000fde       0x2e MCAL/I2C Module/I2C.o
-                0x00000fde                I2C_MasterSendByte
+                0x00000fe0       0x2e MCAL/I2C Module/I2C.o
+                0x00000fe0                I2C_MasterSendByte
  .text.I2C_MasterReceiveByte_ACK
-                0x0000100c       0x34 MCAL/I2C Module/I2C.o
-                0x0000100c                I2C_MasterReceiveByte_ACK
+                0x0000100e       0x34 MCAL/I2C Module/I2C.o
+                0x0000100e                I2C_MasterReceiveByte_ACK
  .text.I2C_MasterReceiveByte_NACK
-                0x00001040       0x34 MCAL/I2C Module/I2C.o
-                0x00001040                I2C_MasterReceiveByte_NACK
+                0x00001042       0x34 MCAL/I2C Module/I2C.o
+                0x00001042                I2C_MasterReceiveByte_NACK
  .text.I2C_MasterReceiveGeneral
-                0x00001074       0xf8 MCAL/I2C Module/I2C.o
-                0x00001074                I2C_MasterReceiveGeneral
+                0x00001076       0xf8 MCAL/I2C Module/I2C.o
+                0x00001076                I2C_MasterReceiveGeneral
  .text.I2C_MasterSendToLocation
-                0x0000116c       0x9e MCAL/I2C Module/I2C.o
-                0x0000116c                I2C_MasterSendToLocation
+                0x0000116e       0x9e MCAL/I2C Module/I2C.o
+                0x0000116e                I2C_MasterSendToLocation
  .text.I2C_MasterReceiveFromLocation
-                0x0000120a       0x2e MCAL/I2C Module/I2C.o
-                0x0000120a                I2C_MasterReceiveFromLocation
+                0x0000120c       0x2e MCAL/I2C Module/I2C.o
+                0x0000120c                I2C_MasterReceiveFromLocation
  .text.Spi_init
-                0x00001238       0x5c MCAL/Spi Module/Spi.o
-                0x00001238                Spi_init
+                0x0000123a       0x5c MCAL/Spi Module/Spi.o
+                0x0000123a                Spi_init
  .text.Spi_MasterSendByte
-                0x00001294       0x2a MCAL/Spi Module/Spi.o
-                0x00001294                Spi_MasterSendByte
+                0x00001296       0x2a MCAL/Spi Module/Spi.o
+                0x00001296                Spi_MasterSendByte
  .text.Spi_MasterSendPacket
-                0x000012be       0x4c MCAL/Spi Module/Spi.o
-                0x000012be                Spi_MasterSendPacket
+                0x000012c0       0x4c MCAL/Spi Module/Spi.o
+                0x000012c0                Spi_MasterSendPacket
  .text.__vector_12
-                0x0000130a       0x4e MCAL/Spi Module/Spi.o
-                0x0000130a                __vector_12
+                0x0000130c       0x4e MCAL/Spi Module/Spi.o
+                0x0000130c                __vector_12
  .text.stringLength
-                0x00001358       0x18 MCAL/StringManipulation.o
-                0x00001358                stringLength
+                0x0000135a       0x18 MCAL/StringManipulation.o
+                0x0000135a                stringLength
  .text.stringCompare
-                0x00001370       0x5e MCAL/StringManipulation.o
-                0x00001370                stringCompare
+                0x00001372       0x5e MCAL/StringManipulation.o
+                0x00001372                stringCompare
  .text.stringConcatenate
-                0x000013ce       0x56 MCAL/StringManipulation.o
-                0x000013ce                stringConcatenate
+                0x000013d0       0x56 MCAL/StringManipulation.o
+                0x000013d0                stringConcatenate
  .text.EmptyString
-                0x00001424       0x18 MCAL/StringManipulation.o
-                0x00001424                EmptyString
+                0x00001426       0x18 MCAL/StringManipulation.o
+                0x00001426                EmptyString
  .text.stringCopy
-                0x0000143c       0x22 MCAL/StringManipulation.o
-                0x0000143c                stringCopy
+                0x0000143e       0x22 MCAL/StringManipulation.o
+                0x0000143e                stringCopy
  .text.Uart_init
-                0x0000145e       0x2c MCAL/Uart Module/Uart.o
-                0x0000145e                Uart_init
+                0x00001460       0x2c MCAL/Uart Module/Uart.o
+                0x00001460                Uart_init
  .text.Uart_sendByte
-                0x0000148a       0x16 MCAL/Uart Module/Uart.o
-                0x0000148a                Uart_sendByte
+                0x0000148c       0x16 MCAL/Uart Module/Uart.o
+                0x0000148c                Uart_sendByte
  .text.Uart_sendPacket
-                0x000014a0       0x4e MCAL/Uart Module/Uart.o
-                0x000014a0                Uart_sendPacket
+                0x000014a2       0x4e MCAL/Uart Module/Uart.o
+                0x000014a2                Uart_sendPacket
  .text.Uart_EnableNotification_RXC
-                0x000014ee       0x2a MCAL/Uart Module/Uart.o
-                0x000014ee                Uart_EnableNotification_RXC
+                0x000014f0       0x2a MCAL/Uart Module/Uart.o
+                0x000014f0                Uart_EnableNotification_RXC
  .text.Uart_DataRegister
-                0x00001518        0x4 MCAL/Uart Module/Uart.o
-                0x00001518                Uart_DataRegister
+                0x0000151a        0x4 MCAL/Uart Module/Uart.o
+                0x0000151a                Uart_DataRegister
  .text.__vector_15
-                0x0000151c       0x4e MCAL/Uart Module/Uart.o
-                0x0000151c                __vector_15
+                0x0000151e       0x4e MCAL/Uart Module/Uart.o
+                0x0000151e                __vector_15
  .text.__vector_13
-                0x0000156a       0x4e MCAL/Uart Module/Uart.o
-                0x0000156a                __vector_13
+                0x0000156c       0x4e MCAL/Uart Module/Uart.o
+                0x0000156c                __vector_13
  .text.__vector_14
-                0x000015b8       0x4e MCAL/Uart Module/Uart.o
-                0x000015b8                __vector_14
- .text.libgcc   0x00001606       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_adddi3_s8.o)
-                0x00001606                __adddi3_s8
- .text.libgcc   0x0000161e       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_cmpdi2.o)
-                0x0000161e                __cmpdi2
- .text.libgcc   0x00001630       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_cmpdi2_s8.o)
-                0x00001630                __cmpdi2_s8
-                0x00001648                . = ALIGN (0x2)
+                0x000015ba       0x4e MCAL/Uart Module/Uart.o
+                0x000015ba                __vector_14
+ .text.libgcc   0x00001608       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_adddi3_s8.o)
+                0x00001608                __adddi3_s8
+ .text.libgcc   0x00001620       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_cmpdi2.o)
+                0x00001620                __cmpdi2
+ .text.libgcc   0x00001632       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_cmpdi2_s8.o)
+                0x00001632                __cmpdi2_s8
+                0x0000164a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001648        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00001648                _exit
-                0x00001648                exit
+ .fini9         0x0000164a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000164a                _exit
+                0x0000164a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -691,11 +691,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001648        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000164a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000164c                _etext = .
+                0x0000164e                _etext = .
 
-.data           0x00800060      0x15e load address 0x0000164c
+.data           0x00800060      0x16e load address 0x0000164e
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -713,67 +713,68 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800065      0x153 APPL/App.o
-                                0x155 (size before relaxing)
+                0x00800065      0x162 APPL/App.o
+                                0x164 (size before relaxing)
  .rodata.cgau8_ADMIN_Word
-                0x008001b8        0x6 APPL/App.o
-                0x008001b8                cgau8_ADMIN_Word
+                0x008001c7        0x6 APPL/App.o
+                0x008001c7                cgau8_ADMIN_Word
  *(.gnu.linkonce.r*)
-                0x008001be                . = ALIGN (0x2)
-                0x008001be                _edata = .
-                0x008001be                PROVIDE (__data_end, .)
+                0x008001ce                . = ALIGN (0x2)
+ *fill*         0x008001cd        0x1 
+                0x008001ce                _edata = .
+                0x008001ce                PROVIDE (__data_end, .)
 
-.bss            0x008001be      0x12e
-                0x008001be                PROVIDE (__bss_start, .)
+.bss            0x008001ce      0x12e
+                0x008001ce                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.gstr_userCardData
-                0x008001be       0x19 APPL/App.o
+                0x008001ce       0x19 APPL/App.o
  .bss.cgu8_ATM_Req
-                0x008001d7        0x1 APPL/App.o
-                0x008001d7                cgu8_ATM_Req
+                0x008001e7        0x1 APPL/App.o
+                0x008001e7                cgu8_ATM_Req
  .bss.gu8_ADMIN_Request
-                0x008001d8        0x1 APPL/App.o
+                0x008001e8        0x1 APPL/App.o
  .bss.gu8_USER_Mode_State
-                0x008001d9        0x1 APPL/App.o
+                0x008001e9        0x1 APPL/App.o
  .bss.gu8_CardMode
-                0x008001da        0x1 APPL/App.o
- .bss.gu8_flag  0x008001db        0x1 ECUAL/Terminal Module/Terminal.o
-                0x008001db                gu8_flag
+                0x008001ea        0x1 APPL/App.o
+ .bss.gu8_flag  0x008001eb        0x1 ECUAL/Terminal Module/Terminal.o
+                0x008001eb                gu8_flag
  .bss.gu8_counter
-                0x008001dc        0x1 ECUAL/Terminal Module/Terminal.o
-                0x008001dc                gu8_counter
+                0x008001ec        0x1 ECUAL/Terminal Module/Terminal.o
+                0x008001ec                gu8_counter
  .bss.gau8_data
-                0x008001dd       0xff ECUAL/Terminal Module/Terminal.o
-                0x008001dd                gau8_data
+                0x008001ed       0xff ECUAL/Terminal Module/Terminal.o
+                0x008001ed                gau8_data
  .bss.gu8_visibility
-                0x008002dc        0x1 ECUAL/Terminal Module/Terminal.o
+                0x008002ec        0x1 ECUAL/Terminal Module/Terminal.o
  .bss.INT2_CallBackPtr
-                0x008002dd        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
+                0x008002ed        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
  .bss.INT1_CallBackPtr
-                0x008002df        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
+                0x008002ef        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
  .bss.INT0_CallBackPtr
-                0x008002e1        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
+                0x008002f1        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
  .bss.SPI_STC_CallBackPtr
-                0x008002e3        0x2 MCAL/Spi Module/Spi.o
+                0x008002f3        0x2 MCAL/Spi Module/Spi.o
  .bss.u8_Uart_Status
-                0x008002e5        0x1 MCAL/Uart Module/Uart.o
+                0x008002f5        0x1 MCAL/Uart Module/Uart.o
  .bss.Uart_UDRE_CallBackPtr
-                0x008002e6        0x2 MCAL/Uart Module/Uart.o
+                0x008002f6        0x2 MCAL/Uart Module/Uart.o
  .bss.Uart_RXC_CallBackPtr
-                0x008002e8        0x2 MCAL/Uart Module/Uart.o
+                0x008002f8        0x2 MCAL/Uart Module/Uart.o
  .bss.Uart_TXC_CallBackPtr
-                0x008002ea        0x2 MCAL/Uart Module/Uart.o
+                0x008002fa        0x2 MCAL/Uart Module/Uart.o
  *(COMMON)
-                0x008002ec                PROVIDE (__bss_end, .)
-                0x0000164c                __data_load_start = LOADADDR (.data)
-                0x000017aa                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008002fc                PROVIDE (__bss_end, .)
+                0x0000164e                __data_load_start = LOADADDR (.data)
+                0x000017bc                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008002ec        0x0
+.noinit         0x008002fc        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008002ec                _end = .
+                0x008002fc                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0

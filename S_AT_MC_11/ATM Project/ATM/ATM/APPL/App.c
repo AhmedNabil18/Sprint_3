@@ -116,9 +116,9 @@ enuApp_Status_t App_init(void)
 		return APP_STATUS_ERROR_NOK;
 	/**************************/
 	/* Only for Testing */
-	if(Eeprom_24_writeByte(ATM_DB_FLAG_ADDR, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
-	Delay_ms(10);
+// 	if(Eeprom_24_writeByte(ATM_DB_FLAG_ADDR, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
+// 		return APP_STATUS_ERROR_NOK;
+// 	Delay_ms(10);
 	/**************************/
 	if(Lcd_printString((uint8_t*)cgau8_LoadingString) != LCD_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
@@ -140,7 +140,7 @@ enuApp_Status_t App_init(void)
 		/* Lock the ATM For the User */
 		Lcd_printLCD((uint8_t*)"******ATM*******", (uint8_t*)"*****LOCKED*****");
 		
-		if(Terminal_Out((uint8_t*)"Programming Mode\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nProgramming Mode\r") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
 	}else
 	{ /* Case it was previously registered == Contains data in the DB */
@@ -155,7 +155,7 @@ enuApp_Status_t App_init(void)
 		
 		Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
 			
-		if(Terminal_Out((uint8_t*)"USER Mode\r") != TERMINAL_STATUS_ERROR_OK)
+		if(Terminal_Out((uint8_t*)"\nUSER Mode\r") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
 	}
 	
@@ -208,7 +208,7 @@ enuApp_Status_t App_update(void)
 				u8_passFlag = 1;
 			}
 			
-			if(Terminal_Out((uint8_t*)"1.Add New Customer\r2.Update Max Amount\r3.Exit\r") != TERMINAL_STATUS_ERROR_OK)
+			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Max Amount\n\r3.Exit\r") != TERMINAL_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
 				
 			AppADMIN_getInput(au8_Input);
@@ -231,7 +231,7 @@ enuApp_Status_t App_update(void)
 					u8_passFlag = 0;
 					gu8_ATMMode = ATM_MODE_USER;
 					Lcd_clear();
-					if(Terminal_Out((uint8_t*)"USER Mode\r") != TERMINAL_STATUS_ERROR_OK)
+					if(Terminal_Out((uint8_t*)"\nUSER Mode\r") != TERMINAL_STATUS_ERROR_OK)
 						return APP_STATUS_ERROR_NOK;
 					
 					Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
@@ -239,7 +239,7 @@ enuApp_Status_t App_update(void)
 					return APP_STATUS_ERROR_OK;
 				}else
 				{
-					if(Terminal_Out((uint8_t*)"Data Base is empty, you must register at least one customer\r") != TERMINAL_STATUS_ERROR_OK)
+					if(Terminal_Out((uint8_t*)"\nData Base is empty, you must register at least one customer\r") != TERMINAL_STATUS_ERROR_OK)
 						return APP_STATUS_ERROR_NOK;
 					return APP_STATUS_ERROR_OK;
 				}
@@ -263,7 +263,7 @@ enuApp_Status_t App_update(void)
 					if(gu8_USER_Mode_State == USER_BUSY) /* CARD is Busy in transaction */
 					{
 						gu8_ADMIN_Request = ADMIN_REQUESTED;
-						if(Terminal_Out((uint8_t*)"ATM is Busy Now, Programming Mode will start after current Process\r") != TERMINAL_STATUS_ERROR_OK)
+						if(Terminal_Out((uint8_t*)"\nATM is Busy Now, Programming Mode will start after current Process\r") != TERMINAL_STATUS_ERROR_OK)
 							return APP_STATUS_ERROR_NOK;
 					}else /* User Mode is Idle ==> The ATM is not used by User */
 					{
@@ -271,7 +271,7 @@ enuApp_Status_t App_update(void)
 						
 						Lcd_printLCD((uint8_t*)"******ATM*******", (uint8_t*)"*****LOCKED*****");
 						
-						if(Terminal_Out((uint8_t*)"Programming Mode\r") != TERMINAL_STATUS_ERROR_OK)
+						if(Terminal_Out((uint8_t*)"\nProgramming Mode\r") != TERMINAL_STATUS_ERROR_OK)
 							return APP_STATUS_ERROR_NOK;
 						return APP_STATUS_ERROR_OK;
 					}
@@ -293,7 +293,7 @@ enuApp_Status_t App_update(void)
 				}else if(au8_data == '2')
 				{
 					AppUSER_displayTemp();
-				}else if(au8_data == '-')
+				}else if(au8_data == '-') 
 				{
 					gu8_displayFlag = 0;
 					Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
@@ -311,7 +311,7 @@ enuApp_Status_t App_update(void)
 			}
 	/****************************************************************/
 	}
-	
+	Delay_ms(100);
 	return APP_STATUS_ERROR_OK;
 }
 

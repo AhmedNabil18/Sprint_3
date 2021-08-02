@@ -74,7 +74,7 @@ enuLcd_Status_t Lcd_init(void)
 	Lcd_sendCommand(0x01);
 	Lcd_sendCommand(0x06);
 	Lcd_sendCommand(0x0C);
-	
+	Delay_ms(2);
 	/* Change the state of the Lcd module to Initialized */
 	genu_LcdModuleState = LCD_STATUS_INIT;
 	return LCD_STATUS_ERROR_OK;
@@ -101,7 +101,6 @@ enuLcd_Status_t Lcd_sendCommand(uint8_t u8_command)
 	Lcd_EnableToggle();
 	Lcd_WriteData(u8_command & 0x0F);
 	Lcd_EnableToggle();
-				
 	return LCD_STATUS_ERROR_OK;
 }
 
@@ -182,7 +181,6 @@ enuLcd_Status_t Lcd_printChar(uint8_t u8_data)
 	Lcd_EnableToggle();
 	Lcd_WriteData(u8_data & 0x0F);
 	Lcd_EnableToggle();
-		
 	return LCD_STATUS_ERROR_OK;
 }
 
