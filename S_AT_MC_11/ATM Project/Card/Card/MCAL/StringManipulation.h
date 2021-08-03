@@ -35,6 +35,8 @@ void stringHexToNum(uint8_t *pu8_String, uint16_t *pu16_Num);
 void stringToInteger(uint32_t *pu32_Num, uint8_t *pu8_String);
 void integerToString(uint16_t u16_Num, uint8_t *pu8_String, uint8_t u8_base);
 void stringConcatenate(uint8_t* destination, uint8_t* source);
+float32_t stringToFloat(uint8_t* string);
+void floatToString(float32_t f32_num, uint8_t* string);
 #endif // _STRINGMANIPULATION_H_
 
 

@@ -52,18 +52,20 @@ uint8_t stringLength(uint8_t* string1)
 
 uint8_t stringCompare(uint8_t* string1, uint8_t* string2)
 {
-    uint8_t u8_loopIndex=0;
-    if(stringLength(string1) > stringLength(string2))
-        return 2;
-    if(stringLength(string1) < stringLength(string2))
-        return 3;
-    while(string1[u8_loopIndex] != '\0')
-    {
-        if(string1[u8_loopIndex] != string2[u8_loopIndex])
-            return 0;
-        u8_loopIndex++;
-    }
-    return 1;
+	uint8_t u8_loopIndex=0;
+	if(stringLength(string1) > stringLength(string2))
+		return 2;
+	if(stringLength(string1) < stringLength(string2))
+		return 3;
+	while(string1[u8_loopIndex] != '\0')
+	{
+		if(string1[u8_loopIndex] > string2[u8_loopIndex])
+			return 2;
+		else if(string1[u8_loopIndex] < string2[u8_loopIndex])
+			return 3;
+		u8_loopIndex++;
+	}
+	return 1;
 }
 
 void stringConcatenate(uint8_t* destination, uint8_t* source)
@@ -161,11 +163,13 @@ void integerToString(uint16_t u16_Num, uint8_t *pu8_String, uint8_t u8_base)
 			n/=10;
 			if(n==0) break;
 		}
+		pu8_String[i+1] = '\0';
 		while (u16_Num)
 		{
 			pu8_String[i--] = (u16_Num % 10) + '0';
 			u16_Num /= 10;
 		}
+		
 	}else if(u8_base == BIN)
 	{
 
@@ -185,4 +189,61 @@ void stringToInteger(uint32_t *pu32_Num, uint8_t *pu8_String)
 		*pu32_Num += (pu8_String[s8_loopIndex]-'0') *digit;
 		digit*=10;
 	}
+}
+
+float32_t stringToFloat(uint8_t* string)
+{
+	uint8_t strLen = stringLength(string)-1;
+	uint8_t u8_loopIndex=0;
+	float32_t f32_digit = 1;
+	float32_t f32_num = 0;
+	for(u8_loopIndex=0 ;u8_loopIndex<strLen; u8_loopIndex++)
+	{
+		if(string[u8_loopIndex] == '.')
+		{
+			u8_loopIndex++;
+			break;
+		}
+		f32_num += string[u8_loopIndex] - '0';
+		f32_num *= 10;
+	}
+	f32_num /= 10;
+	f32_digit = 1;
+	for(;u8_loopIndex<strLen; u8_loopIndex++)
+	{
+		f32_digit/=10;
+		f32_num += (string[u8_loopIndex] - '0')*f32_digit;
+	}
+	return f32_num;
+}
+
+void floatToString(float32_t f32_num, uint8_t* string)
+{
+	uint32_t u32_num = (uint32_t)f32_num;
+	uint8_t u8_digitCount=0;
+	uint8_t u8_indexDot=0;
+	uint32_t temp = 0;
+	while(u32_num !=0)
+	{
+		u32_num/=10;
+		u8_digitCount++;
+	}
+	u32_num = (uint32_t)f32_num;
+	u8_indexDot = u8_digitCount--;
+	while (u32_num)
+	{
+		temp = (u32_num % 10)+ '0';
+		string[u8_digitCount--] = temp;
+		u32_num /= 10;
+
+	}
+	u32_num = (uint32_t)f32_num;
+	f32_num -= u32_num;
+	u32_num = f32_num*10;
+	string[u8_indexDot++] = '.';
+	string[u8_indexDot++] = u32_num + '0';
+	f32_num *=10;
+	f32_num -= u32_num;
+	u32_num = f32_num*10;
+	string[u8_indexDot] = u32_num + '0';
 }

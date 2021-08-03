@@ -291,11 +291,11 @@ enuI2C_Status_t I2C_MasterSendByte(uint8_t u8_data)
 	/* Read the status of the last operation */
 	uint8_t u8_status = I2C_readSTATUS();
 	if (u8_status == I2C_SYMB_DATA_Tx_ACK)
-	return I2C_SYMB_DATA_Tx_ACK;
+		return I2C_SYMB_DATA_Tx_ACK;
 	if (u8_status == I2C_SYMB_DATA_Tx_NACK)
-	return I2C_SYMB_DATA_Tx_NACK;
+		return I2C_SYMB_DATA_Tx_NACK;
 	else
-	return I2C_STATUS_ERROR_NOK;
+		return I2C_STATUS_ERROR_NOK;
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -500,15 +500,15 @@ enuI2C_Status_t I2C_MasterSendGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_loc
 	if (I2C_MasterSendSTART() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	/* Sened the Slave Address Along with Write Command */
 	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_WRITE) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
-			
+
 	/* Loop for data length and Send Byte by Byte */
 	while (u16_locationLen--)
 		if (I2C_MasterSendByte(*pu8_location++) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	
-	/* Loop for data length and receive Byte by Byte and report back with Ack */
-	while (--u16_dataLen)
-		if(I2C_MasterSendByte(*pu8_data++) != I2C_STATUS_ERROR_OK) return I2C_STATUS_ERROR_NOK;
-			
+ 	/* Loop for data length and send byte by byte */
+ 	while (u16_dataLen--)
+		if(I2C_MasterSendByte(*pu8_data++)  == I2C_STATUS_ERROR_NOK) return I2C_STATUS_ERROR_NOK;
+
 	if(I2C_MasterSendSTOP() != I2C_STATUS_ERROR_OK)
 	return I2C_STATUS_ERROR_NOK;
 			

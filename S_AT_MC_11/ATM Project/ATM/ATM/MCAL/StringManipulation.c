@@ -163,11 +163,13 @@ void integerToString(uint16_t u16_Num, uint8_t *pu8_String, uint8_t u8_base)
 			n/=10;
 			if(n==0) break;
 		}
+		pu8_String[i+1] = '\0';
 		while (u16_Num)
 		{
 			pu8_String[i--] = (u16_Num % 10) + '0';
 			u16_Num /= 10;
 		}
+		
 	}else if(u8_base == BIN)
 	{
 

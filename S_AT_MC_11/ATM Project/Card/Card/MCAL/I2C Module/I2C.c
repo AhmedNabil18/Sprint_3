@@ -291,11 +291,11 @@ enuI2C_Status_t I2C_MasterSendByte(uint8_t u8_data)
 	/* Read the status of the last operation */
 	uint8_t u8_status = I2C_readSTATUS();
 	if (u8_status == I2C_SYMB_DATA_Tx_ACK)
-	return I2C_SYMB_DATA_Tx_ACK;
+		return I2C_SYMB_DATA_Tx_ACK;
 	if (u8_status == I2C_SYMB_DATA_Tx_NACK)
-	return I2C_SYMB_DATA_Tx_NACK;
+		return I2C_SYMB_DATA_Tx_NACK;
 	else
-	return I2C_STATUS_ERROR_NOK;
+		return I2C_STATUS_ERROR_NOK;
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -443,6 +443,78 @@ enuI2C_Status_t I2C_MasterSendPacket(uint8_t u8_slaveAddress, uint8_t * pu8_data
 	if (I2C_MasterSendSTOP() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
 	return I2C_STATUS_ERROR_OK;
 }
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+* Service Name: I2C_MasterSendGeneral
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): u8_salveAddress - Address of the slave to communicate with.
+*				   pu8_location - pointer to the location bytes
+*                  u16_locationLen - Length of location bytes to be sent.
+*					pu8_data - Pointer to a packet or array of data to be sent.
+*				   u16_dataLen - Length of sent data bytes.
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: enuI2C_Status_t - return the status of the function ERROR_OK or NOT_OK
+* Description: Function to Send multiple location bytes and send multiple data bytes with repeated start.
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+enuI2C_Status_t I2C_MasterSendGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_location, uint16_t u16_locationLen,\
+									uint8_t * pu8_data, uint16_t u16_dataLen)
+{
+/**************************************************************************************/
+/*								Start of Error Checking								  */
+/**************************************************************************************/
+	/* Check if the I2C module is not initialized */
+	if (I2C_STATUS_INIT != genuI2C_Status)
+	{
+		return I2C_STATUS_NOT_INIT;
+	}else{/*Nothing to here*/}
+	/* Check if Argument is NULL PTR */
+	if (pu8_location == NULL_PTR)
+	{
+		return I2C_STATUS_NULL_ARGUMENT;
+	}
+	else{/*Nothing to here*/}
+	/* Check if Argument is NULL PTR */
+	if (pu8_data == NULL_PTR)
+	{
+		return I2C_STATUS_NULL_ARGUMENT;
+	}
+	else{/*Nothing to here*/}
+	/* Check if the slave address is out of range */
+	if(u8_slaveAddress > 0x7F)
+	{
+		return I2C_STATUS_INVALID_SLV_ADDR;
+	}else{/*Nothing to here*/}
+			
+/**************************************************************************************/
+/*								End of Error Checking								  */
+/**************************************************************************************/
+
+/**************************************************************************************/
+/*								Function Implementation								  */
+/**************************************************************************************/
+	/* Initiate Start Bit */
+	if (I2C_MasterSendSTART() == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
+	/* Sened the Slave Address Along with Write Command */
+	if (I2C_MasterSendSlaveAddress(u8_slaveAddress, I2C_WRITE) != I2C_STATUS_ERROR_OK)	return I2C_STATUS_ERROR_NOK;
+
+	/* Loop for data length and Send Byte by Byte */
+	while (u16_locationLen--)
+		if (I2C_MasterSendByte(*pu8_location++) == I2C_STATUS_ERROR_NOK)	return I2C_STATUS_ERROR_NOK;
+	
+ 	/* Loop for data length and send byte by byte */
+ 	while (u16_dataLen--)
+		if(I2C_MasterSendByte(*pu8_data++)  == I2C_STATUS_ERROR_NOK) return I2C_STATUS_ERROR_NOK;
+
+	if(I2C_MasterSendSTOP() != I2C_STATUS_ERROR_OK)
+	return I2C_STATUS_ERROR_NOK;
+			
+	return I2C_STATUS_ERROR_OK;
+}
+
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 * Service Name: I2C_MasterReceivePacket
@@ -838,7 +910,6 @@ enuI2C_Status_t I2C_SlaveReceiveByte(uint8_t *pu8_data)
 	}else if(u8_status == I2C_SLV_STOP_REP_START)		
 	{
 		I2C_TWCR_REG |= (1<<I2C_TWCR_TWINT);
-		DIO_PORTB_DATA = 1<<0;
 		return I2C_STATUS_SLAVE_STOP;
 	}
 	return I2C_STATUS_ERROR_NOK;

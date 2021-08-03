@@ -9,6 +9,7 @@
 #ifndef APPUSER_H_
 #define APPUSER_H_
 
+uint8_t Kpd_enablePass = 0;
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 * Service Name: AppUSER_displayTemp
 * Sync/Async: Synchronous
@@ -25,18 +26,18 @@ enuApp_Status_t AppUSER_displayTemp(void)
 	gu8_displayFlag = DISPLAY_TEMP;
 	Lcd_clear();
 	if(Lcd_setCursor(0, 0) != LCD_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
+		return APP_STATUS_ERROR_NOK;
 	if(Lcd_printString((uint8_t*)"Current Temp is:") != LCD_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
+		return APP_STATUS_ERROR_NOK;
 	if (LM35_readTemp(&u8_currentTemp) == LM35_STATUS_ERROR_OK)
 	{
 		if(Lcd_setCursor(1, 0) != LCD_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
+			return APP_STATUS_ERROR_NOK;
 		if(Lcd_printDecimal(u8_currentTemp) != LCD_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
+			return APP_STATUS_ERROR_NOK;
 	}
 	if(Lcd_printString((uint8_t*)"   '-' To Exit") != LCD_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
+		return APP_STATUS_ERROR_NOK;
 	return APP_STATUS_ERROR_OK;
 }
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -117,8 +118,8 @@ enuApp_Status_t AppUSER_startProcess(strCardData_t* pstr_CardData)
 	return APP_STATUS_ERROR_NOK;
 	
 	
-	Lcd_printLCD((uint8_t*)"    Welcome", gstr_userCardData.au8_cardHolderName);
-	Delay_ms(2000);
+// 	Lcd_printLCD((uint8_t*)"    Welcome", gstr_userCardData.au8_cardHolderName);
+// 	Delay_ms(2000);
 	
 	Lcd_printLCD((uint8_t*)"  Your Balance", gstr_clientdata.au8_Balance);
 	Delay_ms(2000);
@@ -202,11 +203,12 @@ enuApp_Status_t AppUSER_startTransaction(void)
 						
 					uint8_t u8_newCustomerBalAddr = ATM_DB_CUSTOMER_BAL_BASE_ADDR + gu8_clientIndex*16 ;
 					if(Eeprom_24_writePacket(u8_newCustomerBalAddr, gstr_clientdata.au8_Balance, \
-					stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
+										stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
 					return APP_STATUS_ERROR_NOK;
 						
 					Lcd_printLCD((uint8_t*)"  Your Balance", gstr_clientdata.au8_Balance);
-						
+					
+					Delay_ms(1000);
 					Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
 						
 					return APP_STATUS_ERROR_OK;
@@ -273,6 +275,7 @@ enuApp_Status_t AppUSER_checkPin(void)
 {
 	uint8_t au8_inputKPD[5] = {0};
 	enuApp_Status_t KeypdaStatus = 0;
+	Kpd_enablePass = 1;
 	while(1)
 	{
 		EmptyString(au8_inputKPD);
@@ -294,10 +297,11 @@ enuApp_Status_t AppUSER_checkPin(void)
 			{
 				Lcd_printLCD((uint8_t*)"  Please Wait", (uint8_t*)" Processing....");
 					
+				Delay_ms(155);
+				Kpd_enablePass = 0;
 				return APP_STATUS_PIN_CORRECT;
 			}
 		}
-		Delay_ms(155);
 	}
 }
 
@@ -345,8 +349,16 @@ enuApp_Status_t AppUSER_ReportKeypad(uint8_t* pu8_key)
 			{
 				if(Lcd_setCursor(LCD_IN_POS_X, u8_index+LCD_IN_POS_Y) != LCD_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
-				if(Lcd_printChar(sau8_data[u8_index]) != LCD_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
+				if(Kpd_enablePass == 0)
+				{
+					if(Lcd_printChar(sau8_data[u8_index]) != LCD_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_NOK;
+				}
+				else
+				{
+					if(Lcd_printChar('*') != LCD_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_NOK;
+				}
 				u8_index++;
 			}else
 			{
