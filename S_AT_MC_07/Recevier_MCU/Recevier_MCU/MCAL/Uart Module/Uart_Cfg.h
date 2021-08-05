@@ -10,7 +10,7 @@
 #define UART_CFG_H_
 
 /*- The Frequency of the Controller -*/
-#define F_OSC					1000000UL
+#define F_OSC					8000000UL
 /*- The Operation Baudrate of the UART -*/
 #define USART_BAUDRATE			9600UL
 

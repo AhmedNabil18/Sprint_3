@@ -144,6 +144,15 @@
     <Compile Include="MCAL\ATMega32_Registers.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\Delay Module\Delay.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Delay Module\Delay.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\Delay Module\Delay_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL\Platform_Types.h">
       <SubType>compile</SubType>
     </Compile>
@@ -183,6 +192,7 @@
     <Folder Include="ECUAL\" />
     <Folder Include="ECUAL\Terminal Module\" />
     <Folder Include="MCAL\" />
+    <Folder Include="MCAL\Delay Module\" />
     <Folder Include="MCAL\Spi Module\" />
     <Folder Include="MCAL\Uart Module\" />
   </ItemGroup>

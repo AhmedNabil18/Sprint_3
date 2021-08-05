@@ -25,21 +25,22 @@ enuApp_Status_t AppADMIN_processNewCustomer(void)
 	uint8_t au8_tempBalance[8]={0};
 	/* Get the Customer's Primary Account Number from the ADMIN Terminal */
 	if(AppADMIN_getCustomerPAN(au8_tempPAN) != APP_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
+		return APP_STATUS_ERROR_NOK;
 	stringCopy(au8_tempPAN, gstr_clientdata.au8_PAN);
 	
 	/* Get the Customer's Balance from the ADMIN Terminal */
 	if(AppADMIN_getCustomerBalance(au8_tempBalance) != APP_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
+		return APP_STATUS_ERROR_NOK;
 	stringCopy(au8_tempBalance, gstr_clientdata.au8_Balance);
 	
 	if(AppADMIN_saveNewCustomerData() != APP_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
+		return APP_STATUS_ERROR_NOK;
 	if(gu8_registeredAccNum == 1)
 	{
+		Terminal_Out((uint8_t*)"\nData Saved, Flag Raised\n");
 		gu8_initData = ATM_DB_FLAG_SET_VAL;
 		if(Eeprom_24_writeByte(ATM_DB_FLAG_ADDR, ATM_DB_FLAG_SET_VAL) != EEPROM_24_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
+			return APP_STATUS_ERROR_NOK;
 	}
 	return APP_STATUS_ERROR_OK;
 }
@@ -142,14 +143,14 @@ enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data)
 			{
 				break;
 			}else if((App_terminalStatus != APP_STATUS_ERROR_OK) && (App_terminalStatus != APP_STATUS_NO_OP))
-			return APP_STATUS_ERROR_NOK;
+				return APP_STATUS_ERROR_NOK;
 		} while (App_terminalStatus == APP_STATUS_NO_OP);
 		
 		if (pu8_data[9] == '\0')
-		break;
+			break;
 		EmptyString(pu8_data);
 		if(Terminal_Out((uint8_t*)"\nInvalid PAN, Only 9 characters\r") != TERMINAL_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
+			return APP_STATUS_ERROR_NOK;
 	} while (1);
 	return APP_STATUS_ERROR_OK;
 }
@@ -253,17 +254,17 @@ enuApp_Status_t AppADMIN_getAtmPIN(uint8_t* pu8_data)
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 enuApp_Status_t AppADMIN_saveNewCustomerData(void)
 {
-	uint8_t u8_newCustomerPanAddr = ATM_DB_CUSTOMER_PAN_BASE_ADDR + gu8_registeredAccNum*16 ;
-	uint8_t u8_newCustomerBalAddr = ATM_DB_CUSTOMER_BAL_BASE_ADDR + gu8_registeredAccNum*16 ;
+	uint8_t u8_newCustomerPanAddr = ATM_DB_CUSTOMER_PAN_BASE_ADDR + gu8_registeredAccNum*ATM_DB_CUSTOMER_DATA_SIZE ;
+	uint8_t u8_newCustomerBalAddr = ATM_DB_CUSTOMER_BAL_BASE_ADDR + gu8_registeredAccNum*ATM_DB_CUSTOMER_DATA_SIZE ;
 	
 	if(Eeprom_24_writePacket(u8_newCustomerPanAddr, gstr_clientdata.au8_PAN, stringLength(gstr_clientdata.au8_PAN)) != EEPROM_24_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
+		return APP_STATUS_ERROR_NOK;
 	
 	if(Eeprom_24_writePacket(u8_newCustomerBalAddr, gstr_clientdata.au8_Balance, stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
+		return APP_STATUS_ERROR_NOK;
 	
 	if(Eeprom_24_writeByte(ATM_DB_ACC_NUM_ADDR, ++gu8_registeredAccNum) != EEPROM_24_STATUS_ERROR_OK)
-	return APP_STATUS_ERROR_NOK;
+		return APP_STATUS_ERROR_NOK;
 	
 	return APP_STATUS_ERROR_OK;
 }

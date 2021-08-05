@@ -9,12 +9,12 @@
 #ifndef I2C_CFG_H_
 #define I2C_CFG_H_
 
-#define F_OSC				1000000UL
+#define F_OSC				8000000UL
 
 /*
  * Output Clock on SCL Pin
  */
-#define I2C_SCL_CLK			250000UL
+#define I2C_SCL_CLK			25000UL
 
 /*
  * Prescaler Value
@@ -23,7 +23,7 @@
  *			 I2C_PRESACLER_16
  *			 I2C_PRESACLER_64
  */
-#define PRESCALER_VALUE		I2C_PRESACLER_1
+#define PRESCALER_VALUE		I2C_PRESACLER_16
 
 /*
  * I2C Mode

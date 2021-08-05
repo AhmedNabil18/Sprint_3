@@ -119,6 +119,7 @@ enuApp_Status_t App_update(void)
 	enuTerminal_Status_t enuTermStatus = Terminal_In(au8_inputString);
 	if (enuTermStatus == TERMINAL_STATUS_INPUT_CHANGED)
 	{
+		Terminal_Out((uint8_t*)"Sending\n");
 		SPI_SS_ENABLE();
 		if(Spi_MasterSendPacket(au8_inputString, stringLength(au8_inputString)) != SPI_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;

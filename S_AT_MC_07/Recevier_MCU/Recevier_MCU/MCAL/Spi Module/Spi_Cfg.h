@@ -43,7 +43,7 @@
  * SPI_FOSC_DIV8
  * SPI_FOSC_DIV32
  */
-#define SPI_FOSC_DIV	SPI_FOSC_DIV2
+#define SPI_FOSC_DIV	SPI_FOSC_DIV16
 
 /*- SPI Slave Select Initial -*/
 /* :Options:

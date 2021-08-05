@@ -8,8 +8,8 @@
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
 #include "Lcd.h"
-#include "../../MCAL/Delay Module/Delay.h"
 #include "../../MCAL/StringManipulation.h"
+#include "../../MCAL/Delay Module/Delay.h"
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- GLOBAL STATIC VARIABLES *-*-*-*-*-*/
 static enuLcd_Status_t genu_LcdModuleState = LCD_STATUS_NOT_INIT;
@@ -64,17 +64,18 @@ enuLcd_Status_t Lcd_init(void)
 	if((DIO_STATUS_ERROR_OK != Dio_State) && (DIO_STATUS_ALREADY_INIT != Dio_State))
 		return LCD_STATUS_ERROR_NOK;
 	
+	Delay_ms(20);
 	CMD;
 	DISABLE;
 	
 	Lcd_sendCommand(0x33);
 	Lcd_sendCommand(0x32);
 	Lcd_sendCommand(0x28);
-	Lcd_sendCommand(0x08);
-	Lcd_sendCommand(0x01);
-	Lcd_sendCommand(0x06);
+	//Lcd_sendCommand(0x08);
 	Lcd_sendCommand(0x0C);
-	Delay_ms(2);
+	Lcd_sendCommand(0x06);
+	Lcd_sendCommand(0x01);
+	//Delay_ms(2);
 	/* Change the state of the Lcd module to Initialized */
 	genu_LcdModuleState = LCD_STATUS_INIT;
 	return LCD_STATUS_ERROR_OK;
@@ -99,8 +100,10 @@ enuLcd_Status_t Lcd_sendCommand(uint8_t u8_command)
 	CMD;
 	Lcd_WriteData((u8_command & 0xF0)>>4); 
 	Lcd_EnableToggle();
+	Delay_ms(1);
 	Lcd_WriteData(u8_command & 0x0F);
 	Lcd_EnableToggle();
+	Delay_ms(2);
 	return LCD_STATUS_ERROR_OK;
 }
 
@@ -179,8 +182,10 @@ enuLcd_Status_t Lcd_printChar(uint8_t u8_data)
 	DATA;             // => RS = 1
 	Lcd_WriteData((u8_data & 0xF0)>>4);             //Data transfer
 	Lcd_EnableToggle();
+	Delay_ms(1);
 	Lcd_WriteData(u8_data & 0x0F);
 	Lcd_EnableToggle();
+	Delay_ms(2);
 	return LCD_STATUS_ERROR_OK;
 }
 

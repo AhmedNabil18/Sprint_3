@@ -8,6 +8,8 @@ ECUAL\Terminal Module\Terminal.c
 
 main.c
 
+MCAL\Delay Module\Delay.c
+
 MCAL\Spi Module\Spi.c
 
 MCAL\StringManipulation.c

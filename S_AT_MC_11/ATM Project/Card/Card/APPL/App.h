@@ -21,15 +21,30 @@
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- CONSTANTS -*-*-*-*-*-*/
+#define INTERRUPT_REQUEST		0U
+#define POLLING_REQUEST			1U
+#define HARDWARE				0U
+#define SIMULATION				1U
+
+
+#define PROJECT						SIMULATION
+#define REQUEST_MODE				INTERRUPT_REQUEST
+
 #define CARD_MODE_ADMIN				0U
 #define CARD_MODE_USER				1U
 
 #define CARD_INIT_ADDRESS			0x00U
 #define CARD_INITIALIZED			0xAAU
+
+#if PROJECT == HARDWARE
+#define CARD_NAME_PAGE_ADDR			0x01U
+#define CARD_PAN_PAGE_ADDR			0x0BU
+#define CARD_PIN_PAGE_ADDR			0x15U
+#elif PROJECT == SIMULATION
 #define CARD_NAME_PAGE_ADDR			0x20U
 #define CARD_PAN_PAGE_ADDR			0x30U
 #define CARD_PIN_PAGE_ADDR			0x40U
-
+#endif
 #define CARD_NAME				0U
 #define CARD_PAN				1U
 #define CARD_PIN				2U
@@ -46,7 +61,7 @@
 
 #define ATM_NOT_REQUESTED		0U
 #define ATM_REQUESTED			1U
-
+#define ATM_SENDING				2U
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- Data Types -*-*-*-*-*-*/
 typedef struct

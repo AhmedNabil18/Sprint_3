@@ -15,7 +15,7 @@
 #define AT24C16B		0
 #define AT24C256B		1
 
-#define EEPROM_24_MODEL					AT24C256B
+#define EEPROM_24_MODEL					AT24C16B
 
 #if EEPROM_24_MODEL == AT24C16B
 	/* Number of Words in the Memory */

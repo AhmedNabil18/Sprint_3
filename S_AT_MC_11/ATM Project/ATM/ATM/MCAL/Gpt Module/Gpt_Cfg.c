@@ -15,7 +15,7 @@
 /* PB structure used with GPT_Init API */
 const strGpt_ChannelConfig_t Timers_Configurations[GPT_CONFIGURED_CHANNELS] =
 {
-	{GPT_TIMER_0, GPT_CLK_SRC_PRSCLR_8, GPT_CH_MODE_NORMAL}
+	{GPT_TIMER_0, GPT_CLK_SRC_PRSCLR_64, GPT_CH_MODE_NORMAL}
 };
 /*
 typedef struct

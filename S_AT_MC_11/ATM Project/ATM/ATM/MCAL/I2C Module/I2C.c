@@ -9,7 +9,7 @@
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
 #include "I2C.h"
 #include "..\ATMega32_Registers.h"
-
+#include "../../ECUAL/Terminal Module/Terminal.h"
 
 //static void (*I2C_STC_CallBackPtr)(void);
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -510,7 +510,7 @@ enuI2C_Status_t I2C_MasterSendGeneral(uint8_t u8_slaveAddress, uint8_t * pu8_loc
 		if(I2C_MasterSendByte(*pu8_data++)  == I2C_STATUS_ERROR_NOK) return I2C_STATUS_ERROR_NOK;
 
 	if(I2C_MasterSendSTOP() != I2C_STATUS_ERROR_OK)
-	return I2C_STATUS_ERROR_NOK;
+		return I2C_STATUS_ERROR_NOK;
 			
 	return I2C_STATUS_ERROR_OK;
 }

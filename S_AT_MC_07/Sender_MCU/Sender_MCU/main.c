@@ -7,11 +7,14 @@
 
 #include "App Layer/App.h"
 
+
+
 int main(void)
 {
+
     App_start();
-    while (1) 
-    {
-    }
+     while (1) 
+     {
+     }
 }
 

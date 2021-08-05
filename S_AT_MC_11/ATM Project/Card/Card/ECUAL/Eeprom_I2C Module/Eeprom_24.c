@@ -9,7 +9,6 @@
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
 #include "Eeprom_24.h"
 #include "../../MCAL/Delay Module/Delay.h"
-#include "../Lcd Module/Lcd.h"
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- GLOBAL STATIC VARIABLES *-*-*-*-*-*/
 static enuEeprom_24_Status_t genu_eepromModuleState = EEPROM_24_STATUS_NOT_INIT;

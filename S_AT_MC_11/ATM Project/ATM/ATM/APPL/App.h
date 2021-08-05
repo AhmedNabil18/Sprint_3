@@ -24,6 +24,12 @@
 #include "../MCAL/Delay Module/Delay.h"
 #include "../MCAL/StringManipulation.h"
 
+#define HARDWARE		0U
+#define SIMULATION		1U
+
+
+#define PROJECT			SIMULATION
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- CONSTANTS -*-*-*-*-*-*/
 #define ATM_MODE_ADMIN				0U
@@ -44,11 +50,17 @@
 
 #define ATM_DB_MAX_ACC_NUM_ADDR					0x10 // 2 Bytes
 
+#if PROJECT == HARDWARE
+#define ATM_DB_CUSTOMER_PAN_BASE_ADDR			0x40 // 1 Page for each customer PAN
+#define ATM_DB_CUSTOMER_BAL_BASE_ADDR			0x4A // 1 Page for each customer Balance
+#define ATM_DB_CUSTOMER_DATA_SIZE				64U
+#elif PROJECT == SIMULATION
 #define ATM_DB_CUSTOMER_PAN_BASE_ADDR			0x20 // 1 Page for each customer PAN
 #define ATM_DB_CUSTOMER_BAL_BASE_ADDR			0x30 // 1 Page for each customer Balance
+#define ATM_DB_CUSTOMER_DATA_SIZE				16U
+#endif
 
-#define LCD_IN_POS_X			1U
-#define LCD_IN_POS_Y			6U
+#define MAX_PIN_TRIAL			3U
 
 #define DISPLAY_TEMP			1U
 #define CARD_IN					1U
@@ -58,7 +70,7 @@
 #define MAX_NAME_LENGTH			9U
 #define MAX_PAN_LENGTH			9U
 #define MAX_PIN_LENGTH			4U
-#define MAX_BAL_LENGTH			8U
+#define MAX_BAL_LENGTH			7U
 #define USER_IDLE				0U
 #define USER_BUSY				1U
 
@@ -68,6 +80,8 @@
 #define ATM_NOT_REQUESTED		0U
 #define ATM_REQUESTED			1U
 
+#define LCD_IN_POS_X			1U
+#define LCD_IN_POS_Y			6U
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- Data Types -*-*-*-*-*-*/
 typedef struct
@@ -99,6 +113,7 @@ typedef enum
 	APP_STATUS_NO_OP,
 	APP_STATUS_KPD_NUM,
 	APP_STATUS_PIN_CORRECT,
+	APP_STATUS_PIN_NOT_CORRECT,
 	APP_STATUS_PAN_FOUND,
 	APP_STATUS_PAN_NOT_FOUND
 }enuApp_Status_t;
@@ -129,9 +144,6 @@ enuApp_Status_t AppADMIN_getCustomerBalance(uint8_t* pu8_data);
 
 enuApp_Status_t AppADMIN_saveNewCustomerData(void);
 
-
-
-
 enuApp_Status_t AppUSER_ReportKeypad(uint8_t* pu8_key);
 
 enuApp_Status_t AppUSER_startTransaction(void);
@@ -142,21 +154,13 @@ enuApp_Status_t AppUSER_checkPan(void);
 
 enuApp_Status_t App_ReportTerminal(uint8_t* pu8_data);
 
-
-
-
-
-
 enuApp_Status_t AppUSER_getCardData(strCardData_t* pstr_CardData, uint8_t *pu8_dataString);
 
 enuApp_Status_t AppUSER_getCardData(strCardData_t* pstr_CardData, uint8_t *pu8_dataString);
 
 enuApp_Status_t AppUSER_startProcess(strCardData_t* pstr_CardData);
 
-
-
 enuApp_Status_t AppUSER_insertCard(void);
-
 
 enuApp_Status_t AppUSER_displayTemp(void);
 #endif /* APP_H_ */

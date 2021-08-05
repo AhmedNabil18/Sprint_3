@@ -15,7 +15,7 @@
 #define AT24C16B		0
 #define AT24C256B		1
 
-#define EEPROM_24_MODEL					AT24C256B
+#define EEPROM_24_MODEL					AT24C16B
 
 #if EEPROM_24_MODEL == AT24C16B
 	/* Number of Words in the Memory */
@@ -37,7 +37,7 @@
 	#define EEPROM_24_PAGE_MASK				0x7F0U
 
 	/* Number of Bits for the Byte Mask in the Address */
-	#define EEPROM_24_PAGE_SHIFT_BITS			4U
+	#define EEPROM_24_PAGE_SHIFT_BITS		4U
 
 	/* Mask of the Byte offset in the Address */
 	#define EEPROM_24_BYTE_MASK				0x00FU

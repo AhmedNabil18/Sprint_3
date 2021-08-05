@@ -21,25 +21,31 @@ static strCardData_t  gstr_userCardData = {0};
 const uint8_t cgu8_ATM_SPI_CARD_Busy[3] = "CB";
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*--*-*-*- FUNCTIONS IMPLEMENTATION -*-*-*-*-*-*/
+#if REQUEST_MODE == INTERRUPT_REQUEST
 void ATM_REQ_ISR(void)
 {	
 	if(cgu8_ATM_Req == ATM_REQUESTED)
-	cgu8_ATM_Req = ATM_NOT_REQUESTED;
+	{
+		cgu8_ATM_Req = ATM_NOT_REQUESTED;
+		gu8_USER_Mode_State = USER_IDLE;
+	}
 	else
 	{/* ATM Request Data from Card */
 		cgu8_ATM_Req = ATM_REQUESTED;
 		if (gu8_CardMode == CARD_MODE_ADMIN)
 		{
 			SPI_SS_ENABLE();
-			Spi_MasterSendByte('*');
+			Spi_MasterSendPacket((uint8_t*)"**",3);
 			SPI_SS_DISABLE();
+			Delay_ms(1000);
+			cgu8_ATM_Req = ATM_NOT_REQUESTED;
 		}else
 		{
 			gu8_USER_Mode_State = USER_BUSY;
 		}
 	}
 }
-
+#endif
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 * Service Name: App_start
 * Sync/Async: Synchronous
@@ -58,8 +64,14 @@ enuApp_Status_t App_start(void)
 	/* Initialize the application */
 	if(App_init() != APP_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
-	Ext_INT0_init(EXT_INT0_EDGE_FALL);
-	INT0_setCallBack(ATM_REQ_ISR);
+	Delay_ms(1000);
+#if REQUEST_MODE == INTERRUPT_REQUEST
+ 	Ext_INT0_init(EXT_INT0_EDGE_FALL_RISE);
+ 	INT0_setCallBack(ATM_REQ_ISR);
+#elif REQUEST_MODE == POLLING_REQUEST
+	DIO_PORTD_DIR &= ~(1<<2);
+	DIO_PORTD_DATA |= 1<<2;
+#endif
 	EnableGlbl_Interrupt();
 	
 	/* Application Super Loop */
@@ -68,7 +80,6 @@ enuApp_Status_t App_start(void)
 		/* Update the App Status */
 		if(App_update() != APP_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
-			
 	}
 }
 
@@ -106,26 +117,30 @@ enuApp_Status_t App_init(void)
 		return APP_STATUS_ERROR_NOK;
 	if(SPI_STATUS_ERROR_OK != Spi_init())
 		return APP_STATUS_ERROR_NOK;
-	
+	DIO_PORTD_DIR &= ~(1<<2);
+	DIO_PORTD_DATA |= 1<<2;
 	/**************************/
 	/* Only for Testing */
 // 	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
 // 		return APP_STATUS_ERROR_NOK;
 // 	Delay_ms(10);
 	/**************************/
-	if(Terminal_Out((uint8_t*)"CARD Terminal\r\n") != TERMINAL_STATUS_ERROR_OK)
+	if(Terminal_Out((uint8_t*)"CARD Terminal Window\r\n") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	uint8_t u8_initData = 0;
 	/* Check if the card was previously registered and has its data in the eeprom */
 	if(Eeprom_24_readByte(CARD_INIT_ADDRESS, &u8_initData) != EEPROM_24_STATUS_ERROR_OK)
+	{
 		return APP_STATUS_ERROR_NOK;
-	DIO_PORTD_DATA |= 1<<2;
+	}
+		
 	if(u8_initData != CARD_INITIALIZED)
 	{
 		gu8_CardMode = CARD_MODE_ADMIN;
 	}else
 	{
 		gu8_CardMode = CARD_MODE_USER;
+		Terminal_Out((uint8_t*)"You are now in User Mode\r\n");
 		AppMemory_getCardData(&gstr_userCardData);
 	}
 	
@@ -218,23 +233,52 @@ enuApp_Status_t App_update(void)
 			}else if((App_terminalStatus != APP_STATUS_ERROR_OK) && (App_terminalStatus != APP_STATUS_NO_OP))
 				return APP_STATUS_ERROR_NOK;
 			/****************************************************************/
+			/***************************************************/
+		#if REQUEST_MODE == POLLING_REQUEST
+			if((DIO_PORTD_PIN & (1<<2)) == 0)
+			{/* ATM Request Data from Card */
+				Terminal_Out((uint8_t*)"Data Requested by the ATM\r\n");
+				if (cgu8_ATM_Req == ATM_SENDING)
+				{
+				}
+				else
+				{
+					cgu8_ATM_Req = ATM_REQUESTED;
+					if (gu8_CardMode == CARD_MODE_ADMIN)
+					{
+						SPI_SS_ENABLE();
+						Spi_MasterSendByte('*');
+						SPI_SS_DISABLE();
+					}else
+					{
+						gu8_USER_Mode_State = USER_BUSY;
+					}
+				}
+			}else
+			{
+				cgu8_ATM_Req = ATM_NOT_REQUESTED;
+			}
+		#endif
+			/***************************************************/
 			if (cgu8_ATM_Req == ATM_REQUESTED)
 			{
-				DIO_PORTA_DATA = 0xFF;
+				Terminal_Out((uint8_t*)"Sending\r\n");
 				AppUSER_sendCardData(&gstr_userCardData);
 				
 				Delay_ms(1000);
 				
-				if (gu8_ADMIN_Request == ADMIN_NOT_REQUESTED)
-				{
-					if(Terminal_Out((uint8_t*)"Data Successfully Sent\r\n") != TERMINAL_STATUS_ERROR_OK)
-						return APP_STATUS_ERROR_NOK;
-				}
+				if(Terminal_Out((uint8_t*)"Data Successfully Sent\r\n") != TERMINAL_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
+			#if REQUEST_MODE == POLLING_REQUEST
+				cgu8_ATM_Req = ATM_NOT_REQUESTED;
+				gu8_USER_Mode_State = USER_IDLE;
+			#endif
 			}
+			
 	/****************************************************************/
 	}
 	
-	Delay_ms(155);
+	Delay_ms(100);
 	return APP_STATUS_ERROR_OK;
 }
 
@@ -288,12 +332,13 @@ enuApp_Status_t AppADMIN_getCardName(uint8_t* pu8_data)
 				return APP_STATUS_ERROR_NOK;
 		} while (App_terminalStatus == APP_STATUS_NO_OP);
 		
-		
-		if (pu8_data[MAX_NAME_LENGTH] == '\0')
-			break;
+		if(stringLength(pu8_data) != MAX_NAME_LENGTH+1) 
+		{
+			if(Terminal_Out((uint8_t*)"\nInvalid Name, Name should be 9 characters\r\n") != TERMINAL_STATUS_ERROR_OK)
+				return APP_STATUS_ERROR_NOK;
+		}else{break;}
+			
 		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"\nInvalid Name, Only 9 characters\r\n") != TERMINAL_STATUS_ERROR_OK)
-			return APP_STATUS_ERROR_NOK;
 	} while (1);
 	return APP_STATUS_ERROR_OK;
 }
@@ -326,11 +371,29 @@ enuApp_Status_t AppADMIN_getCardPAN(uint8_t* pu8_data)
 			return APP_STATUS_ERROR_NOK;
 		} while (App_terminalStatus == APP_STATUS_NO_OP);
 		
-		if (pu8_data[9] == '\0')
-		break;
-		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"\nInvalid PAN, Only 9 characters\r\n") != TERMINAL_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
+		if(stringLength(pu8_data) != MAX_PAN_LENGTH+1)
+		{
+			if(Terminal_Out((uint8_t*)"\nInvalid PAN, PAN should be 9 numeric characters\r\n") != TERMINAL_STATUS_ERROR_OK)	
+				return APP_STATUS_ERROR_NOK;
+			EmptyString(pu8_data);
+			continue;
+		}
+		uint8_t u8_index=0;
+		
+		for(u8_index=0; u8_index<MAX_PAN_LENGTH; u8_index++)
+		{
+			if((pu8_data[u8_index]>'9') || (pu8_data[u8_index]<'0'))
+			{
+				if(Terminal_Out((uint8_t*)"\nInvalid PAN, PAN should be 9 numeric characters\r\n") != TERMINAL_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
+				EmptyString(pu8_data);
+				break;
+			}
+		}
+		if (u8_index == MAX_PAN_LENGTH)
+		{
+			break;
+		}
 	} while (1);
 	return APP_STATUS_ERROR_OK;
 }
@@ -364,11 +427,30 @@ enuApp_Status_t AppADMIN_getCardPIN(uint8_t* pu8_data)
 			return APP_STATUS_ERROR_NOK;
 		} while (App_terminalStatus == APP_STATUS_NO_OP);
 		
-		if (pu8_data[4] == '\0')
-			break;
-		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"Invalid PIN, Only 4 characters\r\n") != TERMINAL_STATUS_ERROR_OK)
+		
+		if(stringLength(pu8_data) != MAX_PIN_LENGTH+1)
+		{
+			if(Terminal_Out((uint8_t*)"\nInvalid PIN, PIN should be 4 numeric characters\r\n") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
+			EmptyString(pu8_data);
+			continue;
+		}
+		uint8_t u8_index=0;
+		
+		for(u8_index=0; u8_index<MAX_PIN_LENGTH; u8_index++)
+		{
+			if((pu8_data[u8_index]>'9') || (pu8_data[u8_index]<'0'))
+			{
+				if(Terminal_Out((uint8_t*)"\nInvalid PIN, PIN should be 4 numeric characters\r\n") != TERMINAL_STATUS_ERROR_OK)
+				return APP_STATUS_ERROR_NOK;
+				EmptyString(pu8_data);
+				break;
+			}
+		}
+		if (u8_index == MAX_PIN_LENGTH)
+		{
+			break;
+		}
 	} while (1);
 	Terminal_disablePasswordMode();
 	return APP_STATUS_ERROR_OK;

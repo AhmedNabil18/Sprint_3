@@ -9,7 +9,7 @@
 /*-*-*-*-*- INCLUDES *-*-*-*-*-*/
 #include "Spi.h"
 #include "..\ATMega32_Registers.h"
-
+#include "../Delay Module/Delay.h"
 
 static void (*SPI_STC_CallBackPtr)(void);
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -179,7 +179,7 @@ enuSpi_Status_t Spi_MasterSendPacket(uint8_t *pu8_Data, uint16_t u16_packetSize)
 		if(Spi_MasterSendByte(pu8_Data[u8_loopIndex]) != SPI_STATUS_ERROR_OK)
 			return SPI_STATUS_ERROR_NOK;
 	}
-		
+	
 	return SPI_STATUS_ERROR_OK;
 }
 #endif

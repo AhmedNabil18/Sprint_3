@@ -119,6 +119,6 @@ enuApp_Status_t App_update(void)
 	if(Spi_SlaveReceivePacket(au8_inputString, MAX_INPUT_SIZE) != SPI_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	Terminal_Out(au8_inputString);
-	Terminal_Out((uint8_t*)"\r");
+	Terminal_Out((uint8_t*)"\r\n");
 	return APP_STATUS_ERROR_OK;
 }

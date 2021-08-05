@@ -12,7 +12,7 @@
 
 
 
-#define F_DELAY_OSC			1000000UL
+#define F_DELAY_OSC			8000000UL
 
 
 

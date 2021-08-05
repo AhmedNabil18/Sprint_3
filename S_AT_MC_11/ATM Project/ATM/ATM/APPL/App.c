@@ -98,15 +98,15 @@ enuApp_Status_t App_init(void)
 /*								Function Implementation								  */
 /**************************************************************************************/
 	/* Initialize Used Modules */
-	if(EEPROM_24_STATUS_ERROR_OK != Eeprom_24_init())
+	if(LCD_STATUS_ERROR_OK != Lcd_init())
 		return APP_STATUS_ERROR_NOK;
 	if(TERMINAL_STATUS_ERROR_OK != Terminal_init())
+		return APP_STATUS_ERROR_NOK;
+	if(EEPROM_24_STATUS_ERROR_OK != Eeprom_24_init())
 		return APP_STATUS_ERROR_NOK;
 	if(SPI_STATUS_ERROR_OK != Spi_init())
 		return APP_STATUS_ERROR_NOK;
 	if(KEYPAD_STATUS_ERROR_OK != Keypad_init())
-		return APP_STATUS_ERROR_NOK;
-	if(LCD_STATUS_ERROR_OK != Lcd_init())
 		return APP_STATUS_ERROR_NOK;
 	if(LM35_STATUS_ERROR_OK != LM35_init())
 		return APP_STATUS_ERROR_NOK;
@@ -208,7 +208,7 @@ enuApp_Status_t App_update(void)
 				u8_passFlag = 1;
 			}
 			
-			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Max Amount\n\r3.Exit\r") != TERMINAL_STATUS_ERROR_OK)
+			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Existing Customer\n\r3.Update Max Amount\n\r4.Exit\r") != TERMINAL_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
 				
 			AppADMIN_getInput(au8_Input);
@@ -217,13 +217,16 @@ enuApp_Status_t App_update(void)
 				AppADMIN_processNewCustomer();
 				EmptyString(au8_Input);
 
+// 			}else if(au8_Input[0] == '2')//--------- Update Existing Customer OPTION -----------//
+// 			{
+// 				AppADMIN_processExistingCustomer();
+// 				EmptyString(au8_Input);
 			}else if(au8_Input[0] == '2')//--------- Max Amount OPTION -----------//
 			{
 				AppADMIN_getnewMaxAmount(au8_tempMaxAmount);
 				if(Eeprom_24_writePacket(ATM_DB_MAX_AMNT_ADDR, au8_tempMaxAmount, stringLength(au8_tempMaxAmount)) != EEPROM_24_STATUS_ERROR_OK)
 					return APP_STATUS_ERROR_NOK;
-				stringCopy(au8_tempMaxAmount, gau8_maxAmount);
-					
+				stringCopy(au8_tempMaxAmount, gau8_maxAmount);	
 			}else if(au8_Input[0] == '3')//--------- EXIT OPTION -----------//
 			{
 				if(gu8_initData == ATM_DB_FLAG_SET_VAL)
@@ -243,6 +246,10 @@ enuApp_Status_t App_update(void)
 						return APP_STATUS_ERROR_NOK;
 					return APP_STATUS_ERROR_OK;
 				}
+			}else
+			{
+				if(Terminal_Out((uint8_t*)"\nInvalid Input!") != TERMINAL_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
 			}
 	/****************************************************************/
 	}else
