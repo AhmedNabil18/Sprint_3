@@ -158,11 +158,29 @@ enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data)
 				return APP_STATUS_ERROR_NOK;
 		} while (App_terminalStatus == APP_STATUS_NO_OP);
 		
-		if (pu8_data[9] == '\0')
-			break;
-		EmptyString(pu8_data);
-		if(Terminal_Out((uint8_t*)"\nInvalid PAN, Only 9 characters\r") != TERMINAL_STATUS_ERROR_OK)
+		if(stringLength(pu8_data) != MAX_PAN_LENGTH+1)
+		{
+			if(Terminal_Out((uint8_t*)"\nInvalid PAN, PAN should be 9 numeric characters\r\n") != TERMINAL_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
+			EmptyString(pu8_data);
+			continue;
+		}
+		uint8_t u8_index=0;
+		
+		for(u8_index=0; u8_index<MAX_PAN_LENGTH; u8_index++)
+		{
+			if((pu8_data[u8_index]>'9') || (pu8_data[u8_index]<'0'))
+			{
+				if(Terminal_Out((uint8_t*)"\nInvalid PAN, PAN should be 9 numeric characters\r\n") != TERMINAL_STATUS_ERROR_OK)
+				return APP_STATUS_ERROR_NOK;
+				EmptyString(pu8_data);
+				break;
+			}
+		}
+		if (u8_index == MAX_PAN_LENGTH)
+		{
+			break;
+		}
 	} while (1);
 	return APP_STATUS_ERROR_OK;
 }
