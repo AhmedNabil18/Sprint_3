@@ -230,7 +230,7 @@ enuApp_Status_t AppUSER_startTransaction(void)
 				}
 			}
 		}
-		Delay_ms(155);
+		Delay_ms(200);
 	}
 }
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -325,7 +325,7 @@ enuApp_Status_t AppUSER_checkPin(void)
 				return APP_STATUS_PIN_CORRECT;
 			}
 		}
-		Delay_ms(155);
+		Delay_ms(200);
 	}
 	Kpd_enablePass = 0;
 }

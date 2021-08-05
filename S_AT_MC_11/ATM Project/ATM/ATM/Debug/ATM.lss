@@ -986,8 +986,8 @@ enuApp_Status_t AppUSER_startTransaction(void)
 				}
 			}
 		}
-		Delay_ms(155);
-     564:	2b e9       	ldi	r18, 0x9B	; 155
+		Delay_ms(200);
+     564:	28 ec       	ldi	r18, 0xC8	; 200
      566:	30 e0       	ldi	r19, 0x00	; 0
      568:	40 e0       	ldi	r20, 0x00	; 0
      56a:	50 e0       	ldi	r21, 0x00	; 0
@@ -1032,7 +1032,7 @@ enuApp_Status_t AppUSER_startTransaction(void)
 				}
 			}
 		}
-		Delay_ms(155);
+		Delay_ms(200);
 	}
 }
      58c:	28 96       	adiw	r28, 0x08	; 8
@@ -1204,8 +1204,8 @@ enuApp_Status_t AppUSER_checkPin(void)
      6a0:	0e c0       	rjmp	.+28     	; 0x6be <AppUSER_checkPin+0x106>
 			}
 		}
-		Delay_ms(155);
-     6a2:	2b e9       	ldi	r18, 0x9B	; 155
+		Delay_ms(200);
+     6a2:	28 ec       	ldi	r18, 0xC8	; 200
      6a4:	30 e0       	ldi	r19, 0x00	; 0
      6a6:	40 e0       	ldi	r20, 0x00	; 0
      6a8:	50 e0       	ldi	r21, 0x00	; 0
@@ -1229,7 +1229,7 @@ enuApp_Status_t AppUSER_checkPin(void)
      6bc:	80 e0       	ldi	r24, 0x00	; 0
 			}
 		}
-		Delay_ms(155);
+		Delay_ms(200);
 	}
 	Kpd_enablePass = 0;
 }
@@ -1898,7 +1898,7 @@ enuApp_Status_t AppUSER_insertCard(void)
      a28:	f9 f0       	breq	.+62     	; 0xa68 <App_init+0xe2>
 	{ /* Case not previously registered */
 		gu8_ATMMode = ATM_MODE_ADMIN; // Set in ADMIN mode
-     a2a:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+     a2a:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__data_start>
 		/* Read the Admin PIN from the memory */
 		if(Eeprom_24_writePacket(ATM_DB_ATM_PIN_ADDR, (uint8_t*)ATM_DB_ATM_PIN_VAL,\
 								stringLength((uint8_t*)ATM_DB_ATM_PIN_VAL)) != EEPROM_24_STATUS_ERROR_OK)
@@ -1944,7 +1944,7 @@ enuApp_Status_t AppUSER_insertCard(void)
 	{ /* Case it was previously registered == Contains data in the DB */
 		gu8_ATMMode = ATM_MODE_USER;
      a68:	81 e0       	ldi	r24, 0x01	; 1
-     a6a:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+     a6a:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_start>
 		
 		if(Eeprom_24_readPacket(ATM_DB_MAX_AMNT_ADDR, gau8_maxAmount, 8) != EEPROM_24_STATUS_ERROR_OK)
      a6e:	48 e0       	ldi	r20, 0x08	; 8
@@ -2923,7 +2923,7 @@ enuApp_Status_t App_update(void)
      e82:	e9 f7       	brne	.-6      	; 0xe7e <App_update+0x26>
 	static uint8_t u8_passFlag = 0;
 	if(gu8_ATMMode == ATM_MODE_ADMIN)
-     e84:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+     e84:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
      e88:	81 11       	cpse	r24, r1
      e8a:	82 c0       	rjmp	.+260    	; 0xf90 <App_update+0x138>
 	{ /**************** PROGRAMMING MODE ****************/
@@ -3037,7 +3037,7 @@ enuApp_Status_t App_update(void)
      f30:	10 92 f0 04 	sts	0x04F0, r1	; 0x8004f0 <__data_end>
 					gu8_ATMMode = ATM_MODE_USER;
      f34:	81 e0       	ldi	r24, 0x01	; 1
-     f36:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+     f36:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_start>
 					Lcd_clear();
      f3a:	0e 94 28 0d 	call	0x1a50	; 0x1a50 <Lcd_clear>
 					if(Terminal_Out((uint8_t*)"\nUSER Mode\r") != TERMINAL_STATUS_ERROR_OK)
@@ -3139,7 +3139,7 @@ enuApp_Status_t App_update(void)
      f9e:	02 c0       	rjmp	.+4      	; 0xfa4 <App_update+0x14c>
 			{
 				gu8_ATMMode = ATM_MODE_ADMIN;
-     fa0:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+     fa0:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__data_start>
 			}
 			App_terminalStatus = App_ReportTerminal(au8_termInput);
      fa4:	ce 01       	movw	r24, r28
@@ -3177,7 +3177,7 @@ enuApp_Status_t App_update(void)
 					}else /* User Mode is Idle ==> The ATM is not used by User */
 					{
 						gu8_ATMMode = ATM_MODE_ADMIN;
-     fdc:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+     fdc:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__data_start>
 						
 						Lcd_printLCD((uint8_t*)"******ATM*******", (uint8_t*)"*****LOCKED*****");
      fe0:	60 e7       	ldi	r22, 0x70	; 112
