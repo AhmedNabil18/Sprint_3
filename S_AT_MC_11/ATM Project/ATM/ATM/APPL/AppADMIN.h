@@ -121,15 +121,11 @@ enuApp_Status_t AppADMIN_getnewMaxAmount(uint8_t* pu8_data)
 				break;
 			}
 		}
-		if (u8_index == MAX_PAN_LENGTH)
+		if (u8_index == MAX_BAL_LENGTH)
 		{
+			EmptyString(pu8_data);
 			break;
-		}		
-// 		if ((pu8_data[7] == '\0') && (pu8_data[4] == '.'))
-// 		break;
-// 		EmptyString(pu8_data);
-// 		if(Terminal_Out((uint8_t*)"\nInvalid Balance, Only 7 characters eg. 1234.56\r") != TERMINAL_STATUS_ERROR_OK)
-// 		return APP_STATUS_ERROR_NOK;
+		}
 	} while (1);
 	return APP_STATUS_ERROR_OK;
 }
