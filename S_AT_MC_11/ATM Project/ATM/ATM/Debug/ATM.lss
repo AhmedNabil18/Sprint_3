@@ -1051,7 +1051,7 @@ enuApp_Status_t AppUSER_startTransaction(void)
      5be:	10 7e       	andi	r17, 0xE0	; 224
      5c0:	10 5d       	subi	r17, 0xD0	; 208
 					if(Eeprom_24_writePacket(u8_newCustomerBalAddr, gstr_clientdata.au8_Balance, \
-											stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
+											 stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
      5c2:	83 ef       	ldi	r24, 0xF3	; 243
      5c4:	95 e0       	ldi	r25, 0x05	; 5
      5c6:	0e 94 48 19 	call	0x3290	; 0x3290 <stringLength>
@@ -1070,7 +1070,7 @@ enuApp_Status_t AppUSER_startTransaction(void)
      5d6:	0e 94 7e 0b 	call	0x16fc	; 0x16fc <Eeprom_24_writePacket>
      5da:	81 30       	cpi	r24, 0x01	; 1
      5dc:	59 f5       	brne	.+86     	; 0x634 <AppUSER_startTransaction+0x20c>
-											stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
+											 stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
 						return APP_STATUS_ERROR_NOK;
 						
 					Lcd_printLCD((uint8_t*)"  Your Balance", gstr_clientdata.au8_Balance);
@@ -1148,7 +1148,7 @@ enuApp_Status_t AppUSER_startTransaction(void)
 						
 					uint8_t u8_newCustomerBalAddr = ATM_DB_CUSTOMER_BAL_BASE_ADDR + gu8_clientIndex*ATM_DB_CUSTOMER_DATA_SIZE;
 					if(Eeprom_24_writePacket(u8_newCustomerBalAddr, gstr_clientdata.au8_Balance, \
-											stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
+											 stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
 						return APP_STATUS_ERROR_NOK;
      634:	80 e0       	ldi	r24, 0x00	; 0
 		}
