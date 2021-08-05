@@ -207,9 +207,10 @@ enuApp_Status_t App_update(void)
 					return APP_STATUS_ERROR_NOK;
 				u8_passFlag = 1;
 			}
-			
-			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Existing Customer\n\r3.Update Max Amount\n\r4.Exit\r") != TERMINAL_STATUS_ERROR_OK)
+			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Max Amount\n\r3.Exit\r") != TERMINAL_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
+// 			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Existing Customer\n\r3.Update Max Amount\n\r4.Exit\r") != TERMINAL_STATUS_ERROR_OK)
+//				return APP_STATUS_ERROR_NOK;
 				
 			AppADMIN_getInput(au8_Input);
 			if(au8_Input[0] == '1')//--------- New Customer OPTION -----------//

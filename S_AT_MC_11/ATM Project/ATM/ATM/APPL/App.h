@@ -57,7 +57,7 @@
 #elif PROJECT == SIMULATION
 #define ATM_DB_CUSTOMER_PAN_BASE_ADDR			0x20 // 1 Page for each customer PAN
 #define ATM_DB_CUSTOMER_BAL_BASE_ADDR			0x30 // 1 Page for each customer Balance
-#define ATM_DB_CUSTOMER_DATA_SIZE				16U
+#define ATM_DB_CUSTOMER_DATA_SIZE				32U
 #endif
 
 #define MAX_PIN_TRIAL			3U
