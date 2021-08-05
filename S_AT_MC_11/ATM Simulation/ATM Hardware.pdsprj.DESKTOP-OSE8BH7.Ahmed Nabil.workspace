@@ -48,7 +48,7 @@
      <ITEM name="VSplitter1Pos">6</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="940" x="0" flags="00000022" y="256" h="214" pid="0" iid="24">
+   <POPUP w="940" x="0" flags="00000023" y="287" h="214" pid="0" iid="24">
     <PROPERTIES>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>
@@ -67,13 +67,13 @@
    <POPUP w="1384" x="128" flags="00000000" y="147" h="883" pid="0" iid="25">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="454" x="794" flags="00000023" y="200" h="403" pid="0" iid="23">
+   <POPUP w="454" x="794" flags="00000022" y="200" h="403" pid="0" iid="23">
     <PROPERTIES>
      <ITEM name="HSplitter1Pos">125</ITEM>
      <ITEM name="VSplitter1Pos">298</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="707" x="27" flags="00008023" y="418" h="307" pid="0" iid="18">
+   <POPUP w="707" x="0" flags="00000023" y="496" h="307" pid="0" iid="18">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>

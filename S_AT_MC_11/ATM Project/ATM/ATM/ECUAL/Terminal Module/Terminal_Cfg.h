@@ -11,6 +11,6 @@
 
 #include "../../MCAL/Uart Module/Uart.h"
 
-#define MAX_INPUT_SIZE		255U
+#define MAX_INPUT_SIZE		20U
 
 #endif /* TERMINAL_CFG_H_ */

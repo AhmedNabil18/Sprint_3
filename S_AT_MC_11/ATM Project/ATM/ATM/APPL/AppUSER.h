@@ -78,7 +78,6 @@ enuApp_Status_t AppUSER_insertCard(void)
 			Delay_ms(1000);
 			Lcd_printLCD((uint8_t*)"Please Contact",(uint8_t*)"Customer Service");
 			Delay_ms(1000);
-			gu8_USER_Mode_State = USER_IDLE;
 			Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
 			EmptyString(au8_inputString);
 			return APP_STATUS_ERROR_OK;
@@ -94,7 +93,6 @@ enuApp_Status_t AppUSER_insertCard(void)
 	if((processState == APP_STATUS_PAN_NOT_FOUND) || (processState == APP_STATUS_PIN_NOT_CORRECT))
 	{
 		Delay_ms(1000);
-		gu8_USER_Mode_State = USER_IDLE;
 		Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
 	}else if (processState != APP_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
@@ -135,10 +133,21 @@ enuApp_Status_t AppUSER_startProcess(strCardData_t* pstr_CardData)
 	
 	
 	Lcd_printLCD((uint8_t*)"    Welcome", (uint8_t*)"    Customer");
-	Delay_ms(2000);
+	Delay_ms(1000);
 	
-	Lcd_printLCD((uint8_t*)"  Your Balance", gstr_clientdata.au8_Balance);
-	Delay_ms(2000);
+	if(gf32_balance > 0)
+	{
+		
+		Lcd_printLCD((uint8_t*)"  Your Balance", gstr_clientdata.au8_Balance);
+	}else
+	{
+		Lcd_printLCD((uint8_t*)"You have no", (uint8_t*)"  Balance");
+		Delay_ms(1000);
+		Lcd_printLCD((uint8_t*)"Transaction", (uint8_t*)"Denied");
+		Delay_ms(1000);
+		return APP_STATUS_ERROR_OK;
+	}
+	Delay_ms(1000);
 	
 	Lcd_clear();
 	if(Lcd_setCursor(0, 0) != LCD_STATUS_ERROR_OK)
@@ -147,7 +156,6 @@ enuApp_Status_t AppUSER_startProcess(strCardData_t* pstr_CardData)
 		return APP_STATUS_ERROR_NOK;
 	if(AppUSER_startTransaction() != APP_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
-	
 	return APP_STATUS_ERROR_OK;
 }
 
@@ -191,19 +199,19 @@ enuApp_Status_t AppUSER_startTransaction(void)
 				return APP_STATUS_ERROR_NOK;
 			}else
 			{
-			Lcd_printLCD((uint8_t*)"  Please Wait", (uint8_t*)" Processing....");
-				
-			if(f32_balance < f32_amount)
-			{
-				Lcd_printLCD((uint8_t*)"  Insufficient", (uint8_t*)"      Fund");
-					
+				Lcd_printLCD((uint8_t*)"  Please Wait", (uint8_t*)" Processing....");
 				Delay_ms(500);
+				if(f32_balance < f32_amount)
+				{
+					Lcd_printLCD((uint8_t*)"  Insufficient", (uint8_t*)"      Fund");
 					
-				Lcd_clear();
-				if(Lcd_setCursor(0, 0) != LCD_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
-				if(Lcd_printString((uint8_t*)"Enter Amount") != LCD_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
+					Delay_ms(500);
+					
+					Lcd_clear();
+					if(Lcd_setCursor(0, 0) != LCD_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
+					if(Lcd_printString((uint8_t*)"Enter Amount") != LCD_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
 				}else/****************** Transaction Successfull ******************/
 				{
 					Lcd_printLCD((uint8_t*)"   Successful", (uint8_t*)"  Transaction");
@@ -211,7 +219,6 @@ enuApp_Status_t AppUSER_startTransaction(void)
 					Motor_run(MOTOR_CASH_ID, 100, MOTOR_DIR_CLK_WISE);
 					Delay_ms(1000);
 					Motor_stop(MOTOR_CASH_ID);
-					gu8_USER_Mode_State = USER_IDLE;
 						
 					f32_balance -= f32_amount;
 					EmptyString(gstr_clientdata.au8_Balance);
@@ -219,19 +226,20 @@ enuApp_Status_t AppUSER_startTransaction(void)
 						
 					uint8_t u8_newCustomerBalAddr = ATM_DB_CUSTOMER_BAL_BASE_ADDR + gu8_clientIndex*ATM_DB_CUSTOMER_DATA_SIZE;
 					if(Eeprom_24_writePacket(u8_newCustomerBalAddr, gstr_clientdata.au8_Balance, \
-					stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
-					return APP_STATUS_ERROR_NOK;
+											 stringLength(gstr_clientdata.au8_Balance)) != EEPROM_24_STATUS_ERROR_OK)
+						return APP_STATUS_ERROR_NOK;
 						
 					Lcd_printLCD((uint8_t*)"  Your Balance", gstr_clientdata.au8_Balance);
 					Delay_ms(1000);
 					Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
-						
-					return APP_STATUS_ERROR_OK;
+					break;
 				}
 			}
 		}
 		Delay_ms(155);
 	}
+	
+	return APP_STATUS_ERROR_OK;
 }
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 * Service Name: AppUSER_checkPan
@@ -265,13 +273,14 @@ enuApp_Status_t AppUSER_checkPan(void)
 		uint8_t u8_clientBalAddr = ATM_DB_CUSTOMER_BAL_BASE_ADDR + gu8_clientIndex*ATM_DB_CUSTOMER_DATA_SIZE;
 			
 		stringCopy(au8_clientPAN, gstr_clientdata.au8_PAN);
-			
+		
 		if(Eeprom_24_readPacket(u8_clientBalAddr, gstr_clientdata.au8_Balance, MAX_BAL_LENGTH+1) != EEPROM_24_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
-			
+		
+		gf32_balance = stringToFloat(gstr_clientdata.au8_Balance);
+		Terminal_Out(gstr_clientdata.au8_Balance);
 		return APP_STATUS_PAN_FOUND;
 	}
-
 	return APP_STATUS_PAN_NOT_FOUND;
 }
 

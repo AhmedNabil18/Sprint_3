@@ -24,7 +24,7 @@ uint8_t gu8_registeredAccNum = 0;
 uint8_t gu8_ATMPin[5]={0};
 uint8_t gau8_maxAmount[8]={0};	
 uint8_t gu8_clientIndex = 0;
-
+float32_t gf32_balance = 0;
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /*-*-*-*-*- CONST VARIABLES *-*-*-*-*-*/
@@ -116,7 +116,7 @@ enuApp_Status_t App_init(void)
 		return APP_STATUS_ERROR_NOK;
 	/**************************/
 	/* Only for Testing */
-// 	if(Eeprom_24_writeByte(ATM_DB_FLAG_ADDR, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
+// 	if(Eeprom_24_writeByte(ATM_DB_FLAG_ADDR, 0xAA) != EEPROM_24_STATUS_ERROR_OK)
 // 		return APP_STATUS_ERROR_NOK;
 // 	Delay_ms(10);
 	/**************************/
@@ -217,17 +217,17 @@ enuApp_Status_t App_update(void)
 				AppADMIN_processNewCustomer();
 				EmptyString(au8_Input);
 
-// 			}else if(au8_Input[0] == '2')//--------- Update Existing Customer OPTION -----------//
-// 			{
-// 				AppADMIN_processExistingCustomer();
-// 				EmptyString(au8_Input);
-			}else if(au8_Input[0] == '2')//--------- Max Amount OPTION -----------//
+			}else if(au8_Input[0] == '2')//--------- Update Existing Customer OPTION -----------//
+			{
+				AppADMIN_processExistingCustomer();
+				EmptyString(au8_Input);
+			}else if(au8_Input[0] == '3')//--------- Max Amount OPTION -----------//
 			{
 				AppADMIN_getnewMaxAmount(au8_tempMaxAmount);
 				if(Eeprom_24_writePacket(ATM_DB_MAX_AMNT_ADDR, au8_tempMaxAmount, stringLength(au8_tempMaxAmount)) != EEPROM_24_STATUS_ERROR_OK)
 					return APP_STATUS_ERROR_NOK;
 				stringCopy(au8_tempMaxAmount, gau8_maxAmount);	
-			}else if(au8_Input[0] == '3')//--------- EXIT OPTION -----------//
+			}else if(au8_Input[0] == '4')//--------- EXIT OPTION -----------//
 			{
 				if(gu8_initData == ATM_DB_FLAG_SET_VAL)
 				{
@@ -296,6 +296,7 @@ enuApp_Status_t App_update(void)
 				if(au8_data == '1') 
 				{
 					AppUSER_insertCard();
+					gu8_USER_Mode_State = USER_IDLE;
 			/******* Display Temp Chosen *******/
 				}else if(au8_data == '2')
 				{
