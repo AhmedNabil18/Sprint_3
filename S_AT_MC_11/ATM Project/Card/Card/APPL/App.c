@@ -119,9 +119,9 @@ enuApp_Status_t App_init(void)
 	DIO_PORTD_DATA |= 1<<2;
 	/**************************/
 	/* Only for Testing */
-// 	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
-// 		return APP_STATUS_ERROR_NOK;
-// 	Delay_ms(10);
+	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
+		return APP_STATUS_ERROR_NOK;
+	Delay_ms(10);
 	/**************************/
 	if(Terminal_Out((uint8_t*)"CARD Terminal Window\r\n") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
@@ -201,6 +201,7 @@ enuApp_Status_t App_update(void)
 			if(AppADMIN_saveCardData(&gstr_userCardData) != APP_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
 		
+			gu8_ADMIN_Request = ADMIN_NOT_REQUESTED;
 			gu8_CardMode = CARD_MODE_USER;
 			if(Terminal_Out((uint8_t*)"\nUSER Mode\r\n") != TERMINAL_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;

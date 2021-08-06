@@ -66,7 +66,7 @@ enuApp_Status_t AppUSER_insertCard(void)
 	}
 	Lcd_printLCD((uint8_t*)"Button Pressed",(uint8_t*)"Receiving Data");
 	Dio_writePin(DIO_SIG_CHANNEL_ID, PIN_LOW);
-	
+	EmptyString(au8_inputString);
 	while (au8_inputString[0] != '#')
 	{
 		if(Spi_SlaveReceivePacket(au8_inputString, CARD_FRAME_LENGTH) != SPI_STATUS_ERROR_OK)
@@ -379,7 +379,7 @@ enuApp_Status_t AppUSER_ReportKeypad(uint8_t* pu8_key)
 			return APP_STATUS_ERROR_NOK;
 			if(Lcd_printChar(' ') != LCD_STATUS_ERROR_OK)
 			return APP_STATUS_ERROR_NOK;
-		}else
+		}else if((sau8_data[u8_index] != '+') || (sau8_data[u8_index] != 'x'))
 		{
 			if(u8_index!=10)
 			{
