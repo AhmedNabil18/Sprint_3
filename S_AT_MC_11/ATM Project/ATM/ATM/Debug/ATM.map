@@ -66,8 +66,6 @@ Discarded input sections
  .text          0x00000000        0x0 APPL/App.o
  .data          0x00000000        0x0 APPL/App.o
  .bss           0x00000000        0x0 APPL/App.o
- .text.AppADMIN_saveNewCustomerData
-                0x00000000       0x84 APPL/App.o
  .rodata.ATM_TERM_EXIT
                 0x00000000        0x2 APPL/App.o
  .rodata.ATM_TERM_MAX_AMOUNT
@@ -598,7 +596,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x41c6
+.text           0x00000000     0x4218
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -679,407 +677,407 @@ END GROUP
                 0x00000278      0x12a APPL/App.o
                 0x00000278                AppUSER_ReportKeypad
  .text.AppUSER_startTransaction
-                0x000003a2      0x22a APPL/App.o
+                0x000003a2      0x25c APPL/App.o
                 0x000003a2                AppUSER_startTransaction
  .text.AppUSER_checkPin
-                0x000005cc      0x118 APPL/App.o
-                0x000005cc                AppUSER_checkPin
+                0x000005fe      0x120 APPL/App.o
+                0x000005fe                AppUSER_checkPin
  .text.AppUSER_startProcess
-                0x000006e4       0xc2 APPL/App.o
-                0x000006e4                AppUSER_startProcess
+                0x0000071e       0xca APPL/App.o
+                0x0000071e                AppUSER_startProcess
  .text.AppUSER_getCardData
-                0x000007a6       0x78 APPL/App.o
-                0x000007a6                AppUSER_getCardData
+                0x000007e8       0x78 APPL/App.o
+                0x000007e8                AppUSER_getCardData
  .text.AppUSER_insertCard
-                0x0000081e      0x17c APPL/App.o
-                0x0000081e                AppUSER_insertCard
+                0x00000860      0x174 APPL/App.o
+                0x00000860                AppUSER_insertCard
  .text.App_init
-                0x0000099a      0x186 APPL/App.o
-                0x0000099a                App_init
+                0x000009d4      0x186 APPL/App.o
+                0x000009d4                App_init
  .text.App_ReportTerminal
-                0x00000b20       0x62 APPL/App.o
-                0x00000b20                App_ReportTerminal
+                0x00000b5a       0x62 APPL/App.o
+                0x00000b5a                App_ReportTerminal
  .text.AppADMIN_getInput
-                0x00000b82       0x52 APPL/App.o
-                0x00000b82                AppADMIN_getInput
+                0x00000bbc       0x52 APPL/App.o
+                0x00000bbc                AppADMIN_getInput
  .text.AppADMIN_getnewMaxAmount
-                0x00000bd4       0x78 APPL/App.o
-                0x00000bd4                AppADMIN_getnewMaxAmount
+                0x00000c0e       0x80 APPL/App.o
+                0x00000c0e                AppADMIN_getnewMaxAmount
  .text.AppADMIN_getCustomerPAN
-                0x00000c4c       0x90 APPL/App.o
-                0x00000c4c                AppADMIN_getCustomerPAN
+                0x00000c8e       0x90 APPL/App.o
+                0x00000c8e                AppADMIN_getCustomerPAN
  .text.AppADMIN_getCustomerBalance
-                0x00000cdc       0x78 APPL/App.o
-                0x00000cdc                AppADMIN_getCustomerBalance
+                0x00000d1e       0x80 APPL/App.o
+                0x00000d1e                AppADMIN_getCustomerBalance
  .text.AppADMIN_processNewCustomer
-                0x00000d54      0x1f6 APPL/App.o
-                0x00000d54                AppADMIN_processNewCustomer
+                0x00000d9e      0x1ee APPL/App.o
+                0x00000d9e                AppADMIN_processNewCustomer
  .text.AppADMIN_processExistingCustomer
-                0x00000f4a      0x1f6 APPL/App.o
-                0x00000f4a                AppADMIN_processExistingCustomer
+                0x00000f8c      0x1ee APPL/App.o
+                0x00000f8c                AppADMIN_processExistingCustomer
  .text.AppADMIN_getAtmPIN
-                0x00001140       0x88 APPL/App.o
-                0x00001140                AppADMIN_getAtmPIN
+                0x0000117a       0x9e APPL/App.o
+                0x0000117a                AppADMIN_getAtmPIN
  .text.App_update
-                0x000011c8      0x260 APPL/App.o
-                0x000011c8                App_update
+                0x00001218      0x262 APPL/App.o
+                0x00001218                App_update
  .text.App_start
-                0x00001428       0x1a APPL/App.o
-                0x00001428                App_start
+                0x0000147a       0x1a APPL/App.o
+                0x0000147a                App_start
  .text.Button_init
-                0x00001442       0x26 ECUAL/Button Module/Button.o
-                0x00001442                Button_init
+                0x00001494       0x26 ECUAL/Button Module/Button.o
+                0x00001494                Button_init
  .text.Button_getState
-                0x00001468       0x24 ECUAL/Button Module/Button.o
-                0x00001468                Button_getState
+                0x000014ba       0x24 ECUAL/Button Module/Button.o
+                0x000014ba                Button_getState
  .text.Button_updateState
-                0x0000148c       0xe6 ECUAL/Button Module/Button.o
-                0x0000148c                Button_updateState
+                0x000014de       0xe6 ECUAL/Button Module/Button.o
+                0x000014de                Button_updateState
  .text.EEPROM_getAddresses
-                0x00001572       0x1e ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x000015c4       0x1e ECUAL/Eeprom_I2C Module/Eeprom_24.o
  .text.Eeprom_24_init
-                0x00001590       0x1e ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x00001590                Eeprom_24_init
+                0x000015e2       0x1e ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x000015e2                Eeprom_24_init
  .text.Eeprom_24_writeByte
-                0x000015ae       0x78 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x000015ae                Eeprom_24_writeByte
+                0x00001600       0x78 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x00001600                Eeprom_24_writeByte
  .text.Eeprom_24_readByte
-                0x00001626       0x82 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x00001626                Eeprom_24_readByte
+                0x00001678       0x82 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x00001678                Eeprom_24_readByte
  .text.Eeprom_24_writePage
-                0x000016a8       0x72 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x000016a8                Eeprom_24_writePage
+                0x000016fa       0x72 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x000016fa                Eeprom_24_writePage
  .text.Eeprom_24_readPage
-                0x0000171a       0x72 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x0000171a                Eeprom_24_readPage
+                0x0000176c       0x72 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x0000176c                Eeprom_24_readPage
  .text.Eeprom_24_writePacket
-                0x0000178c      0x1b2 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x0000178c                Eeprom_24_writePacket
+                0x000017de      0x1b2 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x000017de                Eeprom_24_writePacket
  .text.Eeprom_24_readPacket
-                0x0000193e      0x174 ECUAL/Eeprom_I2C Module/Eeprom_24.o
-                0x0000193e                Eeprom_24_readPacket
+                0x00001990      0x174 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x00001990                Eeprom_24_readPacket
  .text.Keypad_init
-                0x00001ab2       0x26 ECUAL/Keypad Module/Keypad.o
-                0x00001ab2                Keypad_init
+                0x00001b04       0x26 ECUAL/Keypad Module/Keypad.o
+                0x00001b04                Keypad_init
  .text.Keypad_readKey
-                0x00001ad8       0xf4 ECUAL/Keypad Module/Keypad.o
-                0x00001ad8                Keypad_readKey
+                0x00001b2a       0xf4 ECUAL/Keypad Module/Keypad.o
+                0x00001b2a                Keypad_readKey
  .text.Lcd_WriteData
-                0x00001bcc       0x60 ECUAL/Lcd Module/Lcd.o
+                0x00001c1e       0x60 ECUAL/Lcd Module/Lcd.o
  .text.Lcd_EnableToggle
-                0x00001c2c       0x26 ECUAL/Lcd Module/Lcd.o
+                0x00001c7e       0x26 ECUAL/Lcd Module/Lcd.o
  .text.Lcd_sendCommand
-                0x00001c52       0x54 ECUAL/Lcd Module/Lcd.o
-                0x00001c52                Lcd_sendCommand
+                0x00001ca4       0x54 ECUAL/Lcd Module/Lcd.o
+                0x00001ca4                Lcd_sendCommand
  .text.Lcd_init
-                0x00001ca6       0x6e ECUAL/Lcd Module/Lcd.o
-                0x00001ca6                Lcd_init
+                0x00001cf8       0x6e ECUAL/Lcd Module/Lcd.o
+                0x00001cf8                Lcd_init
  .text.Lcd_setCursor
-                0x00001d14       0x36 ECUAL/Lcd Module/Lcd.o
-                0x00001d14                Lcd_setCursor
+                0x00001d66       0x36 ECUAL/Lcd Module/Lcd.o
+                0x00001d66                Lcd_setCursor
  .text.Lcd_printChar
-                0x00001d4a       0x60 ECUAL/Lcd Module/Lcd.o
-                0x00001d4a                Lcd_printChar
+                0x00001d9c       0x60 ECUAL/Lcd Module/Lcd.o
+                0x00001d9c                Lcd_printChar
  .text.Lcd_printString
-                0x00001daa       0x28 ECUAL/Lcd Module/Lcd.o
-                0x00001daa                Lcd_printString
+                0x00001dfc       0x28 ECUAL/Lcd Module/Lcd.o
+                0x00001dfc                Lcd_printString
  .text.Lcd_clear
-                0x00001dd2        0xa ECUAL/Lcd Module/Lcd.o
-                0x00001dd2                Lcd_clear
+                0x00001e24        0xa ECUAL/Lcd Module/Lcd.o
+                0x00001e24                Lcd_clear
  .text.Lcd_printLCD
-                0x00001ddc       0x52 ECUAL/Lcd Module/Lcd.o
-                0x00001ddc                Lcd_printLCD
+                0x00001e2e       0x52 ECUAL/Lcd Module/Lcd.o
+                0x00001e2e                Lcd_printLCD
  .text.Lcd_printDecimal
-                0x00001e2e       0x3c ECUAL/Lcd Module/Lcd.o
-                0x00001e2e                Lcd_printDecimal
+                0x00001e80       0x3c ECUAL/Lcd Module/Lcd.o
+                0x00001e80                Lcd_printDecimal
  .text.LM35_init
-                0x00001e6a       0x1e ECUAL/LM35 Module/LM35.o
-                0x00001e6a                LM35_init
+                0x00001ebc       0x1e ECUAL/LM35 Module/LM35.o
+                0x00001ebc                LM35_init
  .text.LM35_readTemp
-                0x00001e88       0x72 ECUAL/LM35 Module/LM35.o
-                0x00001e88                LM35_readTemp
+                0x00001eda       0x72 ECUAL/LM35 Module/LM35.o
+                0x00001eda                LM35_readTemp
  .text.Motor_init
-                0x00001efa       0x22 ECUAL/Motor Module/Motor.o
-                0x00001efa                Motor_init
+                0x00001f4c       0x22 ECUAL/Motor Module/Motor.o
+                0x00001f4c                Motor_init
  .text.Motor_stop
-                0x00001f1c       0xde ECUAL/Motor Module/Motor.o
-                0x00001f1c                Motor_stop
+                0x00001f6e       0xde ECUAL/Motor Module/Motor.o
+                0x00001f6e                Motor_stop
  .text.Motor_run
-                0x00001ffa       0xe0 ECUAL/Motor Module/Motor.o
-                0x00001ffa                Motor_run
+                0x0000204c       0xe0 ECUAL/Motor Module/Motor.o
+                0x0000204c                Motor_run
  .text.Uart_RXC_ISR
-                0x000020da       0x82 ECUAL/Terminal Module/Terminal.o
-                0x000020da                Uart_RXC_ISR
+                0x0000212c       0x82 ECUAL/Terminal Module/Terminal.o
+                0x0000212c                Uart_RXC_ISR
  .text.Terminal_init
-                0x0000215c       0x2a ECUAL/Terminal Module/Terminal.o
-                0x0000215c                Terminal_init
+                0x000021ae       0x2a ECUAL/Terminal Module/Terminal.o
+                0x000021ae                Terminal_init
  .text.Terminal_Out
-                0x00002186       0x36 ECUAL/Terminal Module/Terminal.o
-                0x00002186                Terminal_Out
+                0x000021d8       0x36 ECUAL/Terminal Module/Terminal.o
+                0x000021d8                Terminal_Out
  .text.Terminal_In
-                0x000021bc       0x36 ECUAL/Terminal Module/Terminal.o
-                0x000021bc                Terminal_In
+                0x0000220e       0x36 ECUAL/Terminal Module/Terminal.o
+                0x0000220e                Terminal_In
  .text.Terminal_enablePasswordMode
-                0x000021f2        0x8 ECUAL/Terminal Module/Terminal.o
-                0x000021f2                Terminal_enablePasswordMode
+                0x00002244        0x8 ECUAL/Terminal Module/Terminal.o
+                0x00002244                Terminal_enablePasswordMode
  .text.Terminal_disablePasswordMode
-                0x000021fa        0x8 ECUAL/Terminal Module/Terminal.o
-                0x000021fa                Terminal_disablePasswordMode
- .text.main     0x00002202        0x6 main.o
-                0x00002202                main
+                0x0000224c        0x8 ECUAL/Terminal Module/Terminal.o
+                0x0000224c                Terminal_disablePasswordMode
+ .text.main     0x00002254        0x6 main.o
+                0x00002254                main
  .text.Adc_init
-                0x00002208       0x50 MCAL/Adc Module/Adc.o
-                0x00002208                Adc_init
+                0x0000225a       0x50 MCAL/Adc Module/Adc.o
+                0x0000225a                Adc_init
  .text.Adc_start
-                0x00002258       0xec MCAL/Adc Module/Adc.o
-                0x00002258                Adc_start
+                0x000022aa       0xec MCAL/Adc Module/Adc.o
+                0x000022aa                Adc_start
  .text.__vector_16
-                0x00002344       0x4e MCAL/Adc Module/Adc.o
-                0x00002344                __vector_16
+                0x00002396       0x4e MCAL/Adc Module/Adc.o
+                0x00002396                __vector_16
  .text.Delay_ms
-                0x00002392      0x132 MCAL/Delay Module/Delay.o
-                0x00002392                Delay_ms
+                0x000023e4      0x132 MCAL/Delay Module/Delay.o
+                0x000023e4                Delay_ms
  .text.Dio_init
-                0x000024c4      0x1dc MCAL/Dio Module/Dio.o
-                0x000024c4                Dio_init
+                0x00002516      0x1dc MCAL/Dio Module/Dio.o
+                0x00002516                Dio_init
  .text.Dio_writePin
-                0x000026a0      0x132 MCAL/Dio Module/Dio.o
-                0x000026a0                Dio_writePin
+                0x000026f2      0x132 MCAL/Dio Module/Dio.o
+                0x000026f2                Dio_writePin
  .text.Dio_togglePin
-                0x000027d2       0xb0 MCAL/Dio Module/Dio.o
-                0x000027d2                Dio_togglePin
+                0x00002824       0xb0 MCAL/Dio Module/Dio.o
+                0x00002824                Dio_togglePin
  .text.Dio_readPin
-                0x00002882      0x10a MCAL/Dio Module/Dio.o
-                0x00002882                Dio_readPin
+                0x000028d4      0x10a MCAL/Dio Module/Dio.o
+                0x000028d4                Dio_readPin
  .text.__vector_1
-                0x0000298c       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
-                0x0000298c                __vector_1
+                0x000029de       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
+                0x000029de                __vector_1
  .text.__vector_2
-                0x000029da       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
-                0x000029da                __vector_2
+                0x00002a2c       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
+                0x00002a2c                __vector_2
  .text.__vector_3
-                0x00002a28       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
-                0x00002a28                __vector_3
+                0x00002a7a       0x4e MCAL/Ext Interrupt Module/Ext_INT.o
+                0x00002a7a                __vector_3
  .text.Gpt_ISRHandler
-                0x00002a76       0x96 MCAL/Gpt Module/Gpt.o
- .text.GptInit  0x00002b0c       0x68 MCAL/Gpt Module/Gpt.o
-                0x00002b0c                GptInit
+                0x00002ac8       0x96 MCAL/Gpt Module/Gpt.o
+ .text.GptInit  0x00002b5e       0x68 MCAL/Gpt Module/Gpt.o
+                0x00002b5e                GptInit
  .text.GptStart_aSync
-                0x00002b74       0xbe MCAL/Gpt Module/Gpt.o
-                0x00002b74                GptStart_aSync
- .text.GptStop  0x00002c32       0x5a MCAL/Gpt Module/Gpt.o
-                0x00002c32                GptStop
+                0x00002bc6       0xbe MCAL/Gpt Module/Gpt.o
+                0x00002bc6                GptStart_aSync
+ .text.GptStop  0x00002c84       0x5a MCAL/Gpt Module/Gpt.o
+                0x00002c84                GptStop
  .text.__vector_11
-                0x00002c8c       0x4a MCAL/Gpt Module/Gpt.o
-                0x00002c8c                __vector_11
+                0x00002cde       0x4a MCAL/Gpt Module/Gpt.o
+                0x00002cde                __vector_11
  .text.__vector_10
-                0x00002cd6       0x4a MCAL/Gpt Module/Gpt.o
-                0x00002cd6                __vector_10
+                0x00002d28       0x4a MCAL/Gpt Module/Gpt.o
+                0x00002d28                __vector_10
  .text.__vector_9
-                0x00002d20       0x4a MCAL/Gpt Module/Gpt.o
-                0x00002d20                __vector_9
+                0x00002d72       0x4a MCAL/Gpt Module/Gpt.o
+                0x00002d72                __vector_9
  .text.__vector_6
-                0x00002d6a       0x4a MCAL/Gpt Module/Gpt.o
-                0x00002d6a                __vector_6
+                0x00002dbc       0x4a MCAL/Gpt Module/Gpt.o
+                0x00002dbc                __vector_6
  .text.__vector_7
-                0x00002db4       0x4a MCAL/Gpt Module/Gpt.o
-                0x00002db4                __vector_7
+                0x00002e06       0x4a MCAL/Gpt Module/Gpt.o
+                0x00002e06                __vector_7
  .text.__vector_8
-                0x00002dfe       0x4a MCAL/Gpt Module/Gpt.o
-                0x00002dfe                __vector_8
+                0x00002e50       0x4a MCAL/Gpt Module/Gpt.o
+                0x00002e50                __vector_8
  .text.__vector_4
-                0x00002e48       0x4a MCAL/Gpt Module/Gpt.o
-                0x00002e48                __vector_4
+                0x00002e9a       0x4a MCAL/Gpt Module/Gpt.o
+                0x00002e9a                __vector_4
  .text.__vector_5
-                0x00002e92       0x4a MCAL/Gpt Module/Gpt.o
-                0x00002e92                __vector_5
+                0x00002ee4       0x4a MCAL/Gpt Module/Gpt.o
+                0x00002ee4                __vector_5
  .text.I2C_MasterInit
-                0x00002edc       0x1e MCAL/I2C Module/I2C.o
-                0x00002edc                I2C_MasterInit
+                0x00002f2e       0x1e MCAL/I2C Module/I2C.o
+                0x00002f2e                I2C_MasterInit
  .text.I2C_MasterSendSTART
-                0x00002efa       0x26 MCAL/I2C Module/I2C.o
-                0x00002efa                I2C_MasterSendSTART
+                0x00002f4c       0x26 MCAL/I2C Module/I2C.o
+                0x00002f4c                I2C_MasterSendSTART
  .text.I2C_MasterSendSlaveAddress
-                0x00002f20       0x62 MCAL/I2C Module/I2C.o
-                0x00002f20                I2C_MasterSendSlaveAddress
+                0x00002f72       0x62 MCAL/I2C Module/I2C.o
+                0x00002f72                I2C_MasterSendSlaveAddress
  .text.I2C_MasterSendRepSTART
-                0x00002f82       0x26 MCAL/I2C Module/I2C.o
-                0x00002f82                I2C_MasterSendRepSTART
+                0x00002fd4       0x26 MCAL/I2C Module/I2C.o
+                0x00002fd4                I2C_MasterSendRepSTART
  .text.I2C_MasterSendSTOP
-                0x00002fa8       0x1a MCAL/I2C Module/I2C.o
-                0x00002fa8                I2C_MasterSendSTOP
+                0x00002ffa       0x1a MCAL/I2C Module/I2C.o
+                0x00002ffa                I2C_MasterSendSTOP
  .text.I2C_MasterSendByte
-                0x00002fc2       0x2e MCAL/I2C Module/I2C.o
-                0x00002fc2                I2C_MasterSendByte
+                0x00003014       0x2e MCAL/I2C Module/I2C.o
+                0x00003014                I2C_MasterSendByte
  .text.I2C_MasterReceiveByte_ACK
-                0x00002ff0       0x34 MCAL/I2C Module/I2C.o
-                0x00002ff0                I2C_MasterReceiveByte_ACK
+                0x00003042       0x34 MCAL/I2C Module/I2C.o
+                0x00003042                I2C_MasterReceiveByte_ACK
  .text.I2C_MasterReceiveByte_NACK
-                0x00003024       0x34 MCAL/I2C Module/I2C.o
-                0x00003024                I2C_MasterReceiveByte_NACK
+                0x00003076       0x34 MCAL/I2C Module/I2C.o
+                0x00003076                I2C_MasterReceiveByte_NACK
  .text.I2C_MasterReceiveGeneral
-                0x00003058       0xf8 MCAL/I2C Module/I2C.o
-                0x00003058                I2C_MasterReceiveGeneral
+                0x000030aa       0xf8 MCAL/I2C Module/I2C.o
+                0x000030aa                I2C_MasterReceiveGeneral
  .text.I2C_MasterSendToLocation
-                0x00003150       0x9e MCAL/I2C Module/I2C.o
-                0x00003150                I2C_MasterSendToLocation
+                0x000031a2       0x9e MCAL/I2C Module/I2C.o
+                0x000031a2                I2C_MasterSendToLocation
  .text.I2C_MasterReceiveFromLocation
-                0x000031ee       0x2e MCAL/I2C Module/I2C.o
-                0x000031ee                I2C_MasterReceiveFromLocation
+                0x00003240       0x2e MCAL/I2C Module/I2C.o
+                0x00003240                I2C_MasterReceiveFromLocation
  .text.Spi_init
-                0x0000321c       0x3a MCAL/Spi Module/Spi.o
-                0x0000321c                Spi_init
+                0x0000326e       0x3a MCAL/Spi Module/Spi.o
+                0x0000326e                Spi_init
  .text.Spi_SlaveReceiveByte
-                0x00003256       0x22 MCAL/Spi Module/Spi.o
-                0x00003256                Spi_SlaveReceiveByte
+                0x000032a8       0x22 MCAL/Spi Module/Spi.o
+                0x000032a8                Spi_SlaveReceiveByte
  .text.Spi_SlaveReceivePacket
-                0x00003278       0x5a MCAL/Spi Module/Spi.o
-                0x00003278                Spi_SlaveReceivePacket
+                0x000032ca       0x5a MCAL/Spi Module/Spi.o
+                0x000032ca                Spi_SlaveReceivePacket
  .text.__vector_12
-                0x000032d2       0x4e MCAL/Spi Module/Spi.o
-                0x000032d2                __vector_12
+                0x00003324       0x4e MCAL/Spi Module/Spi.o
+                0x00003324                __vector_12
  .text.stringLength
-                0x00003320       0x18 MCAL/StringManipulation.o
-                0x00003320                stringLength
+                0x00003372       0x18 MCAL/StringManipulation.o
+                0x00003372                stringLength
  .text.stringCompare
-                0x00003338       0x66 MCAL/StringManipulation.o
-                0x00003338                stringCompare
+                0x0000338a       0x66 MCAL/StringManipulation.o
+                0x0000338a                stringCompare
  .text.EmptyString
-                0x0000339e       0x18 MCAL/StringManipulation.o
-                0x0000339e                EmptyString
+                0x000033f0       0x18 MCAL/StringManipulation.o
+                0x000033f0                EmptyString
  .text.stringCopy
-                0x000033b6       0x22 MCAL/StringManipulation.o
-                0x000033b6                stringCopy
+                0x00003408       0x22 MCAL/StringManipulation.o
+                0x00003408                stringCopy
  .text.integerToString
-                0x000033d8       0x9c MCAL/StringManipulation.o
-                0x000033d8                integerToString
+                0x0000342a       0x9c MCAL/StringManipulation.o
+                0x0000342a                integerToString
  .text.stringToFloat
-                0x00003474       0xfc MCAL/StringManipulation.o
-                0x00003474                stringToFloat
+                0x000034c6       0xfc MCAL/StringManipulation.o
+                0x000034c6                stringToFloat
  .text.floatToString
-                0x00003570      0x11e MCAL/StringManipulation.o
-                0x00003570                floatToString
+                0x000035c2      0x11e MCAL/StringManipulation.o
+                0x000035c2                floatToString
  .text.waveFunction
-                0x0000368e      0x110 MCAL/SWPwm Module/SWPwm.o
-                0x0000368e                waveFunction
+                0x000036e0      0x110 MCAL/SWPwm Module/SWPwm.o
+                0x000036e0                waveFunction
  .text.SWPwm_Init
-                0x0000379e       0x38 MCAL/SWPwm Module/SWPwm.o
-                0x0000379e                SWPwm_Init
+                0x000037f0       0x38 MCAL/SWPwm Module/SWPwm.o
+                0x000037f0                SWPwm_Init
  .text.SWPwm_Start
-                0x000037d6      0x268 MCAL/SWPwm Module/SWPwm.o
-                0x000037d6                SWPwm_Start
+                0x00003828      0x268 MCAL/SWPwm Module/SWPwm.o
+                0x00003828                SWPwm_Start
  .text.SWPwm_Stop
-                0x00003a3e       0x90 MCAL/SWPwm Module/SWPwm.o
-                0x00003a3e                SWPwm_Stop
+                0x00003a90       0x90 MCAL/SWPwm Module/SWPwm.o
+                0x00003a90                SWPwm_Stop
  .text.Uart_init
-                0x00003ace       0x2c MCAL/Uart Module/Uart.o
-                0x00003ace                Uart_init
+                0x00003b20       0x2c MCAL/Uart Module/Uart.o
+                0x00003b20                Uart_init
  .text.Uart_sendByte
-                0x00003afa       0x16 MCAL/Uart Module/Uart.o
-                0x00003afa                Uart_sendByte
+                0x00003b4c       0x16 MCAL/Uart Module/Uart.o
+                0x00003b4c                Uart_sendByte
  .text.Uart_sendPacket
-                0x00003b10       0x4e MCAL/Uart Module/Uart.o
-                0x00003b10                Uart_sendPacket
+                0x00003b62       0x4e MCAL/Uart Module/Uart.o
+                0x00003b62                Uart_sendPacket
  .text.Uart_EnableNotification_RXC
-                0x00003b5e       0x2a MCAL/Uart Module/Uart.o
-                0x00003b5e                Uart_EnableNotification_RXC
+                0x00003bb0       0x2a MCAL/Uart Module/Uart.o
+                0x00003bb0                Uart_EnableNotification_RXC
  .text.Uart_DataRegister
-                0x00003b88        0x4 MCAL/Uart Module/Uart.o
-                0x00003b88                Uart_DataRegister
+                0x00003bda        0x4 MCAL/Uart Module/Uart.o
+                0x00003bda                Uart_DataRegister
  .text.__vector_15
-                0x00003b8c       0x4e MCAL/Uart Module/Uart.o
-                0x00003b8c                __vector_15
+                0x00003bde       0x4e MCAL/Uart Module/Uart.o
+                0x00003bde                __vector_15
  .text.__vector_13
-                0x00003bda       0x4e MCAL/Uart Module/Uart.o
-                0x00003bda                __vector_13
+                0x00003c2c       0x4e MCAL/Uart Module/Uart.o
+                0x00003c2c                __vector_13
  .text.__vector_14
-                0x00003c28       0x4e MCAL/Uart Module/Uart.o
-                0x00003c28                __vector_14
+                0x00003c7a       0x4e MCAL/Uart Module/Uart.o
+                0x00003c7a                __vector_14
  .text.avr-libc.fplib
-                0x00003c76        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                0x00003c76                __subsf3
-                0x00003c78                __addsf3
+                0x00003cc8        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
+                0x00003cc8                __subsf3
+                0x00003cca                __addsf3
  .text.avr-libc.fplib
-                0x00003c84       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
-                0x00003ca6                __addsf3x
+                0x00003cd6       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+                0x00003cf8                __addsf3x
  .text.avr-libc.fplib
-                0x00003d50        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
-                0x00003d50                __nesf2
-                0x00003d50                __eqsf2
-                0x00003d50                __cmpsf2
-                0x00003d50                __ltsf2
-                0x00003d50                __lesf2
+                0x00003da2        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
+                0x00003da2                __nesf2
+                0x00003da2                __eqsf2
+                0x00003da2                __cmpsf2
+                0x00003da2                __ltsf2
+                0x00003da2                __lesf2
  .text.avr-libc.fplib
-                0x00003d5a        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                0x00003d5a                __divsf3
+                0x00003dac        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x00003dac                __divsf3
  .text.avr-libc.fplib
-                0x00003d62       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
-                0x00003d82                __divsf3x
-                0x00003d88                __divsf3_pse
+                0x00003db4       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x00003dd4                __divsf3x
+                0x00003dda                __divsf3_pse
  .text.avr-libc.fplib
-                0x00003e3e       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x00003e3e                __fixunssfsi
+                0x00003e90       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x00003e90                __fixunssfsi
  .text.avr-libc.fplib
-                0x00003e9c       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x00003e9c                __floatunsisf
-                0x00003ea0                __floatsisf
+                0x00003eee       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x00003eee                __floatunsisf
+                0x00003ef2                __floatsisf
  .text.avr-libc.fplib
-                0x00003f16       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
-                0x00003f16                __fp_cmp
+                0x00003f68       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
+                0x00003f68                __fp_cmp
  .text.avr-libc.fplib
-                0x00003f5e        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x00003f5e                __fp_inf
+                0x00003fb0        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x00003fb0                __fp_inf
  .text.avr-libc.fplib
-                0x00003f6a        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x00003f6a                __fp_nan
+                0x00003fbc        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x00003fbc                __fp_nan
  .text.avr-libc.fplib
-                0x00003f70        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x00003f70                __fp_pscA
+                0x00003fc2        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x00003fc2                __fp_pscA
  .text.avr-libc.fplib
-                0x00003f7e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x00003f7e                __fp_pscB
+                0x00003fd0        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x00003fd0                __fp_pscB
  .text.avr-libc.fplib
-                0x00003f8c       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x00003f8c                __fp_round
+                0x00003fde       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x00003fde                __fp_round
  .text.avr-libc.fplib
-                0x00003fae       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x00003fae                __fp_split3
-                0x00003fbe                __fp_splitA
+                0x00004000       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x00004000                __fp_split3
+                0x00004010                __fp_splitA
  .text.avr-libc.fplib
-                0x00003ff2        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00003ff2                __fp_zero
-                0x00003ff4                __fp_szero
+                0x00004044        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x00004044                __fp_zero
+                0x00004046                __fp_szero
  .text.avr-libc.fplib
-                0x00004000        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x00004000                __mulsf3
+                0x00004052        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x00004052                __mulsf3
  .text.avr-libc.fplib
-                0x00004008       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x00004026                __mulsf3x
-                0x0000402c                __mulsf3_pse
+                0x0000405a       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x00004078                __mulsf3x
+                0x0000407e                __mulsf3_pse
  .text.libgcc.div
-                0x000040da       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
-                0x000040da                _div
-                0x000040da                __divmodhi4
+                0x0000412c       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
+                0x0000412c                _div
+                0x0000412c                __divmodhi4
  .text.libgcc.div
-                0x00004102       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00004102                __udivmodsi4
- .text.libgcc   0x00004146        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x00004146                __tablejump2__
+                0x00004154       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00004154                __udivmodsi4
+ .text.libgcc   0x00004198        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x00004198                __tablejump2__
  .text.libgcc.mul
-                0x00004152       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00004152                __umulhisi3
- .text.libgcc   0x00004170       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_adddi3_s8.o)
-                0x00004170                __adddi3_s8
- .text.libgcc   0x00004188       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_cmpdi2.o)
-                0x00004188                __cmpdi2
+                0x000041a4       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x000041a4                __umulhisi3
+ .text.libgcc   0x000041c2       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_adddi3_s8.o)
+                0x000041c2                __adddi3_s8
+ .text.libgcc   0x000041da       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_cmpdi2.o)
+                0x000041da                __cmpdi2
  .text.libgcc.div
-                0x0000419a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
-                0x0000419a                __udivmodhi4
-                0x000041c2                . = ALIGN (0x2)
+                0x000041ec       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                0x000041ec                __udivmodhi4
+                0x00004214                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000041c2        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000041c2                _exit
-                0x000041c2                exit
+ .fini9         0x00004214        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00004214                _exit
+                0x00004214                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1098,196 +1096,200 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000041c2        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00004214        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000041c6                _etext = .
+                0x00004218                _etext = .
 
-.data           0x00800060      0x520 load address 0x000041c6
+.data           0x00800060      0x50e load address 0x00004218
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
+ .data.cgau8_AMOUNTString
+                0x00800060        0xd APPL/App.o
+                0x00800060                cgau8_AMOUNTString
  .data.gu8_ATMMode
-                0x00800060        0x1 APPL/App.o
+                0x0080006d        0x1 APPL/App.o
  .data.enuCurrentAppStatus
-                0x00800061        0x1 APPL/App.o
+                0x0080006e        0x1 APPL/App.o
  .data.genu_BttnModuleState
-                0x00800062        0x1 ECUAL/Button Module/Button.o
+                0x0080006f        0x1 ECUAL/Button Module/Button.o
  .data.gau8_buttonsUsed
-                0x00800063        0x1 ECUAL/Button Module/Button_Cfg.o
-                0x00800063                gau8_buttonsUsed
+                0x00800070        0x1 ECUAL/Button Module/Button_Cfg.o
+                0x00800070                gau8_buttonsUsed
  .data.genu_eepromModuleState
-                0x00800064        0x1 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x00800071        0x1 ECUAL/Eeprom_I2C Module/Eeprom_24.o
  .data.genu_KeypadModuleState
-                0x00800065        0x1 ECUAL/Keypad Module/Keypad.o
+                0x00800072        0x1 ECUAL/Keypad Module/Keypad.o
  .data.gau8_ButtonSymbols
-                0x00800066       0x10 ECUAL/Keypad Module/Keypad_Cfg.o
-                0x00800066                gau8_ButtonSymbols
+                0x00800073       0x10 ECUAL/Keypad Module/Keypad_Cfg.o
+                0x00800073                gau8_ButtonSymbols
  .data.gau8_Rows
-                0x00800076        0x4 ECUAL/Keypad Module/Keypad_Cfg.o
-                0x00800076                gau8_Rows
+                0x00800083        0x4 ECUAL/Keypad Module/Keypad_Cfg.o
+                0x00800083                gau8_Rows
  .data.gau8_Columns
-                0x0080007a        0x4 ECUAL/Keypad Module/Keypad_Cfg.o
-                0x0080007a                gau8_Columns
+                0x00800087        0x4 ECUAL/Keypad Module/Keypad_Cfg.o
+                0x00800087                gau8_Columns
  .data.genu_LcdModuleState
-                0x0080007e        0x1 ECUAL/Lcd Module/Lcd.o
+                0x0080008b        0x1 ECUAL/Lcd Module/Lcd.o
  .data.genu_LM35ModuleState
-                0x0080007f        0x1 ECUAL/LM35 Module/LM35.o
+                0x0080008c        0x1 ECUAL/LM35 Module/LM35.o
  .data.gu8_MotorModuleStatus
-                0x00800080        0x1 ECUAL/Motor Module/Motor.o
-                0x00800080                gu8_MotorModuleStatus
+                0x0080008d        0x1 ECUAL/Motor Module/Motor.o
+                0x0080008d                gu8_MotorModuleStatus
  .data.genu_TerminalModuleState
-                0x00800081        0x1 ECUAL/Terminal Module/Terminal.o
+                0x0080008e        0x1 ECUAL/Terminal Module/Terminal.o
  .data.genuAdc_Status
-                0x00800082        0x1 MCAL/Adc Module/Adc.o
+                0x0080008f        0x1 MCAL/Adc Module/Adc.o
  .data.str_ADCchannels
-                0x00800083        0x2 MCAL/Adc Module/Adc_Cfg.o
-                0x00800083                str_ADCchannels
+                0x00800090        0x2 MCAL/Adc Module/Adc_Cfg.o
+                0x00800090                str_ADCchannels
  .data.strDio_pins
-                0x00800085       0x50 MCAL/Dio Module/Dio_Cfg.o
-                0x00800085                strDio_pins
+                0x00800092       0x50 MCAL/Dio Module/Dio_Cfg.o
+                0x00800092                strDio_pins
  .data.genuI2C_Status
-                0x008000d5        0x1 MCAL/I2C Module/I2C.o
+                0x008000e2        0x1 MCAL/I2C Module/I2C.o
  .data.genuSpi_Status
-                0x008000d6        0x1 MCAL/Spi Module/Spi.o
+                0x008000e3        0x1 MCAL/Spi Module/Spi.o
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x008000d7      0x47c APPL/App.o
-                                0x48a (size before relaxing)
+                0x008000e4      0x45c APPL/App.o
+                                0x46a (size before relaxing)
  .rodata.cgau8_ATMString
-                0x00800553        0xe APPL/App.o
-                0x00800553                cgau8_ATMString
+                0x00800540        0xe APPL/App.o
+                0x00800540                cgau8_ATMString
  .rodata.cgau8_LoadingString
-                0x00800561        0xa APPL/App.o
-                0x00800561                cgau8_LoadingString
+                0x0080054e        0xa APPL/App.o
+                0x0080054e                cgau8_LoadingString
  .rodata.ATM_DB_ATM_PIN_VAL
-                0x0080056b        0x5 APPL/App.o
-                0x0080056b                ATM_DB_ATM_PIN_VAL
+                0x00800558        0x5 APPL/App.o
+                0x00800558                ATM_DB_ATM_PIN_VAL
  .rodata.cgau8_ADMIN_Word
-                0x00800570        0x6 APPL/App.o
-                0x00800570                cgau8_ADMIN_Word
+                0x0080055d        0x6 APPL/App.o
+                0x0080055d                cgau8_ADMIN_Word
  .rodata.str_MotorsConfig
-                0x00800576        0x5 ECUAL/Motor Module/Motor_Cfg.o
-                0x00800576                str_MotorsConfig
+                0x00800563        0x5 ECUAL/Motor Module/Motor_Cfg.o
+                0x00800563                str_MotorsConfig
  .rodata.Timers_Configurations
-                0x0080057b        0x3 MCAL/Gpt Module/Gpt_Cfg.o
-                0x0080057b                Timers_Configurations
+                0x00800568        0x3 MCAL/Gpt Module/Gpt_Cfg.o
+                0x00800568                Timers_Configurations
  .rodata.SWPwm_Channels
-                0x0080057e        0x2 MCAL/SWPwm Module/SWPwm_Cfg.o
-                0x0080057e                SWPwm_Channels
+                0x0080056b        0x2 MCAL/SWPwm Module/SWPwm_Cfg.o
+                0x0080056b                SWPwm_Channels
  *(.gnu.linkonce.r*)
-                0x00800580                . = ALIGN (0x2)
-                0x00800580                _edata = .
-                0x00800580                PROVIDE (__data_end, .)
+                0x0080056e                . = ALIGN (0x2)
+ *fill*         0x0080056d        0x1 
+                0x0080056e                _edata = .
+                0x0080056e                PROVIDE (__data_end, .)
 
-.bss            0x00800580      0x17b
-                0x00800580                PROVIDE (__bss_start, .)
+.bss            0x0080056e      0x17b
+                0x0080056e                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.u8_passFlag.2324
-                0x00800580        0x1 APPL/App.o
- .bss.sau8_data.2295
-                0x00800581        0xa APPL/App.o
- .bss.u8_index.2294
-                0x0080058b        0x1 APPL/App.o
+ .bss.u8_passFlag.2323
+                0x0080056e        0x1 APPL/App.o
+ .bss.sau8_data.2294
+                0x0080056f        0xa APPL/App.o
+ .bss.u8_index.2293
+                0x00800579        0x1 APPL/App.o
  .bss.Kpd_enablePass
-                0x0080058c        0x1 APPL/App.o
-                0x0080058c                Kpd_enablePass
+                0x0080057a        0x1 APPL/App.o
+                0x0080057a                Kpd_enablePass
  .bss.gu8_clientIndex
-                0x0080058d        0x1 APPL/App.o
-                0x0080058d                gu8_clientIndex
+                0x0080057b        0x1 APPL/App.o
+                0x0080057b                gu8_clientIndex
  .bss.gau8_maxAmount
-                0x0080058e        0x8 APPL/App.o
-                0x0080058e                gau8_maxAmount
+                0x0080057c        0x8 APPL/App.o
+                0x0080057c                gau8_maxAmount
  .bss.gu8_ATMPin
-                0x00800596        0x5 APPL/App.o
-                0x00800596                gu8_ATMPin
+                0x00800584        0x5 APPL/App.o
+                0x00800584                gu8_ATMPin
  .bss.gu8_registeredAccNum
-                0x0080059b        0x1 APPL/App.o
-                0x0080059b                gu8_registeredAccNum
+                0x00800589        0x1 APPL/App.o
+                0x00800589                gu8_registeredAccNum
  .bss.gu8_initData
-                0x0080059c        0x1 APPL/App.o
-                0x0080059c                gu8_initData
+                0x0080058a        0x1 APPL/App.o
+                0x0080058a                gu8_initData
  .bss.gstr_clientdata
-                0x0080059d       0x12 APPL/App.o
-                0x0080059d                gstr_clientdata
+                0x0080058b       0x12 APPL/App.o
+                0x0080058b                gstr_clientdata
  .bss.gstr_userCardData
-                0x008005af       0x19 APPL/App.o
+                0x0080059d       0x19 APPL/App.o
  .bss.gu8_displayFlag
-                0x008005c8        0x1 APPL/App.o
-                0x008005c8                gu8_displayFlag
+                0x008005b6        0x1 APPL/App.o
+                0x008005b6                gu8_displayFlag
  .bss.gu8_ADMIN_Request
-                0x008005c9        0x1 APPL/App.o
+                0x008005b7        0x1 APPL/App.o
  .bss.gu8_USER_Mode_State
-                0x008005ca        0x1 APPL/App.o
+                0x008005b8        0x1 APPL/App.o
  .bss.gu8_ButtonsState
-                0x008005cb        0x1 ECUAL/Button Module/Button.o
+                0x008005b9        0x1 ECUAL/Button Module/Button.o
  .bss.gau8_MotorsState
-                0x008005cc        0x1 ECUAL/Motor Module/Motor.o
-                0x008005cc                gau8_MotorsState
- .bss.gu8_flag  0x008005cd        0x1 ECUAL/Terminal Module/Terminal.o
-                0x008005cd                gu8_flag
+                0x008005ba        0x1 ECUAL/Motor Module/Motor.o
+                0x008005ba                gau8_MotorsState
+ .bss.gu8_flag  0x008005bb        0x1 ECUAL/Terminal Module/Terminal.o
+                0x008005bb                gu8_flag
  .bss.gu8_counter
-                0x008005ce        0x1 ECUAL/Terminal Module/Terminal.o
-                0x008005ce                gu8_counter
+                0x008005bc        0x1 ECUAL/Terminal Module/Terminal.o
+                0x008005bc                gu8_counter
  .bss.gau8_data
-                0x008005cf       0xff ECUAL/Terminal Module/Terminal.o
-                0x008005cf                gau8_data
+                0x008005bd       0xff ECUAL/Terminal Module/Terminal.o
+                0x008005bd                gau8_data
  .bss.gu8_visibility
-                0x008006ce        0x1 ECUAL/Terminal Module/Terminal.o
+                0x008006bc        0x1 ECUAL/Terminal Module/Terminal.o
  .bss.ADC_CallBackPtr
-                0x008006cf        0x2 MCAL/Adc Module/Adc.o
+                0x008006bd        0x2 MCAL/Adc Module/Adc.o
  .bss.u8_Dio_Status
-                0x008006d1        0x1 MCAL/Dio Module/Dio.o
+                0x008006bf        0x1 MCAL/Dio Module/Dio.o
  .bss.pstrDio_pinsConfig
-                0x008006d2        0x2 MCAL/Dio Module/Dio.o
+                0x008006c0        0x2 MCAL/Dio Module/Dio.o
  .bss.INT2_CallBackPtr
-                0x008006d4        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
+                0x008006c2        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
  .bss.INT1_CallBackPtr
-                0x008006d6        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
+                0x008006c4        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
  .bss.INT0_CallBackPtr
-                0x008006d8        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
+                0x008006c6        0x2 MCAL/Ext Interrupt Module/Ext_INT.o
  .bss.genu_GPTModStatus
-                0x008006da        0x1 MCAL/Gpt Module/Gpt.o
-                0x008006da                genu_GPTModStatus
+                0x008006c8        0x1 MCAL/Gpt Module/Gpt.o
+                0x008006c8                genu_GPTModStatus
  .bss.u32_Channels_ISR_Count
-                0x008006db        0x4 MCAL/Gpt Module/Gpt.o
-                0x008006db                u32_Channels_ISR_Count
+                0x008006c9        0x4 MCAL/Gpt Module/Gpt.o
+                0x008006c9                u32_Channels_ISR_Count
  .bss.enuChannelsState
-                0x008006df        0x1 MCAL/Gpt Module/Gpt.o
-                0x008006df                enuChannelsState
+                0x008006cd        0x1 MCAL/Gpt Module/Gpt.o
+                0x008006cd                enuChannelsState
  .bss.Gpt_Timer0_CallBackPtr
-                0x008006e0        0x2 MCAL/Gpt Module/Gpt.o
+                0x008006ce        0x2 MCAL/Gpt Module/Gpt.o
  .bss.SPI_STC_CallBackPtr
-                0x008006e2        0x2 MCAL/Spi Module/Spi.o
+                0x008006d0        0x2 MCAL/Spi Module/Spi.o
  .bss.genu_SWPwmModStatus
-                0x008006e4        0x1 MCAL/SWPwm Module/SWPwm.o
-                0x008006e4                genu_SWPwmModStatus
+                0x008006d2        0x1 MCAL/SWPwm Module/SWPwm.o
+                0x008006d2                genu_SWPwmModStatus
  .bss.gu8_currentPwmChannel
-                0x008006e5        0x1 MCAL/SWPwm Module/SWPwm.o
-                0x008006e5                gu8_currentPwmChannel
+                0x008006d3        0x1 MCAL/SWPwm Module/SWPwm.o
+                0x008006d3                gu8_currentPwmChannel
  .bss.gstr_ChannelsData
-                0x008006e6        0xe MCAL/SWPwm Module/SWPwm.o
-                0x008006e6                gstr_ChannelsData
+                0x008006d4        0xe MCAL/SWPwm Module/SWPwm.o
+                0x008006d4                gstr_ChannelsData
  .bss.u8_Uart_Status
-                0x008006f4        0x1 MCAL/Uart Module/Uart.o
+                0x008006e2        0x1 MCAL/Uart Module/Uart.o
  .bss.Uart_UDRE_CallBackPtr
-                0x008006f5        0x2 MCAL/Uart Module/Uart.o
+                0x008006e3        0x2 MCAL/Uart Module/Uart.o
  .bss.Uart_RXC_CallBackPtr
-                0x008006f7        0x2 MCAL/Uart Module/Uart.o
+                0x008006e5        0x2 MCAL/Uart Module/Uart.o
  .bss.Uart_TXC_CallBackPtr
-                0x008006f9        0x2 MCAL/Uart Module/Uart.o
+                0x008006e7        0x2 MCAL/Uart Module/Uart.o
  *(COMMON)
-                0x008006fb                PROVIDE (__bss_end, .)
-                0x000041c6                __data_load_start = LOADADDR (.data)
-                0x000046e6                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008006e9                PROVIDE (__bss_end, .)
+                0x00004218                __data_load_start = LOADADDR (.data)
+                0x00004726                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008006fb        0x0
+.noinit         0x008006e9        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008006fb                _end = .
+                0x008006e9                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -1377,93 +1379,93 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x700
+.debug_aranges  0x00000000      0x6f8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0xc0 APPL/App.o
+                0x00000000       0xb8 APPL/App.o
  .debug_aranges
-                0x000000c0       0x30 ECUAL/Button Module/Button.o
+                0x000000b8       0x30 ECUAL/Button Module/Button.o
  .debug_aranges
-                0x000000f0       0x18 ECUAL/Button Module/Button_Cfg.o
+                0x000000e8       0x18 ECUAL/Button Module/Button_Cfg.o
  .debug_aranges
-                0x00000108       0x58 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+                0x00000100       0x58 ECUAL/Eeprom_I2C Module/Eeprom_24.o
  .debug_aranges
-                0x00000160       0x28 ECUAL/Keypad Module/Keypad.o
+                0x00000158       0x28 ECUAL/Keypad Module/Keypad.o
  .debug_aranges
-                0x00000188       0x18 ECUAL/Keypad Module/Keypad_Cfg.o
+                0x00000180       0x18 ECUAL/Keypad Module/Keypad_Cfg.o
  .debug_aranges
-                0x000001a0       0x88 ECUAL/Lcd Module/Lcd.o
+                0x00000198       0x88 ECUAL/Lcd Module/Lcd.o
  .debug_aranges
-                0x00000228       0x28 ECUAL/LM35 Module/LM35.o
+                0x00000220       0x28 ECUAL/LM35 Module/LM35.o
  .debug_aranges
-                0x00000250       0x30 ECUAL/Motor Module/Motor.o
+                0x00000248       0x30 ECUAL/Motor Module/Motor.o
  .debug_aranges
-                0x00000280       0x18 ECUAL/Motor Module/Motor_Cfg.o
+                0x00000278       0x18 ECUAL/Motor Module/Motor_Cfg.o
  .debug_aranges
-                0x00000298       0x48 ECUAL/Terminal Module/Terminal.o
+                0x00000290       0x48 ECUAL/Terminal Module/Terminal.o
  .debug_aranges
-                0x000002e0       0x20 main.o
+                0x000002d8       0x20 main.o
  .debug_aranges
-                0x00000300       0x48 MCAL/Adc Module/Adc.o
+                0x000002f8       0x48 MCAL/Adc Module/Adc.o
  .debug_aranges
-                0x00000348       0x18 MCAL/Adc Module/Adc_Cfg.o
+                0x00000340       0x18 MCAL/Adc Module/Adc_Cfg.o
  .debug_aranges
-                0x00000360       0x30 MCAL/Delay Module/Delay.o
+                0x00000358       0x30 MCAL/Delay Module/Delay.o
  .debug_aranges
-                0x00000390       0x38 MCAL/Dio Module/Dio.o
+                0x00000388       0x38 MCAL/Dio Module/Dio.o
  .debug_aranges
-                0x000003c8       0x18 MCAL/Dio Module/Dio_Cfg.o
+                0x000003c0       0x18 MCAL/Dio Module/Dio_Cfg.o
  .debug_aranges
-                0x000003e0       0x60 MCAL/Ext Interrupt Module/Ext_INT.o
+                0x000003d8       0x60 MCAL/Ext Interrupt Module/Ext_INT.o
  .debug_aranges
-                0x00000440       0x80 MCAL/Gpt Module/Gpt.o
+                0x00000438       0x80 MCAL/Gpt Module/Gpt.o
  .debug_aranges
-                0x000004c0       0x18 MCAL/Gpt Module/Gpt_Cfg.o
+                0x000004b8       0x18 MCAL/Gpt Module/Gpt_Cfg.o
  .debug_aranges
-                0x000004d8       0x88 MCAL/I2C Module/I2C.o
+                0x000004d0       0x88 MCAL/I2C Module/I2C.o
  .debug_aranges
-                0x00000560       0x58 MCAL/Spi Module/Spi.o
+                0x00000558       0x58 MCAL/Spi Module/Spi.o
  .debug_aranges
-                0x000005b8       0x78 MCAL/StringManipulation.o
+                0x000005b0       0x78 MCAL/StringManipulation.o
  .debug_aranges
-                0x00000630       0x38 MCAL/SWPwm Module/SWPwm.o
+                0x00000628       0x38 MCAL/SWPwm Module/SWPwm.o
  .debug_aranges
-                0x00000668       0x18 MCAL/SWPwm Module/SWPwm_Cfg.o
+                0x00000660       0x18 MCAL/SWPwm Module/SWPwm_Cfg.o
  .debug_aranges
-                0x00000680       0x80 MCAL/Uart Module/Uart.o
+                0x00000678       0x80 MCAL/Uart Module/Uart.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x7811
+.debug_info     0x00000000     0x780a
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6     0x24e9 APPL/App.o
- .debug_info    0x000029cf      0x327 ECUAL/Button Module/Button.o
- .debug_info    0x00002cf6       0x98 ECUAL/Button Module/Button_Cfg.o
- .debug_info    0x00002d8e      0x8dd ECUAL/Eeprom_I2C Module/Eeprom_24.o
- .debug_info    0x0000366b      0x30a ECUAL/Keypad Module/Keypad.o
- .debug_info    0x00003975       0xd2 ECUAL/Keypad Module/Keypad_Cfg.o
- .debug_info    0x00003a47      0x893 ECUAL/Lcd Module/Lcd.o
- .debug_info    0x000042da      0x1c0 ECUAL/LM35 Module/LM35.o
- .debug_info    0x0000449a      0x379 ECUAL/Motor Module/Motor.o
- .debug_info    0x00004813       0xf9 ECUAL/Motor Module/Motor_Cfg.o
- .debug_info    0x0000490c      0x38b ECUAL/Terminal Module/Terminal.o
- .debug_info    0x00004c97       0xb4 main.o
- .debug_info    0x00004d4b      0x2ec MCAL/Adc Module/Adc.o
- .debug_info    0x00005037       0xc8 MCAL/Adc Module/Adc_Cfg.o
- .debug_info    0x000050ff      0x138 MCAL/Delay Module/Delay.o
- .debug_info    0x00005237      0x247 MCAL/Dio Module/Dio.o
- .debug_info    0x0000547e      0x108 MCAL/Dio Module/Dio_Cfg.o
- .debug_info    0x00005586      0x1fd MCAL/Ext Interrupt Module/Ext_INT.o
- .debug_info    0x00005783      0x54f MCAL/Gpt Module/Gpt.o
- .debug_info    0x00005cd2      0x169 MCAL/Gpt Module/Gpt_Cfg.o
- .debug_info    0x00005e3b      0x68d MCAL/I2C Module/I2C.o
- .debug_info    0x000064c8      0x269 MCAL/Spi Module/Spi.o
- .debug_info    0x00006731      0x5fd MCAL/StringManipulation.o
- .debug_info    0x00006d2e      0x627 MCAL/SWPwm Module/SWPwm.o
- .debug_info    0x00007355       0xd2 MCAL/SWPwm Module/SWPwm_Cfg.o
- .debug_info    0x00007427      0x3ea MCAL/Uart Module/Uart.o
+ .debug_info    0x000004e6     0x24e2 APPL/App.o
+ .debug_info    0x000029c8      0x327 ECUAL/Button Module/Button.o
+ .debug_info    0x00002cef       0x98 ECUAL/Button Module/Button_Cfg.o
+ .debug_info    0x00002d87      0x8dd ECUAL/Eeprom_I2C Module/Eeprom_24.o
+ .debug_info    0x00003664      0x30a ECUAL/Keypad Module/Keypad.o
+ .debug_info    0x0000396e       0xd2 ECUAL/Keypad Module/Keypad_Cfg.o
+ .debug_info    0x00003a40      0x893 ECUAL/Lcd Module/Lcd.o
+ .debug_info    0x000042d3      0x1c0 ECUAL/LM35 Module/LM35.o
+ .debug_info    0x00004493      0x379 ECUAL/Motor Module/Motor.o
+ .debug_info    0x0000480c       0xf9 ECUAL/Motor Module/Motor_Cfg.o
+ .debug_info    0x00004905      0x38b ECUAL/Terminal Module/Terminal.o
+ .debug_info    0x00004c90       0xb4 main.o
+ .debug_info    0x00004d44      0x2ec MCAL/Adc Module/Adc.o
+ .debug_info    0x00005030       0xc8 MCAL/Adc Module/Adc_Cfg.o
+ .debug_info    0x000050f8      0x138 MCAL/Delay Module/Delay.o
+ .debug_info    0x00005230      0x247 MCAL/Dio Module/Dio.o
+ .debug_info    0x00005477      0x108 MCAL/Dio Module/Dio_Cfg.o
+ .debug_info    0x0000557f      0x1fd MCAL/Ext Interrupt Module/Ext_INT.o
+ .debug_info    0x0000577c      0x54f MCAL/Gpt Module/Gpt.o
+ .debug_info    0x00005ccb      0x169 MCAL/Gpt Module/Gpt_Cfg.o
+ .debug_info    0x00005e34      0x68d MCAL/I2C Module/I2C.o
+ .debug_info    0x000064c1      0x269 MCAL/Spi Module/Spi.o
+ .debug_info    0x0000672a      0x5fd MCAL/StringManipulation.o
+ .debug_info    0x00006d27      0x627 MCAL/SWPwm Module/SWPwm.o
+ .debug_info    0x0000734e       0xd2 MCAL/SWPwm Module/SWPwm_Cfg.o
+ .debug_info    0x00007420      0x3ea MCAL/Uart Module/Uart.o
 
 .debug_abbrev   0x00000000     0x1e86
  *(.debug_abbrev)
@@ -1495,134 +1497,134 @@ END GROUP
  .debug_abbrev  0x00001c92       0x6e MCAL/SWPwm Module/SWPwm_Cfg.o
  .debug_abbrev  0x00001d00      0x186 MCAL/Uart Module/Uart.o
 
-.debug_line     0x00000000     0x474f
+.debug_line     0x00000000     0x476e
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000116     0x1209 APPL/App.o
- .debug_line    0x0000131f      0x1f9 ECUAL/Button Module/Button.o
- .debug_line    0x00001518       0x85 ECUAL/Button Module/Button_Cfg.o
- .debug_line    0x0000159d      0x4bd ECUAL/Eeprom_I2C Module/Eeprom_24.o
- .debug_line    0x00001a5a      0x1b8 ECUAL/Keypad Module/Keypad.o
- .debug_line    0x00001c12       0x85 ECUAL/Keypad Module/Keypad_Cfg.o
- .debug_line    0x00001c97      0x469 ECUAL/Lcd Module/Lcd.o
- .debug_line    0x00002100      0x139 ECUAL/LM35 Module/LM35.o
- .debug_line    0x00002239      0x247 ECUAL/Motor Module/Motor.o
- .debug_line    0x00002480       0x8d ECUAL/Motor Module/Motor_Cfg.o
- .debug_line    0x0000250d      0x296 ECUAL/Terminal Module/Terminal.o
- .debug_line    0x000027a3       0x52 main.o
- .debug_line    0x000027f5      0x278 MCAL/Adc Module/Adc.o
- .debug_line    0x00002a6d       0x6d MCAL/Adc Module/Adc_Cfg.o
- .debug_line    0x00002ada       0xd4 MCAL/Delay Module/Delay.o
- .debug_line    0x00002bae      0x2f6 MCAL/Dio Module/Dio.o
- .debug_line    0x00002ea4       0x6d MCAL/Dio Module/Dio_Cfg.o
- .debug_line    0x00002f11      0x15c MCAL/Ext Interrupt Module/Ext_INT.o
- .debug_line    0x0000306d      0x39c MCAL/Gpt Module/Gpt.o
- .debug_line    0x00003409       0x6d MCAL/Gpt Module/Gpt_Cfg.o
- .debug_line    0x00003476      0x5aa MCAL/I2C Module/I2C.o
- .debug_line    0x00003a20      0x22e MCAL/Spi Module/Spi.o
- .debug_line    0x00003c4e      0x4a3 MCAL/StringManipulation.o
- .debug_line    0x000040f1      0x2ce MCAL/SWPwm Module/SWPwm.o
- .debug_line    0x000043bf       0x75 MCAL/SWPwm Module/SWPwm_Cfg.o
- .debug_line    0x00004434      0x31b MCAL/Uart Module/Uart.o
+ .debug_line    0x00000116     0x1228 APPL/App.o
+ .debug_line    0x0000133e      0x1f9 ECUAL/Button Module/Button.o
+ .debug_line    0x00001537       0x85 ECUAL/Button Module/Button_Cfg.o
+ .debug_line    0x000015bc      0x4bd ECUAL/Eeprom_I2C Module/Eeprom_24.o
+ .debug_line    0x00001a79      0x1b8 ECUAL/Keypad Module/Keypad.o
+ .debug_line    0x00001c31       0x85 ECUAL/Keypad Module/Keypad_Cfg.o
+ .debug_line    0x00001cb6      0x469 ECUAL/Lcd Module/Lcd.o
+ .debug_line    0x0000211f      0x139 ECUAL/LM35 Module/LM35.o
+ .debug_line    0x00002258      0x247 ECUAL/Motor Module/Motor.o
+ .debug_line    0x0000249f       0x8d ECUAL/Motor Module/Motor_Cfg.o
+ .debug_line    0x0000252c      0x296 ECUAL/Terminal Module/Terminal.o
+ .debug_line    0x000027c2       0x52 main.o
+ .debug_line    0x00002814      0x278 MCAL/Adc Module/Adc.o
+ .debug_line    0x00002a8c       0x6d MCAL/Adc Module/Adc_Cfg.o
+ .debug_line    0x00002af9       0xd4 MCAL/Delay Module/Delay.o
+ .debug_line    0x00002bcd      0x2f6 MCAL/Dio Module/Dio.o
+ .debug_line    0x00002ec3       0x6d MCAL/Dio Module/Dio_Cfg.o
+ .debug_line    0x00002f30      0x15c MCAL/Ext Interrupt Module/Ext_INT.o
+ .debug_line    0x0000308c      0x39c MCAL/Gpt Module/Gpt.o
+ .debug_line    0x00003428       0x6d MCAL/Gpt Module/Gpt_Cfg.o
+ .debug_line    0x00003495      0x5aa MCAL/I2C Module/I2C.o
+ .debug_line    0x00003a3f      0x22e MCAL/Spi Module/Spi.o
+ .debug_line    0x00003c6d      0x4a3 MCAL/StringManipulation.o
+ .debug_line    0x00004110      0x2ce MCAL/SWPwm Module/SWPwm.o
+ .debug_line    0x000043de       0x75 MCAL/SWPwm Module/SWPwm_Cfg.o
+ .debug_line    0x00004453      0x31b MCAL/Uart Module/Uart.o
 
-.debug_frame    0x00000000     0x16e8
+.debug_frame    0x00000000     0x16c8
  *(.debug_frame)
- .debug_frame   0x00000000      0x300 APPL/App.o
- .debug_frame   0x00000300       0x60 ECUAL/Button Module/Button.o
- .debug_frame   0x00000360      0x1a4 ECUAL/Eeprom_I2C Module/Eeprom_24.o
- .debug_frame   0x00000504       0x6c ECUAL/Keypad Module/Keypad.o
- .debug_frame   0x00000570      0x15c ECUAL/Lcd Module/Lcd.o
- .debug_frame   0x000006cc       0x50 ECUAL/LM35 Module/LM35.o
- .debug_frame   0x0000071c       0x84 ECUAL/Motor Module/Motor.o
- .debug_frame   0x000007a0       0x8c ECUAL/Terminal Module/Terminal.o
- .debug_frame   0x0000082c       0x24 main.o
- .debug_frame   0x00000850       0xfc MCAL/Adc Module/Adc.o
- .debug_frame   0x0000094c       0xa4 MCAL/Delay Module/Delay.o
- .debug_frame   0x000009f0       0x54 MCAL/Dio Module/Dio.o
- .debug_frame   0x00000a44      0x17c MCAL/Ext Interrupt Module/Ext_INT.o
- .debug_frame   0x00000bc0      0x344 MCAL/Gpt Module/Gpt.o
- .debug_frame   0x00000f04      0x210 MCAL/I2C Module/I2C.o
- .debug_frame   0x00001114      0x100 MCAL/Spi Module/Spi.o
- .debug_frame   0x00001214      0x214 MCAL/StringManipulation.o
- .debug_frame   0x00001428       0xc4 MCAL/SWPwm Module/SWPwm.o
- .debug_frame   0x000014ec      0x1fc MCAL/Uart Module/Uart.o
+ .debug_frame   0x00000000      0x2e0 APPL/App.o
+ .debug_frame   0x000002e0       0x60 ECUAL/Button Module/Button.o
+ .debug_frame   0x00000340      0x1a4 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+ .debug_frame   0x000004e4       0x6c ECUAL/Keypad Module/Keypad.o
+ .debug_frame   0x00000550      0x15c ECUAL/Lcd Module/Lcd.o
+ .debug_frame   0x000006ac       0x50 ECUAL/LM35 Module/LM35.o
+ .debug_frame   0x000006fc       0x84 ECUAL/Motor Module/Motor.o
+ .debug_frame   0x00000780       0x8c ECUAL/Terminal Module/Terminal.o
+ .debug_frame   0x0000080c       0x24 main.o
+ .debug_frame   0x00000830       0xfc MCAL/Adc Module/Adc.o
+ .debug_frame   0x0000092c       0xa4 MCAL/Delay Module/Delay.o
+ .debug_frame   0x000009d0       0x54 MCAL/Dio Module/Dio.o
+ .debug_frame   0x00000a24      0x17c MCAL/Ext Interrupt Module/Ext_INT.o
+ .debug_frame   0x00000ba0      0x344 MCAL/Gpt Module/Gpt.o
+ .debug_frame   0x00000ee4      0x210 MCAL/I2C Module/I2C.o
+ .debug_frame   0x000010f4      0x100 MCAL/Spi Module/Spi.o
+ .debug_frame   0x000011f4      0x214 MCAL/StringManipulation.o
+ .debug_frame   0x00001408       0xc4 MCAL/SWPwm Module/SWPwm.o
+ .debug_frame   0x000014cc      0x1fc MCAL/Uart Module/Uart.o
 
-.debug_str      0x00000000     0x2c90
+.debug_str      0x00000000     0x2c91
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0xff7 APPL/App.o
-                               0x1034 (size before relaxing)
- .debug_str     0x0000118d      0x216 ECUAL/Button Module/Button.o
+ .debug_str     0x00000196      0xff8 APPL/App.o
+                               0x1040 (size before relaxing)
+ .debug_str     0x0000118e      0x216 ECUAL/Button Module/Button.o
                                 0x47f (size before relaxing)
- .debug_str     0x000013a3       0x24 ECUAL/Button Module/Button_Cfg.o
+ .debug_str     0x000013a4       0x24 ECUAL/Button Module/Button_Cfg.o
                                 0x1c7 (size before relaxing)
- .debug_str     0x000013c7      0x317 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+ .debug_str     0x000013c8      0x317 ECUAL/Eeprom_I2C Module/Eeprom_24.o
                                 0x5c8 (size before relaxing)
- .debug_str     0x000016de       0x8b ECUAL/Keypad Module/Keypad.o
+ .debug_str     0x000016df       0x8b ECUAL/Keypad Module/Keypad.o
                                 0x496 (size before relaxing)
- .debug_str     0x00001769       0x24 ECUAL/Keypad Module/Keypad_Cfg.o
+ .debug_str     0x0000176a       0x24 ECUAL/Keypad Module/Keypad_Cfg.o
                                 0x1e0 (size before relaxing)
- .debug_str     0x0000178d      0x104 ECUAL/Lcd Module/Lcd.o
+ .debug_str     0x0000178e      0x104 ECUAL/Lcd Module/Lcd.o
                                 0x52d (size before relaxing)
- .debug_str     0x00001891      0x13f ECUAL/LM35 Module/LM35.o
+ .debug_str     0x00001892      0x13f ECUAL/LM35 Module/LM35.o
                                 0x39a (size before relaxing)
- .debug_str     0x000019d0      0x1a8 ECUAL/Motor Module/Motor.o
+ .debug_str     0x000019d1      0x1a8 ECUAL/Motor Module/Motor.o
                                 0x43a (size before relaxing)
- .debug_str     0x00001b78       0x22 ECUAL/Motor Module/Motor_Cfg.o
+ .debug_str     0x00001b79       0x22 ECUAL/Motor Module/Motor_Cfg.o
                                 0x221 (size before relaxing)
- .debug_str     0x00001b9a      0x1ce ECUAL/Terminal Module/Terminal.o
+ .debug_str     0x00001b9b      0x1ce ECUAL/Terminal Module/Terminal.o
                                 0x493 (size before relaxing)
- .debug_str     0x00001d68       0x11 main.o
+ .debug_str     0x00001d69       0x11 main.o
                                 0x1a5 (size before relaxing)
- .debug_str     0x00001d79      0x10e MCAL/Adc Module/Adc.o
+ .debug_str     0x00001d7a      0x10e MCAL/Adc Module/Adc.o
                                 0x3ab (size before relaxing)
- .debug_str     0x00001e87       0x1d MCAL/Adc Module/Adc_Cfg.o
+ .debug_str     0x00001e88       0x1d MCAL/Adc Module/Adc_Cfg.o
                                 0x1e0 (size before relaxing)
- .debug_str     0x00001ea4       0x5a MCAL/Delay Module/Delay.o
+ .debug_str     0x00001ea5       0x5a MCAL/Delay Module/Delay.o
                                 0x1ed (size before relaxing)
- .debug_str     0x00001efe       0x62 MCAL/Dio Module/Dio.o
+ .debug_str     0x00001eff       0x62 MCAL/Dio Module/Dio.o
                                 0x375 (size before relaxing)
- .debug_str     0x00001f60       0x1d MCAL/Dio Module/Dio_Cfg.o
+ .debug_str     0x00001f61       0x1d MCAL/Dio Module/Dio_Cfg.o
                                 0x232 (size before relaxing)
- .debug_str     0x00001f7d       0xe7 MCAL/Ext Interrupt Module/Ext_INT.o
+ .debug_str     0x00001f7e       0xe7 MCAL/Ext Interrupt Module/Ext_INT.o
                                 0x270 (size before relaxing)
- .debug_str     0x00002064      0x474 MCAL/Gpt Module/Gpt.o
+ .debug_str     0x00002065      0x474 MCAL/Gpt Module/Gpt.o
                                 0x62e (size before relaxing)
- .debug_str     0x000024d8       0x1d MCAL/Gpt Module/Gpt_Cfg.o
+ .debug_str     0x000024d9       0x1d MCAL/Gpt Module/Gpt_Cfg.o
                                 0x358 (size before relaxing)
- .debug_str     0x000024f5      0x18f MCAL/I2C Module/I2C.o
+ .debug_str     0x000024f6      0x18f MCAL/I2C Module/I2C.o
                                 0x505 (size before relaxing)
- .debug_str     0x00002684       0xf5 MCAL/Spi Module/Spi.o
+ .debug_str     0x00002685       0xf5 MCAL/Spi Module/Spi.o
                                 0x394 (size before relaxing)
- .debug_str     0x00002779      0x14f MCAL/StringManipulation.o
+ .debug_str     0x0000277a      0x14f MCAL/StringManipulation.o
                                 0x39a (size before relaxing)
- .debug_str     0x000028c8      0x207 MCAL/SWPwm Module/SWPwm.o
+ .debug_str     0x000028c9      0x207 MCAL/SWPwm Module/SWPwm.o
                                 0x8b7 (size before relaxing)
- .debug_str     0x00002acf       0x21 MCAL/SWPwm Module/SWPwm_Cfg.o
+ .debug_str     0x00002ad0       0x21 MCAL/SWPwm Module/SWPwm_Cfg.o
                                 0x1fb (size before relaxing)
- .debug_str     0x00002af0      0x1a0 MCAL/Uart Module/Uart.o
+ .debug_str     0x00002af1      0x1a0 MCAL/Uart Module/Uart.o
                                 0x48e (size before relaxing)
 
-.debug_loc      0x00000000     0x6280
+.debug_loc      0x00000000     0x625c
  *(.debug_loc)
- .debug_loc     0x00000000      0xe87 APPL/App.o
- .debug_loc     0x00000e87      0x1bf ECUAL/Button Module/Button.o
- .debug_loc     0x00001046      0xb2c ECUAL/Eeprom_I2C Module/Eeprom_24.o
- .debug_loc     0x00001b72      0x18f ECUAL/Keypad Module/Keypad.o
- .debug_loc     0x00001d01      0x43a ECUAL/Lcd Module/Lcd.o
- .debug_loc     0x0000213b       0xb8 ECUAL/LM35 Module/LM35.o
- .debug_loc     0x000021f3      0x265 ECUAL/Motor Module/Motor.o
- .debug_loc     0x00002458      0x136 ECUAL/Terminal Module/Terminal.o
- .debug_loc     0x0000258e      0x3c2 MCAL/Adc Module/Adc.o
- .debug_loc     0x00002950      0x2f4 MCAL/Delay Module/Delay.o
- .debug_loc     0x00002c44      0x178 MCAL/Dio Module/Dio.o
- .debug_loc     0x00002dbc      0x2c4 MCAL/Ext Interrupt Module/Ext_INT.o
- .debug_loc     0x00003080      0x99b MCAL/Gpt Module/Gpt.o
- .debug_loc     0x00003a1b      0xcbb MCAL/I2C Module/I2C.o
- .debug_loc     0x000046d6      0x2ad MCAL/Spi Module/Spi.o
- .debug_loc     0x00004983      0xe10 MCAL/StringManipulation.o
- .debug_loc     0x00005793      0x4c2 MCAL/SWPwm Module/SWPwm.o
- .debug_loc     0x00005c55      0x62b MCAL/Uart Module/Uart.o
+ .debug_loc     0x00000000      0xe63 APPL/App.o
+ .debug_loc     0x00000e63      0x1bf ECUAL/Button Module/Button.o
+ .debug_loc     0x00001022      0xb2c ECUAL/Eeprom_I2C Module/Eeprom_24.o
+ .debug_loc     0x00001b4e      0x18f ECUAL/Keypad Module/Keypad.o
+ .debug_loc     0x00001cdd      0x43a ECUAL/Lcd Module/Lcd.o
+ .debug_loc     0x00002117       0xb8 ECUAL/LM35 Module/LM35.o
+ .debug_loc     0x000021cf      0x265 ECUAL/Motor Module/Motor.o
+ .debug_loc     0x00002434      0x136 ECUAL/Terminal Module/Terminal.o
+ .debug_loc     0x0000256a      0x3c2 MCAL/Adc Module/Adc.o
+ .debug_loc     0x0000292c      0x2f4 MCAL/Delay Module/Delay.o
+ .debug_loc     0x00002c20      0x178 MCAL/Dio Module/Dio.o
+ .debug_loc     0x00002d98      0x2c4 MCAL/Ext Interrupt Module/Ext_INT.o
+ .debug_loc     0x0000305c      0x99b MCAL/Gpt Module/Gpt.o
+ .debug_loc     0x000039f7      0xcbb MCAL/I2C Module/I2C.o
+ .debug_loc     0x000046b2      0x2ad MCAL/Spi Module/Spi.o
+ .debug_loc     0x0000495f      0xe10 MCAL/StringManipulation.o
+ .debug_loc     0x0000576f      0x4c2 MCAL/SWPwm Module/SWPwm.o
+ .debug_loc     0x00005c31      0x62b MCAL/Uart Module/Uart.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1642,27 +1644,27 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x600
+.debug_ranges   0x00000000      0x608
  *(.debug_ranges)
- .debug_ranges  0x00000000      0x128 APPL/App.o
- .debug_ranges  0x00000128       0x20 ECUAL/Button Module/Button.o
- .debug_ranges  0x00000148       0xa8 ECUAL/Eeprom_I2C Module/Eeprom_24.o
- .debug_ranges  0x000001f0       0x18 ECUAL/Keypad Module/Keypad.o
- .debug_ranges  0x00000208       0x78 ECUAL/Lcd Module/Lcd.o
- .debug_ranges  0x00000280       0x18 ECUAL/LM35 Module/LM35.o
- .debug_ranges  0x00000298       0x20 ECUAL/Motor Module/Motor.o
- .debug_ranges  0x000002b8       0x38 ECUAL/Terminal Module/Terminal.o
- .debug_ranges  0x000002f0       0x10 main.o
- .debug_ranges  0x00000300       0x38 MCAL/Adc Module/Adc.o
- .debug_ranges  0x00000338       0x20 MCAL/Delay Module/Delay.o
- .debug_ranges  0x00000358       0x28 MCAL/Dio Module/Dio.o
- .debug_ranges  0x00000380       0x50 MCAL/Ext Interrupt Module/Ext_INT.o
- .debug_ranges  0x000003d0       0x70 MCAL/Gpt Module/Gpt.o
- .debug_ranges  0x00000440       0x78 MCAL/I2C Module/I2C.o
- .debug_ranges  0x000004b8       0x48 MCAL/Spi Module/Spi.o
- .debug_ranges  0x00000500       0x68 MCAL/StringManipulation.o
- .debug_ranges  0x00000568       0x28 MCAL/SWPwm Module/SWPwm.o
- .debug_ranges  0x00000590       0x70 MCAL/Uart Module/Uart.o
+ .debug_ranges  0x00000000      0x130 APPL/App.o
+ .debug_ranges  0x00000130       0x20 ECUAL/Button Module/Button.o
+ .debug_ranges  0x00000150       0xa8 ECUAL/Eeprom_I2C Module/Eeprom_24.o
+ .debug_ranges  0x000001f8       0x18 ECUAL/Keypad Module/Keypad.o
+ .debug_ranges  0x00000210       0x78 ECUAL/Lcd Module/Lcd.o
+ .debug_ranges  0x00000288       0x18 ECUAL/LM35 Module/LM35.o
+ .debug_ranges  0x000002a0       0x20 ECUAL/Motor Module/Motor.o
+ .debug_ranges  0x000002c0       0x38 ECUAL/Terminal Module/Terminal.o
+ .debug_ranges  0x000002f8       0x10 main.o
+ .debug_ranges  0x00000308       0x38 MCAL/Adc Module/Adc.o
+ .debug_ranges  0x00000340       0x20 MCAL/Delay Module/Delay.o
+ .debug_ranges  0x00000360       0x28 MCAL/Dio Module/Dio.o
+ .debug_ranges  0x00000388       0x50 MCAL/Ext Interrupt Module/Ext_INT.o
+ .debug_ranges  0x000003d8       0x70 MCAL/Gpt Module/Gpt.o
+ .debug_ranges  0x00000448       0x78 MCAL/I2C Module/I2C.o
+ .debug_ranges  0x000004c0       0x48 MCAL/Spi Module/Spi.o
+ .debug_ranges  0x00000508       0x68 MCAL/StringManipulation.o
+ .debug_ranges  0x00000570       0x28 MCAL/SWPwm Module/SWPwm.o
+ .debug_ranges  0x00000598       0x70 MCAL/Uart Module/Uart.o
 
 .debug_macro
  *(.debug_macro)

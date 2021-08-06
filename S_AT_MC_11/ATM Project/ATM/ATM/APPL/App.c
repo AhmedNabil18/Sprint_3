@@ -35,8 +35,7 @@ const uint8_t ATM_TERM_EXIT[2] = "3";
 const uint8_t ATM_DB_ATM_PIN_VAL[5] = "8520";
 const uint8_t cgau8_LoadingString[] = "Loading..";
 const uint8_t cgau8_ATMString[] = "ATM Terminal\r";
-
-
+uint8_t cgau8_AMOUNTString[] = "Enter Amount";
 #include "AppADMIN.h"
 #include "AppUSER.h"
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -199,19 +198,20 @@ enuApp_Status_t App_update(void)
 			uint8_t au8_Input[2]={0};
 			uint8_t au8_tempPinNum[5]={0};
 			uint8_t au8_tempMaxAmount[8]={0};
-			
+			enuApp_Status_t PIN_Status = 0;
 			if(u8_passFlag == 0)
 			{
 				/* Get the ATM PIN from the ADMIN Terminal and check if it's correct */
-				if(AppADMIN_getAtmPIN(au8_tempPinNum) != APP_STATUS_ERROR_OK)
+				PIN_Status = AppADMIN_getAtmPIN(au8_tempPinNum);
+				if(PIN_Status == APP_STATUS_PIN_NOT_CORRECT)
+					return APP_STATUS_ERROR_OK;
+				else if(PIN_Status != APP_STATUS_PIN_CORRECT)
 					return APP_STATUS_ERROR_NOK;
 				u8_passFlag = 1;
 			}
-// 			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Max Amount\n\r3.Exit\r") != TERMINAL_STATUS_ERROR_OK)
-// 				return APP_STATUS_ERROR_NOK;
-			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Existing Customer\n\r3.Update Max Amount\n\r4.Exit\r") != TERMINAL_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
-				
+			
+			Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Existing Customer\n\r3.Update Max Amount\n\r4.Exit\r");
+			
 			AppADMIN_getInput(au8_Input);
 			if(au8_Input[0] == '1')//--------- New Customer OPTION -----------//
 			{

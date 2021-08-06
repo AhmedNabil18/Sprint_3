@@ -24,25 +24,23 @@ const uint8_t cgu8_ATM_SPI_CARD_Busy[3] = "CB";
 #if REQUEST_MODE == INTERRUPT_REQUEST
 void ATM_REQ_ISR(void)
 {	
-	if(cgu8_ATM_Req == ATM_REQUESTED)
+	if((gu8_USER_Mode_State == USER_IDLE) && (cgu8_ATM_Req == ATM_NOT_REQUESTED))
 	{
-		cgu8_ATM_Req = ATM_NOT_REQUESTED;
-		gu8_USER_Mode_State = USER_IDLE;
-	}
-	else
-	{/* ATM Request Data from Card */
-		cgu8_ATM_Req = ATM_REQUESTED;
-		if (gu8_CardMode == CARD_MODE_ADMIN)
+		/* ATM Request Data from Card */
+		if (gu8_CardMode == CARD_MODE_USER)
 		{
+			cgu8_ATM_Req = ATM_REQUESTED;
+		}else if(gu8_CardMode == CARD_MODE_ADMIN) // Card is in ADMIN Mode 
+		{	//Send "**" to the atm to indicate that Card is in Admin mode
 			SPI_SS_ENABLE();
 			Spi_MasterSendPacket((uint8_t*)"**",3);
 			SPI_SS_DISABLE();
-			Delay_ms(1000);
 			cgu8_ATM_Req = ATM_NOT_REQUESTED;
-		}else
-		{
-			gu8_USER_Mode_State = USER_BUSY;
 		}
+	}
+	else if((gu8_USER_Mode_State == USER_BUSY) && (cgu8_ATM_Req == ATM_NOT_REQUESTED))
+	{	/* ATM CARD OUT*/
+		gu8_USER_Mode_State = USER_IDLE;
 	}
 }
 #endif
@@ -233,46 +231,15 @@ enuApp_Status_t App_update(void)
 			}else if((App_terminalStatus != APP_STATUS_ERROR_OK) && (App_terminalStatus != APP_STATUS_NO_OP))
 				return APP_STATUS_ERROR_NOK;
 			/****************************************************************/
-			/***************************************************/
-		#if REQUEST_MODE == POLLING_REQUEST
-			if((DIO_PORTD_PIN & (1<<2)) == 0)
-			{/* ATM Request Data from Card */
-				Terminal_Out((uint8_t*)"Data Requested by the ATM\r\n");
-				if (cgu8_ATM_Req == ATM_SENDING)
-				{
-				}
-				else
-				{
-					cgu8_ATM_Req = ATM_REQUESTED;
-					if (gu8_CardMode == CARD_MODE_ADMIN)
-					{
-						SPI_SS_ENABLE();
-						Spi_MasterSendByte('*');
-						SPI_SS_DISABLE();
-					}else
-					{
-						gu8_USER_Mode_State = USER_BUSY;
-					}
-				}
-			}else
-			{
-				cgu8_ATM_Req = ATM_NOT_REQUESTED;
-			}
-		#endif
-			/***************************************************/
+			/************************* ATM Request **************************/
 			if (cgu8_ATM_Req == ATM_REQUESTED)
 			{
-				Terminal_Out((uint8_t*)"Sending\r\n");
+				gu8_USER_Mode_State = USER_BUSY;
 				AppUSER_sendCardData(&gstr_userCardData);
-				
-				Delay_ms(1000);
 				
 				if(Terminal_Out((uint8_t*)"Data Successfully Sent\r\n") != TERMINAL_STATUS_ERROR_OK)
 					return APP_STATUS_ERROR_NOK;
-			#if REQUEST_MODE == POLLING_REQUEST
 				cgu8_ATM_Req = ATM_NOT_REQUESTED;
-				gu8_USER_Mode_State = USER_IDLE;
-			#endif
 			}
 			
 	/****************************************************************/
@@ -370,7 +337,6 @@ enuApp_Status_t AppADMIN_getCardPAN(uint8_t* pu8_data)
 			}else if((App_terminalStatus != APP_STATUS_ERROR_OK) && (App_terminalStatus != APP_STATUS_NO_OP))
 			return APP_STATUS_ERROR_NOK;
 		} while (App_terminalStatus == APP_STATUS_NO_OP);
-		
 		if(stringLength(pu8_data) != MAX_PAN_LENGTH+1)
 		{
 			if(Terminal_Out((uint8_t*)"\nInvalid PAN, PAN should be 9 numeric characters\r\n") != TERMINAL_STATUS_ERROR_OK)	

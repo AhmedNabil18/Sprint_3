@@ -146,7 +146,7 @@ enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data);
 
 enuApp_Status_t AppADMIN_getCustomerBalance(uint8_t* pu8_data);
 
-enuApp_Status_t AppADMIN_saveNewCustomerData(void);
+enuApp_Status_t AppADMIN_printOptions(void);
 
 enuApp_Status_t AppUSER_ReportKeypad(uint8_t* pu8_key);
 

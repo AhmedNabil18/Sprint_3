@@ -73,20 +73,17 @@ enuApp_Status_t AppUSER_insertCard(void)
 			return APP_STATUS_ERROR_NOK;
 		if((au8_inputString[0] == '*') && (au8_inputString[1] == '*'))
 		{
-			Dio_writePin(DIO_SIG_CHANNEL_ID, PIN_HIGH);
 			Lcd_printLCD((uint8_t*)"Card is not",(uint8_t*)"Programmed");
 			Delay_ms(1000);
 			Lcd_printLCD((uint8_t*)"Please Contact",(uint8_t*)"Customer Service");
 			Delay_ms(1000);
+			Dio_writePin(DIO_SIG_CHANNEL_ID, PIN_HIGH);
 			gu8_USER_Mode_State = USER_IDLE;
 			Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
 			EmptyString(au8_inputString);
 			return APP_STATUS_ERROR_OK;
 		}
-		
 	}
-	
-	Dio_writePin(DIO_SIG_CHANNEL_ID, PIN_HIGH);
 	if(AppUSER_getCardData(&gstr_userCardData, au8_inputString) != APP_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 		
@@ -121,6 +118,7 @@ enuApp_Status_t AppUSER_startProcess(strCardData_t* pstr_CardData)
 	if(PAN_status == APP_STATUS_PAN_NOT_FOUND)
 	{
 		Lcd_printLCD((uint8_t*)"Your Card is not", (uint8_t*)"in the Database");
+		Dio_writePin(DIO_SIG_CHANNEL_ID, PIN_HIGH);
 		return APP_STATUS_PAN_NOT_FOUND;
 	}
 	
@@ -135,15 +133,15 @@ enuApp_Status_t AppUSER_startProcess(strCardData_t* pstr_CardData)
 	
 	
 	Lcd_printLCD((uint8_t*)"    Welcome", (uint8_t*)"    Customer");
-	Delay_ms(2000);
+	Delay_ms(1000);
 	
 	Lcd_printLCD((uint8_t*)"  Your Balance", gstr_clientdata.au8_Balance);
-	Delay_ms(2000);
+	Delay_ms(1000);
 	
 	Lcd_clear();
 	if(Lcd_setCursor(0, 0) != LCD_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
-	if(Lcd_printString((uint8_t*)"Enter Amount") != LCD_STATUS_ERROR_OK)
+	if(Lcd_printString(cgau8_AMOUNTString) != LCD_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
 	if(AppUSER_startTransaction() != APP_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
@@ -175,7 +173,18 @@ enuApp_Status_t AppUSER_startTransaction(void)
 		
 		if(KeypdaStatus == APP_STATUS_KPD_NUM)
 		{
-			
+			if((stringLength(au8_inputKPD) != MAX_BAL_LENGTH+1) || (au8_inputKPD[4] != '.'))
+			{
+// 				Lcd_printLCD((uint8_t*)"Invalid Balance", (uint8_t*)"Format = xxxx.xx");
+				Lcd_clear();
+				Lcd_setCursor(0,0);
+				Lcd_printString(cgau8_AMOUNTString);
+//  			Delay_ms(1000);
+//  			Lcd_clear();
+//  			Lcd_setCursor(0,0);
+//  			Lcd_printString((uint8_t*)"Enter Amount");
+				continue;
+			}
 			f32_amount = stringToFloat(au8_inputKPD);
 			
 			if(f32_maxAmount < f32_amount)
@@ -186,9 +195,9 @@ enuApp_Status_t AppUSER_startTransaction(void)
 				
 				Lcd_clear();
 				if(Lcd_setCursor(0, 0) != LCD_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
-				if(Lcd_printString((uint8_t*)"Enter Amount") != LCD_STATUS_ERROR_OK)
-				return APP_STATUS_ERROR_NOK;
+					return APP_STATUS_ERROR_NOK;
+				if(Lcd_printString(cgau8_AMOUNTString) != LCD_STATUS_ERROR_OK)
+					return APP_STATUS_ERROR_NOK;
 			}else
 			{
 			Lcd_printLCD((uint8_t*)"  Please Wait", (uint8_t*)" Processing....");
@@ -202,7 +211,7 @@ enuApp_Status_t AppUSER_startTransaction(void)
 				Lcd_clear();
 				if(Lcd_setCursor(0, 0) != LCD_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
-				if(Lcd_printString((uint8_t*)"Enter Amount") != LCD_STATUS_ERROR_OK)
+				if(Lcd_printString(cgau8_AMOUNTString) != LCD_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
 				}else/****************** Transaction Successfull ******************/
 				{
@@ -224,13 +233,14 @@ enuApp_Status_t AppUSER_startTransaction(void)
 						
 					Lcd_printLCD((uint8_t*)"  Your Balance", gstr_clientdata.au8_Balance);
 					Delay_ms(1000);
+					Dio_writePin(DIO_SIG_CHANNEL_ID, PIN_HIGH); //Card Out
 					Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
 						
 					return APP_STATUS_ERROR_OK;
 				}
 			}
 		}
-		Delay_ms(200);
+		Delay_ms(175);
 	}
 }
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -308,6 +318,7 @@ enuApp_Status_t AppUSER_checkPin(void)
 					Delay_ms(1000);
 					Lcd_printLCD((uint8_t*)"Please Contact", (uint8_t*)"Customer Service");
 					Delay_ms(1000);
+					Dio_writePin(DIO_SIG_CHANNEL_ID, PIN_HIGH);
 					return APP_STATUS_PIN_NOT_CORRECT;
 				}
 				Lcd_printLCD((uint8_t*)" Incorrect PIN", (uint8_t*)"   Try Again");
@@ -325,7 +336,7 @@ enuApp_Status_t AppUSER_checkPin(void)
 				return APP_STATUS_PIN_CORRECT;
 			}
 		}
-		Delay_ms(200);
+		Delay_ms(175);
 	}
 	Kpd_enablePass = 0;
 }
