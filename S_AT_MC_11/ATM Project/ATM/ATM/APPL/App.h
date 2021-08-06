@@ -136,7 +136,11 @@ enuApp_Status_t AppADMIN_getInput(uint8_t* pu8_data);
 
 enuApp_Status_t AppADMIN_getnewMaxAmount(uint8_t* pu8_data);
 
+sint16_t AppADMIN_searchPan(uint8_t* pu8_data);
+
 enuApp_Status_t AppADMIN_processNewCustomer(void);
+
+enuApp_Status_t AppADMIN_processExistingCustomer(void);
 
 enuApp_Status_t AppADMIN_getCustomerPAN(uint8_t* pu8_data);
 

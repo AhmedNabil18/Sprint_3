@@ -207,10 +207,10 @@ enuApp_Status_t App_update(void)
 					return APP_STATUS_ERROR_NOK;
 				u8_passFlag = 1;
 			}
-			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Max Amount\n\r3.Exit\r") != TERMINAL_STATUS_ERROR_OK)
+// 			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Max Amount\n\r3.Exit\r") != TERMINAL_STATUS_ERROR_OK)
+// 				return APP_STATUS_ERROR_NOK;
+			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Existing Customer\n\r3.Update Max Amount\n\r4.Exit\r") != TERMINAL_STATUS_ERROR_OK)
 				return APP_STATUS_ERROR_NOK;
-// 			if(Terminal_Out((uint8_t*)"\n1.Add New Customer\n\r2.Update Existing Customer\n\r3.Update Max Amount\n\r4.Exit\r") != TERMINAL_STATUS_ERROR_OK)
-//				return APP_STATUS_ERROR_NOK;
 				
 			AppADMIN_getInput(au8_Input);
 			if(au8_Input[0] == '1')//--------- New Customer OPTION -----------//
@@ -218,17 +218,17 @@ enuApp_Status_t App_update(void)
 				AppADMIN_processNewCustomer();
 				EmptyString(au8_Input);
 
-// 			}else if(au8_Input[0] == '2')//--------- Update Existing Customer OPTION -----------//
-// 			{
-// 				AppADMIN_processExistingCustomer();
-// 				EmptyString(au8_Input);
-			}else if(au8_Input[0] == '2')//--------- Max Amount OPTION -----------//
+			}else if(au8_Input[0] == '2')//--------- Update Existing Customer OPTION -----------//
+			{
+				AppADMIN_processExistingCustomer();
+				EmptyString(au8_Input);
+			}else if(au8_Input[0] == '3')//--------- Max Amount OPTION -----------//
 			{
 				AppADMIN_getnewMaxAmount(au8_tempMaxAmount);
 				if(Eeprom_24_writePacket(ATM_DB_MAX_AMNT_ADDR, au8_tempMaxAmount, stringLength(au8_tempMaxAmount)) != EEPROM_24_STATUS_ERROR_OK)
 					return APP_STATUS_ERROR_NOK;
 				stringCopy(au8_tempMaxAmount, gau8_maxAmount);	
-			}else if(au8_Input[0] == '3')//--------- EXIT OPTION -----------//
+			}else if(au8_Input[0] == '4')//--------- EXIT OPTION -----------//
 			{
 				if(gu8_initData == ATM_DB_FLAG_SET_VAL)
 				{
