@@ -73,14 +73,13 @@ enuApp_Status_t AppUSER_insertCard(void)
 			return APP_STATUS_ERROR_NOK;
 		if((au8_inputString[0] == '*') && (au8_inputString[1] == '*'))
 		{
+			Dio_writePin(DIO_SIG_CHANNEL_ID, PIN_HIGH);
 			Lcd_printLCD((uint8_t*)"Card is not",(uint8_t*)"Programmed");
 			Delay_ms(1000);
 			Lcd_printLCD((uint8_t*)"Please Contact",(uint8_t*)"Customer Service");
 			Delay_ms(1000);
-			Dio_writePin(DIO_SIG_CHANNEL_ID, PIN_HIGH);
 			gu8_USER_Mode_State = USER_IDLE;
 			Lcd_printLCD((uint8_t*)"1.Insert Card", (uint8_t*)"2.Display Temp");
-			EmptyString(au8_inputString);
 			return APP_STATUS_ERROR_OK;
 		}
 	}
@@ -240,7 +239,7 @@ enuApp_Status_t AppUSER_startTransaction(void)
 				}
 			}
 		}
-		Delay_ms(175);
+		Delay_ms(200);
 	}
 }
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -336,7 +335,7 @@ enuApp_Status_t AppUSER_checkPin(void)
 				return APP_STATUS_PIN_CORRECT;
 			}
 		}
-		Delay_ms(175);
+		Delay_ms(200);
 	}
 	Kpd_enablePass = 0;
 }

@@ -119,9 +119,9 @@ enuApp_Status_t App_init(void)
 	DIO_PORTD_DATA |= 1<<2;
 	/**************************/
 	/* Only for Testing */
-	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
-		return APP_STATUS_ERROR_NOK;
-	Delay_ms(10);
+// 	if(Eeprom_24_writeByte(CARD_INIT_ADDRESS, 0xFF) != EEPROM_24_STATUS_ERROR_OK)
+// 		return APP_STATUS_ERROR_NOK;
+// 	Delay_ms(10);
 	/**************************/
 	if(Terminal_Out((uint8_t*)"CARD Terminal Window\r\n") != TERMINAL_STATUS_ERROR_OK)
 		return APP_STATUS_ERROR_NOK;
@@ -221,7 +221,7 @@ enuApp_Status_t App_update(void)
 					if(gu8_USER_Mode_State == USER_BUSY) /* CARD is Busy in transaction */
 					{
 						gu8_ADMIN_Request = ADMIN_REQUESTED;
-						if(Terminal_Out((uint8_t*)"CARD is Busy Now, Programming Mode will start after current Process\r\n") != TERMINAL_STATUS_ERROR_OK)
+						if(Terminal_Out((uint8_t*)"CARD is Busy Now, \rProgramming Mode will start after current Process\r\n") != TERMINAL_STATUS_ERROR_OK)
 							return APP_STATUS_ERROR_NOK;
 					}else /* User Mode is Idle ==> The Card is not used by ATM */
 					{
